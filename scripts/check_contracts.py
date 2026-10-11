@@ -19,7 +19,9 @@ for path in BASE.glob('*.schema.json'):
 
 examples={'guidance':'guidance','retrieval-request':'retrieval-request','retrieval-result':'retrieval-result',
           'retrieval-empty':'retrieval-result','browser-request':'browser-request','session-snapshot':'session-snapshot',
-          'decision-teach':'decision','decision-continue':'decision'}
+          'decision-teach':'decision','decision-continue':'decision',
+          'companion-snapshot':'companion-snapshot','companion-tool-plan':'companion-tool-plan',
+          'companion-outcome':'companion-outcome'}
 for name,contract in examples.items(): validators[contract].validate(read(BASE/'examples'/f'{name}.json'))
 snapshot=read(BASE/'examples/session-snapshot.json')
 assert make_snapshot(read(BASE/'examples/browser-request.json'))==snapshot
@@ -39,4 +41,8 @@ bad=copy.deepcopy(result);del bad['matches'][0]['citation'];rejects('retrieval-r
 bad=copy.deepcopy(result);bad['schema_version']='2.0';rejects('retrieval-result',bad)
 bad=read(BASE/'examples/decision-continue.json');bad['prompt']='Unexpected activity';rejects('decision',bad)
 bad=copy.deepcopy(snapshot);bad['schema_version']='1.0';rejects('session-snapshot',bad)
+bad=read(BASE/'examples/companion-tool-plan.json');bad['tool']='move_servos';rejects('companion-tool-plan',bad)
+bad=read(BASE/'examples/companion-tool-plan.json');bad['arguments']={'session_id':bad['arguments']['session_id']};rejects('companion-tool-plan',bad)
+bad=read(BASE/'examples/companion-outcome.json');bad['match']='maybe';rejects('companion-outcome',bad)
+bad=read(BASE/'examples/companion-snapshot.json');del bad['device'];rejects('companion-snapshot',bad)
 print(f'Validated {len(validators)} schemas, {len(examples)} examples, live demo fixtures and negative cases. No cloud calls.')

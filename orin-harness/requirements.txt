@@ -1,0 +1,11 @@
+# Core harness (server, brain client, config, tests). No hardware needed.
+mcp>=1.28,<2
+pyyaml
+requests
+pytest>=8
+
+# Hardware backend (`backend: real`) also needs the cane-vision stack:
+#   pip install -r cane-vision/requirements.txt
+# which brings ultralytics, opencv-python, pyserial and (for `listening.engine: scribe`)
+# the microphone path via sounddevice:
+#   pip install sounddevice

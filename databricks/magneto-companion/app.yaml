@@ -1,0 +1,17 @@
+command:
+- python
+- -m
+- runtime.main
+env:
+- name: MAGNETO_MODEL
+  value: databricks-qwen3-next-80b-a3b-instruct
+- name: MLFLOW_TRACKING_URI
+  value: databricks
+- name: MLFLOW_EXPERIMENT_ID
+  value: '948045133158359'
+- name: PIP_INDEX_URL
+  value: https://pypi.org/simple/
+- name: UV_INDEX_URL
+  value: https://pypi.org/simple/
+- name: UV_DEFAULT_INDEX
+  value: https://pypi.org/simple/

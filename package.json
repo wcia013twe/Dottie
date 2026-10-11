@@ -9,7 +9,9 @@
     "check": "node --check web/learn/app.js && node --check web/learn/stories.js && node --check web/learn/peter-activities.js && node --check web/learn/ebook.js && node --check web/learn/flipbook.js && node --check web/learn/story-coach.js && node --check web/learn/connectors.js && node --check web/learn/decision-session.js && node --check web/viewer.js && node --check web/servo-cell.js && node --check web/servo-geometry.js && node --check web/eight-cell-track.js && node --check web/dimensions.js && node --check web/cardboard-shell.js && python3 scripts/check.py && node scripts/check-guide-slots.mjs && node scripts/check-horn-clearance.mjs && node scripts/check-eight-cell-arms.mjs && node scripts/check-tray-panel.mjs && node scripts/check-eight-cell-station.mjs && node scripts/build-split.mjs && node --check web/split-print.js",
     "check:reasoning": "node --test tests/decision-session.test.mjs && python3 -m unittest discover -s tests -p test_decision_bridge.py && databricks/magneto-director/.venv/bin/python -m pytest databricks/magneto-director/tests -q",
     "check:story": "python3 -m unittest discover -s tests -p test_story_mode.py && .venv-story/bin/python -m unittest discover -s tests -p test_story_mcp.py",
-    "check:contracts": "databricks/magneto-director/.venv/bin/python scripts/check_contracts.py"
+    "check:contracts": "PY=databricks/magneto-director/.venv/bin/python; [ -x \"$PY\" ] || PY=.venv-harness/bin/python; \"$PY\" scripts/check_contracts.py",
+    "check:harness": ".venv-harness/bin/python -m pytest orin-harness/tests -q -c orin-harness/pytest.ini && PYTHONPATH=orin-harness .venv-harness/bin/python -m magneto_harness.dry_run --lesson word_cab",
+    "check:companion": ".venv-harness/bin/python -m pytest databricks/magneto-companion/tests/test_plan.py -q -c databricks/magneto-companion/pyproject.toml"
   },
   "dependencies": {
     "manifold-3d": "3.5.4"

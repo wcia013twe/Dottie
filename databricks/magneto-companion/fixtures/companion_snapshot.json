@@ -1,0 +1,50 @@
+{
+  "snapshot": {
+    "schema_version": "1.0",
+    "request_id": "0f0a2b4c-6d8e-4a1b-9c2d-3e4f5a6b7c8d",
+    "session_id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+    "revision": 3,
+    "phase": "reviewing",
+    "lesson_id": "word_cab",
+    "targets": ["c", "a", "b"],
+    "index": 0,
+    "target": "c",
+    "activity": "identify",
+    "prompt": "Feel the letter on the cell, then say it out loud.",
+    "activities_started": 1,
+    "policy": { "max_activities": 6, "advance_on_correct": true },
+    "device": { "cell_connected": true, "cell_ready": true, "listening": false, "camera_available": false },
+    "last_response": null,
+    "recent_outcomes": [],
+    "recent_observations": []
+  },
+  "available_mcp_tools": [
+    {
+      "name": "present_activity",
+      "description": "Actuation: show the target and speak the prompt.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "session_id": { "type": "string" },
+          "revision": { "type": "integer" },
+          "target": { "type": "string" },
+          "activity": { "type": "string" },
+          "prompt": { "type": "string" }
+        },
+        "required": ["session_id", "revision", "target", "activity"]
+      }
+    },
+    {
+      "name": "recommend_continue",
+      "description": "Actuation: end the lesson for now.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "session_id": { "type": "string" },
+          "revision": { "type": "integer" }
+        },
+        "required": ["session_id", "revision"]
+      }
+    }
+  ]
+}

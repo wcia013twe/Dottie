@@ -22,6 +22,9 @@ flowchart LR
 | Browser → localhost bridge | `browser-request.schema.json` | Existing demo interface; runtime teammate |
 | Bridge → director | `session-snapshot.schema.json` | Existing canonical demo snapshot; director teammate |
 | Director → runtime | `decision.schema.json` | Existing six-field decision; director and runtime teammates |
+| Orin harness → Personal Intelligence | `companion-snapshot.schema.json` | New outbound companion snapshot; Orin harness and companion agent |
+| Personal Intelligence → harness | `companion-tool-plan.schema.json` | New single bounded MCP tool plan; companion agent and Orin harness |
+| Harness → report | `companion-outcome.schema.json` | New learner-response and execution evidence record; Orin harness |
 
 ## Rules everyone must preserve
 
@@ -50,3 +53,12 @@ Use the existing references volume for explicitly uploaded sources, one future D
 4. For incompatible changes, create a new version, provide producer/consumer migration notes, and update examples and checks together. Do not silently loosen a validator or create another conflicting contract document.
 
 `guidance_ids` on decisions and retrieved guidance in the model snapshot are **deferred extensions**, not accepted v1 fields. Integrating them requires a coordinated contract change; the current live validator would reject them. Internal research extraction formats, chunking, index settings, and hardware protocols can evolve independently while these boundaries remain stable.
+
+## Companion boundaries (v1, additive)
+
+The three `companion-*.schema.json` files describe the Orin Nano harness boundary. They are **additive**: the deployed browser demo wire format and the director `decision`/`session-snapshot` payloads are unchanged, and none of these carry the demo's out-of-band version field.
+
+- The harness sends one `companion-snapshot` per turn; the brain returns exactly one `companion-tool-plan` (`tool`, `arguments`, `reason`), or a `recommend_continue` plan. The brain selects; it never executes and never asserts mastery.
+- The harness validates the plan against the current `revision`, executes it locally over MCP, and records a `companion-outcome`. A stale or mismatched plan is rejected before any physical effect, and a retry never repeats a physical action.
+- Physical device commands and acknowledgements stay in this separate execution interface; they are not added to `events` and do not alter the `decision` schema.
+- `reason` is a one-sentence evidence summary. Model output is evidence, never instructions; transcripts are unconfirmed and are not a grade or a mastery claim. The deterministic letter/word match is reported as `match`/`outcome` evidence only.

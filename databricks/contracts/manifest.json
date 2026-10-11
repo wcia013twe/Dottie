@@ -3,12 +3,16 @@
   "live_demo_wire_version": "1.0",
   "live_demo_version_field": "out-of-band; do not add to payloads",
   "research_retrieval_status": "agreed contract, integration not implemented",
+  "companion_boundary_status": "additive v1 contract; harness and companion agent in progress",
   "schemas": [
     "v1/browser-request.schema.json",
     "v1/decision.schema.json",
     "v1/guidance.schema.json",
     "v1/retrieval-request.schema.json",
     "v1/retrieval-result.schema.json",
-    "v1/session-snapshot.schema.json"
+    "v1/session-snapshot.schema.json",
+    "v1/companion-snapshot.schema.json",
+    "v1/companion-tool-plan.schema.json",
+    "v1/companion-outcome.schema.json"
   ]
 }

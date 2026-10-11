@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magneto:contracts:v1:companion-tool-plan",
+  "title": "Magneto companion tool plan",
+  "description": "The single bounded MCP tool call the Personal Intelligence brain selects for the Orin harness to execute. The harness validates the plan against the current revision before any physical effect. The reason is a one-sentence evidence summary, never hidden chain-of-thought.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tool": {
+      "enum": [
+        "get_companion_state",
+        "observe_scene",
+        "read_cell",
+        "announce",
+        "show_cell",
+        "present_activity",
+        "begin_listening",
+        "end_listening",
+        "advance_target",
+        "record_outcome",
+        "recommend_continue"
+      ]
+    },
+    "arguments": { "type": "object" },
+    "reason": { "type": "string", "minLength": 1, "maxLength": 400 }
+  },
+  "required": ["tool", "arguments", "reason"],
+  "oneOf": [
+    {
+      "properties": {
+        "tool": { "const": "get_companion_state" },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": { "session_id": { "$ref": "#/$defs/session_id" } },
+          "required": ["session_id"]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tool": { "const": "observe_scene" },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "session_id": { "$ref": "#/$defs/session_id" },
+            "max_items": { "type": "integer", "minimum": 1, "maximum": 10 }
+          },
+          "required": ["session_id"]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tool": { "const": "read_cell" },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": { "session_id": { "$ref": "#/$defs/session_id" } },
+          "required": ["session_id"]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tool": { "const": "announce" },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "session_id": { "$ref": "#/$defs/session_id" },
+            "revision": { "$ref": "#/$defs/revision" },
+            "text": { "type": "string", "minLength": 1, "maxLength": 160 }
+          },
+          "required": ["session_id", "revision", "text"]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tool": { "const": "show_cell" },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "session_id": { "$ref": "#/$defs/session_id" },
+            "revision": { "$ref": "#/$defs/revision" },
+            "text": { "type": "string", "minLength": 1, "maxLength": 64 }
+          },
+          "required": ["session_id", "revision", "text"]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tool": { "const": "present_activity" },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "session_id": { "$ref": "#/$defs/session_id" },
+            "revision": { "$ref": "#/$defs/revision" },
+            "activity": { "enum": ["introduce", "identify", "match", "spell"] },
+            "target": { "type": "string", "minLength": 1, "maxLength": 32 },
+            "prompt": { "type": "string", "minLength": 1, "maxLength": 240 }
+          },
+          "required": ["session_id", "revision", "activity", "target", "prompt"]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tool": { "const": "begin_listening" },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "session_id": { "$ref": "#/$defs/session_id" },
+            "revision": { "$ref": "#/$defs/revision" }
+          },
+          "required": ["session_id", "revision"]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tool": { "const": "end_listening" },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "session_id": { "$ref": "#/$defs/session_id" },
+            "revision": { "$ref": "#/$defs/revision" }
+          },
+          "required": ["session_id", "revision"]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tool": { "const": "advance_target" },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "session_id": { "$ref": "#/$defs/session_id" },
+            "revision": { "$ref": "#/$defs/revision" }
+          },
+          "required": ["session_id", "revision"]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tool": { "const": "record_outcome" },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "session_id": { "$ref": "#/$defs/session_id" },
+            "revision": { "$ref": "#/$defs/revision" },
+            "outcome": { "enum": ["correct", "incorrect", "help", "unrecognized"] },
+            "transcript": { "type": "string", "maxLength": 300 }
+          },
+          "required": ["session_id", "revision", "outcome", "transcript"]
+        }
+      }
+    },
+    {
+      "properties": {
+        "tool": { "const": "recommend_continue" },
+        "arguments": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "session_id": { "$ref": "#/$defs/session_id" },
+            "revision": { "$ref": "#/$defs/revision" },
+            "reason": { "type": "string", "minLength": 1, "maxLength": 400 }
+          },
+          "required": ["session_id", "revision", "reason"]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "session_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "revision": { "type": "integer", "minimum": 0 }
+  }
+}
