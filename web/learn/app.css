@@ -227,3 +227,6 @@ body:has(.book-player) .player-header .voice-input-panel{position:relative;left:
 body:has(.book-player) .book-player{bottom:0;height:100dvh}.story-fullscreen main:has(.book-player){height:100dvh}
 @media(max-width:600px){.player-header .voice-toggle span{display:none}.player-header .voice-toggle{font-size:12px;gap:4px}.player-header .voice-input-panel{padding:0 8px}}
 .book-player .voice-controls-content{color-scheme:light}.book-player .voice-controls-content button{color:var(--ink);background:var(--green);border:1px solid var(--line);padding:10px 14px;border-radius:12px}.book-player .voice-controls-content button:hover{background:#dce7bc}.book-player .voice-controls-content button.primary{background:var(--teal);color:#fff}.book-player .voice-controls-content button:disabled{opacity:.5}.book-player .voice-controls-content .text-button{background:transparent}.book-player .voice-controls-content .voice-command-help summary{color:var(--ink)}
+
+.local-narration:not([hidden]){display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:.5rem 0}
+.local-narration audio{max-width:100%}

@@ -1,4 +1,4 @@
-import { stopNavigationVoice } from './navigation-voice.js?v=eleven-autoplay-1';
+import { stopNavigationVoice } from './navigation-voice.js?v=restored-narration-1';
 // Teacher console. The server owns session state; model proposals never directly drive hardware.
 let latestEvidence = null;
 let activeVoiceCoach = null;

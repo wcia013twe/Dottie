@@ -21,3 +21,6 @@ orin-harness/tools/cell-firmware/build/
 .local/camera/
 
 .local/device-connections.json
+
+# Generated ElevenLabs story clips stay local; rebuilt by narration tooling.
+web/learn/narration/

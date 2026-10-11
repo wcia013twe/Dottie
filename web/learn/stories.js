@@ -1,7 +1,8 @@
+import { preparePeterReading } from './peter-reading.js?v=restored-narration-1';
 import { demoCompletionRecap, mountStoryCompletion } from './story-completion.js';
 import { DecisionSession } from './decision-session.js?v=story-completion-1';
 import { peterActivities, bindPeterActivities } from './peter-activities.js';
-import { mountFlipbook } from './flipbook.js?v=eleven-autoplay-1';
+import { mountFlipbook } from './flipbook.js?v=restored-narration-1';
 import { importEbook, ebookStore } from './ebook.js';
 // Reading records are separate from learning progress and saved CAD designs.
 const key = 'magneto-stories-v1';
@@ -37,7 +38,7 @@ async function loadBook(book) {
   if (!book.bundled) return ebookStore('get',book.id);
   const response = await fetch('./books/the-tale-of-peter-rabbit.epub');
   if (!response.ok) throw Error('Peter Rabbit could not be opened. Please reload and try again.');
-  const content = await importEbook(new File([await response.blob()], 'the-tale-of-peter-rabbit.epub'));
+  const content = preparePeterReading(await importEbook(new File([await response.blob()], 'the-tale-of-peter-rabbit.epub')));
   book.total = content.chapters.length;
   book.position = Math.min(book.position, book.total-1);
   book.current = Math.min(book.current, book.total);

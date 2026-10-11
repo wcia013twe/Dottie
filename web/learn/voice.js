@@ -1,5 +1,5 @@
 import { interpretSpeech, normalizeSpeech } from './voice-intents.js';
-import { navigationSpeaking } from './navigation-voice.js?v=eleven-autoplay-1';
+import { navigationSpeaking } from './navigation-voice.js?v=restored-narration-1';
 
 export function pcmBase64(samples, muted = false) {
   const bytes = new Uint8Array(samples.length * 2), view = new DataView(bytes.buffer);

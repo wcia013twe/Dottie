@@ -1,4 +1,5 @@
-import { mountStoryCoach } from './story-coach.js?v=eleven-autoplay-1';
+import { mountNarration } from './narration.js?v=restored-narration-1';
+import { mountStoryCoach } from './story-coach.js?v=restored-narration-1';
 import { completionRecap, mountStoryCompletion } from './story-completion.js';
 // Pair each illustration with the following passage in the EPUB reading order.
 function illustrationSpreads(html) {
@@ -25,13 +26,14 @@ export function mountFlipbook({main, book, content, save, announce}) {
   let spreads=[], paintedPage=-1;
   reader.classList.add('spread-reader');
   const illustration=document.createElement('div');illustration.className='spread-illustration';sheet.prepend(illustration);
-  let playTimer=null;
-  function stopPlaying(){clearInterval(playTimer);playTimer=null;play.textContent='▶';play.setAttribute('aria-label','Play automatic page turns');main.querySelector('#player-mode').textContent='Read at your own pace';}
+  let playTimer=null, narration=null;
+  function stopPlaying(pauseAudio=true){if(pauseAudio)narration?.pause();clearInterval(playTimer);playTimer=null;play.textContent='▶';play.setAttribute('aria-label','Play automatic page turns');main.querySelector('#player-mode').textContent='Read at your own pace';}
   let chapter=Math.min(book.position||0,content.chapters.length-1), page=0, count=1, stride=0;
   let turning=false, disposed=false, animation=null, overlay=null, resizeFrame=0, generation=0;
   if (book.finished === undefined) book.finished = book.current === book.total;
   let legacyScroll = book.pageFraction === undefined ? (book.scroll || 0) : 0;
   const coach=mountStoryCoach({player,enabled:book.bundled,pause:()=>{stopPlaying();window.speechSynthesis?.pause();}});
+  narration=mountNarration({player,bookId:book.id,onPlay:()=>stopPlaying(false)});
   const completion=mountStoryCompletion({parent:player,title:book.title});
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   function persist() {
@@ -44,7 +46,7 @@ export function mountFlipbook({main, book, content, save, announce}) {
       illustration.innerHTML=spread?.image || '<span class="spread-no-art" aria-hidden="true">⠿</span>';
       text.innerHTML=spread?.html || '<p class="spread-caption"></p>';
       if(!spread?.html)text.querySelector('.spread-caption').textContent=content.chapters[chapter].title;
-      windowEl.scrollTop=0;paintedPage=page;coach.context(text.textContent);
+      windowEl.scrollTop=0;paintedPage=page;coach.context(text.textContent);narration.context(text.textContent);
     }
     previous.disabled=coach.isPaused() || (chapter===0 && page===0);
     next.disabled=coach.isPaused();
@@ -101,7 +103,7 @@ export function mountFlipbook({main, book, content, save, announce}) {
     }
     cancelTurn();if(!disposed)paint();
   }
-  play.onclick=()=>{if(playTimer){stopPlaying();return;}play.textContent='Ⅱ';play.setAttribute('aria-label','Pause automatic page turns');main.querySelector('#player-mode').textContent='Auto-turn · 12 seconds per page';playTimer=setInterval(()=>turn(1),12000);};
+  play.onclick=()=>{narration.pause();if(playTimer){stopPlaying();return;}play.textContent='Ⅱ';play.setAttribute('aria-label','Pause automatic page turns');main.querySelector('#player-mode').textContent='Auto-turn · 12 seconds per page';playTimer=setInterval(()=>turn(1),12000);};
   seek.oninput=()=>{stopPlaying();cancelTurn();page=Number(seek.value)-1;book.finished=false;paint();persist();};
   const fullscreen=main.querySelector('#reader-fullscreen');
   fullscreen.hidden=!document.fullscreenEnabled;
@@ -127,5 +129,5 @@ export function mountFlipbook({main, book, content, save, announce}) {
   // Decode before measuring columns so illustrations cannot move the bookmark.
   const initialFraction=book.pageFraction||0;
   loadChapter(chapter,initialFraction).then(()=>{if(!disposed)observer.observe(windowEl);});
-  return ()=>{completion.dispose();coach.dispose();stopPlaying();document.removeEventListener('fullscreenchange',fullscreenChanged);disposed=true;generation++;observer.disconnect();cancelAnimationFrame(resizeFrame);cancelTurn();};
+  return ()=>{completion.dispose();coach.dispose();stopPlaying();narration.dispose();document.removeEventListener('fullscreenchange',fullscreenChanged);disposed=true;generation++;observer.disconnect();cancelAnimationFrame(resizeFrame);cancelTurn();};
 }

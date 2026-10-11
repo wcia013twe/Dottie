@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "book_id": "builtin-peter-rabbit",
+  "script_version": "sample-1",
+  "model_id": "eleven_multilingual_v2",
+  "voice_settings": {"stability": 0.5, "similarity_boost": 0.75, "style": 0, "use_speaker_boost": true},
+  "passages": [
+    {
+      "id": "rabbit-introduction",
+      "match_text": "Once upon a time there were four little Rabbits",
+      "text": "Once upon a time there were four little Rabbits, and their names were Flopsy, Mopsy, Cotton-tail, and Peter."
+    },
+    {
+      "id": "garden-gate",
+      "match_text": "squeezed under the gate",
+      "text": "But Peter, who was very naughty, ran straight away to Mr. McGregor's garden, and squeezed under the gate!"
+    }
+  ]
+}

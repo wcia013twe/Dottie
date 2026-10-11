@@ -1,8 +1,8 @@
-import { loadNavigationVoice, navigationPrompt, speakNavigation, stopNavigationVoice } from './navigation-voice.js?v=eleven-autoplay-1';
+import { loadNavigationVoice, navigationPrompt, speakNavigation, stopNavigationVoice } from './navigation-voice.js?v=restored-narration-1';
 import { mountDeviceStatus } from './device-status.js';
-import { mountVoice } from './voice.js?v=eleven-autoplay-1';
-import { voiceContext, performVoiceAction } from './voice-actions.js?v=eleven-autoplay-1';
-import { stories, bindStories, cleanupStoryReader, isStoryOpen } from './stories.js?v=eleven-autoplay-1';
+import { mountVoice } from './voice.js?v=restored-narration-1';
+import { voiceContext, performVoiceAction } from './voice-actions.js?v=restored-narration-1';
+import { stories, bindStories, cleanupStoryReader, isStoryOpen } from './stories.js?v=restored-narration-1';
 import { intelligence, bindIntelligence } from './intelligence.js?v=alex-persona-1';
 import { connectors } from './connectors.js';
 import { exploreView, bindExplore, cleanupExplore } from './explore.js';

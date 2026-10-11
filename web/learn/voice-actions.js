@@ -1,5 +1,5 @@
-import { storyVoiceContext, performStoryVoice } from './story-coach.js?v=eleven-autoplay-1';
-import { stopNavigationVoice } from './navigation-voice.js?v=eleven-autoplay-1';
+import { storyVoiceContext, performStoryVoice } from './story-coach.js?v=restored-narration-1';
+import { stopNavigationVoice } from './navigation-voice.js?v=restored-narration-1';
 
 export function voiceContext() {
   const route = location.hash.slice(1) || 'home';
