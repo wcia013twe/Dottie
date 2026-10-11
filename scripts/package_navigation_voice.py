@@ -26,15 +26,16 @@ def main():
     settings = config.get('speech', {}).get('elevenlabs', {})
     destination = ROOT / 'web/learn/assets/navigation-voice'
     cache = ROOT / '.local/navigation-voice'
-    tts = ElevenLabsTTS(key, voice_id=os.environ.get('ELEVENLABS_VOICE_ID') or settings.get('voice_id', DEFAULT_VOICE), model_id=os.environ.get('ELEVENLABS_MODEL_ID') or settings.get('model_id', DEFAULT_MODEL), cache_dir=cache)
+    tts = ElevenLabsTTS(key, voice_id=os.environ.get('ELEVENLABS_NAVIGATION_VOICE_ID') or os.environ.get('ELEVENLABS_VOICE_ID') or settings.get('voice_id', DEFAULT_VOICE), model_id=os.environ.get('ELEVENLABS_MODEL_ID') or settings.get('model_id', DEFAULT_MODEL), cache_dir=cache)
     phrases = json.loads((ROOT / 'web/learn/navigation-prompts.json').read_text())
     destination.mkdir(parents=True, exist_ok=True)
     try:
-        for route, phrase in phrases.items():
-            shutil.copyfile(tts.audio(phrase), destination / f'{route}.wav')
+        generated = [(route, tts.audio(phrase)) for route, phrase in phrases.items()]
     except Exception:
         print('ElevenLabs packaging failed. Check key access, quota, and network. Existing packaged prompts remain available.')
         return 1
+    for route, source in generated:
+        shutil.copyfile(source, destination / f'{route}.wav')
     manifest = {'provider':'elevenlabs','voice_id':tts.voice_id,'model_id':tts.model_id,'phrases':phrases}
     temporary = destination / 'manifest.part'
     temporary.write_text(json.dumps(manifest, indent=2) + '\n')

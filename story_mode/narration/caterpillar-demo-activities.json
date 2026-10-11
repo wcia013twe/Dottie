@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "book_id": "caterpillar-demo-activities",
+  "script_version": "demo-prompts-1",
+  "model_id": "eleven_multilingual_v2",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "style": 0,
+    "use_speaker_boost": true
+  },
+  "passages": [
+    {
+      "id": "egg",
+      "match_text": "egg",
+      "text": "Find the tiny egg on the leaf. What shape is the egg?"
+    },
+    {
+      "id": "moon",
+      "match_text": "moon",
+      "text": "Explore the moon. Is its shape round or square?"
+    },
+    {
+      "id": "sun",
+      "match_text": "sun",
+      "text": "Look at the big sun. Name one color you can see in it."
+    },
+    {
+      "id": "apple",
+      "match_text": "apple",
+      "text": "Find the apple. Apple begins with A. Can you say the letter A?"
+    },
+    {
+      "id": "pears",
+      "match_text": "pears",
+      "text": "Count the two pears. Pear begins with P. Can you say the letter P?"
+    },
+    {
+      "id": "plums",
+      "match_text": "plums",
+      "text": "Find the purple plums. How many plums are there?"
+    },
+    {
+      "id": "berries",
+      "match_text": "berries",
+      "text": "Find the red strawberries. Count them slowly. How many are there?"
+    },
+    {
+      "id": "oranges",
+      "match_text": "oranges",
+      "text": "Find the oranges. Count them from left to right. How many are there?"
+    },
+    {
+      "id": "leaf",
+      "match_text": "leaf",
+      "text": "Explore the green leaf. Leaf begins with L. Can you say the letter L?"
+    },
+    {
+      "id": "butterfly",
+      "match_text": "butterfly",
+      "text": "Explore the butterfly wings. Butterfly begins with B. Can you say the letter B?"
+    }
+  ]
+}

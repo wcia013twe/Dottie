@@ -1,0 +1,33 @@
+{
+  "synthetic": true,
+  "persona_id": "alex-morgan",
+  "persona_source": "story_mode/personas/alex-morgan.json",
+  "live_model": true,
+  "tested_reply": "Are a letter and a word basically the same? I am confused.",
+  "follow_up": {
+    "activity": "introduce",
+    "target": "r",
+    "kind": "letter",
+    "reason": "Learner confused letter and word as the same; clarifying with a concrete analogy (brick in a wall) and reiterating the target 'r' aligns with teaching preferences for plain language and small steps.",
+    "prompt": "A letter is one part of a word, like a single brick in a wall. The letter 'r' is one part of the word 'rabbit'. Let's feel just the letter 'r' again: \u2817.",
+    "hint": "Feel the two dots on the left side of the Braille cell \u2014 that's the letter 'r'."
+  },
+  "phase": "proposed",
+  "observations_count": 0,
+  "device_ready": false,
+  "session_log": "reports/storybook-session-test/sessions/e353bc3c-df3a-4b93-a5cd-b2e3a31cf91a.jsonl",
+  "screenshot": "reports/storybook-session-test/alex-follow-up.png",
+  "checks": [
+    "11 controller tests passed",
+    "5 MCP integration tests passed",
+    "npm run check:contracts passed",
+    "npm run check passed",
+    "System map connection label and animation verified in browser"
+  ],
+  "limits": [
+    "Fictional starting profile; not confirmed learner evidence",
+    "Local persona storage; no cloud persona table",
+    "Sessions are not restored across reloads",
+    "Live model prose still requires teacher review"
+  ]
+}

@@ -88,3 +88,11 @@ The three `companion-*.schema.json` files describe the Orin Nano harness boundar
 The optional [narration format 1.0](../../story_mode/narration/README.md) connects the local ElevenLabs
 build command to the browser reader through generated WAV files and a playback manifest. It is
 separate from learner telemetry and requires no lakehouse storage or deployed wire-format change.
+
+## Story cell transport (additive)
+
+[Story cell transport v1](story-cell-v1/README.md) defines the local Story runtime's bounded command/receipt path to the Nano harness receiver. Validated proposal targets can actuate the USB Braille controller when the user configures the connection. Device readiness requires a new matching CELL receipt; live hardware verification is pending. Deployed demo wire formats and learner evidence contracts are unchanged. Saved timeline reviews are browser-local and never actuate hardware.
+
+## Additive voice navigation
+
+[Voice navigation v1](voice-navigation-v1/README.md) documents the browser-to-localhost natural navigation fallback. It classifies unknown navigation text through the existing model into one bounded UI action. It carries no learner history or activity answers and does not change the deployed demo wire format.

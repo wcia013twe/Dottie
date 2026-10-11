@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 from uuid import uuid4
 
 from databricks.sdk.errors import NotFound, PermissionDenied, ResourceAlreadyExists
@@ -50,6 +50,16 @@ class ServicesTest(unittest.TestCase):
         self.client.config.host = 'https://different.example.com'
         with self.assertRaises(ValueError):
             Services(self.config, client=self.client)
+
+    def test_local_pat_uses_unified_auth_environment(self):
+        import os
+        client = MagicMock()
+        client.config.host = self.config.workspace_host
+        with patch.dict(os.environ, {'DATABRICKS_HOST': self.config.workspace_host,
+                                     'DATABRICKS_TOKEN': 'test-token'}, clear=True), \
+             patch('magneto_platform.services.WorkspaceClient', return_value=client) as workspace_client:
+            Services(self.config)
+        workspace_client.assert_called_once_with()
 
     def test_reference_paths_stay_in_volume(self):
         for path in ('', '../secret', '/etc/passwd', 'a/../b', 'a//b', 'a/./b', 'a\\b'):

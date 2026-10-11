@@ -5,7 +5,8 @@ from pathlib import Path
 import sys
 import time
 import tomllib
-from learner_intelligence import FIELDS, ROOT, validate_event
+from learner_intelligence import ROOT, validate_event
+import learner_medallion as layers
 
 DDL = 'id STRING, learner_id STRING, session_id STRING, occurred_at STRING, category STRING, target STRING, task STRING, condition STRING, outcome STRING, confirmed BOOLEAN, synthetic BOOLEAN, trace_id STRING'
 CONFIG=tomllib.loads((ROOT/'databricks/platform/learner-intelligence.toml').read_text())
@@ -30,19 +31,33 @@ def query(w,statement,params=None):
 def setup(w):
     query(w,f"CREATE TABLE IF NOT EXISTS {TABLE} ({DDL}) USING DELTA COMMENT 'Confirmed learner observations. Independent recognition counts teacher-confirmed identify responses independent versus with_help within identical target/task/condition; exclude deferred and device failures. No mastery inference. MLflow trace_id is provenance only.'")
 
+def insert_silver(w,e):
+    validate_event(e)
+    if e['synthetic'] or not e['confirmed']:raise ValueError('Only confirmed real observations may enter silver.')
+    payload=json.dumps(e,sort_keys=True)
+    existing=query(w,f'SELECT * FROM {TABLE} WHERE id = :event_id',{'event_id':e['id']})
+    if existing:
+        if len(existing)!=1 or decode(existing[0])!=e:raise layers.EventConflict('Conflicting immutable cloud event. No overwrite performed.')
+        return
+    struct='STRUCT<'+DDL.replace(' STRING',':STRING').replace(' BOOLEAN',':BOOLEAN')+'>'
+    query(w,f"MERGE INTO {TABLE} t USING (SELECT parsed.* FROM (SELECT from_json(:payload, '{struct}') parsed)) s ON t.id=s.id WHEN NOT MATCHED THEN INSERT *",{'payload':payload})
+    stored=query(w,f'SELECT * FROM {TABLE} WHERE id = :event_id',{'event_id':e['id']})
+    if len(stored)!=1 or decode(stored[0])!=e:raise RuntimeError('Silver readback mismatch; retry required.')
+
 def ingest(w,events):
-    for e in events:
-        validate_event(e)
-        if e['synthetic'] or not e['confirmed']:raise ValueError('Only confirmed real observations may enter the live table.')
-    for e in events:
-        payload=json.dumps(e,sort_keys=True)
-        existing=query(w,f'SELECT * FROM {TABLE} WHERE id = :event_id',{'event_id':e['id']})
-        if existing:
-            if decode(existing[0])!=e:raise ValueError('Conflicting immutable cloud event. No overwrite performed.')
-            continue
-        struct='STRUCT<'+DDL.replace(' STRING',':STRING').replace(' BOOLEAN',':BOOLEAN')+'>'
-        query(w,f"MERGE INTO {TABLE} t USING (SELECT parsed.* FROM (SELECT from_json(:payload, '{struct}') parsed)) s ON t.id=s.id WHEN NOT MATCHED THEN INSERT *",{'payload':payload})
-    return {'uploaded':len(events),'table':TABLE}
+    execute=lambda sql,params=None:query(w,sql,params)
+    identifiers=layers.capture(execute,events)
+    count=layers.promote(execute,identifiers,lambda event:insert_silver(w,event))
+    return {'uploaded':count,'table':TABLE,'bronze_table':layers.BRONZE}
+
+def replay(w,learner):
+    if not learner:raise ValueError('Replay requires one explicit learner.')
+    rows=query(w,f'SELECT ingest_id FROM {layers.BRONZE} WHERE learner_id=:learner ORDER BY ingested_at,ingest_id',{'learner':learner})
+    count=layers.promote(lambda sql,params=None:query(w,sql,params),[row['ingest_id'] for row in rows],lambda event:insert_silver(w,event))
+    return {'replayed':count,'table':TABLE}
+
+def publish_gold(w,profile):
+    return layers.publish(lambda sql,params=None:query(w,sql,params),profile,lambda learner:read(w,learner)['events'])
 
 def decode(row):
     for k in ('confirmed','synthetic'):
@@ -60,13 +75,28 @@ def read(w,learner=None):
     return {'learner_id':learner,'events':[decode(row) for row in rows],'table':TABLE}
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('operation',choices=['setup','ingest','read']);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('operation',choices=['setup','ingest','read','replay','publish-gold','read-gold','backfill']);args=parser.parse_args()
     from databricks.sdk import WorkspaceClient
     w=WorkspaceClient(profile=CONFIG['profile'])
     if w.config.host.rstrip('/')!='https://dbc-129a8d44-1940.cloud.databricks.com':raise ValueError('Workspace mismatch.')
-    if args.operation=='setup':setup(w);result={'ready':True,'table':TABLE}
-    elif args.operation=='ingest':result=ingest(w,json.load(sys.stdin)['events'])
-    else:result=read(w,json.load(sys.stdin).get('learner_id'))
+    execute=lambda sql,params=None:query(w,sql,params)
+    if args.operation=='setup':
+        setup(w);layers.setup(execute)
+        result={'ready':True,'silver':TABLE,'bronze':layers.BRONZE,'gold':layers.GOLD}
+    else:
+        payload=json.load(sys.stdin)
+        if args.operation=='ingest':result=ingest(w,payload['events'])
+        elif args.operation=='replay':result=replay(w,payload.get('learner_id'))
+        elif args.operation=='publish-gold':result=publish_gold(w,payload['profile'])
+        elif args.operation=='read-gold':result={'profile':layers.read_gold(execute,payload.get('learner_id'))}
+        elif args.operation=='backfill':
+            # Historical silver is not mislabeled as an original received payload.
+            rows=query(w,f'SELECT * FROM {TABLE} ORDER BY occurred_at,id')
+            ids=layers.capture(execute,[decode(row) for row in rows],source='historical-silver-backfill-v1')
+            result={'backfilled':len(ids),'source':'historical-silver-backfill-v1'}
+        else:
+            result=read(w,payload.get('learner_id'))
+            result['gold_profile']=layers.read_gold(execute,result['learner_id'])
     print(json.dumps(result))
 if __name__=='__main__':
     try:main()

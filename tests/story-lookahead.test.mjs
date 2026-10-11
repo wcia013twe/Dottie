@@ -33,7 +33,8 @@ test('feedback never grades a transcript or treats try-later as incorrect',()=>{
 test('question markers track only ready or active questions in the current window',()=>{
  const candidate={state:null,passage:null,windowTargets:['rabbit'],status:'ready',preview:{tool:'propose_activity'},target:'rabbit'};
  assert.equal(plannedQuestion(candidate),'rabbit');
- for(const change of [{status:'preparing'},{status:'failed'},{preview:{tool:'recommend_continue'}},{preview:{tool:'propose_word_emphasis'}},{windowTargets:[]}])assert.equal(plannedQuestion({...candidate,...change}),null);
+ assert.equal(plannedQuestion({...candidate,preview:{tool:'propose_word_emphasis'}}),'rabbit');
+ for(const change of [{status:'preparing'},{status:'failed'},{preview:{tool:'recommend_continue'}},{windowTargets:[]}])assert.equal(plannedQuestion({...candidate,...change}),null);
  const active={...candidate,status:'idle',passage:'rabbit',state:{passage_id:'rabbit',phase:'waiting_response',proposal:{activity:'identify'}}};
  assert.equal(plannedQuestion(active),'rabbit');
  assert.equal(plannedQuestion({...active,state:{...active.state,phase:'complete'}}),null);
@@ -54,4 +55,21 @@ test('recorded question results survive plan changes and keep status on a planne
  assert.equal(questionStops(null,[{...row,outcome:'try_later'}],checkpoints)[0].status,'skipped');
  for(const change of [{activity:'emphasize'},{source:'agent'},{outcome:'unknown'},{passage_id:'unknown'},{observed_at:'invalid'}])
    assert.deepEqual(questionStops(null,[{...row,...change}],checkpoints),[]);
+});
+
+test('automatic narration waits for the story boundary and handles late generation once',async()=>{
+ const {shouldOfferInteraction}=await import('../web/learn/story-lookahead.js');
+ const ready={ended:true,ready:true,busy:false,phase:'reading',offered:false};
+ assert.equal(shouldOfferInteraction({...ready,ended:false}),false);
+ assert.equal(shouldOfferInteraction({...ready,ready:false}),false);
+ assert.equal(shouldOfferInteraction(ready),true);
+ assert.equal(shouldOfferInteraction({...ready,phase:'proposed'}),true);
+ for(const change of [{busy:true},{phase:'waiting_response'},{phase:'awaiting_confirmation'},{offered:true}])
+  assert.equal(shouldOfferInteraction({...ready,...change}),false);
+});
+
+test('word activities persist as review points without becoming solved evidence',async()=>{
+ const {questionStops}=await import('../web/learn/story-lookahead.js');
+ const stops=questionStops(null,[],[{id:'rabbit'}],[{passage_id:'rabbit',activity:'emphasize',status:'presented'}]);
+ assert.deepEqual(stops,[{id:'rabbit',status:'visited',planned:false}]);
 });

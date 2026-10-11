@@ -13,8 +13,22 @@ export class StoryMemory {
     this.outbox=previous?.profile?.profile_id===this.profileId?previous:profile;
     this.outbox.profile=profile.profile;outboxes.set(storage,this.outbox);
     this.key=KEY+':'+this.profileId;
+    this.reviewKey=this.key+':reviews';this.reviews=[];
+    try{const saved=JSON.parse(storage.getItem(this.reviewKey)||'[]');if(Array.isArray(saved))this.reviews=saved.filter(r=>r && typeof r.id==='string' && typeof r.prompt==='string').slice(-100);}
+    catch{this.error='Saved activity reviews could not be read.';}
     try{const rows=JSON.parse(storage.getItem(this.key)||'[]');if(!Array.isArray(rows))throw Error();this.rows=rows.slice(-40);}
     catch{this.error='Saved story practice could not be read. New observations remain in this session.';this.broken=true;}
+  }
+  saveReview(id,state,audio={},status='presented'){
+    if(state.synthetic_persona || !state.proposal?.target)return;
+    const old=this.reviews.find(r=>r.id===id);
+    const row={id,session_id:state.session_id,passage_id:state.passage_id,target:state.proposal.target,
+      activity:state.proposal.activity,prompt:state.proposal.prompt,reason:state.proposal.reason,
+      response:state.response?.text||old?.response||'',status,
+      audio:audio.prompt||old?.audio||null,at:old?.at||new Date().toISOString()};
+    this.reviews=[...this.reviews.filter(r=>r.id!==id),row].slice(-100);
+    try{this.storage.setItem(this.reviewKey,JSON.stringify(this.reviews));}
+    catch{this.error='Activity review is available now, but browser storage could not save it.';}
   }
   remember(observations,sessionId){
     if(this.broken)return;

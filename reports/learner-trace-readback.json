@@ -1,0 +1,10 @@
+{
+  "request_id": "5a54f64d-f516-4edb-a7b3-ddd622fdab28",
+  "trace_id": "trace:/workspace.magneto.948045133158359/a1ae3997d1332a2daecb0e4517a3f432",
+  "span_names": [
+    "magneto_decision",
+    "LangGraph",
+    "decide"
+  ],
+  "boundary": "Decision provenance only. Join to separately confirmed learner events before reflection."
+}

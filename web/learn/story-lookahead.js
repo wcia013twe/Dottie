@@ -32,12 +32,12 @@ export function createLookahead(api, changed = () => {}) {
 
 export function plannedQuestion({state, passage, windowTargets, status, preview, target}) {
   if(state?.passage_id===passage && ['proposed','awaiting_tactile','ready','waiting_response','awaiting_confirmation'].includes(state?.phase)
-      && ['introduce','identify','match'].includes(state?.proposal?.activity))return passage;
-  return status==='ready' && preview?.tool==='propose_activity' && windowTargets.includes(target)?target:null;
+      && ['introduce','identify','match','emphasize'].includes(state?.proposal?.activity))return passage;
+  return status==='ready' && ['propose_activity','propose_word_emphasis'].includes(preview?.tool) && windowTargets.includes(target)?target:null;
 }
 
 // Only accepted teacher outcomes count; exposure and unconfirmed proposals do not.
-export function questionStops(planned, observations = [], checkpoints = []) {
+export function questionStops(planned, observations = [], checkpoints = [], reviews = []) {
   const stops = new Map(), known = new Set(checkpoints.map(c=>c.id));
   const outcomes = {independent:'solved',with_help:'assisted',try_later:'skipped'};
   for (const row of observations) {
@@ -48,6 +48,12 @@ export function questionStops(planned, observations = [], checkpoints = []) {
     if (!previous || Date.parse(row.observed_at)>=Date.parse(previous.observedAt))
       stops.set(row.passage_id,{id:row.passage_id,status:outcomes[row.outcome],observedAt:row.observed_at,planned:false});
   }
+  for(const row of reviews){if(known.has(row.passage_id) && !stops.has(row.passage_id))stops.set(row.passage_id,{id:row.passage_id,status:'visited',planned:false});}
   if (known.has(planned)) stops.set(planned,{...(stops.get(planned)||{id:planned,status:'planned'}),planned:true});
   return [...stops.values()];
+}
+
+// A late AI result may arrive after page narration has already ended.
+export function shouldOfferInteraction({ended, ready, busy, phase, offered}) {
+  return ended && ready && !busy && ['reading','proposed'].includes(phase) && !offered;
 }

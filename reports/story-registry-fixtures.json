@@ -1,0 +1,111 @@
+{
+  "mode": "direct",
+  "first_request": null,
+  "summary": {
+    "requests": 5,
+    "successes": 5,
+    "failures": 0,
+    "behavior_mismatches": 0,
+    "median_ms": 3638,
+    "p95_ms": 6683,
+    "first_request_ms": null,
+    "first_request_ok": null
+  },
+  "requests": [
+    {
+      "fixture": "apple",
+      "ok": true,
+      "expected_action": "continue",
+      "matches_expected": true,
+      "request_id": "7d9fb473-c299-44a0-b758-e1ecee190864",
+      "session_id": "edd21b47-2433-4e71-a1c6-ef4359a99019",
+      "decision": {
+        "action": "continue",
+        "passage_id": "monday_apple",
+        "target_letter": null,
+        "prompt": null,
+        "reason": "The target letter A is familiar with no recent events indicating difficulty, so teaching is not needed.",
+        "based_on_event_id": null
+      },
+      "model": "databricks-qwen3-next-80b-a3b-instruct",
+      "elapsed_ms": 6683,
+      "round_trip_ms": 6683
+    },
+    {
+      "fixture": "plum_incorrect",
+      "ok": true,
+      "expected_action": "teach",
+      "matches_expected": true,
+      "request_id": "ad82cfd1-df14-44fa-bdd9-d18196959e54",
+      "session_id": "e72db7a6-f808-4d77-a3d7-e3260a16b65b",
+      "decision": {
+        "action": "teach",
+        "passage_id": "wednesday_plum",
+        "target_letter": "P",
+        "prompt": "Feel the Braille letter P and tell me which letter it is.",
+        "reason": "The target letter P has a recent incorrect recognition in the previous passage and is marked as needing practice with no recent success.",
+        "based_on_event_id": "23e88ee2-1386-4632-90bb-051b2ace8a77"
+      },
+      "model": "databricks-qwen3-next-80b-a3b-instruct",
+      "elapsed_ms": 3531,
+      "round_trip_ms": 3531
+    },
+    {
+      "fixture": "plum_correct",
+      "ok": true,
+      "expected_action": "continue",
+      "matches_expected": true,
+      "request_id": "f606d01f-3864-4637-99db-00f86713155e",
+      "session_id": "110003ce-48bf-430b-a033-0d72f90b37de",
+      "decision": {
+        "action": "continue",
+        "passage_id": "wednesday_plum",
+        "target_letter": null,
+        "prompt": null,
+        "reason": "The target letter P was recently recognized correctly in the tuesday_pear passage, overriding its needs_practice history.",
+        "based_on_event_id": "e5527dfb-25fd-4b88-a8ac-8f2eb73dbd53"
+      },
+      "model": "databricks-qwen3-next-80b-a3b-instruct",
+      "elapsed_ms": 3365,
+      "round_trip_ms": 3365
+    },
+    {
+      "fixture": "pear",
+      "ok": true,
+      "expected_action": "teach",
+      "matches_expected": true,
+      "request_id": "8286693f-a8a2-44c0-93cd-e869840a58dc",
+      "session_id": "a0fd4fbf-8b6e-475c-a155-8f2a76627561",
+      "decision": {
+        "action": "teach",
+        "passage_id": "tuesday_pear",
+        "target_letter": "P",
+        "prompt": "Feel the Braille letter P and tell me which letter it is.",
+        "reason": "The learner has a needs_practice history for P with no recent correct recognition events to override it.",
+        "based_on_event_id": null
+      },
+      "model": "databricks-qwen3-next-80b-a3b-instruct",
+      "elapsed_ms": 3787,
+      "round_trip_ms": 3787
+    },
+    {
+      "fixture": "plum_help",
+      "ok": true,
+      "expected_action": "teach",
+      "matches_expected": true,
+      "request_id": "9be796ae-b118-4519-a4dd-fb346983d1cc",
+      "session_id": "0d38b964-ce00-457a-906e-0a92ab177688",
+      "decision": {
+        "action": "teach",
+        "passage_id": "wednesday_plum",
+        "target_letter": "P",
+        "prompt": "Feel the Braille letter P and tell me which letter it is.",
+        "reason": "The learner previously needed help with P on tuesday_pear, and P is still marked as needs_practice with no recent correct recognition.",
+        "based_on_event_id": "158f9af6-c8d8-4253-9eac-8df5b1b05ad8"
+      },
+      "model": "databricks-qwen3-next-80b-a3b-instruct",
+      "elapsed_ms": 3638,
+      "round_trip_ms": 3638
+    }
+  ]
+}

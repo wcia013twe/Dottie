@@ -86,3 +86,18 @@ Profile JSON gains optional `analysis` (conversation/response IDs, source URL, e
 `reports/storybook-session-test/audit.json` records a browser walkthrough of Peter Rabbit with isolated fictional outcomes. Reading position survived reload; teacher-coach tool telemetry updated through confirmation. A live model introduction was correctly excluded from recognition evidence. A separately labeled controlled identification proposal produced a saved synthetic observation, exact isolated SQL readback, validated Genie publication, unchanged replay and an About me profile that survived reload. This is not a real learner run, an automatic test-server cloud trigger, or proof of the full architecture.
 
 The audit fixed Genie JSON parsing when one fenced proposal follows transport narration; ambiguous multiple fences still fail, and profile validation remains authoritative. The test server never selects or syncs production learner data. Production still queues updates per confirmed identification, not at book close, and reopening the reader creates a new anonymous coach session. The shelf's separate mock activities do not feed this queue. Stable learner/session restoration, explicit finalization, other category adapters and MLflow outcome joins remain outstanding.
+
+## Learner medallion storage (October 11)
+
+The existing research-backed, MLflow-judged worker now publishes through additive
+bronze/silver/gold storage. See [medallion stages](../databricks/docs/medallion-stages.md)
+for table roles, upload scope, historical migration and replay commands. The original
+learner event and read-only profile contracts are unchanged. New confirmed-real
+normalized payloads land in bronze before validation; invalid records are retained
+with quarantine reasons. Silver remains `learner_observations_v1`. Immutable gold
+profile epochs require schema/metric/provenance checks and exact SQL readback before
+the staged local profile becomes visible. Latest gold readback can restore the local
+cache; failed publication keeps the prior profile and identical retry candidate.
+The local worker remains necessary. Synthetic tests do not enter these tables,
+empty evidence does not manufacture an epoch, and planner readback, MLflow outcome
+joins, reviewed correction handling and a cloud scheduler remain unconnected.

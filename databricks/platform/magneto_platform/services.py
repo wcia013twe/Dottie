@@ -62,9 +62,11 @@ class ServiceConfig:
 class Services:
     def __init__(self, config: ServiceConfig, *, client=None, http=None):
         self.config = config
-        # Deployed Apps resolve their injected service identity. Local use selects the profile.
+        # Deployed Apps resolve their injected service identity. Local use selects the profile,
+        # unless the local server supplied a private PAT through unified-auth environment variables.
+        local_pat = os.getenv('DATABRICKS_HOST') and os.getenv('DATABRICKS_TOKEN')
         self.client = client if client is not None else WorkspaceClient(
-            **({} if os.getenv('DATABRICKS_APP_NAME') else {'profile': config.profile}))
+            **({} if os.getenv('DATABRICKS_APP_NAME') or local_pat else {'profile': config.profile}))
         if self.client.config.host.rstrip('/') != config.workspace_host.rstrip('/'):
             raise ValueError('Authenticated workspace does not match services.toml')
         self.http = http or requests.Session()

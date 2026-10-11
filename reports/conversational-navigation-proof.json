@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-11",
+  "synthetic": true,
+  "microphone_captured": false,
+  "voice_id": "EdRF4OLfMKecDfuWuBXY",
+  "generated_clip_count": 16,
+  "browser_cases": [
+    {
+      "text": "Mm, let's go explore.",
+      "route": "explore",
+      "playback_voice_url_verified": true
+    },
+    {
+      "text": "I'd love to settle down with a book",
+      "route": "stories",
+      "model_fallback": true
+    },
+    {
+      "text": "Maybe practice or a story, I am not sure",
+      "route": "stories",
+      "clarification": true,
+      "route_unchanged": true
+    }
+  ],
+  "live_http_cases": [
+    {
+      "text": "I'd love to settle down with a book",
+      "status": 200,
+      "type": "navigate",
+      "route": "stories"
+    },
+    {
+      "text": "How have I been doing lately?",
+      "status": 200,
+      "type": "navigate",
+      "route": "intelligence"
+    },
+    {
+      "text": "Don't take me home",
+      "status": 200,
+      "type": "clarify"
+    },
+    {
+      "text": "Maybe practice or a story, I am not sure",
+      "status": 200,
+      "type": "clarify"
+    }
+  ],
+  "limitations": [
+    "Synthetic transcripts were injected into the real browser controller with simulated capture and Scribe transport; the model endpoint was live.",
+    "These checks do not assess blind-user usability or microphone recognition reliability.",
+    "Dynamic uncached speech and explicit browser Read story page retain browser speech fallback."
+  ]
+}

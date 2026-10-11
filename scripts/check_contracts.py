@@ -106,3 +106,38 @@ for mutate in (
     except (ValueError, TypeError): pass
     else: raise AssertionError('v3 runtime accepted invalid input')
 print(f'Validated {len(validators)+len(v2_validators)+1} schemas, {len(examples)+3} examples, generated catalogs, live demo fixtures and negative cases. No cloud calls.')
+
+# Additive local hardware messages; neither interface changes deployed demo payloads.
+cell_folder=ROOT/'databricks/contracts/story-cell-v1'
+for name in ('request','receipt'):
+    schema=read(cell_folder/f'{name}.schema.json')
+    Draft202012Validator.check_schema(schema)
+    validator=Draft202012Validator(schema,format_checker=FormatChecker())
+    validator.validate(read(cell_folder/f'{name}.example.json'))
+    bad=read(cell_folder/f'{name}.example.json')
+    if name=='request':bad['target']='rabbit;CLEAR'
+    else:bad['cell_ack']=False
+    try:validator.validate(bad)
+    except ValidationError:pass
+    else:raise AssertionError('Invalid cell message accepted')
+print('Validated additive Story cell request and successful receipt contracts.')
+
+# Additive navigation classification: existing model, no new execution authority.
+sys.path.insert(0,str(ROOT/'scripts'))
+from voice_navigation import validate_request as validate_navigation_request, validate_action as validate_navigation_action
+nav_folder=ROOT/'databricks/contracts/voice-navigation-v1'
+for name in ('request','response'):
+    schema=read(nav_folder/f'{name}.schema.json')
+    Draft202012Validator.check_schema(schema)
+    validator=Draft202012Validator(schema)
+    example=read(nav_folder/f'{name}.example.json')
+    validator.validate(example)
+    if name=='request':validate_navigation_request(example)
+    else:assert validate_navigation_action({'action':'stories'},read(nav_folder/'request.example.json'))==example['intent']
+    bad=copy.deepcopy(example)
+    if name=='request':bad['route']='outside'
+    else:bad['intent']['route']='https://outside.example'
+    try:validator.validate(bad)
+    except ValidationError:pass
+    else:raise AssertionError('Navigation schema accepted arbitrary destination')
+print('Validated additive navigation request and bounded model intent contracts.')

@@ -1,0 +1,39 @@
+{
+  "run_id": "7b9ae66fa310",
+  "synthetic": true,
+  "table": "workspace.magneto.synthetic_learner_e2e_v1",
+  "learner_id": "synthetic-story-adc6c297-49c0-4c9b-9051-1e93bfc87895-7b9ae66fa310",
+  "started_at": "2026-10-11T10:08:03.365923+00:00",
+  "stages": {
+    "sql_write": {
+      "passed": true,
+      "event_count": 1
+    },
+    "sql_readback": {
+      "passed": true,
+      "exact_match": true,
+      "event_count": 1
+    },
+    "genie": {
+      "passed": true,
+      "analysis": {
+        "conversation_id": "a7a4dba930834cb098712dda33dcb282",
+        "response_id": "958e5c4e1bc54778800dc19fa267706d",
+        "source_url": "https://dbc-129a8d44-1940.cloud.databricks.com/one/chat/threads/a7a4dba930834cb098712dda33dcb282?o=7474648183111292&utm_source=genie_chat_mcp",
+        "summary": "Story walkthrough has one recorded session with a single braille recognition observation; other categories lack sufficient evidence.",
+        "evidence_digest": "735e240eccbbd2c357910142c3ebcb967f5a73384e584b366ba10cb62dd73032"
+      }
+    },
+    "profile_publication": {
+      "passed": true,
+      "epoch": 1,
+      "replay_published": false,
+      "profile_path": "/Users/wes/Documents/Codex/2026-10-10/https-www-canva-com-design-dahxi6nhjhe/outputs/magneto/reports/synthetic-cloud-flow/profile.json",
+      "schema_valid": true
+    }
+  },
+  "full_suite_complete": false,
+  "live_learner_table_written": false,
+  "input_evidence": "/Users/wes/Documents/Codex/2026-10-10/https-www-canva-com-design-dahxi6nhjhe/outputs/magneto/reports/storybook-session-test/evidence.json",
+  "status": "passed"
+}

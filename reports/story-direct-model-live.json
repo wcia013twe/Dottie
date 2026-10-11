@@ -1,0 +1,106 @@
+{
+  "scope": "Local Story HTTP -> MCP discovery -> live Databricks model -> validated proposal; no learner observation recorded",
+  "synthetic_scenario": true,
+  "started_at": "2026-10-11T09:56:33.478917+00:00",
+  "input_state": {
+    "session_id": "32846a12-2c74-4e9a-8b50-96bbc1f86268",
+    "revision": 1,
+    "passage_id": "rabbit",
+    "phase": "reading",
+    "proposal": null,
+    "response": null,
+    "observations": [],
+    "trace": [
+      {
+        "tool": "set_context",
+        "actor": "teacher",
+        "revision": 1
+      }
+    ],
+    "device": {
+      "connected": false,
+      "ready": false,
+      "mode": "teacher-supplied tactile Braille"
+    },
+    "policy": {
+      "teacher_approval": true,
+      "max_activities": 6,
+      "braille_code": "UEB",
+      "translation": "uncontracted lowercase letters"
+    },
+    "activities_started": 0,
+    "opportunity": {
+      "summary": "Meet Peter and the other little rabbits.",
+      "prop": "rabbit model",
+      "targets": [
+        "r",
+        "rabbit"
+      ]
+    }
+  },
+  "result": {
+    "state": {
+      "session_id": "32846a12-2c74-4e9a-8b50-96bbc1f86268",
+      "revision": 2,
+      "passage_id": "rabbit",
+      "phase": "proposed",
+      "proposal": {
+        "activity": "introduce",
+        "target": "r",
+        "kind": "letter",
+        "reason": "Teacher-approved opportunity to introduce target letter r using rabbit model and uncontracted UEB.",
+        "prompt": "This is the letter r.",
+        "hint": "r makes the /r/ sound like in rabbit."
+      },
+      "response": null,
+      "observations": [],
+      "trace": [
+        {
+          "tool": "set_context",
+          "actor": "teacher",
+          "revision": 1
+        },
+        {
+          "tool": "propose_activity",
+          "actor": "orchestrator",
+          "revision": 2
+        }
+      ],
+      "device": {
+        "connected": false,
+        "ready": false,
+        "mode": "teacher-supplied tactile Braille"
+      },
+      "policy": {
+        "teacher_approval": true,
+        "max_activities": 6,
+        "braille_code": "UEB",
+        "translation": "uncontracted lowercase letters"
+      },
+      "activities_started": 0,
+      "opportunity": {
+        "summary": "Meet Peter and the other little rabbits.",
+        "prop": "rabbit model",
+        "targets": [
+          "r",
+          "rabbit"
+        ]
+      }
+    },
+    "orchestrator": {
+      "mode": "live-model",
+      "transport": "MCP stdio",
+      "tools_discovered": [
+        "get_story_context",
+        "propose_activity",
+        "recommend_continue",
+        "prepare_braille",
+        "speak_prompt",
+        "give_hint",
+        "submit_response"
+      ],
+      "tool_called": "propose_activity"
+    }
+  },
+  "status": "passed"
+}

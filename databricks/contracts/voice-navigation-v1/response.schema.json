@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "intent": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "navigate"
+            },
+            "route": {
+              "enum": [
+                "home",
+                "explore",
+                "practice",
+                "stories",
+                "intelligence",
+                "guess",
+                "match",
+                "letters",
+                "connect"
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "route"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "enum": [
+                "back",
+                "help",
+                "repeat",
+                "stopListening"
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "control"
+            },
+            "name": {
+              "enum": [
+                "stop audio",
+                "next page",
+                "previous page",
+                "read story",
+                "pause reading",
+                "resume reading"
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "name"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "clarify"
+            },
+            "message": {
+              "const": "What would you like to do? You can explore, practice, read a story, or hear about your progress."
+            }
+          },
+          "required": [
+            "type",
+            "message"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "const": "model"
+    }
+  },
+  "required": [
+    "intent",
+    "source"
+  ]
+}

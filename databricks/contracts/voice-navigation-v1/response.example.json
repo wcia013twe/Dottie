@@ -1,0 +1,7 @@
+{
+  "intent": {
+    "type": "navigate",
+    "route": "stories"
+  },
+  "source": "model"
+}

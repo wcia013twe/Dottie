@@ -1,0 +1,15 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "run_id": "b07c18114e7b45fa99025f10bd0c6647",
+  "run_url": "https://dbc-129a8d44-1940.cloud.databricks.com/ml/experiments/1306573313615572/runs/b07c18114e7b45fa99025f10bd0c6647",
+  "episodes": 2,
+  "retrieved_passages": 3,
+  "attempts": 2,
+  "final_proposed_changes": 0,
+  "accepted": true,
+  "remote_audit_readback_matches": true,
+  "replay_published": false,
+  "profile_schema_valid": true,
+  "boundary": "Final run retained deterministic observations and proposed no research-based adaptation. Broadly related research did not justify the proposed action. Live bridge activation requires server restart; Genie summary was not invoked for synthetic evidence."
+}

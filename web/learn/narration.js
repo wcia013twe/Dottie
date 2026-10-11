@@ -9,30 +9,41 @@ export function matchNarration(manifest, bookId, text) {
   return passage;
 }
 
-export function mountNarration({player, bookId, onPlay, onEnded = () => {}}) {
+export function mountNarration({player, bookId, onPlay, onEnded = () => {}, onProgress = () => {}}) {
   if (!/^[a-zA-Z0-9_-]{1,100}$/.test(bookId)) return {context(){}, pause(){}, dispose(){}};
   const area = document.createElement('div'); area.hidden = true; area.className = 'local-narration';
   const label = document.createElement('span'); label.textContent = 'Recorded narration';
-  const audio = document.createElement('audio'); audio.controls = true; audio.preload = 'auto'; audio.setAttribute('aria-label', 'Read this passage');
-  area.append(label, audio); player.querySelector('.player-controls').prepend(area);
+  const audio = document.createElement('audio'); audio.controls = false; audio.preload = 'auto'; audio.setAttribute('aria-label', 'Read this passage');
+  const description = document.createElement('details');
+  const summary = document.createElement('summary'); summary.textContent = 'Picture description';
+  const transcript = document.createElement('p'); description.append(summary, transcript);
+  const replay = document.createElement('button'); replay.type = 'button'; replay.textContent = 'Replay description';
+  replay.onclick = () => { audio.currentTime = 0; audio.play().catch(() => { label.textContent = 'Press play to hear this page'; }); };
+  area.append(label, replay, description, audio); player.querySelector('.player-controls').prepend(area);
   let disposed = false, manifest = null, currentText = '', source = '';
   function context(text) {
     currentText = text;
     const passage = matchNarration(manifest, bookId, text);
     const next = passage ? `./narration/${bookId}/${passage.audio}` : '';
-    if (next === source) return;
-    audio.pause(); label.textContent = 'Recorded narration'; source = next; area.hidden = !next;
-    if (next) audio.src = next; else audio.removeAttribute('src');
+    if (next === source) {if(manifest && !next)onEnded();return;}
+    const visual = String(manifest?.script_version || '').startsWith('visual-description-');
+    audio.pause(); label.textContent = visual ? 'Original visual narration' : 'Recorded narration'; source = next; area.hidden = !(visual && next);
+    transcript.textContent = visual ? passage?.text || '' : '';
+    description.hidden = replay.hidden = !visual;
+    if (next) audio.src = next; else {audio.removeAttribute('src');if(manifest)onEnded();}
     audio.load();
+    onProgress(0);
     if (next) audio.play().catch(() => {
       if (!disposed && source === next && audio.paused) label.textContent = 'Press play to hear this page';
     });
   }
+  function reportProgress(){onProgress(Number.isFinite(audio.duration) && audio.duration > 0 ? Math.min(1,audio.currentTime/audio.duration) : 0);}
+  audio.ontimeupdate = audio.onloadedmetadata = audio.onseeked = reportProgress;
   audio.onended = () => {if(!disposed)onEnded();};
   audio.onplay = () => { onPlay(); window.speechSynthesis?.cancel(); };
   audio.onerror = () => { label.textContent = 'Narration unavailable. Continue reading or rebuild this audio.'; };
   fetch(`./narration/${bookId}/manifest.json`, {cache:'no-store'})
     .then(response => response.ok ? response.json() : null)
     .then(data => { if (!disposed) { manifest = data; context(currentText); } }).catch(() => {});
-  return {context, pause(){audio.pause();}, dispose(){disposed=true;audio.pause();audio.removeAttribute('src');audio.load();area.remove();}};
+  return {context, seek(fraction){if(source && Number.isFinite(audio.duration) && audio.duration > 0){audio.currentTime=Math.max(0,Math.min(1,fraction))*audio.duration;reportProgress();}}, resume(){if(source && audio.paused)audio.play().catch(() => {label.textContent='Press play to hear this page';});}, isPlaying(){return !audio.paused && !audio.ended;}, pause(){audio.pause();}, dispose(){disposed=true;audio.pause();audio.removeAttribute('src');audio.load();area.remove();}};
 }

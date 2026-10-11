@@ -1,0 +1,54 @@
+{
+  "run_id": "f038af38d9ea",
+  "synthetic": true,
+  "table": "workspace.magneto.synthetic_learner_e2e_v1",
+  "learner_id": "synthetic-river-f038af38d9ea",
+  "started_at": "2026-10-11T09:51:28.468776+00:00",
+  "stages": {
+    "sql_write": {
+      "passed": true,
+      "event_count": 17
+    },
+    "sql_readback": {
+      "passed": true,
+      "exact_match": true,
+      "event_count": 17
+    },
+    "genie": {
+      "passed": true,
+      "analysis": {
+        "conversation_id": "a13bcef140bb497fb661ffd138f62fe5",
+        "response_id": "0772e41b16ed4d7f824d7e4fa02ba7ad",
+        "source_url": "https://dbc-129a8d44-1940.cloud.databricks.com/one/chat/threads/a13bcef140bb497fb661ffd138f62fe5?o=7474648183111292&utm_source=genie_chat_mcp",
+        "summary": "River has one recorded session with evidence across braille recognition, instruction following, and response mode choices.",
+        "evidence_digest": "8ec0e5af4764fef14fd3247bdbf3c9eb8bdc3296d394b9df4efe972d71860cba"
+      }
+    },
+    "profile_publication": {
+      "passed": true,
+      "epoch": 1,
+      "replay_published": false,
+      "profile_path": "/Users/wes/Documents/Codex/2026-10-10/https-www-canva-com-design-dahxi6nhjhe/outputs/magneto/reports/synthetic-cloud-flow/profile.json",
+      "schema_valid": true
+    },
+    "browser_consumer": {
+      "passed": true,
+      "http_profile_exact_match": true,
+      "six_categories_rendered": true,
+      "fictional_label_visible": true,
+      "metric_percent": 40,
+      "epoch": 1,
+      "url": "http://127.0.0.1:8099/learn/?profile=synthetic-test#intelligence",
+      "screenshot": "reports/synthetic-cloud-flow/browser-preview.png"
+    }
+  },
+  "full_suite_complete": false,
+  "live_learner_table_written": false,
+  "status": "passed",
+  "checks": {
+    "intelligence_tests_passed": 32,
+    "contract_checks": "passed",
+    "repository_check": "passed",
+    "system_map_browser": "connections and animation verified"
+  }
+}

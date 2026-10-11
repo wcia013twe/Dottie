@@ -1,0 +1,70 @@
+{
+  "synthetic": true,
+  "full_suite_complete": false,
+  "browser_origin": "http://127.0.0.1:8100",
+  "live_model_checked": true,
+  "identification_proposal": "controlled fixture; not a live model choice",
+  "session_id": "adc6c297-49c0-4c9b-9051-1e93bfc87895",
+  "saved_event_ids": [
+    "7f75563d-5b0e-4cd3-8d89-c2bbd1c59d99"
+  ],
+  "normalized_identification_count": 1,
+  "telemetry_updated": true,
+  "bookmark_reload": "chapter page 3 restored",
+  "saved_observation_survived_book_close": true,
+  "production_book_close_triggers_update": false,
+  "production_confirmed_identification_triggers_update": true,
+  "persistent_coach_session_restore": false,
+  "cloud_run_id": "7b9ae66fa310",
+  "first_cloud_attempt": {
+    "status": "rejected",
+    "error": "Genie preface before fenced JSON; JSONDecodeError; prior cloud profile retained"
+  },
+  "cloud_status": "passed",
+  "checks": {
+    "intelligence_tests": 34,
+    "story_controller_tests": 8,
+    "story_mcp_tests": 4,
+    "contracts": "passed",
+    "npm_check": "passed"
+  },
+  "cloud_stages": {
+    "sql_write": {
+      "passed": true,
+      "event_count": 1
+    },
+    "sql_readback": {
+      "passed": true,
+      "exact_match": true,
+      "event_count": 1
+    },
+    "genie": {
+      "passed": true,
+      "analysis": {
+        "conversation_id": "a7a4dba930834cb098712dda33dcb282",
+        "response_id": "958e5c4e1bc54778800dc19fa267706d",
+        "source_url": "https://dbc-129a8d44-1940.cloud.databricks.com/one/chat/threads/a7a4dba930834cb098712dda33dcb282?o=7474648183111292&utm_source=genie_chat_mcp",
+        "summary": "Story walkthrough has one recorded session with a single braille recognition observation; other categories lack sufficient evidence.",
+        "evidence_digest": "735e240eccbbd2c357910142c3ebcb967f5a73384e584b366ba10cb62dd73032"
+      }
+    },
+    "profile_publication": {
+      "passed": true,
+      "epoch": 1,
+      "replay_published": false,
+      "profile_path": "/Users/wes/Documents/Codex/2026-10-10/https-www-canva-com-design-dahxi6nhjhe/outputs/magneto/reports/synthetic-cloud-flow/profile.json",
+      "schema_valid": true
+    }
+  },
+  "browser_profile": {
+    "passed": true,
+    "epoch": 1,
+    "reload_preserved": true,
+    "recognition_targets": 1,
+    "sessions_with_evidence": 1,
+    "percentage": null,
+    "six_summaries": true,
+    "genie_source_visible": true,
+    "screenshot": "reports/storybook-session-test/profile-preview.png"
+  }
+}

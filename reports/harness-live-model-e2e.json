@@ -1,0 +1,67 @@
+{
+  "synthetic": true,
+  "backend": "sim",
+  "brain": "live Databricks model",
+  "started_at": "2026-10-11T09:23:14.796550+00:00",
+  "result": {
+    "state": {
+      "schema_version": "1.0",
+      "session_id": "07eb1db1-76cb-4049-8d1f-e2c9a333c1f1",
+      "revision": 13,
+      "phase": "reviewing",
+      "lesson_id": "word_cab",
+      "targets": [
+        "c",
+        "a",
+        "b"
+      ],
+      "index": 2,
+      "target": "b",
+      "activity": "identify",
+      "prompt": "Feel the letter on the cell, then say it out loud.",
+      "activities_started": 2,
+      "policy": {
+        "max_activities": 6,
+        "advance_on_correct": true
+      },
+      "device": {
+        "cell_connected": false,
+        "cell_ready": true,
+        "listening": false,
+        "camera_available": false
+      },
+      "last_response": {
+        "transcript": "c",
+        "expected": "b",
+        "match": "none",
+        "outcome": "incorrect",
+        "source": "stt",
+        "received_at_ms": 70265237
+      },
+      "recent_outcomes": [
+        {
+          "transcript": "c",
+          "expected": "c",
+          "match": "exact",
+          "outcome": "correct",
+          "source": "stt",
+          "received_at_ms": 70257921
+        },
+        {
+          "transcript": "c",
+          "expected": "b",
+          "match": "none",
+          "outcome": "incorrect",
+          "source": "stt",
+          "received_at_ms": 70265237
+        }
+      ],
+      "recent_observations": []
+    },
+    "tool_called": "announce",
+    "reason": "Learner incorrectly identified 'b' as 'c'; repeat the same target with a gentle hint to encourage correction.",
+    "done": false,
+    "session_id": "07eb1db1-76cb-4049-8d1f-e2c9a333c1f1"
+  },
+  "status": "turn_limit_reached"
+}

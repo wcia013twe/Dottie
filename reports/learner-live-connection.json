@@ -1,0 +1,9 @@
+{
+  "verified": true,
+  "source": "workspace.magneto.learner_observations_v1",
+  "connected": true,
+  "real_event_count": 0,
+  "live_epoch": 0,
+  "mock_is_separate": true,
+  "genie_status": "unavailable_403"
+}

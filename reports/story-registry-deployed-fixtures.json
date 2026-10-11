@@ -1,0 +1,51 @@
+{
+  "mode": "deployed",
+  "first_request": null,
+  "summary": {
+    "requests": 5,
+    "successes": 0,
+    "failures": 5,
+    "behavior_mismatches": 0,
+    "median_ms": null,
+    "p95_ms": null,
+    "first_request_ms": null,
+    "first_request_ok": null
+  },
+  "requests": [
+    {
+      "fixture": "apple",
+      "ok": false,
+      "error": "Databricks could not complete the decision. Check the magneto login and app health, then retry.",
+      "request_id": "37bbe697-c08e-4b85-9734-fbc73a479a39",
+      "round_trip_ms": 3422
+    },
+    {
+      "fixture": "plum_incorrect",
+      "ok": false,
+      "error": "Databricks could not complete the decision. Check the magneto login and app health, then retry.",
+      "request_id": "aa501f9d-0cc3-48ba-9b59-cfba3e72ebe9",
+      "round_trip_ms": 3253
+    },
+    {
+      "fixture": "plum_correct",
+      "ok": false,
+      "error": "Databricks could not complete the decision. Check the magneto login and app health, then retry.",
+      "request_id": "2d7a3e87-b7cb-4cba-afa8-210d795fbcbc",
+      "round_trip_ms": 3231
+    },
+    {
+      "fixture": "pear",
+      "ok": false,
+      "error": "Databricks could not complete the decision. Check the magneto login and app health, then retry.",
+      "request_id": "453ab662-56ed-4c4a-b2ec-a0a741dac82f",
+      "round_trip_ms": 1410
+    },
+    {
+      "fixture": "plum_help",
+      "ok": false,
+      "error": "Databricks could not complete the decision. Check the magneto login and app health, then retry.",
+      "request_id": "6320d445-d0b0-4206-8950-d8b5822d8a87",
+      "round_trip_ms": 1433
+    }
+  ]
+}

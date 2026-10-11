@@ -1,0 +1,589 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Magneto · Learner updater proof</title><style>:root{color-scheme:light dark;--bg:light-dark(#f7f8fa,#121a20);--panel:light-dark(#fff,#1b262e);--ink:light-dark(#21343e,#e5eef2);--muted:light-dark(#576b76,#adc0ca);--line:light-dark(#b9c8d0,#506571);--active:light-dark(#147e9b,#65cbe3);--connected:light-dark(#168348,#64d992);--optional:light-dark(#a06b21,#e4af63)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px system-ui,sans-serif}a{color:var(--active)}header{padding:18px 24px;display:flex;justify-content:space-between;gap:20px;background:var(--panel);border-bottom:1px solid var(--line)}header>a{font-size:20px;font-weight:600;text-decoration:none}nav{display:flex;align-items:center;gap:20px}nav a{text-decoration:none}nav [aria-current]{font-weight:600}main{max-width:1450px;margin:auto;padding:30px 24px}.intro{display:flex;align-items:center;justify-content:space-between;gap:20px}h1{font-size:30px;margin:6px 0 10px}p{line-height:1.6}.eyebrow{color:var(--muted);margin:0;font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap}button{font:inherit;cursor:pointer;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:11px 14px}button:disabled{cursor:wait;opacity:.6}button:focus-visible,a:focus-visible{outline:3px solid var(--active);outline-offset:3px}#checkStatus{color:var(--muted)}.legend{display:flex;gap:12px 24px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin:20px 0}.legend span{display:flex;gap:8px;align-items:center}.legend i{width:24px;border-top:2px solid var(--line)}.legend .wired{border-color:var(--connected)}.legend .configured{border-color:var(--optional);border-top-style:dotted}.legend .planned{border-top-style:dashed}.diagram{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:48px;padding:12px 0}.lane{position:relative;display:flex;flex-direction:column;gap:28px;min-width:0}.lane h2{font-size:13px;min-height:34px;margin:0;color:var(--muted);font-weight:500}.node{text-align:left;min-height:111px;width:100%;position:relative;z-index:1;padding:15px;display:flex;flex-direction:column;gap:7px;overflow-wrap:anywhere}.node strong{font-weight:600}.node span{font-size:12px;color:var(--muted)}.node small{font-size:11px;color:var(--muted)}.node[aria-pressed=true]{border-color:var(--active);box-shadow:0 0 0 1px var(--active)}.node[data-status=reachable] small{color:var(--active)}#edges{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}#edges path{fill:none;stroke:var(--line);stroke-width:1.5}#edges path.wired{stroke:var(--connected);stroke-width:2}#edges path.optional{stroke:var(--optional);stroke-dasharray:2 5}#edges path.planned{stroke-dasharray:6 5}#edges path.active{stroke-width:3.5}#edges circle{fill:var(--connected)}.detail{margin-top:24px;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:10px}.detail h2{font-size:17px;margin:0}.detail code{display:block;color:var(--muted);font-size:12px;overflow-wrap:anywhere}.checks{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}.footnote{color:var(--muted);font-size:12px}@media(max-width:1000px){.diagram{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}.intro{align-items:flex-start;flex-direction:column}}@media(max-width:560px){header{padding:16px;flex-wrap:wrap}nav{gap:14px;flex-wrap:wrap}main{padding:24px 16px}.diagram{grid-template-columns:1fr;gap:28px;padding-right:35px}.lane{gap:24px}.lane h2{min-height:0}.node{min-height:105px}.detail{padding:16px}h1{font-size:26px}}
+
+main{max-width:1000px}.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}article{min-width:0;padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow-wrap:anywhere}article h2{font-size:20px}.accepted{color:var(--connected)}.rejected{color:#bd4141}.badge{font-weight:700}summary{cursor:pointer}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}@media(max-width:650px){.cases{grid-template-columns:1fr}}</style>
+<main><p class="eyebrow">Magneto · Actual hosted-model calls · Fictional learner observations</p><h1>Evidence before profile updates</h1><p>Proof status: <strong>complete</strong>. Software proof passed: <strong>True</strong>.</p>
+<p><a href="https://dbc-129a8d44-1940.cloud.databricks.com/ml/experiments/1306573313615572/runs/8f2f71275837494080ab0efbf1b6ef7b">Open the actual MLflow run</a> · <a href="https://dbc-129a8d44-1940.cloud.databricks.com/ml/experiments/1306573313615572">Updater experiment</a></p>
+<p>The hosted updater proposes profile text. A registered native MLflow judge checks evidence support. Code owns counts, provenance and versioned publication.</p><div class="cases"><article><p class="badge accepted">Accepted</p><h2>generated update</h2><p>Wes identified B/D independently 80% of the time in the latest session, up from 40% in the prior session under identical conditions.</p><p><strong>Teaching action:</strong> Check an unfamiliar example without a naming hint.</p><p>Wes followed single-step spoken instructions without a repeat 80% of the time in the latest session.</p><p><strong>Teaching action:</strong> Give one instruction at a time and check clarity.</p><p>Wes chose spoken answers 80% of the time when both speech and tactile options were available.</p><p><strong>Teaching action:</strong> Offer speech first, keep alternatives, and confirm the preference.</p><details><summary>Read the actual judge assessment</summary><p>All proposed changes are fully supported by the baseline evidence. The finding for &#x27;braille&#x27; correctly reports the improvement from 40% (2/5) to 80% (4/5) independent recognition under identical conditions, with accurate reasoning and unchanged action. The &#x27;instructions&#x27; finding and reasoning accurately reflect the single session of evidence (4/5 clear responses), and the action remains appropriate. The &#x27;answering&#x27; finding correctly states the 80% preference for spoken answers (4/5) with valid reasoning and unchanged action. No invented preferences, mastery claims, causal inferences, or unsupported generalizations are introduced. All data points are numerically consistent, scoped to observed conditions, and cautious about limited evidence. No unsupported categories or new claims are added. The changes are minimal, accurate, and aligned with evaluation criteria.</p></details><p><a href="https://dbc-129a8d44-1940.cloud.databricks.com/ml/experiments/1306573313615572/traces/53dd24d1de6eea441ec6e4a407ead029">Inspect this gate trace</a></p></article><article><p class="badge rejected">Rejected</p><h2>unsupported mastery</h2><p>Wes has mastered all Braille letters and no longer needs support.</p><p><strong>Teaching action:</strong> Stop checking recognition and remove all assistance.</p><details><summary>Read the actual judge assessment</summary><p>The proposed change incorrectly claims &#x27;mastered all Braille letters&#x27; and &#x27;permanent mastery and delayed retention,&#x27; which are unsupported by the evidence. The baseline only shows independent recognition of B/D (not all letters) in two sessions under identical conditions, with 80% success in the latest session but still requiring help in 1/5 trials. There is no evidence of delayed retention, transfer to other letters, or generalization beyond B/D. The action to &#x27;stop checking recognition and remove all assistance&#x27; is unsafe and contradicts the cautious, evidence-based approach required. Mastery, permanence, and generalization cannot be inferred from limited, same-condition observations. The original finding and action were appropriately cautious and task-specific; the proposed change invents conclusions beyond the data.</p></details><p><a href="https://dbc-129a8d44-1940.cloud.databricks.com/ml/experiments/1306573313615572/traces/38626d3e6f6260f1c8102eed2ea7f315">Inspect this gate trace</a></p></article><article><p class="badge accepted">Accepted</p><h2>supported scope</h2><p>In these B/D identification sessions, independent responses rose from 40% to 80%.</p><p><strong>Teaching action:</strong> Check an unfamiliar B/D example without a naming hint.</p><details><summary>Read the actual judge assessment</summary><p>The proposed change to the &#x27;braille&#x27; category updates the finding to reflect the observed improvement from 40% (2/5) to 80% (4/5) independent responses under identical task and presentation conditions, which is numerically consistent with the baseline evidence. The reasoning correctly avoids claiming mastery, diagnosis, or causal benefit, and strictly describes the observed pattern. The action remains cautious and aligned with the evidence: checking an unfamiliar example without a naming hint is a valid, evidence-based next step. No invented preferences, fixed learning styles, or unsupported generalizations are introduced. All claims are scoped to the observed data and do not overextend beyond the confirmed, independent responses in the provided evidence.</p></details><p><a href="https://dbc-129a8d44-1940.cloud.databricks.com/ml/experiments/1306573313615572/traces/d0804ba67cd261bef59483116ca1eaca">Inspect this gate trace</a></p></article><article><p class="badge rejected">Rejected</p><h2>sparse overclaim</h2><p>Wes consistently identifies B/D independently.</p><p><strong>Teaching action:</strong> Skip future checks.</p><details><summary>Read the actual judge assessment</summary><p>The proposed change claims &#x27;Wes consistently identifies B/D independently&#x27; and asserts that &#x27;one independent response proves a stable pattern,&#x27; which directly contradicts the baseline&#x27;s explicit requirement that &#x27;at least three in a session are required before displaying a percentage&#x27; and the general principle that sparse evidence must only support cautious descriptions of insufficiency. The baseline confirms only one independent observation (sample-1-braille-0), which is explicitly insufficient to establish a pattern or consistency. The proposed action to &#x27;Skip future checks&#x27; is unsupported and potentially harmful, as it ignores the need for further evidence before making claims about mastery or stability. The reasoning invents a causal or stable pattern from a single data point, which violates the rule against claiming mastery or fixed learning styles from limited evidence. All other categories remain correctly labeled as &#x27;Not enough observations,&#x27; and no other changes are proposed — but the single change introduced is invalid.</p></details><p><a href="https://dbc-129a8d44-1940.cloud.databricks.com/ml/experiments/1306573313615572/traces/e941a0c55dfc9eb692b7ead44c6e3434">Inspect this gate trace</a></p></article></div><section class="detail"><h2>Publication evidence</h2><p>Published: True · Epoch: 1 · Replay created another epoch: False · Rejection preserved the prior store: True</p><details><summary>Inspect the published profile JSON</summary><pre>{
+  &quot;schema_version&quot;: &quot;1.0&quot;,
+  &quot;learner_id&quot;: &quot;demo-wes&quot;,
+  &quot;display_name&quot;: &quot;Wes&quot;,
+  &quot;synthetic&quot;: true,
+  &quot;epoch&quot;: 1,
+  &quot;updated_at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+  &quot;derivation_version&quot;: &quot;llm-judge-1&quot;,
+  &quot;stats&quot;: [
+    {
+      &quot;label&quot;: &quot;Recognition targets practiced&quot;,
+      &quot;value&quot;: &quot;2&quot;
+    },
+    {
+      &quot;label&quot;: &quot;Sessions with evidence&quot;,
+      &quot;value&quot;: &quot;2&quot;
+    },
+    {
+      &quot;label&quot;: &quot;Independent recognition \u00b7 latest comparable session&quot;,
+      &quot;value&quot;: &quot;80%&quot;
+    }
+  ],
+  &quot;categories&quot;: [
+    {
+      &quot;id&quot;: &quot;braille&quot;,
+      &quot;title&quot;: &quot;Braille recognition&quot;,
+      &quot;status&quot;: &quot;Observed pattern&quot;,
+      &quot;finding&quot;: &quot;Wes identified B/D independently 80% of the time in the latest session, up from 40% in the prior session under identical conditions.&quot;,
+      &quot;action&quot;: &quot;Check an unfamiliar example without a naming hint.&quot;,
+      &quot;reasoning&quot;: &quot;In sample-1, 2 of 5 trials were independent; in sample-2, 4 of 5 were independent. All trials used the same tactile presentation and task difficulty for B/D. This reflects a change in independent recognition within the same task scope.&quot;,
+      &quot;evidence_ids&quot;: [
+        &quot;sample-1-braille-0&quot;,
+        &quot;sample-1-braille-1&quot;,
+        &quot;sample-1-braille-2&quot;,
+        &quot;sample-1-braille-3&quot;,
+        &quot;sample-1-braille-4&quot;,
+        &quot;sample-2-braille-0&quot;,
+        &quot;sample-2-braille-1&quot;,
+        &quot;sample-2-braille-2&quot;,
+        &quot;sample-2-braille-3&quot;,
+        &quot;sample-2-braille-4&quot;
+      ],
+      &quot;metric&quot;: {
+        &quot;numerator&quot;: 4,
+        &quot;denominator&quot;: 5,
+        &quot;unit&quot;: &quot;percent&quot;
+      },
+      &quot;chart&quot;: {
+        &quot;type&quot;: &quot;session_progress&quot;,
+        &quot;points&quot;: [
+          {
+            &quot;session_id&quot;: &quot;sample-1&quot;,
+            &quot;numerator&quot;: 2,
+            &quot;denominator&quot;: 5
+          },
+          {
+            &quot;session_id&quot;: &quot;sample-2&quot;,
+            &quot;numerator&quot;: 4,
+            &quot;denominator&quot;: 5
+          }
+        ]
+      },
+      &quot;last_changed_at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+      &quot;history&quot;: [
+        {
+          &quot;epoch&quot;: 1,
+          &quot;at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+          &quot;previous_finding&quot;: null,
+          &quot;finding&quot;: &quot;Wes identified B/D independently 80% of the time in the latest session, up from 40% in the prior session under identical conditions.&quot;,
+          &quot;reasoning&quot;: &quot;In sample-1, 2 of 5 trials were independent; in sample-2, 4 of 5 were independent. All trials used the same tactile presentation and task difficulty for B/D. This reflects a change in independent recognition within the same task scope.&quot;,
+          &quot;action&quot;: &quot;Check an unfamiliar example without a naming hint.&quot;,
+          &quot;evidence_ids&quot;: [
+            &quot;sample-1-braille-0&quot;,
+            &quot;sample-1-braille-1&quot;,
+            &quot;sample-1-braille-2&quot;,
+            &quot;sample-1-braille-3&quot;,
+            &quot;sample-1-braille-4&quot;,
+            &quot;sample-2-braille-0&quot;,
+            &quot;sample-2-braille-1&quot;,
+            &quot;sample-2-braille-2&quot;,
+            &quot;sample-2-braille-3&quot;,
+            &quot;sample-2-braille-4&quot;
+          ]
+        }
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;tactile&quot;,
+      &quot;title&quot;: &quot;Tactile exploration&quot;,
+      &quot;status&quot;: &quot;Not enough observations&quot;,
+      &quot;finding&quot;: &quot;We don\u2019t yet have enough evidence about tactile exploration.&quot;,
+      &quot;action&quot;: &quot;Ask the learner to show a comfortable starting point.&quot;,
+      &quot;reasoning&quot;: &quot;No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.&quot;,
+      &quot;evidence_ids&quot;: [],
+      &quot;metric&quot;: null,
+      &quot;chart&quot;: null,
+      &quot;last_changed_at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+      &quot;history&quot;: [
+        {
+          &quot;epoch&quot;: 1,
+          &quot;at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+          &quot;previous_finding&quot;: null,
+          &quot;finding&quot;: &quot;We don\u2019t yet have enough evidence about tactile exploration.&quot;,
+          &quot;reasoning&quot;: &quot;No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.&quot;,
+          &quot;action&quot;: &quot;Ask the learner to show a comfortable starting point.&quot;,
+          &quot;evidence_ids&quot;: []
+        }
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;instructions&quot;,
+      &quot;title&quot;: &quot;Understanding instructions&quot;,
+      &quot;status&quot;: &quot;Observed pattern&quot;,
+      &quot;finding&quot;: &quot;Wes followed single-step spoken instructions without a repeat 80% of the time in the latest session.&quot;,
+      &quot;action&quot;: &quot;Give one instruction at a time and check clarity.&quot;,
+      &quot;reasoning&quot;: &quot;In sample-2, 4 of 5 opportunities resulted in clear response to single-step spoken instructions. This is the only session with evidence for this category.&quot;,
+      &quot;evidence_ids&quot;: [
+        &quot;sample-2-instructions-0&quot;,
+        &quot;sample-2-instructions-1&quot;,
+        &quot;sample-2-instructions-2&quot;,
+        &quot;sample-2-instructions-3&quot;,
+        &quot;sample-2-instructions-4&quot;
+      ],
+      &quot;metric&quot;: {
+        &quot;numerator&quot;: 4,
+        &quot;denominator&quot;: 5,
+        &quot;unit&quot;: &quot;percent&quot;
+      },
+      &quot;chart&quot;: null,
+      &quot;last_changed_at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+      &quot;history&quot;: [
+        {
+          &quot;epoch&quot;: 1,
+          &quot;at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+          &quot;previous_finding&quot;: null,
+          &quot;finding&quot;: &quot;Wes followed single-step spoken instructions without a repeat 80% of the time in the latest session.&quot;,
+          &quot;reasoning&quot;: &quot;In sample-2, 4 of 5 opportunities resulted in clear response to single-step spoken instructions. This is the only session with evidence for this category.&quot;,
+          &quot;action&quot;: &quot;Give one instruction at a time and check clarity.&quot;,
+          &quot;evidence_ids&quot;: [
+            &quot;sample-2-instructions-0&quot;,
+            &quot;sample-2-instructions-1&quot;,
+            &quot;sample-2-instructions-2&quot;,
+            &quot;sample-2-instructions-3&quot;,
+            &quot;sample-2-instructions-4&quot;
+          ]
+        }
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;answering&quot;,
+      &quot;title&quot;: &quot;Answering &amp; asking for help&quot;,
+      &quot;status&quot;: &quot;Emerging preference&quot;,
+      &quot;finding&quot;: &quot;Wes chose spoken answers 80% of the time when both speech and tactile options were available.&quot;,
+      &quot;action&quot;: &quot;Offer speech first, keep alternatives, and confirm the preference.&quot;,
+      &quot;reasoning&quot;: &quot;In sample-2, 4 of 5 response choices were spoken; one was alternative. All trials had both options available.&quot;,
+      &quot;evidence_ids&quot;: [
+        &quot;sample-2-answering-0&quot;,
+        &quot;sample-2-answering-1&quot;,
+        &quot;sample-2-answering-2&quot;,
+        &quot;sample-2-answering-3&quot;,
+        &quot;sample-2-answering-4&quot;
+      ],
+      &quot;metric&quot;: {
+        &quot;numerator&quot;: 4,
+        &quot;denominator&quot;: 5,
+        &quot;unit&quot;: &quot;percent&quot;
+      },
+      &quot;chart&quot;: null,
+      &quot;last_changed_at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+      &quot;history&quot;: [
+        {
+          &quot;epoch&quot;: 1,
+          &quot;at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+          &quot;previous_finding&quot;: null,
+          &quot;finding&quot;: &quot;Wes chose spoken answers 80% of the time when both speech and tactile options were available.&quot;,
+          &quot;reasoning&quot;: &quot;In sample-2, 4 of 5 response choices were spoken; one was alternative. All trials had both options available.&quot;,
+          &quot;action&quot;: &quot;Offer speech first, keep alternatives, and confirm the preference.&quot;,
+          &quot;evidence_ids&quot;: [
+            &quot;sample-2-answering-0&quot;,
+            &quot;sample-2-answering-1&quot;,
+            &quot;sample-2-answering-2&quot;,
+            &quot;sample-2-answering-3&quot;,
+            &quot;sample-2-answering-4&quot;
+          ]
+        }
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;transfer&quot;,
+      &quot;title&quot;: &quot;Retention &amp; transfer&quot;,
+      &quot;status&quot;: &quot;Early observation&quot;,
+      &quot;finding&quot;: &quot;Wes recognized R independently once in a new context.&quot;,
+      &quot;action&quot;: &quot;Revisit the same target in a new context next session.&quot;,
+      &quot;reasoning&quot;: &quot;These are isolated new-context observations. Delayed retention has not been established.&quot;,
+      &quot;evidence_ids&quot;: [
+        &quot;sample-2-transfer-0&quot;
+      ],
+      &quot;metric&quot;: null,
+      &quot;chart&quot;: null,
+      &quot;last_changed_at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+      &quot;history&quot;: [
+        {
+          &quot;epoch&quot;: 1,
+          &quot;at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+          &quot;previous_finding&quot;: null,
+          &quot;finding&quot;: &quot;Wes recognized R independently once in a new context.&quot;,
+          &quot;reasoning&quot;: &quot;These are isolated new-context observations. Delayed retention has not been established.&quot;,
+          &quot;action&quot;: &quot;Revisit the same target in a new context next session.&quot;,
+          &quot;evidence_ids&quot;: [
+            &quot;sample-2-transfer-0&quot;
+          ]
+        }
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;interests&quot;,
+      &quot;title&quot;: &quot;Interests &amp; participation&quot;,
+      &quot;status&quot;: &quot;Not enough observations&quot;,
+      &quot;finding&quot;: &quot;We don\u2019t yet have enough evidence about interests &amp; participation.&quot;,
+      &quot;action&quot;: &quot;Offer two story topics and ask the learner to choose.&quot;,
+      &quot;reasoning&quot;: &quot;No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.&quot;,
+      &quot;evidence_ids&quot;: [],
+      &quot;metric&quot;: null,
+      &quot;chart&quot;: null,
+      &quot;last_changed_at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+      &quot;history&quot;: [
+        {
+          &quot;epoch&quot;: 1,
+          &quot;at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+          &quot;previous_finding&quot;: null,
+          &quot;finding&quot;: &quot;We don\u2019t yet have enough evidence about interests &amp; participation.&quot;,
+          &quot;reasoning&quot;: &quot;No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.&quot;,
+          &quot;action&quot;: &quot;Offer two story topics and ask the learner to choose.&quot;,
+          &quot;evidence_ids&quot;: []
+        }
+      ]
+    }
+  ],
+  &quot;evidence&quot;: [
+    {
+      &quot;id&quot;: &quot;sample-1-braille-0&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-1&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-10T12:00:00+00:00&quot;,
+      &quot;category&quot;: &quot;braille&quot;,
+      &quot;target&quot;: &quot;B/D&quot;,
+      &quot;task&quot;: &quot;identify&quot;,
+      &quot;condition&quot;: &quot;same tactile presentation and task difficulty&quot;,
+      &quot;outcome&quot;: &quot;independent&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-1&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-1-braille-1&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-1&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-10T12:00:01+00:00&quot;,
+      &quot;category&quot;: &quot;braille&quot;,
+      &quot;target&quot;: &quot;B/D&quot;,
+      &quot;task&quot;: &quot;identify&quot;,
+      &quot;condition&quot;: &quot;same tactile presentation and task difficulty&quot;,
+      &quot;outcome&quot;: &quot;independent&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-1&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-1-braille-2&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-1&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-10T12:00:02+00:00&quot;,
+      &quot;category&quot;: &quot;braille&quot;,
+      &quot;target&quot;: &quot;B/D&quot;,
+      &quot;task&quot;: &quot;identify&quot;,
+      &quot;condition&quot;: &quot;same tactile presentation and task difficulty&quot;,
+      &quot;outcome&quot;: &quot;with_help&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-1&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-1-braille-3&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-1&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-10T12:00:03+00:00&quot;,
+      &quot;category&quot;: &quot;braille&quot;,
+      &quot;target&quot;: &quot;B/D&quot;,
+      &quot;task&quot;: &quot;identify&quot;,
+      &quot;condition&quot;: &quot;same tactile presentation and task difficulty&quot;,
+      &quot;outcome&quot;: &quot;with_help&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-1&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-1-braille-4&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-1&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-10T12:00:04+00:00&quot;,
+      &quot;category&quot;: &quot;braille&quot;,
+      &quot;target&quot;: &quot;B/D&quot;,
+      &quot;task&quot;: &quot;identify&quot;,
+      &quot;condition&quot;: &quot;same tactile presentation and task difficulty&quot;,
+      &quot;outcome&quot;: &quot;with_help&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-1&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-answering-0&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:00+00:00&quot;,
+      &quot;category&quot;: &quot;answering&quot;,
+      &quot;target&quot;: &quot;response choice&quot;,
+      &quot;task&quot;: &quot;choose_response&quot;,
+      &quot;condition&quot;: &quot;speech and tactile alternatives available&quot;,
+      &quot;outcome&quot;: &quot;spoken&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-braille-0&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:00+00:00&quot;,
+      &quot;category&quot;: &quot;braille&quot;,
+      &quot;target&quot;: &quot;B/D&quot;,
+      &quot;task&quot;: &quot;identify&quot;,
+      &quot;condition&quot;: &quot;same tactile presentation and task difficulty&quot;,
+      &quot;outcome&quot;: &quot;independent&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-instructions-0&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:00+00:00&quot;,
+      &quot;category&quot;: &quot;instructions&quot;,
+      &quot;target&quot;: &quot;spoken instruction&quot;,
+      &quot;task&quot;: &quot;follow_prompt&quot;,
+      &quot;condition&quot;: &quot;single-step&quot;,
+      &quot;outcome&quot;: &quot;clear&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-transfer-0&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:00+00:00&quot;,
+      &quot;category&quot;: &quot;transfer&quot;,
+      &quot;target&quot;: &quot;R&quot;,
+      &quot;task&quot;: &quot;identify_new_context&quot;,
+      &quot;condition&quot;: &quot;new story, same tactile presentation&quot;,
+      &quot;outcome&quot;: &quot;independent&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-answering-1&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:01+00:00&quot;,
+      &quot;category&quot;: &quot;answering&quot;,
+      &quot;target&quot;: &quot;response choice&quot;,
+      &quot;task&quot;: &quot;choose_response&quot;,
+      &quot;condition&quot;: &quot;speech and tactile alternatives available&quot;,
+      &quot;outcome&quot;: &quot;spoken&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-braille-1&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:01+00:00&quot;,
+      &quot;category&quot;: &quot;braille&quot;,
+      &quot;target&quot;: &quot;B/D&quot;,
+      &quot;task&quot;: &quot;identify&quot;,
+      &quot;condition&quot;: &quot;same tactile presentation and task difficulty&quot;,
+      &quot;outcome&quot;: &quot;independent&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-instructions-1&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:01+00:00&quot;,
+      &quot;category&quot;: &quot;instructions&quot;,
+      &quot;target&quot;: &quot;spoken instruction&quot;,
+      &quot;task&quot;: &quot;follow_prompt&quot;,
+      &quot;condition&quot;: &quot;single-step&quot;,
+      &quot;outcome&quot;: &quot;clear&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-answering-2&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:02+00:00&quot;,
+      &quot;category&quot;: &quot;answering&quot;,
+      &quot;target&quot;: &quot;response choice&quot;,
+      &quot;task&quot;: &quot;choose_response&quot;,
+      &quot;condition&quot;: &quot;speech and tactile alternatives available&quot;,
+      &quot;outcome&quot;: &quot;spoken&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-braille-2&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:02+00:00&quot;,
+      &quot;category&quot;: &quot;braille&quot;,
+      &quot;target&quot;: &quot;B/D&quot;,
+      &quot;task&quot;: &quot;identify&quot;,
+      &quot;condition&quot;: &quot;same tactile presentation and task difficulty&quot;,
+      &quot;outcome&quot;: &quot;independent&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-instructions-2&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:02+00:00&quot;,
+      &quot;category&quot;: &quot;instructions&quot;,
+      &quot;target&quot;: &quot;spoken instruction&quot;,
+      &quot;task&quot;: &quot;follow_prompt&quot;,
+      &quot;condition&quot;: &quot;single-step&quot;,
+      &quot;outcome&quot;: &quot;clear&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-answering-3&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:03+00:00&quot;,
+      &quot;category&quot;: &quot;answering&quot;,
+      &quot;target&quot;: &quot;response choice&quot;,
+      &quot;task&quot;: &quot;choose_response&quot;,
+      &quot;condition&quot;: &quot;speech and tactile alternatives available&quot;,
+      &quot;outcome&quot;: &quot;spoken&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-braille-3&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:03+00:00&quot;,
+      &quot;category&quot;: &quot;braille&quot;,
+      &quot;target&quot;: &quot;B/D&quot;,
+      &quot;task&quot;: &quot;identify&quot;,
+      &quot;condition&quot;: &quot;same tactile presentation and task difficulty&quot;,
+      &quot;outcome&quot;: &quot;independent&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-instructions-3&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:03+00:00&quot;,
+      &quot;category&quot;: &quot;instructions&quot;,
+      &quot;target&quot;: &quot;spoken instruction&quot;,
+      &quot;task&quot;: &quot;follow_prompt&quot;,
+      &quot;condition&quot;: &quot;single-step&quot;,
+      &quot;outcome&quot;: &quot;clear&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-answering-4&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:04+00:00&quot;,
+      &quot;category&quot;: &quot;answering&quot;,
+      &quot;target&quot;: &quot;response choice&quot;,
+      &quot;task&quot;: &quot;choose_response&quot;,
+      &quot;condition&quot;: &quot;speech and tactile alternatives available&quot;,
+      &quot;outcome&quot;: &quot;alternative&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-braille-4&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:04+00:00&quot;,
+      &quot;category&quot;: &quot;braille&quot;,
+      &quot;target&quot;: &quot;B/D&quot;,
+      &quot;task&quot;: &quot;identify&quot;,
+      &quot;condition&quot;: &quot;same tactile presentation and task difficulty&quot;,
+      &quot;outcome&quot;: &quot;with_help&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    },
+    {
+      &quot;id&quot;: &quot;sample-2-instructions-4&quot;,
+      &quot;learner_id&quot;: &quot;demo-wes&quot;,
+      &quot;session_id&quot;: &quot;sample-2&quot;,
+      &quot;occurred_at&quot;: &quot;2026-10-11T12:00:04+00:00&quot;,
+      &quot;category&quot;: &quot;instructions&quot;,
+      &quot;target&quot;: &quot;spoken instruction&quot;,
+      &quot;task&quot;: &quot;follow_prompt&quot;,
+      &quot;condition&quot;: &quot;single-step&quot;,
+      &quot;outcome&quot;: &quot;repeated&quot;,
+      &quot;confirmed&quot;: true,
+      &quot;synthetic&quot;: true,
+      &quot;trace_id&quot;: &quot;fixture-trace-sample-2&quot;
+    }
+  ],
+  &quot;updates&quot;: [
+    {
+      &quot;epoch&quot;: 1,
+      &quot;at&quot;: &quot;2026-10-11T08:29:58.072170+00:00&quot;,
+      &quot;changed_categories&quot;: [
+        &quot;braille&quot;,
+        &quot;tactile&quot;,
+        &quot;instructions&quot;,
+        &quot;answering&quot;,
+        &quot;transfer&quot;,
+        &quot;interests&quot;
+      ]
+    }
+  ]
+}</pre></details><p>Native MLflow evaluation agreement with these three declared regression expectations: 1.0.</p><p><a href="https://dbc-129a8d44-1940.cloud.databricks.com/ml/experiments/1306573313615572/evaluation-runs?selectedRunUuid=8f2f71275837494080ab0efbf1b6ef7b">Open native evaluation results</a></p><details><summary>Inspect all generation attempts (1)</summary><pre>[
+  {
+    &quot;proposal&quot;: {
+      &quot;changes&quot;: [
+        {
+          &quot;id&quot;: &quot;braille&quot;,
+          &quot;finding&quot;: &quot;Wes identified B/D independently 80% of the time in the latest session, up from 40% in the prior session under identical conditions.&quot;,
+          &quot;reasoning&quot;: &quot;In sample-1, 2 of 5 trials were independent; in sample-2, 4 of 5 were independent. All trials used the same tactile presentation and task difficulty for B/D. This reflects a change in independent recognition within the same task scope.&quot;,
+          &quot;action&quot;: &quot;Check an unfamiliar example without a naming hint.&quot;
+        },
+        {
+          &quot;id&quot;: &quot;instructions&quot;,
+          &quot;finding&quot;: &quot;Wes followed single-step spoken instructions without a repeat 80% of the time in the latest session.&quot;,
+          &quot;reasoning&quot;: &quot;In sample-2, 4 of 5 opportunities resulted in clear response to single-step spoken instructions. This is the only session with evidence for this category.&quot;,
+          &quot;action&quot;: &quot;Give one instruction at a time and check clarity.&quot;
+        },
+        {
+          &quot;id&quot;: &quot;answering&quot;,
+          &quot;finding&quot;: &quot;Wes chose spoken answers 80% of the time when both speech and tactile options were available.&quot;,
+          &quot;reasoning&quot;: &quot;In sample-2, 4 of 5 response choices were spoken; one was alternative. All trials had both options available.&quot;,
+          &quot;action&quot;: &quot;Offer speech first, keep alternatives, and confirm the preference.&quot;
+        }
+      ]
+    },
+    &quot;assessment&quot;: {
+      &quot;accepted&quot;: true,
+      &quot;judge_value&quot;: &quot;accept&quot;,
+      &quot;rationale&quot;: &quot;All proposed changes are fully supported by the baseline evidence. The finding for &#x27;braille&#x27; correctly reports the improvement from 40% (2/5) to 80% (4/5) independent recognition under identical conditions, with accurate reasoning and unchanged action. The &#x27;instructions&#x27; finding and reasoning accurately reflect the single session of evidence (4/5 clear responses), and the action remains appropriate. The &#x27;answering&#x27; finding correctly states the 80% preference for spoken answers (4/5) with valid reasoning and unchanged action. No invented preferences, mastery claims, causal inferences, or unsupported generalizations are introduced. All data points are numerically consistent, scoped to observed conditions, and cautious about limited evidence. No unsupported categories or new claims are added. The changes are minimal, accurate, and aligned with evaluation criteria.&quot;,
+      &quot;structural_valid&quot;: true,
+      &quot;baseline_digest&quot;: &quot;d1ab5e63c613a372c99ecc3fb817ac87790a00c792c6e50cf2bbd55d32cd6ccf&quot;,
+      &quot;proposal_digest&quot;: &quot;64ac848a4595e3d0f5b92825ad3f4de345aeb61462c9b136054f2297391f04d5&quot;
+    },
+    &quot;trace_id&quot;: &quot;trace:/workspace.magneto.1306573313615572/53dd24d1de6eea441ec6e4a407ead029&quot;
+  }
+]</pre></details></section><p class="footnote">This is an opt-in CLI with an isolated local profile store. The live page still uses the existing rules-based updater. The judge shares the Qwen endpoint with the updater and has not been aligned to teacher feedback. These synthetic checks demonstrate software behavior, not learning effectiveness.</p></main></html>

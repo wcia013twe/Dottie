@@ -3,6 +3,7 @@ mcp>=1.28,<2
 pyyaml
 requests
 pytest>=8
+pyserial>=3.5,<4  # bounded Story cell receiver and firmware serial integration tests
 
 # Hardware backend (`backend: real`) also needs the cane-vision stack:
 #   pip install -r cane-vision/requirements.txt

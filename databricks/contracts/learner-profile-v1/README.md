@@ -45,3 +45,12 @@ The additive optional profile `reflection` property contains the MLflow run ID, 
 Find the full audit in `/Shared/magneto-research` → Runs → matching reflection ID → Artifacts → `reflection/audit.json`, or locally `<profile-store>/reflections/<id>.json`. Search runs are separate linked operational runs. The audit artifact is uploaded before profile publication; the run's `publication.json` records the resulting epoch. A crash after publication but before that final artifact is recoverable from the local profile's reflection ID/checkpoint. Rejections are retained as audit artifacts. A failed retrieval may have only the failed search run and failed parent run, with no complete reflection artifact. No-new-evidence skips retrieval and model calls in the live bridge. Source-only changes do not automatically reevaluate learners; that requires a deliberate future reprocessing policy.
 
 Excerpt matching normalizes PDF whitespace, typographic quotes, Unicode compatibility characters and in-word typesetting hyphens. It does not normalize words or paraphrases. Original source text and generated excerpts remain in the audit.
+
+### Additive medallion persistence
+
+The existing event and profile JSON schemas/examples are unchanged. Production
+confirmed-event intake now retains normalized payloads in bronze, derives the
+existing silver observation table, and persists immutable gold profile epochs
+before publishing through the localhost endpoint. [Storage and migration notes](../../docs/medallion-stages.md)
+describe internal tables, quarantine, replay and cloud-cache recovery. This does
+not add a cloud scheduler, planner-memory interface or synthetic-to-live migration.

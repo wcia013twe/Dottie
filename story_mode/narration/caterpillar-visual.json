@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "book_id": "local-very-hungry-caterpillar",
+  "script_version": "visual-description-1",
+  "model_id": "eleven_multilingual_v2",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "style": 0,
+    "use_speaker_boost": true
+  },
+  "passages": [
+    {
+      "id": "visual-page-01",
+      "match_text": "Page 1 of 26",
+      "text": "A green caterpillar stretches across the cover. Its bright red head has purple feelers and little green eyes. Look at the different shades of green along its body."
+    },
+    {
+      "id": "visual-page-02",
+      "match_text": "Page 2 of 26",
+      "text": "A small orange sun sits above rows of colorful circles. Reds, blues, yellows, and greens fill the lower part of the picture."
+    },
+    {
+      "id": "visual-page-03",
+      "match_text": "Page 3 of 26",
+      "text": "Colorful circles crowd together along the bottom of this opening page. Some are bright, and some are dark. Notice how each circle looks a little different."
+    },
+    {
+      "id": "visual-page-04",
+      "match_text": "Page 4 of 26",
+      "text": "A tiny pale egg rests on a broad green leaf. The scene is dark, with deep blue and black shapes around it. Look closely to find the egg."
+    },
+    {
+      "id": "visual-page-05",
+      "match_text": "Page 5 of 26",
+      "text": "A pale moon glows against the dark blue sky. Its round shape stands out among the darker colors."
+    },
+    {
+      "id": "visual-page-06",
+      "match_text": "Page 6 of 26",
+      "text": "A little caterpillar appears near the ground. Orange rays reach into the picture from the edge of the page. The caterpillar looks very small beside them."
+    },
+    {
+      "id": "visual-page-07",
+      "match_text": "Page 7 of 26",
+      "text": "A huge orange sun fills the picture. Long red and yellow rays reach outward. Its face has two small eyes and a gentle smile."
+    },
+    {
+      "id": "visual-page-08",
+      "match_text": "Page 8 of 26",
+      "text": "The small caterpillar travels beneath the smiling sun. Compare its tiny body with the enormous circle overhead."
+    },
+    {
+      "id": "visual-page-09",
+      "match_text": "Page 9 of 26",
+      "text": "A row of colorful fruit crosses the page. A round hole marks the red apple at the left. Look for the caterpillar near the fruit."
+    },
+    {
+      "id": "visual-page-10",
+      "match_text": "Page 10 of 26",
+      "text": "The apple and caterpillar appear beside part of the smiling sun. The page edge changes the picture, bringing the fruit into view."
+    },
+    {
+      "id": "visual-page-11",
+      "match_text": "Page 11 of 26",
+      "text": "Two green pears stand together at the front of the row. Each has a round hole. Their shapes are wider at the bottom and narrower at the top."
+    },
+    {
+      "id": "visual-page-12",
+      "match_text": "Page 12 of 26",
+      "text": "The two pears appear beside the orange sun. The caterpillar rests near them. Notice the green leaves above the pears."
+    },
+    {
+      "id": "visual-page-13",
+      "match_text": "Page 13 of 26",
+      "text": "Three purple plums stand in a row. Their green leaves point in different directions. Three round holes show through the fruit."
+    },
+    {
+      "id": "visual-page-14",
+      "match_text": "Page 14 of 26",
+      "text": "The purple plums fill more of the page. The small caterpillar is near the last plum. Count the three purple shapes."
+    },
+    {
+      "id": "visual-page-15",
+      "match_text": "Page 15 of 26",
+      "text": "Four red strawberries sit beside one another. Each has a green leafy top and a round hole. Look at the tiny dark marks on their red surfaces."
+    },
+    {
+      "id": "visual-page-16",
+      "match_text": "Page 16 of 26",
+      "text": "The caterpillar curves around the last of four strawberries. Their green tops tilt in different directions. Follow the row from left to right."
+    },
+    {
+      "id": "visual-page-17",
+      "match_text": "Page 17 of 26",
+      "text": "Five orange fruits stretch across the page. Each has a round hole. Their orange surfaces contain red and yellow patches."
+    },
+    {
+      "id": "visual-page-18",
+      "match_text": "Page 18 of 26",
+      "text": "A row of snacks fills the picture: cake, an ice cream cone, a pickle, cheese, and salami. Each shape has different colors and textures."
+    },
+    {
+      "id": "visual-page-19",
+      "match_text": "Page 19 of 26",
+      "text": "More treats continue across the next page: a lollipop, a slice of pie, a sausage, a cupcake, and watermelon. The little caterpillar sits below them."
+    },
+    {
+      "id": "visual-page-20",
+      "match_text": "Page 20 of 26",
+      "text": "A broad green leaf fills the picture. Several round holes run across it. Dark lines and lighter patches make the leaf look textured."
+    },
+    {
+      "id": "visual-page-21",
+      "match_text": "Page 21 of 26",
+      "text": "The caterpillar rests on a long green stem beside a brown tree trunk. The trunk has dark streaks, and the stem stretches across the page."
+    },
+    {
+      "id": "visual-page-22",
+      "match_text": "Page 22 of 26",
+      "text": "A much larger caterpillar fills the picture. Its body is made of many rounded green sections. Its red head and purple feelers stand out at one end."
+    },
+    {
+      "id": "visual-page-23",
+      "match_text": "Page 23 of 26",
+      "text": "A brown cocoon hangs from a branch. Its curved shape has red and dark brown patches. Look at the different stripes across its surface."
+    },
+    {
+      "id": "visual-page-24",
+      "match_text": "Page 24 of 26",
+      "text": "Part of a butterfly wing opens into view. Blue, green, yellow, and red shapes decorate the wing. A bright red spot sits near the top."
+    },
+    {
+      "id": "visual-page-25",
+      "match_text": "Page 25 of 26",
+      "text": "A butterfly spreads its colorful wings. Its slim body sits between them, with long feelers reaching upward. Explore the many colors and patterns on both wings."
+    },
+    {
+      "id": "visual-page-26",
+      "match_text": "Page 26 of 26",
+      "text": "On the back cover, a small caterpillar rests on a huge green leaf beneath an orange sun. This closes our picture tour."
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "synthetic": true,
+  "verified": true,
+  "cloud_calls": false,
+  "producer": "scripts/learner_intelligence.py:ProfileStore",
+  "steps": [
+    {
+      "step": "session-1",
+      "epoch": 1,
+      "published": true,
+      "braille_metric": {
+        "numerator": 2,
+        "denominator": 5,
+        "unit": "percent"
+      }
+    },
+    {
+      "step": "session-2",
+      "epoch": 2,
+      "published": true,
+      "braille_metric": {
+        "numerator": 4,
+        "denominator": 5,
+        "unit": "percent"
+      }
+    },
+    {
+      "step": "session-3",
+      "epoch": 3,
+      "published": true,
+      "braille_metric": {
+        "numerator": 3,
+        "denominator": 5,
+        "unit": "percent"
+      }
+    },
+    {
+      "step": "identical-replay",
+      "epoch": 3,
+      "published": false
+    },
+    {
+      "step": "conflicting-event",
+      "rejected": true,
+      "profile_preserved": true
+    },
+    {
+      "step": "different-learner",
+      "rejected": true,
+      "profile_preserved": true
+    },
+    {
+      "step": "real-source-mix",
+      "rejected": true,
+      "profile_preserved": true
+    }
+  ],
+  "scenarios": {
+    "river": 55,
+    "sky-insufficient": 1,
+    "river-changed-condition": 56
+  },
+  "limits": [
+    "No real learner, cloud write, Genie call, MLflow join or physical action.",
+    "Tactile and interests remain unknown: v1 only accepts deferred/failure outcomes there.",
+    "Help is a supported recognition outcome; v1 does not record who requested help.",
+    "Changed presentation/difficulty is not pooled into a previous recognition trend.",
+    "Fixture confirmation flags describe fictional observations, not real teacher approval."
+  ]
+}

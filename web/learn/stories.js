@@ -1,8 +1,10 @@
+import { ensureReadingSession, finishReadingSession, restartReadingSession, readingLabel } from './reading-session.js';
 import { demoCompletionRecap, mountStoryCompletion } from './story-completion.js';
 import { preparePeterReading, PETER_READING_VERSION } from './peter-reading.js?v=merge-main-1';
 import { DecisionSession } from './decision-session.js';
 import { peterActivities, bindPeterActivities } from './peter-activities.js';
-import { mountFlipbook } from './flipbook.js?v=merge-main-1';
+import { mountFlipbook } from './flipbook.js?v=caterpillar-demo-1';
+import { childrenBooks } from './book-catalog.js';
 import { importEbook, ebookStore } from './ebook.js?v=merge-main-1';
 // Reading records are separate from learning progress and saved CAD designs.
 const key = 'magneto-stories-v1';
@@ -11,12 +13,15 @@ const safeLink = value => { try { const url = new URL(value); return ['https:', 
 let books = [], storageOK = true;
 const loadedEbooks = new Map();
 let readerSize = 20;
+let catalogQuery = '';
+let catalogLoading = false;
+const matchesCatalog = book => `${book.title} ${book.author}`.toLocaleLowerCase().includes(catalogQuery.trim().toLocaleLowerCase());
 let disposeReader = null;
 let disposeCompletion = null;
 let celebratedDemoSession = null;
 export function cleanupStoryReader() {
-  const voice=document.querySelector('#voice-input-panel');
-  if (voice?.closest('.book-player')) { voice.open=false; document.querySelector('.workspace').insertBefore(voice,document.querySelector('.voice-bar')); }
+  const microphone=document.querySelector('#voice-microphone');
+  if(microphone?.closest('.book-player'))document.querySelector('.topbar').insertBefore(microphone,document.querySelector('.profile-dropdown'));
  disposeCompletion?.(); disposeCompletion = null; disposeReader?.(); disposeReader = null; if (location.hash !== '#stories') director.cancel(); }
 try {
   const saved = JSON.parse(localStorage.getItem(key) || '[]');
@@ -31,6 +36,10 @@ try {
     if (Number.isSafeInteger(saved[field]) && saved[field] >= 0 && (field !== 'total' || saved[field] > 0)) peter[field] = saved[field];
   }
   if (typeof saved.finished === 'boolean') peter.finished = saved.finished;
+  for (const field of ['readingSessionId','startedAt','completedAt','coachSessionId']) {
+    if (typeof saved[field] === 'string') peter[field] = saved[field];
+  }
+  if (Array.isArray(saved.readingSessions)) peter.readingSessions = saved.readingSessions;
   if (typeof saved.readingVersion === 'string') peter.readingVersion = saved.readingVersion;
   if (saved.previousReadingPosition && typeof saved.previousReadingPosition === 'object') {
     peter.previousReadingPosition = {};
@@ -43,7 +52,15 @@ try {
 } catch { storageOK = false; }
 const selectedBook = () => opened === 'peter' ? peter : Number.isInteger(opened) ? books[opened] : null;
 async function loadBook(book) {
-  if (!book.bundled) return ebookStore('get',book.id);
+  if (!book.bundled) {
+    const stored = await ebookStore('get',book.id);
+    if (stored) return stored;
+    const entry = childrenBooks.find(entry => entry.id === book.id);
+    if (!entry) return;
+    const response = await fetch(entry.file);
+    if (!response.ok) throw Error('This library book could not be opened. Try again.');
+    return importEbook(new File([await response.blob()], entry.file.split('/').pop()));
+  }
   const response = await fetch('./books/the-tale-of-peter-rabbit.epub');
   if (!response.ok) throw Error('Peter Rabbit could not be opened. Please reload and try again.');
   const mapResponse=await fetch('./books/peter-rabbit-checkpoints.json');
@@ -70,7 +87,7 @@ export function learnerStoryEvidence() {
 }
 let opened = null;
 export function isStoryOpen() { return opened !== null; }
-const caterpillar = `<svg viewBox="0 0 260 140" aria-hidden="true"><path d="M32 116Q130 85 239 116" fill="none" stroke="#a2ac61" stroke-width="3"/>${[0,1,2,3,4].map((n)=>`<ellipse cx="${66+n*31}" cy="${91-Math.sin(n)*12}" rx="25" ry="31" fill="${['#719851','#448567','#88a654','#428062','#98aa51'][n]}" transform="rotate(${n*8-15} ${66+n*31} 85)"/>`).join('')}<ellipse cx="207" cy="65" rx="29" ry="33" fill="#c35c48"/><path d="M194 34l-7-16m31 15 8-19" stroke="#766089" stroke-width="5" stroke-linecap="round"/><ellipse cx="199" cy="61" rx="6" ry="9" fill="#e8d679"/><ellipse cx="218" cy="59" rx="6" ry="9" fill="#e8d679"/><path d="M205 78q7 6 12-2" fill="none" stroke="#563e33" stroke-width="3"/></svg>`;
+
 function demoView() {
   const step = director.state.step, result = director.result, decision = result?.decision;
   const heading = ['Monday · The apple','Tuesday · The pears','Wednesday · The plums','A lovely little adventure.'][step];
@@ -102,18 +119,19 @@ export function stories() {
   if (selected?.imported) {
     const content = loadedEbooks.get(selected.id), position = Math.min(selected.position || 0, selected.total-1);
     readerSize = [20,24,30].includes(selected.textSize) ? selected.textSize : 20;
-    return `<section class="book-player" aria-label="Story player"><header class="player-header"><button class="player-button" id="story-close" aria-label="Back to my books" title="Back to my books">←</button><div class="player-title"><h1>${escape(selected.title)}</h1><p>${escape(selected.author)}</p></div>${selected.bundled ? '<button class="player-activity" id="open-story-coach">⠗ <span>Teacher coach</span></button>' : ''}</header><div id="ebook-status" role="status">${content ? '' : 'Opening your book…'}</div>${content ? `<div class="player-stage"><article class="flipbook" id="ebook-content" tabindex="0" aria-label="Book text" style="font-size:${readerSize}px"><div class="book-sheet" id="book-sheet"><div class="page-window" id="page-window"><div class="page-text" id="page-text"></div></div></div></article></div><footer class="player-controls"><label class="sr-only" for="reader-seek">Page in this chapter</label><div class="reader-timeline"><input id="reader-seek" type="range" min="1" max="1" value="1" step="1"><div id="question-markers" aria-label="Question stops and results"></div></div><p id="question-stop-label" class="question-stop-label" hidden></p><div class="player-control-row"><button class="player-button" id="reader-play" aria-label="Play automatic page turns" title="Auto-turn pages every 12 seconds">▶</button><button class="player-button" id="reader-prev" aria-label="Previous page" title="Previous page">❮</button><button class="player-button" id="reader-next" aria-label="Next page" title="Next page">❯</button><span id="reader-feedback" role="status"></span><span class="player-spacer"></span><details class="player-settings"><summary aria-label="Reader settings" title="Reader settings">⚙</summary><div class="player-settings-panel"><label for="reader-chapter">Chapter</label><select id="reader-chapter">${content.chapters.map((chapter,i)=>`<option value="${i}" ${i===position?'selected':''}>${escape(chapter.title)}</option>`).join('')}</select><label for="reader-size">Text size</label><select id="reader-size"><option value="20" ${readerSize===20?'selected':''}>Standard</option><option value="24" ${readerSize===24?'selected':''}>Large</option><option value="30" ${readerSize===30?'selected':''}>Extra large</option></select><p>Play turns a page every 12 seconds. Arrow keys or swipe to turn manually.</p></div></details><button class="player-button" id="reader-fullscreen" aria-label="Enter fullscreen" title="Fullscreen">⛶</button></div><div class="player-meta"><span id="player-mode">Read at your own pace</span><span>Your place is saved automatically</span></div></footer>` : ''}</section>`;
+    return `<section class="book-player" aria-label="Story player"><header class="player-header"><button class="player-button" id="story-close" aria-label="Save and leave book" title="Save and leave book">←</button><div class="player-title"><h1>${escape(selected.title)}</h1><p>${escape(selected.author)}</p></div>${(selected.bundled || selected.id==='local-very-hungry-caterpillar') ? '<button class="player-activity" id="open-story-coach">⠗ <span>Teacher coach</span></button>' : ''}</header><div id="ebook-status" role="status">${content ? '' : 'Opening your book…'}</div>${content ? `<div class="player-stage"><article class="flipbook" id="ebook-content" tabindex="0" aria-label="Book text" style="font-size:${readerSize}px"><div class="book-sheet" id="book-sheet"><div class="page-window" id="page-window"><div class="page-text" id="page-text"></div></div></div></article></div><footer class="player-controls"><label class="sr-only" for="reader-seek">Page in this chapter</label><div class="reader-timeline"><input id="reader-seek" type="range" min="1" max="1" value="1" step="1"><div id="question-markers" aria-label="Question stops and results"></div></div><p id="question-stop-label" class="question-stop-label" hidden></p><div class="player-control-row"><button class="player-button" id="reader-play" aria-label="Play automatic page turns" title="Auto-turn pages every 12 seconds">▶</button><button class="player-button" id="reader-prev" aria-label="Previous page" title="Previous page">❮</button><button class="player-button" id="reader-next" aria-label="Next page" title="Next page">❯</button><span id="reader-feedback" role="status"></span><span class="player-spacer"></span><details class="player-settings"><summary aria-label="Reader settings" title="Reader settings">⚙</summary><div class="player-settings-panel"><button type="button" id="reader-finish">Mark book completed</button><button type="button" id="reader-restart"><span aria-hidden="true">↻</span> Restart book</button><label for="reader-chapter">Chapter</label><select id="reader-chapter">${content.chapters.map((chapter,i)=>`<option value="${i}" ${i===position?'selected':''}>${escape(chapter.title)}</option>`).join('')}</select><label for="reader-size">Text size</label><select id="reader-size"><option value="20" ${readerSize===20?'selected':''}>Standard</option><option value="24" ${readerSize===24?'selected':''}>Large</option><option value="30" ${readerSize===30?'selected':''}>Extra large</option></select><p>Pages turn automatically every 12 seconds, waiting while narration plays. Pause, use arrow keys or swipe to read at your own pace.</p></div></details><button class="player-button" id="reader-fullscreen" aria-label="Enter fullscreen" title="Fullscreen">⛶</button></div><div class="player-meta"><span id="player-mode">Read at your own pace</span><span>Your place is saved automatically</span></div></footer>` : ''}</section>`;
   }
   if (selected) {
     const link = safeLink(selected.url);
-    return `<button class="back text-button" id="story-close">← Back to my books</button><h1>${escape(selected.title)}</h1><p class="intro">${escape(selected.author)}</p><section class="panel"><form data-book="${opened}" class="story-update"><label for="book-place-${opened}">${selected.unit === 'pages' ? 'Pages' : 'Chapters'} read</label><div><input id="book-place-${opened}" name="current" type="number" min="0" max="${selected.total}" required step="1" value="${selected.current}"><button class="secondary">Save progress</button></div></form><div class="story-actions">${link ? `<a class="primary" href="${escape(link)}" target="_blank" rel="noopener noreferrer">Open ebook ↗</a>` : ''}<button class="secondary" data-finish="${opened}">Mark finished</button><button class="text-button" data-remove="${opened}">Remove from shelf</button></div></section>`;
+    return `<button class="back text-button" id="story-close">← Back to my books</button><h1>${escape(selected.title)}</h1><p class="intro">${escape(selected.author)}</p><section class="panel"><form data-book="${opened}" class="story-update"><label for="book-place-${opened}">${selected.unit === 'pages' ? 'Pages' : 'Chapters'} read</label><div><input id="book-place-${opened}" name="current" type="number" min="0" max="${selected.total}" required step="1" value="${selected.current}"><button class="secondary">Save progress</button></div></form><div class="story-actions">${link ? `<a class="primary" href="${escape(link)}" target="_blank" rel="noopener noreferrer">Open ebook ↗</a>` : ''}<button class="secondary" data-finish="${opened}">Mark completed</button><button class="story-restart" title="Start a new reading session from the beginning" data-restart-book="${opened}"><span aria-hidden="true">↻</span> Restart book</button><button class="text-button" data-remove="${opened}">Remove from shelf</button></div></section>`;
   }
   return `<a class="back" href="#home">← Back to home</a><h1>Story mode</h1><p class="intro">Pick a book. Find your next little adventure.</p>
-  <div class="ebook-import"><label class="primary" for="ebook-file">Import ebook ↗</label><input class="sr-only" id="ebook-file" type="file" accept=".epub,.txt"><p class="hint">EPUB or plain text · DRM-free · Up to 25 MB · Stays on this device</p><p id="import-status" role="status"></p></div><section class="story-shelf" aria-label="Your ebook shelf"><article class="shelf-book"><button class="book-cover caterpillar-cover" id="open-demo" aria-label="Open The Very Hungry Caterpillar live decision demo"><span class="cover-kicker">An interactive story demo</span><strong>The Very Hungry<br>Caterpillar</strong>${caterpillar}<span class="cover-author">Eric Carle</span><span class="cover-action">${director.state.step ? 'Continue the adventure' : 'Let’s begin'} ↗</span></button><progress value="${director.state.step}" max="3" aria-label="The Very Hungry Caterpillar demo progress"></progress></article>
-  <article class="shelf-book"><button class="book-cover personal-cover has-cover" id="open-peter" aria-label="Open The Tale of Peter Rabbit"><span class="cover-kicker">Included storybook</span><strong>The Tale of Peter Rabbit</strong><span class="cover-symbol" aria-hidden="true"><img src="./books/peter-rabbit-cover.jpg" alt=""></span><span class="cover-author">Beatrix Potter</span><span class="cover-action">Open book ↗</span></button><progress value="${peter.current}" max="${peter.total}" aria-label="The Tale of Peter Rabbit reading progress"></progress><button class="secondary" id="open-peter-activities">Try Braille activities →</button></article>
-  ${books.map((b,i)=>`<article class="shelf-book"><button class="book-cover personal-cover" data-open-book="${i}" aria-label="Open ${escape(b.title)}"><span class="cover-kicker">My reading shelf</span><strong>${escape(b.title)}</strong><span class="cover-symbol" data-cover="${i}" aria-hidden="true">⠎</span><span class="cover-author">${escape(b.author)}</span><span class="cover-action">Open book ↗</span></button><progress value="${b.current}" max="${b.total}" aria-label="${escape(b.title)} reading progress"></progress></article>`).join('')}</section>
+  <div class="ebook-import"><div class="story-actions"><button class="secondary" id="ebook-search" type="button">Search ebook</button><label class="primary" for="ebook-file">Import ebook ↗</label></div><input class="sr-only" id="ebook-file" type="file" accept=".epub,.txt"><p class="hint">Find a classic in our library below, or import your own ebook.</p><p class="hint">EPUB or plain text · DRM-free · Up to 25 MB · Stays on this device</p><p id="import-status" role="status"></p></div><h2>My books</h2><section class="story-shelf" aria-label="Your ebook shelf">
+  <article class="shelf-book"><button class="book-cover personal-cover has-cover" id="open-peter" aria-label="Open The Tale of Peter Rabbit"><span class="cover-kicker">Included storybook</span><strong>The Tale of Peter Rabbit</strong><span class="cover-symbol" aria-hidden="true"><img src="./books/peter-rabbit-cover.jpg" alt=""></span><span class="cover-author">Beatrix Potter</span><span class="cover-action">${readingLabel(peter)} ↗</span></button><progress value="${peter.current}" max="${peter.total}" aria-label="The Tale of Peter Rabbit reading progress"></progress><div class="shelf-actions"><button class="story-restart" title="Start a new reading session from the beginning" data-restart-book="peter"><span aria-hidden="true">↻</span> Restart book</button></div></article>
+  ${books.map((b,i)=>`<article class="shelf-book"><button class="book-cover personal-cover" data-open-book="${i}" aria-label="Open ${escape(b.title)}"><span class="cover-kicker">My reading shelf</span><strong>${escape(b.title)}</strong><span class="cover-symbol" data-cover="${i}" aria-hidden="true">⠎</span><span class="cover-author">${escape(b.author)}</span><span class="cover-action">${readingLabel(b)} ↗</span></button><progress value="${b.current}" max="${b.total}" aria-label="${escape(b.title)} reading progress"></progress><div class="shelf-actions"><button class="story-restart" title="Start a new reading session from the beginning" data-restart-book="${i}"><span aria-hidden="true">↻</span> Restart book</button></div></article>`).join('')}</section>
   <p class="hint" id="story-storage">${storageOK ? 'Your place is saved in this browser.' : 'Browser storage is unavailable. Changes may last for this visit only.'}</p>
-  <details class="panel story-add-panel"><summary>Add an ebook</summary><form id="story-add" class="story-add"><div><label for="story-title">Book title</label><input id="story-title" name="title" required maxlength="160"></div><div><label for="story-author">Author (optional)</label><input id="story-author" name="author" maxlength="160"></div><div><label for="story-unit">Track by</label><select id="story-unit" name="unit"><option value="pages">Pages</option><option value="chapters">Chapters</option></select></div><div><label for="story-total">Total pages or chapters</label><input id="story-total" name="total" type="number" min="1" max="1000000" step="1" required></div><div><label for="story-current">Already read</label><input id="story-current" name="current" type="number" min="0" step="1" required value="0"></div><div><label for="story-url">Ebook link (optional)</label><input id="story-url" name="url" type="url" placeholder="https://…"></div><button class="primary" type="submit">Add to my shelf</button></form></details>`;
+  <section class="ebook-catalog" aria-labelledby="catalog-heading"><h2 id="catalog-heading">Find a story</h2><p class="hint">Children’s classics, ready to read here.</p><label for="catalog-query">Search by title or author</label><input id="catalog-query" type="search" value="${escape(catalogQuery)}" placeholder="Try Winnie-the-Pooh or Lewis Carroll" autocomplete="off"><p id="catalog-count" class="hint" role="status">${childrenBooks.filter(matchesCatalog).length} books found</p><p id="catalog-status" role="status"></p><div class="catalog-grid">${childrenBooks.map(book => `<article class="catalog-card" data-catalog-card="${book.id}" ${matchesCatalog(book) ? '' : 'hidden'}><button class="catalog-open" data-catalog-book="${book.id}" aria-label="${books.some(saved => saved.id === book.id) ? 'Continue reading' : 'Read'} ${escape(book.title)}"><span class="catalog-cover">${book.cover ? `<img src="${book.cover}" alt="" loading="lazy">` : `<span>${escape(book.title)}</span>`}</span><span class="catalog-title">${escape(book.title)}</span><span class="catalog-author">${escape(book.author)}</span><span class="catalog-description">${escape(book.description)}</span><span class="catalog-read">${books.some(saved => saved.id === book.id) ? 'Continue reading' : 'Add & read'} →</span></button><a class="catalog-source" href="${book.source}" target="_blank" rel="noopener noreferrer" aria-label="${escape(book.sourceLabel || 'Project Gutenberg')} source for ${escape(book.title)} (opens in a new tab)">${escape(book.sourceLabel || 'Project Gutenberg')} ↗</a></article>`).join('')}</div><p class="hint">Classic editions from Project Gutenberg retain their notices. User-supplied books retain their original source.</p></section>
+`;
 }
 export function bindStories(main, render, announce) {
   const refresh = (message, focus) => {
@@ -121,8 +139,44 @@ export function bindStories(main, render, announce) {
     announce(message + (storageOK ? '' : ' Browser storage is unavailable; this change may last for this visit only.'));
   };
   const show = () => { render(); main.focus(); window.scrollTo(0,0); };
+  main.querySelector('#ebook-search')?.addEventListener('click', () => {
+    const input = main.querySelector('#catalog-query');
+    input?.scrollIntoView({block:'center',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+    input?.focus({preventScroll:true});
+  });
+  main.querySelector('#catalog-query')?.addEventListener('input', event => {
+    catalogQuery = event.target.value;
+    main.querySelectorAll('[data-catalog-card]').forEach(card => {
+      card.hidden = !matchesCatalog(childrenBooks.find(book => book.id === card.dataset.catalogCard));
+    });
+    const count = childrenBooks.filter(matchesCatalog).length;
+    main.querySelector('#catalog-count').textContent = count ? `${count} ${count === 1 ? 'book' : 'books'} found` : 'No books found. Try another title or author.';
+  });
+  main.querySelectorAll('[data-catalog-book]').forEach(button => button.addEventListener('click', async () => {
+    if (catalogLoading) return;
+    const entry = childrenBooks.find(book => book.id === button.dataset.catalogBook);
+    const existing = books.findIndex(book => book.id === entry.id);
+    if (existing >= 0) { director.cancel(); opened = existing; show(); return; }
+    catalogLoading = true;
+    const status = main.querySelector('#catalog-status');
+    main.querySelectorAll('[data-catalog-book]').forEach(control => { control.disabled = true; });
+    status.textContent = `Opening ${entry.title}…`;
+    try {
+      const response = await fetch(entry.file);
+      if (!response.ok) throw Error('This library book could not be loaded. Try again.');
+      const content = await importEbook(new File([await response.blob()], entry.file.split('/').pop()));
+      await ebookStore('put', entry.id, content);
+      books.unshift({id:entry.id,title:entry.title,author:entry.author,unit:'chapters',total:content.chapters.length,current:0,position:0,imported:true});
+      save();
+      if (!storageOK) { books.shift(); await ebookStore('delete',entry.id); throw Error('Your shelf could not be saved. Free browser storage and try again.'); }
+      loadedEbooks.set(entry.id, content);
+      if (status.isConnected && location.hash === '#stories') {
+        director.cancel(); opened = 0; show(); announce(`${entry.title} added. Ready to read.`);
+      }
+    } catch (error) { if (status.isConnected) status.textContent = error.message; }
+    finally { catalogLoading = false; main.querySelectorAll('[data-catalog-book]').forEach(control => { control.disabled = false; }); }
+  }));
   main.querySelector('#open-peter')?.addEventListener('click', () => { director.cancel(); opened = 'peter'; show(); });
-  main.querySelector('#open-peter-activities')?.addEventListener('click', () => { opened = 'peter-activities'; show(); });
   if (opened === 'peter-activities') bindPeterActivities(main, show, () => { opened = 'peter'; show(); });
   if (opened === 'demo' && director.state.step === 3 && celebratedDemoSession !== director.state.session_id) {
     celebratedDemoSession = director.state.session_id;
@@ -131,8 +185,30 @@ export function bindStories(main, render, announce) {
     completion.show(demoCompletionRecap(director.state.events));
   }
   const selected = selectedBook();
+  if (selected) { ensureReadingSession(selected); save(); }
+  let restarting = false;
+  const restart = async (book, destination) => {
+    if (restarting) return;
+    restarting = true;
+    try {
+      if (book.imported && !loadedEbooks.has(book.id)) {
+        const content = await loadBook(book);
+        if (!content) throw Error('This ebook is no longer in browser storage.');
+        loadedEbooks.set(book.id, content);
+      }
+      disposeReader?.(); disposeReader = null;
+      restartReadingSession(book, loadedEbooks.get(book.id)?.readingStart || 0);
+      save(); opened = destination; show(); announce('New reading session started.');
+    } catch (error) { announce(error.message); }
+    finally { restarting = false; }
+  };
+  main.querySelector('#reader-restart')?.addEventListener('click', () => restart(selected, opened));
+  main.querySelectorAll('[data-restart-book]').forEach(button => button.addEventListener('click', () => {
+    const destination = button.dataset.restartBook === 'peter' ? 'peter' : Number(button.dataset.restartBook);
+    restart(destination === 'peter' ? peter : books[destination], destination);
+  }));
   const header=main.querySelector('.player-header');
-  if(header && document.querySelector('#voice-input-panel'))header.append(document.querySelector('#voice-input-panel'));
+  if(header && document.querySelector('#voice-microphone'))header.append(document.querySelector('#voice-microphone'));
   if (selected?.imported) {
     if (!loadedEbooks.has(selected.id)) {
       loadBook(selected).then(content=>{
@@ -176,9 +252,8 @@ export function bindStories(main, render, announce) {
     event.target.disabled = true;
     try { await director.outbox.flush(); } catch {} finally { event.target.disabled = false; refreshLearningStatus(); }
   });
-  main.querySelector('#open-demo')?.addEventListener('click', () => { opened = 'demo'; show(); void director.outbox.flush().catch(() => {}).finally(refreshLearningStatus); });
   main.querySelectorAll('[data-open-book]').forEach(button => button.addEventListener('click', () => { director.cancel(); opened = Number(button.dataset.openBook); show(); }));
-  main.querySelectorAll('#story-close, #story-close-done').forEach(button => button.addEventListener('click', () => { director.cancel(); opened = null; show(); }));
+  main.querySelectorAll('#story-close, #story-close-done').forEach(button => button.addEventListener('click', () => { director.cancel(); save(); opened = null; if (document.fullscreenElement) void document.exitFullscreen().catch(()=>{}); show(); }));
   main.querySelector('#demo-next')?.addEventListener('click', () => { director.advance(); show(); });
   main.querySelectorAll('[data-response]').forEach(button => button.addEventListener('click', () => { director.record(button.dataset.response, main.querySelector('#response-support')?.value || 'unknown'); show(); void director.outbox.flush().catch(() => {}).finally(refreshLearningStatus); }));
   main.querySelector('#demo-restart')?.addEventListener('click', () => { director.restart(); show(); });
@@ -187,34 +262,21 @@ export function bindStories(main, render, announce) {
   if (opened === 'demo' && director.state.step < 3 && !director.pending && !director.result && !director.error && !director.skipped) {
     director.request(redrawDemo);
   }
-  main.querySelector('#story-add')?.addEventListener('submit' , event => {
-    event.preventDefault(); const form = event.target, data = new FormData(form);
-    const title = data.get('title').trim(), total = Number(data.get('total')), current = Number(data.get('current')), url = data.get('url').trim();
-    form.elements.title.setCustomValidity(title ? '' : 'Enter a book title.');
-    form.elements.current.setCustomValidity(Number.isSafeInteger(current) && current >= 0 && current <= total ? '' : 'Enter a whole number between zero and the total.');
-    form.elements.url.setCustomValidity(!url || safeLink(url) ? '' : 'Use an http or https ebook link.');
-    if (!form.reportValidity() || !Number.isSafeInteger(total) || total < 1) return;
-    books.unshift({id:crypto.randomUUID(), title, author:data.get('author').trim(), unit:data.get('unit'), total, current, url:safeLink(url)});
-    opened = 0; refresh(`${title} added to your shelf.`, '#book-place-0');
-  });
-  main.querySelector('#story-add')?.addEventListener('input', event => {
-    event.target.setCustomValidity?.('');
-    main.querySelector('#story-current').setCustomValidity('');
-  });
   main.querySelectorAll('[data-book]').forEach(form => form.addEventListener('submit', event => {
     event.preventDefault(); const index = Number(form.dataset.book), current = Number(new FormData(form).get('current'));
     if (!Number.isSafeInteger(current) || current < 0 || current > books[index].total) return;
     books[index].current = current;
+    if (current === books[index].total) finishReadingSession(books[index]);
     refresh(`Progress saved for ${books[index].title}. ${current === books[index].total ? 'Book finished. Well done!' : ''}`, `#book-place-${index}`);
   }));
   main.querySelectorAll('[data-finish]').forEach(button => button.addEventListener('click', () => {
-    const index = Number(button.dataset.finish); books[index].current = books[index].total;
+    const index = Number(button.dataset.finish); finishReadingSession(books[index]);
     refresh(`${books[index].title} finished. Well done!`, `#book-place-${index}`);
   }));
   main.querySelectorAll('[data-remove]').forEach(button => button.addEventListener('click', () => {
     const index = Number(button.dataset.remove);
     if (!confirm(`Remove “${books[index].title}” and its reading progress from your shelf?`)) return;
     if (books[index].imported) { ebookStore('delete',books[index].id).catch(()=>{}); loadedEbooks.delete(books[index].id); }
-    books.splice(index, 1); opened = null; refresh('Book removed from your shelf.', '#story-title');
+    books.splice(index, 1); opened = null; refresh('Book removed from your shelf.', '#ebook-search');
   }));
 }

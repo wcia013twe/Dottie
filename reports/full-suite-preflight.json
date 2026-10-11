@@ -1,0 +1,135 @@
+{
+  "checked_at": "2026-10-11T09:21:56.348205+00:00",
+  "scope": "Full-suite live preflight; not an end-to-end pass. Read-only cloud access plus one synthetic director invocation.",
+  "stages": {
+    "director_app_metadata": {
+      "status": "passed",
+      "result": {
+        "active_deployment": {
+          "create_time": "2026-10-11T06:52:50Z",
+          "deployment_artifacts": {
+            "source_code_path": "/Workspace/Users/18d10b66-be29-40dc-aae3-9365189f5f4a/src/01f1c5405fbe1febacfb17f916609427"
+          },
+          "deployment_id": "01f1c5405fbe1febacfb17f916609427",
+          "mode": "SNAPSHOT",
+          "source_code_path": "/Workspace/Users/wcia013twe@gmail.com/agentbricks_deployments/agent-bricks-magneto-director",
+          "status": {
+            "message": "App started successfully",
+            "state": "SUCCEEDED"
+          },
+          "update_time": "2026-10-11T06:53:02Z"
+        },
+        "app_status": {
+          "message": "App has status: App is running",
+          "state": "RUNNING"
+        },
+        "compute_status": {
+          "message": "App compute is running.",
+          "state": "ACTIVE"
+        },
+        "name": "agent-bricks-magneto-director",
+        "url": "https://agent-bricks-magneto-director-7474648183111292.aws.databricksapps.com"
+      }
+    },
+    "director_tls": {
+      "status": "failed",
+      "error_type": "SSLError",
+      "diagnosis": "TLS connection failure"
+    },
+    "deployed_integration_switches": {
+      "status": "passed",
+      "result": {
+        "source": "/Workspace/Users/wcia013twe@gmail.com/agentbricks_deployments/agent-bricks-magneto-director/app.yaml",
+        "switches": {}
+      }
+    },
+    "director_invocation": {
+      "status": "failed",
+      "error_type": "SSLError",
+      "diagnosis": "TLS connection failure"
+    },
+    "research_counts": {
+      "status": "passed",
+      "result": [
+        {
+          "kind": "eligible_findings",
+          "n": "0"
+        },
+        {
+          "kind": "eligible_recommendations",
+          "n": "0"
+        },
+        {
+          "kind": "sources",
+          "n": "10"
+        }
+      ]
+    },
+    "research_live_retrieval": {
+      "status": "passed",
+      "result": {
+        "schema_version": "1.0",
+        "request_id": "2cce24ee-e4bd-404a-a668-8e78340944c4",
+        "matches": []
+      }
+    },
+    "learner_evidence_counts": {
+      "status": "passed",
+      "result": [
+        {
+          "confirmed_observations": "0",
+          "linked_traces": "0"
+        }
+      ]
+    },
+    "companion_app_metadata": {
+      "status": "failed",
+      "error_type": "NotFound"
+    }
+  },
+  "synthetic_request_id": "2cce24ee-e4bd-404a-a668-8e78340944c4",
+  "local_checks": {
+    "research": {
+      "passed": 40
+    },
+    "learner_intelligence": {
+      "passed": 27
+    },
+    "director": {
+      "passed": 46
+    },
+    "browser_session": {
+      "passed": 8
+    },
+    "bridge": {
+      "passed": 4
+    },
+    "story_controller": {
+      "passed": 8
+    },
+    "story_mcp": {
+      "passed": 4
+    },
+    "contracts": "passed; legacy v1 unchanged",
+    "harness": {
+      "passed": 32,
+      "fixture_lesson": "passed"
+    },
+    "companion_plan": {
+      "passed": 7
+    }
+  },
+  "connected_live_handoffs": {
+    "research_model": "reports/research-model-live-handoff.json",
+    "harness_one_activity": "reports/harness-live-model-one-activity-fixed.json"
+  },
+  "full_suite_complete": false,
+  "remaining": [
+    "Director App TLS connection from local machine fails",
+    "Research retrieval is disabled in deployed App and no human-approved eligible guidance exists",
+    "Trace-to-confirmed-learner join not connected",
+    "Learner profile readback into planner not connected",
+    "Optional companion App not deployed",
+    "Nonempty live learner evidence run requires an actual teacher-confirmed observation"
+  ]
+}

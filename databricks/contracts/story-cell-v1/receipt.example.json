@@ -1,0 +1,8 @@
+{
+  "command_id": "00000000-0000-4000-8000-000000000001",
+  "cell_ack": true,
+  "command": "SPELL rabbit",
+  "receipt": "CELL 17 r",
+  "sequence_started": true,
+  "sequence_complete": false
+}

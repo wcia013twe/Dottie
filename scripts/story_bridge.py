@@ -10,6 +10,7 @@ from time import perf_counter
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from learner_bridge import publish_story
+from story_device import send as send_story_device
 from story_mode.controller import Controller, StoryError
 from story_mode.preparation import Preparation
 from story_mode.lookahead import Lookahead
@@ -47,6 +48,8 @@ def handle(handler):
         path=handler.path
         if path=='/api/story/session':
             result=create_session(body.get('history',[]))
+        elif path=='/api/story/release-device':
+            result=controller.release_device(body['session_id'],send_story_device)
         elif path=='/api/story/lookahead':
             ticket, needed=lookahead.begin(body['session_id'],body['revision'],body['target'])
             if needed:
@@ -80,10 +83,19 @@ def handle(handler):
         elif path in ('/api/story/action','/api/story/mcp'):
             name=body['name'];sid=body['session_id']
             if name=='get_story_context':result=controller.get(sid)
+            elif name=='start_device_activity' and not mcp:
+                result=controller.start_device_activity(sid,body['revision'],send_story_device)
             else:
                 if name not in (MODEL_TOOLS if mcp else TEACHER_ACTIONS):raise StoryError('Action unavailable to this caller.')
                 if not isinstance(body.get('arguments',{}),dict):raise StoryError('Invalid tool arguments.')
-                result=controller.call(sid,body['revision'],name,body.get('arguments',{}),actor='orchestrator' if mcp else 'teacher')
+                with controller.lock:
+                    current=controller.get(sid)
+                    if name in ('resume_story','set_context') and current['device'].get('state') not in (None,'not_configured'):
+                        if type(body['revision']) is not int or body['revision']!=current['revision']:raise StoryError('Stale clear rejected.')
+                        receipt=send_story_device('clear')
+                        controller.sessions[sid]['device']=receipt
+                        if receipt.get('cell_ack') is not True:raise StoryError('Cell clear was not acknowledged. Retry clear before continuing.')
+                    result=controller.call(sid,body['revision'],name,body.get('arguments',{}),actor='orchestrator' if mcp else 'teacher')
         else:
             handler._json(404,{'error':'Unknown Story Mode route.'});return True
         # Reflection is read-only and cannot fail or replay an already saved teaching action.

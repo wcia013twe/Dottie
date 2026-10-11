@@ -1,0 +1,43 @@
+{
+  "synthetic": true,
+  "verified": true,
+  "cloud_calls": false,
+  "steps": [
+    {
+      "step": "first_session",
+      "published": true,
+      "epoch": 1,
+      "finding": "Wes identified B/D independently 40% of the time.",
+      "metric": {
+        "numerator": 2,
+        "denominator": 5,
+        "unit": "percent"
+      },
+      "history_entries": 1
+    },
+    {
+      "step": "new_session",
+      "published": true,
+      "epoch": 2,
+      "finding": "Wes identified B/D independently 80% of the time. Previously 40% under comparable conditions.",
+      "metric": {
+        "numerator": 4,
+        "denominator": 5,
+        "unit": "percent"
+      },
+      "history_entries": 2
+    },
+    {
+      "step": "repeat_background_pass",
+      "published": false,
+      "epoch": 2,
+      "finding": "Wes identified B/D independently 80% of the time. Previously 40% under comparable conditions.",
+      "metric": {
+        "numerator": 4,
+        "denominator": 5,
+        "unit": "percent"
+      },
+      "history_entries": 2
+    }
+  ]
+}

@@ -34,3 +34,11 @@ Publication is one Delta MERGE into the derived search table followed by an expl
 ## Managed capabilities and remaining logic
 
 Databricks performs parsing, contextual search preparation, structured extraction, embeddings, indexing, SQL joins, run storage and MLflow judging. Local code validates provenance, computes immutable IDs, enforces publication eligibility, records decisions, and returns cited search results. It does not implement a graph database, vector engine or custom PDF parser.
+
+## Medallion interpretation
+
+Original source bytes and their registry/artifacts are bronze-like; validated
+passages and findings are silver-like; human-approved eligible recommendations
+and guidance exports are gold-like. Search documents span all three quality tiers
+and are a serving projection, not a gold-only table. Review/run records support
+all stages. See [project medallion stages](../../docs/medallion-stages.md).

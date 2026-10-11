@@ -5,7 +5,7 @@ export function feedbackFor(action, outcome) {
   return null;
 }
 export function createInteractionPlayer(player) {
-  const audio = new Audio(); audio.controls=true; audio.setAttribute('aria-label','Interaction narration');
+  const audio = new Audio(); audio.controls=false; audio.setAttribute('aria-label','Interaction narration');
   const area=document.createElement('div');area.className='local-narration';area.hidden=true;
   const label=document.createElement('span');label.textContent='Interaction narration';area.append(label,audio);
   player.querySelector('.player-controls').prepend(area);
@@ -21,7 +21,7 @@ export function createInteractionPlayer(player) {
     }
     if(disposed||token!==generation)return;
     if(url && /^\/learn\/narration\/peter-rabbit-(?:interactions|exercises)\/[a-zA-Z0-9_-]+-[a-f0-9]{64}\.wav$/.test(url)){
-      area.hidden=false;audio.src=url;
+      audio.src=url;
       try{
         const ended=new Promise(resolve=>{finish=resolve;audio.onended=()=>{finish=null;resolve(true);};audio.onerror=()=>{finish=null;resolve(false);};});
         await audio.play();return await ended;

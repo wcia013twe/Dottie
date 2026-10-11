@@ -137,7 +137,7 @@ def load_local_env(path, environ=None):
         if line.startswith('export '): line = line[7:].lstrip()
         key, separator, value = line.partition('=')
         key = key.strip()
-        if not separator or key not in ('ELEVENLABS_API_KEY', 'ELEVENLABS_VOICE_ID'): continue
+        if not separator or key not in ('ELEVENLABS_API_KEY', 'ELEVENLABS_VOICE_ID', 'ELEVENLABS_STORY_VOICE_ID'): continue
         try:
             parts = shlex.split(value, comments=True, posix=True)
         except ValueError:
@@ -156,7 +156,7 @@ def main():
     args = parser.parse_args()
     try:
         load_local_env(ROOT / '.env')
-        result=build(json.loads(args.script.read_text()), args.output_root, args.voice_id or os.environ.get('ELEVENLABS_VOICE_ID'),
+        result=build(json.loads(args.script.read_text()), args.output_root, args.voice_id or os.environ.get('ELEVENLABS_STORY_VOICE_ID') or os.environ.get('ELEVENLABS_VOICE_ID'),
             api_key=os.environ.get('ELEVENLABS_API_KEY'), dry_run=args.dry_run)
     except (ValueError, OSError) as exc:
         parser.exit(1, f'{exc}\n')

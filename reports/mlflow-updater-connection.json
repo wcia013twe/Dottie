@@ -1,0 +1,19 @@
+{
+  "verified": true,
+  "synthetic": true,
+  "experiment_name": "/Shared/magneto-research",
+  "experiment_id": "1306573313615572",
+  "trace_schema": "workspace.magneto",
+  "trace_table_prefix": "1306573313615572",
+  "warehouse_id": "a5e11b7fe2c6dbbc",
+  "mlflow_run_id": "6fdf63fa55f745108d064f06c3f97d06",
+  "trace_id": "trace:/workspace.magneto.1306573313615572/d19ee9d91c12dcdb5413a182f71b2bea",
+  "url": "https://dbc-129a8d44-1940.cloud.databricks.com/ml/experiments/1306573313615572/traces/d19ee9d91c12dcdb5413a182f71b2bea",
+  "checks": [
+    "CLI authentication",
+    "Unity Catalog experiment metadata",
+    "synthetic trace write and readback",
+    "bundle validation"
+  ],
+  "boundary": "Connection verification only; no model invocation, source ingestion, learner-profile update, or deployed processing job."
+}

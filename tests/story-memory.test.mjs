@@ -36,3 +36,14 @@ test('opted-in telemetry retains observation identity and time',async()=>{
  assert.equal(sent.attempts[0].support,'unknown');
  assert.equal(memory.outbox.attempts.length,0);
 });
+
+test('saved interaction retains prompt and unconfirmed answer without uploading evidence',()=>{
+ const s=storage(),memory=new StoryMemory(s);
+ const state={session_id:'session',passage_id:'rabbit',proposal:{target:'rabbit',activity:'emphasize',prompt:'Feel rabbit.',reason:'Story connection.'},response:null};
+ memory.saveReview('session:2',state,{prompt:'/learn/narration/peter-rabbit-exercises/prompt-abc.wav'});
+ memory.saveReview('session:2',{...state,response:{text:'rabbit'}},{},'answer_unconfirmed');
+ const restored=new StoryMemory(s);
+ assert.equal(restored.reviews.length,1);assert.equal(restored.reviews[0].prompt,'Feel rabbit.');
+ assert.equal(restored.reviews[0].response,'rabbit');assert.equal(restored.reviews[0].status,'answer_unconfirmed');
+ assert.equal(restored.rows.length,0);assert.equal(restored.outbox.attempts.length,0);
+});

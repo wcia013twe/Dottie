@@ -1,0 +1,21 @@
+{
+  "learner_id": "synthetic-story-adc6c297-49c0-4c9b-9051-1e93bfc87895",
+  "display_name": "Story walkthrough \u00b7 fictional test",
+  "synthetic": true,
+  "events": [
+    {
+      "id": "7f75563d-5b0e-4cd3-8d89-c2bbd1c59d99",
+      "learner_id": "synthetic-story-adc6c297-49c0-4c9b-9051-1e93bfc87895",
+      "session_id": "adc6c297-49c0-4c9b-9051-1e93bfc87895",
+      "occurred_at": "2026-10-11T10:07:54.462848+00:00",
+      "category": "braille",
+      "target": "R",
+      "task": "identify",
+      "condition": "teacher-supplied tactile material; difficulty unspecified",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    }
+  ]
+}

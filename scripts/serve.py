@@ -5,7 +5,7 @@ from pathlib import Path
 import argparse
 import json
 import threading
-from voice_env import load_voice_env
+from voice_env import load_databricks_env, load_voice_env
 from urllib.parse import urlparse
 
 from decision_bridge import BridgeError, ContractError, request_decision
@@ -110,6 +110,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 
 def main():
+    load_databricks_env()
     load_voice_env()
     parser=argparse.ArgumentParser()
     parser.add_argument('--port',type=int,default=8080)

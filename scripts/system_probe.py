@@ -16,7 +16,12 @@ def main():
     research = tomllib.loads((ROOT / 'databricks/research-pipeline/config/operations.toml').read_text())
     if research['workspace_host'].rstrip('/') != config.workspace_host.rstrip('/'):
         raise ValueError('Research workspace mismatch')
+    learner = tomllib.loads((ROOT / 'databricks/platform/learner-intelligence.toml').read_text())
+    from learner_medallion import BRONZE, GOLD
     checks = {
+        'learner_bronze': lambda: client.tables.get(BRONZE),
+        'learner_evidence': lambda: client.tables.get(learner['evidence_table']),
+        'learner_gold': lambda: client.tables.get(GOLD),
         'catalog': lambda: client.catalogs.get(config.catalog),
         'schema': lambda: client.schemas.get(config.schema_name),
         'references': lambda: client.volumes.read(config.volume_name),

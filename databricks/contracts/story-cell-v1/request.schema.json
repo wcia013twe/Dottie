@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "command_id",
+    "operation",
+    "target"
+  ],
+  "properties": {
+    "command_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f-]{36}$"
+    },
+    "operation": {
+      "enum": [
+        "show",
+        "clear"
+      ]
+    },
+    "target": {
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "operation": {
+            "const": "show"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "target": {
+            "pattern": "^[a-z]{1,16}$"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "target": {
+            "const": ""
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,437 @@
+{
+  "synthetic": true,
+  "backend": "sim",
+  "brain": "live Databricks model",
+  "scenario": "one C identification; scripted speech is not confirmed learner evidence",
+  "calls": [
+    {
+      "snapshot": {
+        "request_id": "019d5663-e380-44fe-a85a-9e56be19f747",
+        "schema_version": "1.0",
+        "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+        "revision": 1,
+        "phase": "idle",
+        "lesson_id": "cloud_smoke",
+        "targets": [
+          "c"
+        ],
+        "index": 0,
+        "target": "c",
+        "activity": "identify",
+        "prompt": "Feel the letter on the cell, then say it out loud.",
+        "activities_started": 0,
+        "policy": {
+          "max_activities": 6,
+          "advance_on_correct": true
+        },
+        "device": {
+          "cell_connected": false,
+          "cell_ready": true,
+          "listening": false,
+          "camera_available": false
+        },
+        "last_response": null,
+        "recent_outcomes": [],
+        "recent_observations": []
+      },
+      "plan": {
+        "tool": "present_activity",
+        "arguments": {
+          "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+          "revision": 1,
+          "target": "c",
+          "activity": "identify",
+          "prompt": "Feel the letter on the cell, then say it out loud."
+        },
+        "reason": "The phase is idle and the lesson is ready to begin; presenting the target 'c' with the existing prompt initiates the identify activity."
+      }
+    },
+    {
+      "snapshot": {
+        "request_id": "18ca38ec-0472-431f-9682-35bfb76b5798",
+        "schema_version": "1.0",
+        "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+        "revision": 3,
+        "phase": "complete",
+        "lesson_id": "cloud_smoke",
+        "targets": [
+          "c"
+        ],
+        "index": 0,
+        "target": "c",
+        "activity": "identify",
+        "prompt": "Feel the letter on the cell, then say it out loud.",
+        "activities_started": 1,
+        "policy": {
+          "max_activities": 6,
+          "advance_on_correct": true
+        },
+        "device": {
+          "cell_connected": false,
+          "cell_ready": true,
+          "listening": false,
+          "camera_available": false
+        },
+        "last_response": {
+          "transcript": "c",
+          "expected": "c",
+          "match": "exact",
+          "outcome": "correct",
+          "source": "stt",
+          "received_at_ms": 70339042
+        },
+        "recent_outcomes": [
+          {
+            "transcript": "c",
+            "expected": "c",
+            "match": "exact",
+            "outcome": "correct",
+            "source": "stt",
+            "received_at_ms": 70339042
+          }
+        ],
+        "recent_observations": []
+      },
+      "plan": {
+        "tool": "advance_target",
+        "arguments": {
+          "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+          "revision": 3
+        },
+        "reason": "Learner correctly identified the target 'c', so advance to the next target."
+      }
+    },
+    {
+      "snapshot": {
+        "request_id": "1ad9d7df-05c5-48a0-b983-e832af7f7a84",
+        "schema_version": "1.0",
+        "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+        "revision": 4,
+        "phase": "idle",
+        "lesson_id": "cloud_smoke",
+        "targets": [
+          "c"
+        ],
+        "index": 0,
+        "target": "c",
+        "activity": "identify",
+        "prompt": "Feel the letter on the cell, then say it out loud.",
+        "activities_started": 1,
+        "policy": {
+          "max_activities": 6,
+          "advance_on_correct": true
+        },
+        "device": {
+          "cell_connected": false,
+          "cell_ready": true,
+          "listening": false,
+          "camera_available": false
+        },
+        "last_response": null,
+        "recent_outcomes": [
+          {
+            "transcript": "c",
+            "expected": "c",
+            "match": "exact",
+            "outcome": "correct",
+            "source": "stt",
+            "received_at_ms": 70339042
+          }
+        ],
+        "recent_observations": []
+      },
+      "plan": {
+        "tool": "advance_target",
+        "arguments": {
+          "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+          "revision": 4
+        },
+        "reason": "Learner correctly identified the target 'c', so advance to the next target."
+      }
+    },
+    {
+      "snapshot": {
+        "request_id": "8e06611b-d137-45ee-ad46-7ded35160640",
+        "schema_version": "1.0",
+        "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+        "revision": 5,
+        "phase": "idle",
+        "lesson_id": "cloud_smoke",
+        "targets": [
+          "c"
+        ],
+        "index": 0,
+        "target": "c",
+        "activity": "identify",
+        "prompt": "Feel the letter on the cell, then say it out loud.",
+        "activities_started": 1,
+        "policy": {
+          "max_activities": 6,
+          "advance_on_correct": true
+        },
+        "device": {
+          "cell_connected": false,
+          "cell_ready": true,
+          "listening": false,
+          "camera_available": false
+        },
+        "last_response": null,
+        "recent_outcomes": [
+          {
+            "transcript": "c",
+            "expected": "c",
+            "match": "exact",
+            "outcome": "correct",
+            "source": "stt",
+            "received_at_ms": 70339042
+          }
+        ],
+        "recent_observations": []
+      },
+      "plan": {
+        "tool": "advance_target",
+        "arguments": {
+          "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+          "revision": 5
+        },
+        "reason": "Learner correctly identified the target 'c', so advance to the next target."
+      }
+    },
+    {
+      "snapshot": {
+        "request_id": "cf96ca75-b9d4-455d-ad24-5764e2fe1e65",
+        "schema_version": "1.0",
+        "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+        "revision": 6,
+        "phase": "idle",
+        "lesson_id": "cloud_smoke",
+        "targets": [
+          "c"
+        ],
+        "index": 0,
+        "target": "c",
+        "activity": "identify",
+        "prompt": "Feel the letter on the cell, then say it out loud.",
+        "activities_started": 1,
+        "policy": {
+          "max_activities": 6,
+          "advance_on_correct": true
+        },
+        "device": {
+          "cell_connected": false,
+          "cell_ready": true,
+          "listening": false,
+          "camera_available": false
+        },
+        "last_response": null,
+        "recent_outcomes": [
+          {
+            "transcript": "c",
+            "expected": "c",
+            "match": "exact",
+            "outcome": "correct",
+            "source": "stt",
+            "received_at_ms": 70339042
+          }
+        ],
+        "recent_observations": []
+      },
+      "plan": {
+        "tool": "advance_target",
+        "arguments": {
+          "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+          "revision": 6
+        },
+        "reason": "The learner correctly identified the target 'c', so advance to the next target."
+      }
+    },
+    {
+      "snapshot": {
+        "request_id": "cd4b1bed-968e-419a-b27e-46aed30e2f6c",
+        "schema_version": "1.0",
+        "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+        "revision": 7,
+        "phase": "idle",
+        "lesson_id": "cloud_smoke",
+        "targets": [
+          "c"
+        ],
+        "index": 0,
+        "target": "c",
+        "activity": "identify",
+        "prompt": "Feel the letter on the cell, then say it out loud.",
+        "activities_started": 1,
+        "policy": {
+          "max_activities": 6,
+          "advance_on_correct": true
+        },
+        "device": {
+          "cell_connected": false,
+          "cell_ready": true,
+          "listening": false,
+          "camera_available": false
+        },
+        "last_response": null,
+        "recent_outcomes": [
+          {
+            "transcript": "c",
+            "expected": "c",
+            "match": "exact",
+            "outcome": "correct",
+            "source": "stt",
+            "received_at_ms": 70339042
+          }
+        ],
+        "recent_observations": []
+      },
+      "plan": {
+        "tool": "advance_target",
+        "arguments": {
+          "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+          "revision": 7
+        },
+        "reason": "Learner correctly identified the target 'c', so advance to the next target."
+      }
+    },
+    {
+      "snapshot": {
+        "request_id": "f794adf1-8df0-4da2-860d-fcb2242f4028",
+        "schema_version": "1.0",
+        "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+        "revision": 8,
+        "phase": "idle",
+        "lesson_id": "cloud_smoke",
+        "targets": [
+          "c"
+        ],
+        "index": 0,
+        "target": "c",
+        "activity": "identify",
+        "prompt": "Feel the letter on the cell, then say it out loud.",
+        "activities_started": 1,
+        "policy": {
+          "max_activities": 6,
+          "advance_on_correct": true
+        },
+        "device": {
+          "cell_connected": false,
+          "cell_ready": true,
+          "listening": false,
+          "camera_available": false
+        },
+        "last_response": null,
+        "recent_outcomes": [
+          {
+            "transcript": "c",
+            "expected": "c",
+            "match": "exact",
+            "outcome": "correct",
+            "source": "stt",
+            "received_at_ms": 70339042
+          }
+        ],
+        "recent_observations": []
+      },
+      "plan": {
+        "tool": "advance_target",
+        "arguments": {
+          "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+          "revision": 8
+        },
+        "reason": "Learner correctly identified the target 'c', so advance to the next target."
+      }
+    },
+    {
+      "snapshot": {
+        "request_id": "09433b23-8bcc-46a5-b2c1-7f8de17fc93b",
+        "schema_version": "1.0",
+        "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+        "revision": 9,
+        "phase": "idle",
+        "lesson_id": "cloud_smoke",
+        "targets": [
+          "c"
+        ],
+        "index": 0,
+        "target": "c",
+        "activity": "identify",
+        "prompt": "Feel the letter on the cell, then say it out loud.",
+        "activities_started": 1,
+        "policy": {
+          "max_activities": 6,
+          "advance_on_correct": true
+        },
+        "device": {
+          "cell_connected": false,
+          "cell_ready": true,
+          "listening": false,
+          "camera_available": false
+        },
+        "last_response": null,
+        "recent_outcomes": [
+          {
+            "transcript": "c",
+            "expected": "c",
+            "match": "exact",
+            "outcome": "correct",
+            "source": "stt",
+            "received_at_ms": 70339042
+          }
+        ],
+        "recent_observations": []
+      },
+      "plan": {
+        "tool": "advance_target",
+        "arguments": {
+          "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+          "revision": 9
+        },
+        "reason": "Learner correctly identified the target 'c', so advance to the next target."
+      }
+    }
+  ],
+  "result": {
+    "state": {
+      "schema_version": "1.0",
+      "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263",
+      "revision": 10,
+      "phase": "idle",
+      "lesson_id": "cloud_smoke",
+      "targets": [
+        "c"
+      ],
+      "index": 0,
+      "target": "c",
+      "activity": "identify",
+      "prompt": "Feel the letter on the cell, then say it out loud.",
+      "activities_started": 1,
+      "policy": {
+        "max_activities": 6,
+        "advance_on_correct": true
+      },
+      "device": {
+        "cell_connected": false,
+        "cell_ready": true,
+        "listening": false,
+        "camera_available": false
+      },
+      "last_response": null,
+      "recent_outcomes": [
+        {
+          "transcript": "c",
+          "expected": "c",
+          "match": "exact",
+          "outcome": "correct",
+          "source": "stt",
+          "received_at_ms": 70339042
+        }
+      ],
+      "recent_observations": []
+    },
+    "tool_called": "advance_target",
+    "reason": "Learner correctly identified the target 'c', so advance to the next target.",
+    "done": false,
+    "session_id": "3f0e7f5d-ca0c-41c8-af90-3144087f8263"
+  },
+  "status": "incomplete"
+}

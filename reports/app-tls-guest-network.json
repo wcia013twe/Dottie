@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-10-11T09:41:43.287597+00:00",
+  "network_observed": "UCF_Guest connected in System Settings",
+  "hostname": "agent-bricks-magneto-director-7474648183111292.aws.databricksapps.com",
+  "dns": [
+    "146.112.61.110"
+  ],
+  "tls": "failed",
+  "error_type": "SSLError",
+  "reason": "SSLV3_ALERT_HANDSHAKE_FAILURE"
+}

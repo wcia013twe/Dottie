@@ -1,0 +1,100 @@
+{
+  "synthetic": true,
+  "backend": "sim",
+  "brain": "live Databricks model",
+  "scenario": "one C identification; scripted speech is not confirmed learner evidence",
+  "calls": [
+    {
+      "snapshot": {
+        "request_id": "5e9e32b6-8e51-4419-9a61-1df0e536ad60",
+        "schema_version": "1.0",
+        "session_id": "7607884c-aec7-40e9-b160-292a1c85c879",
+        "revision": 1,
+        "phase": "idle",
+        "lesson_id": "cloud_smoke",
+        "targets": [
+          "c"
+        ],
+        "index": 0,
+        "target": "c",
+        "activity": "identify",
+        "prompt": "Feel the letter on the cell, then say it out loud.",
+        "activities_started": 0,
+        "policy": {
+          "max_activities": 6,
+          "advance_on_correct": true
+        },
+        "device": {
+          "cell_connected": false,
+          "cell_ready": true,
+          "listening": false,
+          "camera_available": false
+        },
+        "last_response": null,
+        "recent_outcomes": [],
+        "recent_observations": []
+      },
+      "plan": {
+        "tool": "present_activity",
+        "arguments": {
+          "session_id": "7607884c-aec7-40e9-b160-292a1c85c879",
+          "revision": 1,
+          "target": "c",
+          "activity": "identify",
+          "prompt": "Feel the letter on the cell, then say it out loud."
+        },
+        "reason": "The session is idle and the target 'c' is ready for identification; presenting the activity with the existing prompt to begin the learning phase."
+      }
+    }
+  ],
+  "result": {
+    "state": {
+      "schema_version": "1.0",
+      "session_id": "7607884c-aec7-40e9-b160-292a1c85c879",
+      "revision": 3,
+      "phase": "complete",
+      "lesson_id": "cloud_smoke",
+      "targets": [
+        "c"
+      ],
+      "index": 0,
+      "target": "c",
+      "activity": "identify",
+      "prompt": "Feel the letter on the cell, then say it out loud.",
+      "activities_started": 1,
+      "policy": {
+        "max_activities": 6,
+        "advance_on_correct": true
+      },
+      "device": {
+        "cell_connected": false,
+        "cell_ready": true,
+        "listening": false,
+        "camera_available": false
+      },
+      "last_response": {
+        "transcript": "c",
+        "expected": "c",
+        "match": "exact",
+        "outcome": "correct",
+        "source": "stt",
+        "received_at_ms": 70419393
+      },
+      "recent_outcomes": [
+        {
+          "transcript": "c",
+          "expected": "c",
+          "match": "exact",
+          "outcome": "correct",
+          "source": "stt",
+          "received_at_ms": 70419393
+        }
+      ],
+      "recent_observations": []
+    },
+    "tool_called": null,
+    "done": true,
+    "session_id": "7607884c-aec7-40e9-b160-292a1c85c879"
+  },
+  "status": "passed"
+}

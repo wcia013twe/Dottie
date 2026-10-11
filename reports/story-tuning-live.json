@@ -1,0 +1,135 @@
+{
+  "experiment_id": "1306573313615572",
+  "prompt_name": "workspace.magneto.story_orchestrator",
+  "synthetic": true,
+  "model": "databricks-qwen3-next-80b-a3b-instruct",
+  "status": "complete",
+  "baseline_version": 1,
+  "smoke": {
+    "run_id": "79a413796f194c21bc84fda5b5224420",
+    "trace_id": "trace:/workspace.magneto.1306573313615572/5e503bd2c6705712aaf319c5b1ce3cb5",
+    "output": {
+      "request_id": "8a0c69d7-8b27-5008-a076-47215a9ec04d",
+      "session_id": "3c8a9fa7-1ef4-5c5e-8ee2-e301afbd28d4",
+      "decision": {
+        "action": "continue",
+        "passage_id": "monday_apple",
+        "target_letter": null,
+        "prompt": null,
+        "reason": "The target letter A is familiar with no recent events indicating difficulty, so teaching is not required.",
+        "based_on_event_id": null
+      },
+      "model": "databricks-qwen3-next-80b-a3b-instruct",
+      "elapsed_ms": 3297
+    },
+    "verified_spans": [
+      "story_prompt_decision"
+    ]
+  },
+  "datasets": {
+    "train": "9a3b7aaa-7c97-4fe4-9bbe-dcb223cc16e4",
+    "heldout": "90e119f6-34ea-4995-a579-d7c2b56c40f9",
+    "train_count": 15,
+    "heldout_count": 27
+  },
+  "baseline": {
+    "run_id": "4a7122f08766422998a5a20954a5e49a",
+    "metrics": {
+      "valid_decision/mean": 0.7407407407407407,
+      "teaching_policy/mean": 0.7037037037037037,
+      "concise_activity/mean": 0.7407407407407407
+    }
+  },
+  "optimization_run_id": "39ea180ba0c24b42ab7ecb9b582c6024",
+  "optimizer": {
+    "name": "GepaPromptOptimizer",
+    "initial_score": 0.9333333333333333,
+    "final_score": 0.9333333333333333,
+    "initial_by_scorer": {
+      "valid_decision": 0.9333333333333333,
+      "teaching_policy": 0.9333333333333333,
+      "concise_activity": 0.9333333333333333
+    },
+    "final_by_scorer": {
+      "valid_decision": 0.9333333333333333,
+      "teaching_policy": 0.9333333333333333,
+      "concise_activity": 0.9333333333333333
+    }
+  },
+  "candidate_version": 2,
+  "candidate": {
+    "run_id": "e38adb4bf37c4d668cd5e7bbb215c9f5",
+    "metrics": {
+      "valid_decision/mean": 0.8518518518518519,
+      "teaching_policy/mean": 0.8148148148148148,
+      "concise_activity/mean": 0.8518518518518519
+    }
+  },
+  "promoted": false,
+  "champion_version": 1,
+  "candidate_changed": false,
+  "prompt_sha256": {
+    "baseline": "8165157ed635bf18fa2a94d10a5d4bfe83e9c10e25a76f5218642ad7a775bfae",
+    "candidate": "8165157ed635bf18fa2a94d10a5d4bfe83e9c10e25a76f5218642ad7a775bfae"
+  },
+  "runtime": {
+    "app_state": "RUNNING",
+    "registry_enabled": false,
+    "pending_privileges": [
+      "CREATE_FUNCTION",
+      "MANAGE"
+    ],
+    "local_endpoint_check": "DNS filter / TLS failure"
+  },
+  "cloud_verification": {
+    "baseline": {
+      "status": "FINISHED",
+      "metrics": {
+        "concise_activity/mean": 0.7407407407407407,
+        "teaching_policy/mean": 0.7037037037037037,
+        "valid_decision/mean": 0.7407407407407407
+      }
+    },
+    "candidate": {
+      "status": "FINISHED",
+      "metrics": {
+        "concise_activity/mean": 0.8518518518518519,
+        "teaching_policy/mean": 0.8148148148148148,
+        "valid_decision/mean": 0.8518518518518519
+      }
+    },
+    "optimizer": {
+      "status": "FINISHED",
+      "metrics": {
+        "base_program_full_valset_score": 0.9333333333333333,
+        "base_program_val_coverage": 15.0,
+        "best_program_as_per_agg_score_valset": 0.0,
+        "best_score_on_valset": 0.9333333333333333,
+        "best_valset_agg_score": 0.9333333333333333,
+        "eval_score": 0.7777777777777778,
+        "eval_score.concise_activity": 0.8,
+        "eval_score.teaching_policy": 0.7333333333333333,
+        "eval_score.valid_decision": 0.8,
+        "final_eval_score": 0.9333333333333333,
+        "final_eval_score.concise_activity": 0.9333333333333333,
+        "final_eval_score.teaching_policy": 0.9333333333333333,
+        "final_eval_score.valid_decision": 0.9333333333333333,
+        "initial_eval_score": 0.9333333333333333,
+        "initial_eval_score.concise_activity": 0.9333333333333333,
+        "initial_eval_score.teaching_policy": 0.9333333333333333,
+        "initial_eval_score.valid_decision": 0.9333333333333333,
+        "iteration": 2.0,
+        "linear_pareto_front_program_idx": 0.0,
+        "new_program_idx": 1.0,
+        "new_subsample_score": 3.0,
+        "selected_program_candidate": 0.0,
+        "subsample_score": 2.0,
+        "total_metric_calls": 42.0,
+        "val_evaluated_count_new_program": 15.0,
+        "val_program_average": 0.7777777777777778,
+        "val_total_count": 15.0,
+        "valset_pareto_front_agg": 1.0
+      }
+    }
+  }
+}

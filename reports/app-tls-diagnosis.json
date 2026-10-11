@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-10-11T09:33:42.673884+00:00",
+  "cli_authentication": {
+    "authenticated": true,
+    "active": true,
+    "profile": "magneto"
+  },
+  "hostname": "agent-bricks-magneto-director-7474648183111292.aws.databricksapps.com",
+  "resolved_ipv4": [
+    "146.112.61.110"
+  ],
+  "presented_certificate": {
+    "subject": "C=US, ST=California, L=San Francisco, O=OpenDNS, Inc.",
+    "issuer": "O=Cisco, CN=Cisco Umbrella Secondary SubCA ash-SG",
+    "san": "agent-bricks-magneto-director-7474648183111292.aws.databricksapps.com"
+  },
+  "curl_error": "unable to get local issuer certificate",
+  "python_ssl_reason": "SSLV3_ALERT_HANDSHAKE_FAILURE",
+  "diagnosis": "The App hostname resolves to a documented Cisco Umbrella block-page IP and presents its interception certificate. Local DNS/security filtering blocks the App path; valid workspace CLI authentication does not resolve this.",
+  "source": "https://www.cisco.com/c/en/us/support/docs/security/umbrella/224799-learn-the-umbrella-block-page-ip.html",
+  "next_action": "Network policy owner should review the exact App hostname in Umbrella and approve access if appropriate. Then retry normal HTTPS and a synthetic App invocation.",
+  "changed_security_settings": false,
+  "disabled_certificate_verification": false,
+  "reconnected_cli": false
+}

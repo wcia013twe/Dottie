@@ -7,7 +7,7 @@ import threading
 ROOT = Path(__file__).resolve().parents[1]
 KEYS = ('catalog', 'schema', 'references', 'director', 'companion', 'model',
         'director_traces', 'research_traces', 'warehouse', 'search_endpoint',
-        'search_index', 'embeddings')
+        'search_index', 'embeddings', 'learner_bronze', 'learner_evidence', 'learner_gold')
 _pending = threading.Lock()
 
 

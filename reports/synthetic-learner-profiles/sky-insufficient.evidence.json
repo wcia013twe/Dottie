@@ -1,0 +1,21 @@
+{
+  "learner_id": "synthetic-sky",
+  "display_name": "Sky (fictional)",
+  "synthetic": true,
+  "events": [
+    {
+      "id": "synthetic-sky-session-1-braille-0",
+      "learner_id": "synthetic-sky",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:00+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "with_help",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    }
+  ]
+}

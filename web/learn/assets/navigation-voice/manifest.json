@@ -11,6 +11,13 @@
     "guess": "Feel and Guess. What is the mystery word?",
     "match": "Find its match. Choose the matching object.",
     "letters": "Letters. Choose a letter to hear its Braille dots.",
-    "connect": "Connections. A grown-up can help set up your devices."
+    "connect": "Connections. A grown-up can help set up your devices.",
+    "feedback-help": "What would you like to do? You can explore, practice, read a story, or hear about your progress.",
+    "feedback-help-explore": "Start the camera to discover objects. You can choose an object, or ask to go somewhere else.",
+    "feedback-help-guess": "Tell me your guess, or ask to try another word.",
+    "feedback-stop": "Microphone off.",
+    "feedback-unavailable": "That action is not available here.",
+    "feedback-retry": "That action is unavailable. Please try again.",
+    "feedback-correction": "What would you like to do instead? Say one destination, or ask for help."
   }
 }

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "local-very-hungry-caterpillar",
+    "title": "The Very Hungry Caterpillar",
+    "author": "Eric Carle",
+    "description": "Your scanned book \u00b7 26 original pages \u00b7 image-only reading.",
+    "file": "./books/catalog/very-hungry-caterpillar.epub",
+    "cover": "./books/catalog/very-hungry-caterpillar.jpg",
+    "source": "./books/catalog/very-hungry-caterpillar.pdf",
+    "sourceLabel": "Original PDF",
+    "rights": "User-supplied copyrighted book; local reading.",
+    "sha256": "ac51f16d31037429c57e9352b2f8faa56f94b19438d4a2a5ea3867420b0e88b8"
+  }
+]

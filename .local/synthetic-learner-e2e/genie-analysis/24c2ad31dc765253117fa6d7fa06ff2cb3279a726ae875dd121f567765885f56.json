@@ -1,0 +1,394 @@
+{
+  "baseline_digest": "24c2ad31dc765253117fa6d7fa06ff2cb3279a726ae875dd121f567765885f56",
+  "response": {
+    "response_id": "0772e41b16ed4d7f824d7e4fa02ba7ad",
+    "conversation_id": "a13bcef140bb497fb661ffd138f62fe5",
+    "status": "completed",
+    "deep_link": "https://dbc-129a8d44-1940.cloud.databricks.com/one/chat/threads/a13bcef140bb497fb661ffd138f62fe5?o=7474648183111292&utm_source=genie_chat_mcp",
+    "final_answer": "```json\n{\n  \"summary\": \"River has one recorded session with evidence across braille recognition, instruction following, and response mode choices.\",\n  \"categories\": [\n    {\n      \"id\": \"braille\",\n      \"finding\": \"River independently identified B/D in two of five attempts under the same tactile presentation at recognition difficulty one; the remaining three required assistance.\",\n      \"action\": \"Continue practicing B/D recognition at difficulty one with immediate feedback, then introduce varied tactile presentations once independent recognition becomes consistent.\",\n      \"reasoning\": \"The baseline shows 40% independent recognition for B/D under consistent tactile conditions. Two attempts resulted in independent identification, while three required help. This pattern suggests River is building familiarity with the target but needs more practice to achieve reliable independent recognition. The consistent condition and difficulty level provide a stable foundation for skill development.\",\n      \"evidence_ids\": [\"synthetic-river-session-1-braille-0-f038af38d9ea\", \"synthetic-river-session-1-braille-1-f038af38d9ea\", \"synthetic-river-session-1-braille-2-f038af38d9ea\", \"synthetic-river-session-1-braille-3-f038af38d9ea\", \"synthetic-river-session-1-braille-4-f038af38d9ea\"]\n    },\n    {\n      \"id\": \"tactile\",\n      \"finding\": \"Insufficient observations recorded; River deferred exploring a comfortable starting point when offered by the teacher.\",\n      \"action\": \"Offer tactile exploration opportunities at different times or in varied contexts to identify when River is most receptive to engaging with new tactile materials.\",\n      \"reasoning\": \"Only one tactile event was recorded, and the outcome was try_later rather than engagement or refusal. This single deferred attempt does not establish a pattern or reveal River's tactile exploration preferences. The baseline confirms insufficient observations for this category. More varied opportunities are needed to understand River's comfort and engagement with tactile materials.\",\n      \"evidence_ids\": []\n    },\n    {\n      \"id\": \"instructions\",\n      \"finding\": \"River followed single-step spoken instructions clearly in four of five attempts; one required repetition.\",\n      \"action\": \"Maintain single-step spoken prompts as the primary instruction format, and monitor whether repetition needs cluster around specific task types or times of day.\",\n      \"reasoning\": \"The baseline shows 80% clear instruction following for single-step spoken prompts. Four attempts resulted in clear understanding, while one required repetition. This pattern indicates River generally processes single-step spoken instructions effectively. The single repetition does not suggest a comprehension difficulty but may reflect momentary attention or environmental factors worth tracking over additional sessions.\",\n      \"evidence_ids\": [\"synthetic-river-session-1-instructions-0-f038af38d9ea\", \"synthetic-river-session-1-instructions-1-f038af38d9ea\", \"synthetic-river-session-1-instructions-2-f038af38d9ea\", \"synthetic-river-session-1-instructions-3-f038af38d9ea\", \"synthetic-river-session-1-instructions-4-f038af38d9ea\"]\n    },\n    {\n      \"id\": \"answering\",\n      \"finding\": \"River chose spoken responses in three of five opportunities and used alternative tactile responses twice when both speech and tactile options were available.\",\n      \"action\": \"Continue offering both response modes and observe whether River's choice correlates with task difficulty, fatigue, or other contextual factors.\",\n      \"reasoning\": \"The baseline shows 60% spoken response selection when both speech and tactile alternatives were available. River used speech for three responses and tactile alternatives for two. This emerging pattern suggests River is comfortable with both modes and may select based on situational factors. The variation indicates flexibility rather than a fixed preference, which is valuable for adaptive instruction.\",\n      \"evidence_ids\": [\"synthetic-river-session-1-answering-0-f038af38d9ea\", \"synthetic-river-session-1-answering-1-f038af38d9ea\", \"synthetic-river-session-1-answering-2-f038af38d9ea\", \"synthetic-river-session-1-answering-3-f038af38d9ea\", \"synthetic-river-session-1-answering-4-f038af38d9ea\"]\n    },\n    {\n      \"id\": \"transfer\",\n      \"finding\": \"No transfer observations recorded; evidence is missing for this category.\",\n      \"action\": \"Introduce opportunities to apply recognized braille targets in new contexts or formats once independent recognition becomes more consistent.\",\n      \"reasoning\": \"The baseline confirms no transfer evidence exists. Transfer tasks typically involve applying learned skills to different conditions, materials, or contexts. Since River is still building foundational recognition skills with B/D at difficulty one, transfer opportunities have not yet been introduced or recorded. This category will become relevant as River's independent recognition strengthens.\",\n      \"evidence_ids\": []\n    },\n    {\n      \"id\": \"interests\",\n      \"finding\": \"Insufficient observations recorded; River deferred choosing between two story topics when offered.\",\n      \"action\": \"Present topic choices at varied times or with different presentation formats to identify conditions that support River's engagement in selection tasks.\",\n      \"reasoning\": \"Only one interests event was recorded, and the outcome was try_later rather than a selection or refusal. This single deferred choice does not reveal River's topic preferences or engagement patterns. The baseline confirms insufficient observations for this category. Additional opportunities with varied timing, formats, or topic options are needed to understand what captures River's interest and supports active choice-making.\",\n      \"evidence_ids\": []\n    }\n  ]\n}\n```",
+    "progress_steps": null,
+    "narration_instruction": null,
+    "query_items": null
+  },
+  "candidate": {
+    "schema_version": "1.0",
+    "learner_id": "synthetic-river-f038af38d9ea",
+    "display_name": "River \u00b7 fictional test",
+    "synthetic": true,
+    "epoch": 0,
+    "updated_at": null,
+    "derivation_version": "genie-mcp-1",
+    "stats": [
+      {
+        "label": "Recognition targets practiced",
+        "value": "1"
+      },
+      {
+        "label": "Sessions with evidence",
+        "value": "1"
+      },
+      {
+        "label": "Independent recognition \u00b7 latest comparable session",
+        "value": "40%"
+      }
+    ],
+    "categories": [
+      {
+        "id": "braille",
+        "title": "Braille recognition",
+        "status": "Observed pattern",
+        "finding": "River independently identified B/D in two of five attempts under the same tactile presentation at recognition difficulty one; the remaining three required assistance.",
+        "action": "Continue practicing B/D recognition at difficulty one with immediate feedback, then introduce varied tactile presentations once independent recognition becomes consistent.",
+        "reasoning": "The baseline shows 40% independent recognition for B/D under consistent tactile conditions. Two attempts resulted in independent identification, while three required help. This pattern suggests River is building familiarity with the target but needs more practice to achieve reliable independent recognition. The consistent condition and difficulty level provide a stable foundation for skill development.",
+        "evidence_ids": [
+          "synthetic-river-session-1-braille-0-f038af38d9ea",
+          "synthetic-river-session-1-braille-1-f038af38d9ea",
+          "synthetic-river-session-1-braille-2-f038af38d9ea",
+          "synthetic-river-session-1-braille-3-f038af38d9ea",
+          "synthetic-river-session-1-braille-4-f038af38d9ea"
+        ],
+        "metric": {
+          "numerator": 2,
+          "denominator": 5,
+          "unit": "percent"
+        },
+        "chart": null,
+        "last_changed_at": null,
+        "history": []
+      },
+      {
+        "id": "tactile",
+        "title": "Tactile exploration",
+        "status": "Not enough observations",
+        "finding": "Insufficient observations recorded; River deferred exploring a comfortable starting point when offered by the teacher.",
+        "action": "Offer tactile exploration opportunities at different times or in varied contexts to identify when River is most receptive to engaging with new tactile materials.",
+        "reasoning": "Only one tactile event was recorded, and the outcome was try_later rather than engagement or refusal. This single deferred attempt does not establish a pattern or reveal River's tactile exploration preferences. The baseline confirms insufficient observations for this category. More varied opportunities are needed to understand River's comfort and engagement with tactile materials.",
+        "evidence_ids": [],
+        "metric": null,
+        "chart": null,
+        "last_changed_at": null,
+        "history": []
+      },
+      {
+        "id": "instructions",
+        "title": "Understanding instructions",
+        "status": "Observed pattern",
+        "finding": "River followed single-step spoken instructions clearly in four of five attempts; one required repetition.",
+        "action": "Maintain single-step spoken prompts as the primary instruction format, and monitor whether repetition needs cluster around specific task types or times of day.",
+        "reasoning": "The baseline shows 80% clear instruction following for single-step spoken prompts. Four attempts resulted in clear understanding, while one required repetition. This pattern indicates River generally processes single-step spoken instructions effectively. The single repetition does not suggest a comprehension difficulty but may reflect momentary attention or environmental factors worth tracking over additional sessions.",
+        "evidence_ids": [
+          "synthetic-river-session-1-instructions-0-f038af38d9ea",
+          "synthetic-river-session-1-instructions-1-f038af38d9ea",
+          "synthetic-river-session-1-instructions-2-f038af38d9ea",
+          "synthetic-river-session-1-instructions-3-f038af38d9ea",
+          "synthetic-river-session-1-instructions-4-f038af38d9ea"
+        ],
+        "metric": {
+          "numerator": 4,
+          "denominator": 5,
+          "unit": "percent"
+        },
+        "chart": null,
+        "last_changed_at": null,
+        "history": []
+      },
+      {
+        "id": "answering",
+        "title": "Answering & asking for help",
+        "status": "Emerging preference",
+        "finding": "River chose spoken responses in three of five opportunities and used alternative tactile responses twice when both speech and tactile options were available.",
+        "action": "Continue offering both response modes and observe whether River's choice correlates with task difficulty, fatigue, or other contextual factors.",
+        "reasoning": "The baseline shows 60% spoken response selection when both speech and tactile alternatives were available. River used speech for three responses and tactile alternatives for two. This emerging pattern suggests River is comfortable with both modes and may select based on situational factors. The variation indicates flexibility rather than a fixed preference, which is valuable for adaptive instruction.",
+        "evidence_ids": [
+          "synthetic-river-session-1-answering-0-f038af38d9ea",
+          "synthetic-river-session-1-answering-1-f038af38d9ea",
+          "synthetic-river-session-1-answering-2-f038af38d9ea",
+          "synthetic-river-session-1-answering-3-f038af38d9ea",
+          "synthetic-river-session-1-answering-4-f038af38d9ea"
+        ],
+        "metric": {
+          "numerator": 3,
+          "denominator": 5,
+          "unit": "percent"
+        },
+        "chart": null,
+        "last_changed_at": null,
+        "history": []
+      },
+      {
+        "id": "transfer",
+        "title": "Retention & transfer",
+        "status": "Not enough observations",
+        "finding": "No transfer observations recorded; evidence is missing for this category.",
+        "action": "Introduce opportunities to apply recognized braille targets in new contexts or formats once independent recognition becomes more consistent.",
+        "reasoning": "The baseline confirms no transfer evidence exists. Transfer tasks typically involve applying learned skills to different conditions, materials, or contexts. Since River is still building foundational recognition skills with B/D at difficulty one, transfer opportunities have not yet been introduced or recorded. This category will become relevant as River's independent recognition strengthens.",
+        "evidence_ids": [],
+        "metric": null,
+        "chart": null,
+        "last_changed_at": null,
+        "history": []
+      },
+      {
+        "id": "interests",
+        "title": "Interests & participation",
+        "status": "Not enough observations",
+        "finding": "Insufficient observations recorded; River deferred choosing between two story topics when offered.",
+        "action": "Present topic choices at varied times or with different presentation formats to identify conditions that support River's engagement in selection tasks.",
+        "reasoning": "Only one interests event was recorded, and the outcome was try_later rather than a selection or refusal. This single deferred choice does not reveal River's topic preferences or engagement patterns. The baseline confirms insufficient observations for this category. Additional opportunities with varied timing, formats, or topic options are needed to understand what captures River's interest and supports active choice-making.",
+        "evidence_ids": [],
+        "metric": null,
+        "chart": null,
+        "last_changed_at": null,
+        "history": []
+      }
+    ],
+    "evidence": [
+      {
+        "id": "synthetic-river-session-1-answering-0-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:00+00:00",
+        "category": "answering",
+        "target": "response choice",
+        "task": "choose_response",
+        "condition": "speech and tactile alternatives available",
+        "outcome": "spoken",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-braille-0-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:00+00:00",
+        "category": "braille",
+        "target": "B/D",
+        "task": "identify",
+        "condition": "same tactile presentation; recognition difficulty one",
+        "outcome": "independent",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-instructions-0-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:00+00:00",
+        "category": "instructions",
+        "target": "spoken instruction",
+        "task": "follow_prompt",
+        "condition": "single-step",
+        "outcome": "clear",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-interests-0-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:00+00:00",
+        "category": "interests",
+        "target": "story topic choice",
+        "task": "choose_topic",
+        "condition": "two story topics offered",
+        "outcome": "try_later",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-tactile-0-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:00+00:00",
+        "category": "tactile",
+        "target": "comfortable starting point",
+        "task": "explore",
+        "condition": "teacher offers comfortable starting point",
+        "outcome": "try_later",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-answering-1-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:01+00:00",
+        "category": "answering",
+        "target": "response choice",
+        "task": "choose_response",
+        "condition": "speech and tactile alternatives available",
+        "outcome": "spoken",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-braille-1-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:01+00:00",
+        "category": "braille",
+        "target": "B/D",
+        "task": "identify",
+        "condition": "same tactile presentation; recognition difficulty one",
+        "outcome": "independent",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-instructions-1-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:01+00:00",
+        "category": "instructions",
+        "target": "spoken instruction",
+        "task": "follow_prompt",
+        "condition": "single-step",
+        "outcome": "clear",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-answering-2-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:02+00:00",
+        "category": "answering",
+        "target": "response choice",
+        "task": "choose_response",
+        "condition": "speech and tactile alternatives available",
+        "outcome": "spoken",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-braille-2-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:02+00:00",
+        "category": "braille",
+        "target": "B/D",
+        "task": "identify",
+        "condition": "same tactile presentation; recognition difficulty one",
+        "outcome": "with_help",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-instructions-2-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:02+00:00",
+        "category": "instructions",
+        "target": "spoken instruction",
+        "task": "follow_prompt",
+        "condition": "single-step",
+        "outcome": "clear",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-answering-3-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:03+00:00",
+        "category": "answering",
+        "target": "response choice",
+        "task": "choose_response",
+        "condition": "speech and tactile alternatives available",
+        "outcome": "alternative",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-braille-3-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:03+00:00",
+        "category": "braille",
+        "target": "B/D",
+        "task": "identify",
+        "condition": "same tactile presentation; recognition difficulty one",
+        "outcome": "with_help",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-instructions-3-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:03+00:00",
+        "category": "instructions",
+        "target": "spoken instruction",
+        "task": "follow_prompt",
+        "condition": "single-step",
+        "outcome": "clear",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-answering-4-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:04+00:00",
+        "category": "answering",
+        "target": "response choice",
+        "task": "choose_response",
+        "condition": "speech and tactile alternatives available",
+        "outcome": "alternative",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-braille-4-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:04+00:00",
+        "category": "braille",
+        "target": "B/D",
+        "task": "identify",
+        "condition": "same tactile presentation; recognition difficulty one",
+        "outcome": "with_help",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      },
+      {
+        "id": "synthetic-river-session-1-instructions-4-f038af38d9ea",
+        "learner_id": "synthetic-river-f038af38d9ea",
+        "session_id": "session-1",
+        "occurred_at": "2026-10-01T14:00:04+00:00",
+        "category": "instructions",
+        "target": "spoken instruction",
+        "task": "follow_prompt",
+        "condition": "single-step",
+        "outcome": "repeated",
+        "confirmed": true,
+        "synthetic": true,
+        "trace_id": null
+      }
+    ],
+    "updates": [],
+    "analysis": {
+      "conversation_id": "a13bcef140bb497fb661ffd138f62fe5",
+      "response_id": "0772e41b16ed4d7f824d7e4fa02ba7ad",
+      "source_url": "https://dbc-129a8d44-1940.cloud.databricks.com/one/chat/threads/a13bcef140bb497fb661ffd138f62fe5?o=7474648183111292&utm_source=genie_chat_mcp",
+      "summary": "River has one recorded session with evidence across braille recognition, instruction following, and response mode choices.",
+      "evidence_digest": "8ec0e5af4764fef14fd3247bdbf3c9eb8bdc3296d394b9df4efe972d71860cba"
+    }
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "schema_version": "1.0",
+  "learner_id": "synthetic-sky",
+  "display_name": "Sky (fictional)",
+  "synthetic": true,
+  "epoch": 1,
+  "updated_at": "2026-10-11T09:33:43.795382+00:00",
+  "derivation_version": "rules-1",
+  "stats": [
+    {
+      "label": "Recognition targets practiced",
+      "value": "1"
+    },
+    {
+      "label": "Sessions with evidence",
+      "value": "1"
+    },
+    {
+      "label": "Independent recognition \u00b7 latest comparable session",
+      "value": "\u2014"
+    }
+  ],
+  "categories": [
+    {
+      "id": "braille",
+      "title": "Braille recognition",
+      "status": "Not enough observations",
+      "finding": "We don\u2019t yet have enough evidence about braille recognition.",
+      "action": "Check an unfamiliar example without a naming hint.",
+      "reasoning": "1 comparable observations available; at least three in a session are required before displaying a percentage.",
+      "evidence_ids": [
+        "synthetic-sky-session-1-braille-0"
+      ],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T09:33:43.795382+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.795382+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about braille recognition.",
+          "reasoning": "1 comparable observations available; at least three in a session are required before displaying a percentage.",
+          "action": "Check an unfamiliar example without a naming hint.",
+          "evidence_ids": [
+            "synthetic-sky-session-1-braille-0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tactile",
+      "title": "Tactile exploration",
+      "status": "Not enough observations",
+      "finding": "We don\u2019t yet have enough evidence about tactile exploration.",
+      "action": "Ask the learner to show a comfortable starting point.",
+      "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+      "evidence_ids": [],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T09:33:43.795382+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.795382+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about tactile exploration.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Ask the learner to show a comfortable starting point.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "id": "instructions",
+      "title": "Understanding instructions",
+      "status": "Not enough observations",
+      "finding": "We don\u2019t yet have enough evidence about understanding instructions.",
+      "action": "Give one instruction at a time and check clarity.",
+      "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+      "evidence_ids": [],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T09:33:43.795382+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.795382+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about understanding instructions.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Give one instruction at a time and check clarity.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "id": "answering",
+      "title": "Answering & asking for help",
+      "status": "Not enough observations",
+      "finding": "We don\u2019t yet have enough evidence about answering & asking for help.",
+      "action": "Offer a response choice and ask which feels comfortable.",
+      "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+      "evidence_ids": [],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T09:33:43.795382+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.795382+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about answering & asking for help.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Offer a response choice and ask which feels comfortable.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "title": "Retention & transfer",
+      "status": "Not enough observations",
+      "finding": "We don\u2019t yet have enough evidence about retention & transfer.",
+      "action": "Revisit the same target in a new context next session.",
+      "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+      "evidence_ids": [],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T09:33:43.795382+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.795382+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about retention & transfer.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Revisit the same target in a new context next session.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "id": "interests",
+      "title": "Interests & participation",
+      "status": "Not enough observations",
+      "finding": "We don\u2019t yet have enough evidence about interests & participation.",
+      "action": "Offer two story topics and ask the learner to choose.",
+      "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+      "evidence_ids": [],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T09:33:43.795382+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.795382+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about interests & participation.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Offer two story topics and ask the learner to choose.",
+          "evidence_ids": []
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "synthetic-sky-session-1-braille-0",
+      "learner_id": "synthetic-sky",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:00+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "with_help",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    }
+  ],
+  "updates": [
+    {
+      "epoch": 1,
+      "at": "2026-10-11T09:33:43.795382+00:00",
+      "changed_categories": [
+        "braille",
+        "tactile",
+        "instructions",
+        "answering",
+        "transfer",
+        "interests"
+      ]
+    }
+  ]
+}

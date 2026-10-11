@@ -1,0 +1,91 @@
+{
+  "synthetic": true,
+  "state": {
+    "session_id": "1c0af576-1b9e-415a-95e3-78375d4a19f0",
+    "revision": 9,
+    "passage_id": "rabbit",
+    "phase": "continue_proposed",
+    "proposal": {
+      "reason": "Teacher confirmed independent recognition of 'r' in previous activity; session ready to resume story."
+    },
+    "response": null,
+    "observations": [
+      {
+        "id": "1c0568d1-609c-4d76-abb1-09fbb93515a1",
+        "passage_id": "rabbit",
+        "target": "r",
+        "activity": "introduce",
+        "outcome": "independent",
+        "source": "teacher",
+        "hint_used": false
+      }
+    ],
+    "trace": [
+      {
+        "tool": "set_context",
+        "actor": "teacher",
+        "revision": 1
+      },
+      {
+        "tool": "propose_activity",
+        "actor": "orchestrator",
+        "revision": 2
+      },
+      {
+        "tool": "approve_activity",
+        "actor": "teacher",
+        "revision": 3
+      },
+      {
+        "tool": "prepare_braille",
+        "actor": "teacher",
+        "revision": 4
+      },
+      {
+        "tool": "confirm_tactile",
+        "actor": "teacher",
+        "revision": 5
+      },
+      {
+        "tool": "speak_prompt",
+        "actor": "teacher",
+        "revision": 6
+      },
+      {
+        "tool": "record_observation",
+        "actor": "teacher",
+        "revision": 7
+      },
+      {
+        "tool": "resume_story",
+        "actor": "teacher",
+        "revision": 8
+      },
+      {
+        "tool": "recommend_continue",
+        "actor": "orchestrator",
+        "revision": 9
+      }
+    ],
+    "device": {
+      "connected": false,
+      "ready": false,
+      "mode": "teacher-supplied tactile Braille"
+    },
+    "policy": {
+      "teacher_approval": true,
+      "max_activities": 6,
+      "braille_code": "UEB",
+      "translation": "uncontracted lowercase letters"
+    },
+    "activities_started": 1,
+    "opportunity": {
+      "summary": "Meet Peter and the other little rabbits.",
+      "prop": "rabbit model",
+      "targets": [
+        "r",
+        "rabbit"
+      ]
+    }
+  }
+}

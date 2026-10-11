@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-11T09:27:26.420534+00:00",
+  "checks": {
+    "app_state": "RUNNING",
+    "director_tls": {
+      "status": "failed",
+      "error_type": "SSLError"
+    },
+    "active_snapshot_switches": {
+      "status": "passed",
+      "result": {}
+    },
+    "evidence_counts": {
+      "status": "passed",
+      "result": [
+        {
+          "kind": "approved_research",
+          "n": "0"
+        },
+        {
+          "kind": "confirmed_learner",
+          "n": "0"
+        }
+      ]
+    },
+    "companion": {
+      "status": "failed",
+      "error_type": "NotFound"
+    }
+  }
+}

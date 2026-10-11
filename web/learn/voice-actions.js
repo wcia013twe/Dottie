@@ -1,5 +1,5 @@
-import { storyVoiceContext, performStoryVoice } from './story-coach.js?v=merge-main-1';
-import { stopNavigationVoice } from './navigation-voice.js?v=merge-main-1';
+import { storyVoiceContext, performStoryVoice } from './story-coach.js?v=nano-story-4';
+import { stopNavigationVoice } from './navigation-voice.js?v=conversational-navigation-2';
 
 export function voiceContext() {
   const route = location.hash.slice(1) || 'home';
@@ -23,6 +23,7 @@ function activate(selector, unavailable = 'That action is not available here.') 
 export async function performVoiceAction(intent, {speak}) {
   const route = location.hash.slice(1) || 'home';
   switch (intent.type) {
+    case 'clarify': return intent.message;
     case 'guidance': {
       const control=document.querySelector('#navigation-guidance');
       if (!control) return 'Spoken navigation is unavailable.';
@@ -53,7 +54,7 @@ export async function performVoiceAction(intent, {speak}) {
     }
     case 'help': {
       if (storyVoiceContext().awaitingStoryResponse) return performStoryVoice('give_hint');
-      return route === 'guess' ? 'Say your guess, or say “next word” to try another mystery.' : route === 'explore' ? 'Start the camera, then say “choose” followed by an object listed on screen.' : 'Say “Open Practice”, “Open Story mode”, “Go back”, or “Repeat”. In Practice, choose a letter or open Guess. In a book, say “next page” or “pause”.';
+      return route === 'guess' ? 'Tell me your guess, or ask to try another word.' : route === 'explore' ? 'Your camera preview opens here. You can stop the camera, or ask to go somewhere else.' : 'What would you like to do? You can explore, practice, read a story, or hear about your progress.';
     }
     case 'control': {
       const name = intent.name;
@@ -83,6 +84,6 @@ export async function performVoiceAction(intent, {speak}) {
       const selectors = {'next page':'#reader-next','previous page':'#reader-prev','next word':'#next-word','try another word':'#next-word','start camera':'#start-camera','stop camera':'#stop-camera'};
       return selectors[name] ? activate(selectors[name]) : 'That action is unavailable here.';
     }
-    default: return 'I did not understand that. Say “help” to hear available commands.';
+    default: return 'What would you like to do? You can explore, practice, read a story, or hear about your progress.';
   }
 }

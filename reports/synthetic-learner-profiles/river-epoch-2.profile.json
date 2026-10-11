@@ -1,0 +1,787 @@
+{
+  "schema_version": "1.0",
+  "learner_id": "synthetic-river",
+  "display_name": "River (fictional)",
+  "synthetic": true,
+  "epoch": 2,
+  "updated_at": "2026-10-11T09:33:43.772925+00:00",
+  "derivation_version": "rules-1",
+  "stats": [
+    {
+      "label": "Recognition targets practiced",
+      "value": "2"
+    },
+    {
+      "label": "Sessions with evidence",
+      "value": "2"
+    },
+    {
+      "label": "Independent recognition \u00b7 latest comparable session",
+      "value": "80%"
+    }
+  ],
+  "categories": [
+    {
+      "id": "braille",
+      "title": "Braille recognition",
+      "status": "Observed pattern",
+      "finding": "River (fictional) identified B/D independently 80% of the time. Previously 40% under comparable conditions.",
+      "action": "Check an unfamiliar example without a naming hint.",
+      "reasoning": "4 of 5 teacher-confirmed opportunities in the latest session, for B/D, identify, under same tactile presentation; recognition difficulty one. This describes this task, not mastery or a diagnosis.",
+      "evidence_ids": [
+        "synthetic-river-session-1-braille-0",
+        "synthetic-river-session-1-braille-1",
+        "synthetic-river-session-1-braille-2",
+        "synthetic-river-session-1-braille-3",
+        "synthetic-river-session-1-braille-4",
+        "synthetic-river-session-2-braille-0",
+        "synthetic-river-session-2-braille-1",
+        "synthetic-river-session-2-braille-2",
+        "synthetic-river-session-2-braille-3",
+        "synthetic-river-session-2-braille-4"
+      ],
+      "metric": {
+        "numerator": 4,
+        "denominator": 5,
+        "unit": "percent"
+      },
+      "chart": {
+        "type": "session_progress",
+        "points": [
+          {
+            "session_id": "session-1",
+            "numerator": 2,
+            "denominator": 5
+          },
+          {
+            "session_id": "session-2",
+            "numerator": 4,
+            "denominator": 5
+          }
+        ]
+      },
+      "last_changed_at": "2026-10-11T09:33:43.772925+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.769564+00:00",
+          "previous_finding": null,
+          "finding": "River (fictional) identified B/D independently 40% of the time.",
+          "reasoning": "2 of 5 teacher-confirmed opportunities in the latest session, for B/D, identify, under same tactile presentation; recognition difficulty one. This describes this task, not mastery or a diagnosis.",
+          "action": "Check an unfamiliar example without a naming hint.",
+          "evidence_ids": [
+            "synthetic-river-session-1-braille-0",
+            "synthetic-river-session-1-braille-1",
+            "synthetic-river-session-1-braille-2",
+            "synthetic-river-session-1-braille-3",
+            "synthetic-river-session-1-braille-4"
+          ]
+        },
+        {
+          "epoch": 2,
+          "at": "2026-10-11T09:33:43.772925+00:00",
+          "previous_finding": "River (fictional) identified B/D independently 40% of the time.",
+          "finding": "River (fictional) identified B/D independently 80% of the time. Previously 40% under comparable conditions.",
+          "reasoning": "4 of 5 teacher-confirmed opportunities in the latest session, for B/D, identify, under same tactile presentation; recognition difficulty one. This describes this task, not mastery or a diagnosis.",
+          "action": "Check an unfamiliar example without a naming hint.",
+          "evidence_ids": [
+            "synthetic-river-session-1-braille-0",
+            "synthetic-river-session-1-braille-1",
+            "synthetic-river-session-1-braille-2",
+            "synthetic-river-session-1-braille-3",
+            "synthetic-river-session-1-braille-4",
+            "synthetic-river-session-2-braille-0",
+            "synthetic-river-session-2-braille-1",
+            "synthetic-river-session-2-braille-2",
+            "synthetic-river-session-2-braille-3",
+            "synthetic-river-session-2-braille-4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tactile",
+      "title": "Tactile exploration",
+      "status": "Not enough observations",
+      "finding": "We don\u2019t yet have enough evidence about tactile exploration.",
+      "action": "Ask the learner to show a comfortable starting point.",
+      "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+      "evidence_ids": [],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T09:33:43.769564+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.769564+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about tactile exploration.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Ask the learner to show a comfortable starting point.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "id": "instructions",
+      "title": "Understanding instructions",
+      "status": "Observed pattern",
+      "finding": "River (fictional) responded without a repeat on 80% of single-step prompts.",
+      "action": "Give one instruction at a time and check clarity.",
+      "reasoning": "4 of 5 teacher-confirmed opportunities in the latest session, for spoken instruction, follow_prompt, under single-step. This describes this task, not mastery or a diagnosis.",
+      "evidence_ids": [
+        "synthetic-river-session-1-instructions-0",
+        "synthetic-river-session-1-instructions-1",
+        "synthetic-river-session-1-instructions-2",
+        "synthetic-river-session-1-instructions-3",
+        "synthetic-river-session-1-instructions-4",
+        "synthetic-river-session-2-instructions-0",
+        "synthetic-river-session-2-instructions-1",
+        "synthetic-river-session-2-instructions-2",
+        "synthetic-river-session-2-instructions-3",
+        "synthetic-river-session-2-instructions-4"
+      ],
+      "metric": {
+        "numerator": 4,
+        "denominator": 5,
+        "unit": "percent"
+      },
+      "chart": null,
+      "last_changed_at": "2026-10-11T09:33:43.769564+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.769564+00:00",
+          "previous_finding": null,
+          "finding": "River (fictional) responded without a repeat on 80% of single-step prompts.",
+          "reasoning": "4 of 5 teacher-confirmed opportunities in the latest session, for spoken instruction, follow_prompt, under single-step. This describes this task, not mastery or a diagnosis.",
+          "action": "Give one instruction at a time and check clarity.",
+          "evidence_ids": [
+            "synthetic-river-session-1-instructions-0",
+            "synthetic-river-session-1-instructions-1",
+            "synthetic-river-session-1-instructions-2",
+            "synthetic-river-session-1-instructions-3",
+            "synthetic-river-session-1-instructions-4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "answering",
+      "title": "Answering & asking for help",
+      "status": "Emerging preference",
+      "finding": "River (fictional) chose spoken answers 60% of the time when both options were available.",
+      "action": "Offer speech first, keep alternatives, and confirm the preference.",
+      "reasoning": "3 of 5 teacher-confirmed opportunities in the latest session, for response choice, choose_response, under speech and tactile alternatives available. This describes this task, not mastery or a diagnosis.",
+      "evidence_ids": [
+        "synthetic-river-session-1-answering-0",
+        "synthetic-river-session-1-answering-1",
+        "synthetic-river-session-1-answering-2",
+        "synthetic-river-session-1-answering-3",
+        "synthetic-river-session-1-answering-4",
+        "synthetic-river-session-2-answering-0",
+        "synthetic-river-session-2-answering-1",
+        "synthetic-river-session-2-answering-2",
+        "synthetic-river-session-2-answering-3",
+        "synthetic-river-session-2-answering-4"
+      ],
+      "metric": {
+        "numerator": 3,
+        "denominator": 5,
+        "unit": "percent"
+      },
+      "chart": null,
+      "last_changed_at": "2026-10-11T09:33:43.769564+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.769564+00:00",
+          "previous_finding": null,
+          "finding": "River (fictional) chose spoken answers 60% of the time when both options were available.",
+          "reasoning": "3 of 5 teacher-confirmed opportunities in the latest session, for response choice, choose_response, under speech and tactile alternatives available. This describes this task, not mastery or a diagnosis.",
+          "action": "Offer speech first, keep alternatives, and confirm the preference.",
+          "evidence_ids": [
+            "synthetic-river-session-1-answering-0",
+            "synthetic-river-session-1-answering-1",
+            "synthetic-river-session-1-answering-2",
+            "synthetic-river-session-1-answering-3",
+            "synthetic-river-session-1-answering-4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "title": "Retention & transfer",
+      "status": "Early observation",
+      "finding": "River (fictional) recognized R independently once in a new context.",
+      "action": "Revisit the same target in a new context next session.",
+      "reasoning": "These are isolated new-context observations. Delayed retention has not been established.",
+      "evidence_ids": [
+        "synthetic-river-session-2-transfer-0"
+      ],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T09:33:43.772925+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.769564+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about retention & transfer.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Revisit the same target in a new context next session.",
+          "evidence_ids": []
+        },
+        {
+          "epoch": 2,
+          "at": "2026-10-11T09:33:43.772925+00:00",
+          "previous_finding": "We don\u2019t yet have enough evidence about retention & transfer.",
+          "finding": "River (fictional) recognized R independently once in a new context.",
+          "reasoning": "These are isolated new-context observations. Delayed retention has not been established.",
+          "action": "Revisit the same target in a new context next session.",
+          "evidence_ids": [
+            "synthetic-river-session-2-transfer-0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "interests",
+      "title": "Interests & participation",
+      "status": "Not enough observations",
+      "finding": "We don\u2019t yet have enough evidence about interests & participation.",
+      "action": "Offer two story topics and ask the learner to choose.",
+      "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+      "evidence_ids": [],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T09:33:43.769564+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T09:33:43.769564+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about interests & participation.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Offer two story topics and ask the learner to choose.",
+          "evidence_ids": []
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "synthetic-river-session-1-answering-0",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:00+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "spoken",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-braille-0",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:00+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-instructions-0",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:00+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-interests-0",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:00+00:00",
+      "category": "interests",
+      "target": "story topic choice",
+      "task": "choose_topic",
+      "condition": "two story topics offered",
+      "outcome": "try_later",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-tactile-0",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:00+00:00",
+      "category": "tactile",
+      "target": "comfortable starting point",
+      "task": "explore",
+      "condition": "teacher offers comfortable starting point",
+      "outcome": "try_later",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-answering-1",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:01+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "spoken",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-braille-1",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:01+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-instructions-1",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:01+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-answering-2",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:02+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "spoken",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-braille-2",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:02+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "with_help",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-instructions-2",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:02+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-answering-3",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:03+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "alternative",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-braille-3",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:03+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "with_help",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-instructions-3",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:03+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-answering-4",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:04+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "alternative",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-braille-4",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:04+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "with_help",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-1-instructions-4",
+      "learner_id": "synthetic-river",
+      "session_id": "session-1",
+      "occurred_at": "2026-10-01T14:00:04+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "repeated",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-answering-0",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:00+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "spoken",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-braille-0",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:00+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-instructions-0",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:00+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-interests-0",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:00+00:00",
+      "category": "interests",
+      "target": "story topic choice",
+      "task": "choose_topic",
+      "condition": "two story topics offered",
+      "outcome": "try_later",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-tactile-0",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:00+00:00",
+      "category": "tactile",
+      "target": "comfortable starting point",
+      "task": "explore",
+      "condition": "teacher offers comfortable starting point",
+      "outcome": "try_later",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-transfer-0",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:00+00:00",
+      "category": "transfer",
+      "target": "R",
+      "task": "identify_new_context",
+      "condition": "new story, same tactile presentation",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-answering-1",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:01+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "spoken",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-braille-1",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:01+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-instructions-1",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:01+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-answering-2",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:02+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "spoken",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-braille-2",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:02+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-instructions-2",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:02+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-answering-3",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:03+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "alternative",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-braille-3",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:03+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-instructions-3",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:03+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-answering-4",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:04+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "alternative",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-braille-4",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:04+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation; recognition difficulty one",
+      "outcome": "with_help",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    },
+    {
+      "id": "synthetic-river-session-2-instructions-4",
+      "learner_id": "synthetic-river",
+      "session_id": "session-2",
+      "occurred_at": "2026-10-02T14:00:04+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "repeated",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": null
+    }
+  ],
+  "updates": [
+    {
+      "epoch": 1,
+      "at": "2026-10-11T09:33:43.769564+00:00",
+      "changed_categories": [
+        "braille",
+        "tactile",
+        "instructions",
+        "answering",
+        "transfer",
+        "interests"
+      ]
+    },
+    {
+      "epoch": 2,
+      "at": "2026-10-11T09:33:43.772925+00:00",
+      "changed_categories": [
+        "braille",
+        "transfer"
+      ]
+    }
+  ]
+}

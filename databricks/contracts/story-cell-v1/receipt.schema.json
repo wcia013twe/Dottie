@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "command_id",
+    "cell_ack",
+    "command",
+    "receipt",
+    "sequence_started",
+    "sequence_complete"
+  ],
+  "properties": {
+    "command_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "cell_ack": {
+      "const": true
+    },
+    "command": {
+      "type": "string",
+      "pattern": "^(CLEAR|DOTS [1-6]+|SPELL [a-z]{1,16})$"
+    },
+    "receipt": {
+      "type": "string",
+      "pattern": "^CELL [0-9A-Fa-f]{2} .$"
+    },
+    "sequence_started": {
+      "type": "boolean"
+    },
+    "sequence_complete": {
+      "const": false
+    }
+  }
+}

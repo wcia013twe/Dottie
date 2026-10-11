@@ -3,6 +3,7 @@ import json
 import subprocess
 import threading
 import time
+import shutil
 from urllib.parse import urlparse, parse_qs
 from learner_intelligence import ROOT, STORE, ProfileStore, derive, digest
 
@@ -16,7 +17,7 @@ STATUS={'state':'checking','connected':False,'source':'workspace.magneto.learner
 RUNNING=False;QUEUED=False;CHECKED=0
 
 def cloud(operation,payload):
-    result=subprocess.run([str(ROOT/'.venv-agent/bin/python'),str(ROOT/'scripts/learner_cloud.py'),operation],input=json.dumps(payload),text=True,capture_output=True,timeout=55)
+    result=subprocess.run([str(ROOT/'.venv-agent/bin/python'),str(ROOT/'scripts/learner_cloud.py'),operation],input=json.dumps(payload),text=True,capture_output=True,timeout=180)
     if result.returncode:raise RuntimeError('Databricks evidence sync failed. Local observations retained for retry.')
     return json.loads(result.stdout)
 
@@ -36,16 +37,47 @@ def materialize(data):
     events=sorted(merged.values(),key=lambda e:(e['occurred_at'],e['id']))
     from learner_reflection import VERSION
     if previous and previous['checkpoint']==digest(events) and previous.get('reflection_version')==VERSION:
+        cloud('publish-gold',{'profile':previous['profile']})
         return {'published':False,'profile':previous['profile']}
     if not events:
         return {'published':False,'profile':live_profile()}
+    # Stage publication so a cloud failure cannot replace the visible profile.
+    # Retaining the candidate also makes ambiguous cloud-commit retries identical.
+    stage=ProfileStore(STORE.directory/'gold-pending')
+    staged=stage.read(learner)
+    if not staged or staged['checkpoint']!=digest(events) or staged.get('reflection_version')!=VERSION:
+        stage.directory.mkdir(parents=True,exist_ok=True)
+        if previous:shutil.copyfile(STORE.path(learner),stage.path(learner))
+        elif stage.path(learner).exists():stage.path(learner).unlink()
     batch={'learner_id':learner,'display_name':'This learner','synthetic':False,'events':events}
     with LOCK:STATUS['genie']='analyzing'
     result=subprocess.run([str(ROOT/'.venv-agent/bin/python'),str(ROOT/'scripts/learner_reflection.py')],
-        input=json.dumps({'batch':batch,'store':str(STORE.directory)}),
+        input=json.dumps({'batch':batch,'store':str(stage.directory)}),
         text=True,capture_output=True,timeout=900)
     if result.returncode:raise RuntimeError('Research reflection failed; previous publication retained.')
-    return json.loads(result.stdout)
+    result=json.loads(result.stdout)
+    candidate=stage.read(learner)
+    if not candidate or candidate['profile']!=result['profile']:raise ValueError('Missing staged gold profile.')
+    acknowledged=cloud('publish-gold',{'profile':candidate['profile']})
+    if acknowledged['profile']!=candidate['profile']:raise ValueError('Gold acknowledgement mismatch.')
+    STORE.directory.mkdir(parents=True,exist_ok=True)
+    tmp=STORE.path(learner).with_suffix('.tmp')
+    tmp.write_text(json.dumps(candidate,indent=2)+'\n');tmp.replace(STORE.path(learner))
+    return result
+
+def restore_gold(data):
+    profile=data.get('gold_profile')
+    if not profile:return
+    learner=data['learner_id']
+    if profile['learner_id']!=learner or profile['synthetic']:raise ValueError('Invalid gold learner/source.')
+    events={e['id']:e for e in data['events']}
+    if any(events.get(e['id'])!=e for e in profile['evidence']):raise ValueError('Gold evidence differs from silver.')
+    previous=STORE.read(learner)
+    if previous and previous['profile']['epoch']>=profile['epoch']:return
+    record={'profile':profile,'events':profile['evidence'],'checkpoint':digest(profile['evidence']),
+            'processed_at':time.time(),'reflection_version':profile['derivation_version']}
+    STORE.directory.mkdir(parents=True,exist_ok=True)
+    tmp=STORE.path(learner).with_suffix('.tmp');tmp.write_text(json.dumps(record,indent=2)+'\n');tmp.replace(STORE.path(learner))
 
 def worker():
     global RUNNING,QUEUED,CHECKED
@@ -55,6 +87,7 @@ def worker():
             record=(PENDING_STORE.read(learner) or STORE.read(learner)) if learner else None
             if record:cloud('ingest',{'events':[e for e in record['events'] if e['confirmed'] and not e['synthetic']]})
             data=cloud('read',{'learner_id':learner})
+            restore_gold(data)
             with LOCK:STATUS.update(state='connected',connected=True,event_count=len(data['events']),checked_at=time.time(),error=None)
             try:
                 materialize(data)

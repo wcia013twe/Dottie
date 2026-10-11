@@ -50,6 +50,47 @@ class Controller:
             state['opportunity'] = deepcopy(CATALOG.get(state['passage_id']))
             return state
 
+    def start_device_activity(self, sid, revision, send):
+        """One validated target, atomic revision check, then acknowledged actuation."""
+        with self.lock:
+            state=self.get(sid)
+            if type(revision) is not int or revision!=state['revision']:
+                raise StoryError('Stale activity rejected before sending a device command.')
+            if state.get('device_released') or state['phase']!='proposed' or not state.get('proposal'):
+                raise StoryError('No active proposal to send to the device.')
+            proposal=state['proposal']
+            if proposal['target'] not in CATALOG[state['passage_id']]['targets'] or state['activities_started']>=state['policy']['max_activities']:
+                raise StoryError('Activity target or budget is invalid.')
+            result=send('show',proposal['target'])
+            state['device']=result
+            if result.get('cell_ack') is True and result.get('connected') is True:
+                state['activities_started']+=1
+                state['braille']={'code':'UEB','mode':'uncontracted lowercase','cells':[{'letter':c,'dots':DOTS[c]} for c in proposal['target']],
+                    'physical_ready':True,'source':'device acknowledgement'}
+                state['tactile_source']='device acknowledged target; mechanical operation unverified'
+                state['phase']='waiting_response'
+                state['speech']={'id':str(uuid4()),'text':proposal['prompt'],'kind':'prompt'}
+            state['revision']+=1
+            state['interaction_revision']+=1
+            state['trace']=(state['trace']+[{'tool':'start_device_activity','actor':'runtime','revision':state['revision']}])[-40:]
+            self.sessions[sid]=state
+            return self.get(sid)
+
+    def release_device(self, sid, send):
+        with self.lock:
+            state=self.get(sid)
+            if state['device'].get('state') not in (None,'not_configured'):
+                state['device']=send('clear')
+                if state['device'].get('cell_ack') is not True:
+                    state['revision']+=1;self.sessions[sid]=state
+                    return self.get(sid)
+            state.update(device_released=True,phase='reading',proposal=None,response=None)
+            state['interaction_revision']+=1
+            state.pop('braille',None)
+            state['revision']+=1
+            self.sessions[sid]=state
+            return self.get(sid)
+
     def call(self, sid, revision, name, args=None, *, actor='orchestrator'):
         with self.lock:
             if sid not in self.sessions: raise StoryError('Session expired.')
@@ -68,7 +109,7 @@ class Controller:
                 teacher()
                 passage=args.get('passage_id')
                 if passage is not None and passage not in CATALOG: raise StoryError('Unknown story passage.')
-                s.update(passage_id=passage, phase='reading', proposal=None, response=None)
+                s.update(passage_id=passage, phase='reading', proposal=None, response=None, device_released=False)
             elif name == 'set_word_emphasis':
                 teacher();phase('reading','proposed','continue_proposed')
                 if type(args.get('enabled')) is not bool:raise StoryError('Word emphasis setting must be boolean.')
