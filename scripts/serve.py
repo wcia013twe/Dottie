@@ -16,7 +16,6 @@ from system_status import handle as handle_system_status
 from explore_bridge import handle as handle_explore
 from nano_bridge import handle as handle_nano
 from voice_bridge import handle as handle_voice
-from story_narration import handle as handle_narration
 
 WEB = Path(__file__).resolve().parents[1] / 'web'
 _pending = threading.Lock()
@@ -41,7 +40,6 @@ class Handler(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self):
-        if handle_narration(self): return
         if handle_voice(self): return
         if handle_explore(self): return
         if handle_system_status(self): return
