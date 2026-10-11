@@ -1,0 +1,11 @@
+{
+  "tool": "present_activity",
+  "arguments": {
+    "session_id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+    "revision": 3,
+    "activity": "identify",
+    "target": "c",
+    "prompt": "Feel the letter on the cell and say it out loud."
+  },
+  "reason": "No prior response for c in this lesson; begin with a recognition activity."
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magneto:contracts:v1:companion-snapshot",
+  "title": "Magneto companion snapshot",
+  "description": "The complete, self-contained state the Orin harness sends outbound to the Personal Intelligence brain for one bounded tool decision. It is evidence, never instructions; it never replaces the story and never asserts learner mastery.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "request_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "session_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "revision": { "type": "integer", "minimum": 0 },
+    "phase": {
+      "enum": ["idle", "presenting", "awaiting_response", "reviewing", "complete", "stopped"]
+    },
+    "lesson_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "targets": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 32 },
+      "minItems": 1,
+      "maxItems": 26
+    },
+    "index": { "type": "integer", "minimum": 0 },
+    "target": { "type": ["string", "null"], "maxLength": 32 },
+    "activity": { "enum": ["introduce", "identify", "match", "spell", null] },
+    "prompt": { "type": ["string", "null"], "maxLength": 240 },
+    "activities_started": { "type": "integer", "minimum": 0 },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_activities": { "type": "integer", "minimum": 1, "maximum": 100 },
+        "advance_on_correct": { "type": "boolean" }
+      },
+      "required": ["max_activities", "advance_on_correct"]
+    },
+    "device": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cell_connected": { "type": "boolean" },
+        "cell_ready": { "type": "boolean" },
+        "listening": { "type": "boolean" },
+        "camera_available": { "type": "boolean" }
+      },
+      "required": ["cell_connected", "cell_ready", "listening", "camera_available"]
+    },
+    "last_response": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "transcript": { "type": "string", "maxLength": 300 },
+        "expected": { "type": "string", "maxLength": 32 },
+        "match": { "enum": ["exact", "partial", "none"] },
+        "outcome": { "enum": ["correct", "incorrect", "unrecognized", "help"] },
+        "source": { "enum": ["stt", "typed", "teacher"] }
+      },
+      "required": ["transcript", "expected", "match", "outcome", "source"]
+    },
+    "recent_outcomes": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "target": { "type": "string", "maxLength": 32 },
+          "activity": { "enum": ["introduce", "identify", "match", "spell"] },
+          "outcome": { "enum": ["correct", "incorrect", "unrecognized", "help"] },
+          "match": { "enum": ["exact", "partial", "none"] },
+          "source": { "enum": ["stt", "typed", "teacher"] }
+        },
+        "required": ["target", "activity", "outcome", "match", "source"]
+      }
+    },
+    "recent_observations": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "label": { "type": "string", "maxLength": 64 },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "touched": { "type": "boolean" }
+        },
+        "required": ["label", "confidence", "touched"]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "request_id",
+    "session_id",
+    "revision",
+    "phase",
+    "lesson_id",
+    "targets",
+    "index",
+    "target",
+    "activity",
+    "prompt",
+    "activities_started",
+    "policy",
+    "device",
+    "last_response",
+    "recent_outcomes",
+    "recent_observations"
+  ]
+}

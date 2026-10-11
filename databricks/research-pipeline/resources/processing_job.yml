@@ -1,0 +1,28 @@
+# Explicit manual processing only. No schedule or approval task.
+resources:
+  jobs:
+    research_process:
+      name: magneto-research-process
+      max_concurrent_runs: 1
+      parameters:
+        - name: source_version
+          default: REQUIRED_REGISTERED_SOURCE_VERSION
+      tasks:
+        - task_key: parse_and_prepare
+          environment_key: research
+          max_retries: 0
+          timeout_seconds: 1800
+          python_wheel_task:
+            package_name: magneto_research
+            entry_point: magneto-research
+            parameters:
+              - --config
+              - ${workspace.file_path}/config/operations.toml
+              - process
+              - '{{job.parameters.source_version}}'
+      environments:
+        - environment_key: research
+          spec:
+            environment_version: '3'
+            dependencies:
+              - ../dist/*.whl

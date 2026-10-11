@@ -1,0 +1,112 @@
+# Orin Nano accessible-interaction harness.
+# Provides bounded MCP execution/observation tools for the Databricks Personal Intelligence brain.
+# Millimeters and hardware are external; this file carries no credentials.
+
+# sim = simulated devices (no hardware, safe for dry runs and tests)
+# real = cane-vision hardware: Arduino Braille cell, camera + YOLO, ElevenLabs, microphone
+backend: sim
+
+session:
+  max_activities: 6          # session activity budget; the brain cannot exceed it
+  advance_on_correct: true   # a correct recognition advances to the next target
+  max_trace: 40
+  idle_timeout_s: 120        # a turn with no learner response ends listening
+
+lesson:
+  default: word_cab
+  catalog:
+    word_cab:
+      activity: identify
+      targets: [c, a, b]
+    alphabet_a_f:
+      activity: identify
+      targets: [a, b, c, d, e, f]
+  prompts:
+    identify: "Feel the letter on the cell, then say it out loud."
+    introduce: "This letter is {target}. Feel it and say it."
+    match: "Find the matching letter and say it out loud."
+    spell: "Spell the word you feel on the cell."
+
+bounds:
+  max_prompt_chars: 240      # matches the companion tool-plan schema
+  max_phrase_chars: 160
+  max_observe_items: 10
+  max_outcomes: 20
+  max_observations: 10
+  max_cell_text_chars: 64
+
+cell:
+  port: auto                 # auto | /dev/ttyACM0 | none
+  baud: 115200
+  letter_hold_s: 3.0
+  letter_gap_s: 0.3
+  word_gap_s: 1.0
+
+camera:
+  source: 0                  # webcam index, video/image path, or none
+
+detector:
+  model: yolov8s-worldv2.pt
+  vocabulary: vocabulary.txt # relative to this config folder (cane-vision vocabulary)
+  confidence: 0.25
+  image_size: 640
+
+cane:
+  tip_x: 0.5                 # the cane tip's fixed spot in the frame
+  tip_y: 0.85
+  reach: 0.06
+
+speech:
+  engine: auto               # auto | elevenlabs | say | piper | espeak-ng | print
+  phrase: "{object}"
+  elevenlabs:
+    voice_id: JBFqnCBsd6RMkjVDRZzb
+    model_id: eleven_flash_v2_5
+    timeout_s: 4.0
+
+listening:
+  enabled: true
+  engine: scripted           # scripted (dry run/tests) | scribe (ElevenLabs mic)
+  sample_rate: 16000
+  frame_ms: 30
+  vad: energy                # energy | webrtcvad | none
+  energy_threshold: 500      # int16 RMS; tune on the Orin
+  min_segment_s: 0.25
+  max_segment_s: 6.0
+  silence_ms: 800
+  stt:
+    model_id: scribe_v2
+    language: eng
+    timeout_s: 8.0
+  scripted:                  # transcripts emitted by the scripted engine, in order
+    - c
+
+brain:
+  mode: direct               # direct | agent | fixture
+  agent_app: agent-bricks-magneto-companion
+  model_endpoint: databricks-qwen3-next-80b-a3b-instruct
+  services_config: databricks/platform/services.toml
+  timeout_s: 15
+  max_tokens: 600
+
+grading:
+  # Spoken-letter aliases so "see" counts as c. Words match on tokens.
+  aliases:
+    a: [a, ay, aye]
+    b: [b, bee, be]
+    c: [c, see, sea]
+    d: [d, dee]
+    e: [e, ee]
+    g: [g, gee]
+    i: [i, eye]
+    j: [j, jay]
+    k: [k, kay]
+    o: [o, oh]
+    p: [p, pea, pee]
+    q: [q, cue, queue]
+    r: [r, are]
+    t: [t, tea, tee]
+    u: [u, you]
+    v: [v, vee]
+    y: [y, why]
+    z: [z, zee, zed]

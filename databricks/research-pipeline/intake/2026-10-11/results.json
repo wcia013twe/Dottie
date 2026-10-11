@@ -1,0 +1,531 @@
+{
+  "verified_date": "2026-10-11",
+  "added_sources": 8,
+  "added_physical_pdf_pages": 630,
+  "added_passages": 395,
+  "total_registered_sources": 10,
+  "total_eligible_passages": 409,
+  "sources": [
+    {
+      "source_id": "braille-pedagogy-review",
+      "ingest": {
+        "source_version": "a6f23c308300a5aa258dba4d21ca52902591d79f288bc0eda25fb4914876083c",
+        "status": "registered"
+      },
+      "process": {
+        "run_id": "4871c53b-d79e-4305-ae6f-07ed1f2cee90",
+        "passages": 13,
+        "status": "completed"
+      },
+      "status": "processed"
+    },
+    {
+      "source_id": "ies-study-guide",
+      "ingest": {
+        "source_version": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+        "status": "registered"
+      },
+      "process": {
+        "run_id": "4bc982c4-3fd6-439c-ae6b-096b807d04dd",
+        "passages": 44,
+        "status": "completed"
+      },
+      "status": "processed"
+    },
+    {
+      "source_id": "scanning-study",
+      "ingest": {
+        "source_version": "50b73297052ac85df4ab660843bc5926536f50d4ae677cdbe08843bc4bac3945",
+        "status": "registered"
+      },
+      "process": {
+        "run_id": "48097fb7-8837-4f23-9cdd-4abcbf29d318",
+        "passages": 16,
+        "status": "completed"
+      },
+      "status": "processed"
+    },
+    {
+      "source_id": "polly-guide",
+      "ingest": {
+        "source_version": "c751277a63206419e0f1b69a5b82c074fd0530720974f46f2752b11402335c22",
+        "status": "registered"
+      },
+      "process": {
+        "run_id": "10cf45e6-e3dc-4b81-a584-4525e4e1f35a",
+        "passages": 9,
+        "status": "completed"
+      },
+      "status": "processed"
+    },
+    {
+      "source_id": "polly-menu",
+      "ingest": {
+        "source_version": "c063dd9436e0778837faac99d1777cbd56efcf6d3ffca4cbab96ca36833551e3",
+        "status": "registered"
+      },
+      "process": {
+        "run_id": "7b79ae0c-bd24-47f4-b896-6f614926de85",
+        "passages": 32,
+        "status": "completed"
+      },
+      "status": "processed"
+    },
+    {
+      "source_id": "aph-fy2025",
+      "ingest": {
+        "source_version": "637b411f72904d038d4ef3db2cac119bb1009f4a7bd16f82e57ce9cf924fd4d3",
+        "status": "registered"
+      },
+      "process": {
+        "run_id": "8b0a3067-e650-49ed-aef3-646641bedc55",
+        "passages": 4,
+        "status": "completed"
+      },
+      "status": "processed"
+    },
+    {
+      "source_id": "rnib-braille-200",
+      "ingest": {
+        "source_version": "f0efdbfda07b7b57ac9320c6e9aeb85e034e152ae5b098be042ddce82b9ef3c4",
+        "status": "registered"
+      },
+      "conversion": {
+        "source_uri": "https://www.rnib.org.uk/documents/2652/Braille_200_Report_Final.docx",
+        "original_sha256": "e8410641e48495e94f27b63f0d6dfe0076733ce2c00b25a333478dd9ffd74e9f",
+        "pdf_sha256": "eb73762a9f5433308d339c332ded36629a38e5d30a277cb32d9bd89c9addb0f8",
+        "converter": "LibreOfficeDev 26.8.0.0.alpha0 2c87e51eeaa2b413ff4ae097b2705eea1995d8e5",
+        "command": "soffice --headless --convert-to pdf --outdir OUTPUT ORIGINAL.docx",
+        "conversion_date": "2026-10-11",
+        "original_filename": "Braille_200_Report_Final.docx",
+        "rendered_pages": 25,
+        "citation_note": "Physical PDF pages refer to the archived rendering, not fixed pagination in the original DOCX.",
+        "validation": "25 pages rendered and visually inspected in contact sheets; original document retained unchanged."
+      },
+      "process": {
+        "run_id": "ea59b325-9d1f-4536-91b1-f2fe70265f42",
+        "passages": 12,
+        "status": "completed"
+      },
+      "status": "processed"
+    },
+    {
+      "source_id": "ueb-2024",
+      "ingest": {
+        "source_version": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+        "status": "registered"
+      },
+      "status": "processed",
+      "initial_attempt": {
+        "status": "failed",
+        "error_type": "TimeoutError",
+        "error": "SQL timed out: 01f1c541-c69e-10cd-8941-5d9f6bc74094"
+      },
+      "process": {
+        "run_id": "7ea2fe60-7807-4091-aa3f-f06d0d9351b3",
+        "source_version": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+        "passages": 265,
+        "physical_pages": 408,
+        "status": "completed",
+        "mode": "managed_page_ranges_external_results"
+      }
+    }
+  ],
+  "source_counts": [
+    {
+      "source_id": "aph-fy2025",
+      "source_version": "637b411f72904d038d4ef3db2cac119bb1009f4a7bd16f82e57ce9cf924fd4d3",
+      "collection": "industry",
+      "passages": "4"
+    },
+    {
+      "source_id": "nls-news-2026-q2",
+      "source_version": "8dc8d9cbb18f9838be8208cbce6689f72fd1edd12688edd9c8b5005c82b0256b",
+      "collection": "industry",
+      "passages": "6"
+    },
+    {
+      "source_id": "polly-guide",
+      "source_version": "c751277a63206419e0f1b69a5b82c074fd0530720974f46f2752b11402335c22",
+      "collection": "industry",
+      "passages": "9"
+    },
+    {
+      "source_id": "polly-menu",
+      "source_version": "c063dd9436e0778837faac99d1777cbd56efcf6d3ffca4cbab96ca36833551e3",
+      "collection": "industry",
+      "passages": "32"
+    },
+    {
+      "source_id": "rnib-braille-200",
+      "source_version": "f0efdbfda07b7b57ac9320c6e9aeb85e034e152ae5b098be042ddce82b9ef3c4",
+      "collection": "industry",
+      "passages": "12"
+    },
+    {
+      "source_id": "braille-pedagogy-review",
+      "source_version": "a6f23c308300a5aa258dba4d21ca52902591d79f288bc0eda25fb4914876083c",
+      "collection": "teaching",
+      "passages": "13"
+    },
+    {
+      "source_id": "ies-foundational-reading-summary-2017",
+      "source_version": "d980f9bfda7168daec909175bc787925d7e5e37f9595474a46843b1fdc270a4a",
+      "collection": "teaching",
+      "passages": "8"
+    },
+    {
+      "source_id": "ies-study-guide",
+      "source_version": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+      "collection": "teaching",
+      "passages": "44"
+    },
+    {
+      "source_id": "scanning-study",
+      "source_version": "50b73297052ac85df4ab660843bc5926536f50d4ae677cdbe08843bc4bac3945",
+      "collection": "teaching",
+      "passages": "16"
+    },
+    {
+      "source_id": "ueb-2024",
+      "source_version": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+      "collection": "teaching",
+      "passages": "265"
+    }
+  ],
+  "publication": {
+    "run_id": "13905926-a90b-4f84-89e7-8b9e05669313",
+    "status": "table_refreshed",
+    "index_status": "sync_requested"
+  },
+  "retrieval_checks": [
+    {
+      "source_id": "braille-pedagogy-review",
+      "collection": "teaching",
+      "query": "Evidence-based pedagogy for beginning braille readers in mainstream Kindergarten to Year 4 classrooms",
+      "run_id": "e8920d7e-aba1-42b5-a125-51227d38cb3c",
+      "expected_source_found": true,
+      "hits": [
+        {
+          "id": "0b2923b0501cbf883efd2c4a8e75cdcc8879056ebb864b72c8283a51f21b1d34",
+          "source_id": "braille-pedagogy-review",
+          "source_version": "a6f23c308300a5aa258dba4d21ca52902591d79f288bc0eda25fb4914876083c",
+          "locator": "PDF page(s) 1, 2"
+        },
+        {
+          "id": "c89aa3b155e5ad093a3d8df15308059b49cba1f40ceebad843eb613ad91d6545",
+          "source_id": "braille-pedagogy-review",
+          "source_version": "a6f23c308300a5aa258dba4d21ca52902591d79f288bc0eda25fb4914876083c",
+          "locator": "PDF page(s) 3, 4, 5"
+        },
+        {
+          "id": "48e4b1007cedaf0df76eb046e1f54b7cfc18b21c6126ab0195a38d7adff3e0f0",
+          "source_id": "braille-pedagogy-review",
+          "source_version": "a6f23c308300a5aa258dba4d21ca52902591d79f288bc0eda25fb4914876083c",
+          "locator": "PDF page(s) 11, 12"
+        },
+        {
+          "id": "c11c1c7a28cb38840e4e04caa6edfd457f2bffef5ee8a8a7373c2a9f7143309a",
+          "source_id": "braille-pedagogy-review",
+          "source_version": "a6f23c308300a5aa258dba4d21ca52902591d79f288bc0eda25fb4914876083c",
+          "locator": "PDF page(s) 2, 3"
+        },
+        {
+          "id": "2de137acf2ec65c45273f45b28c372e6ab30bca46a47aed0d6c4c18c80d35bbe",
+          "source_id": "braille-pedagogy-review",
+          "source_version": "a6f23c308300a5aa258dba4d21ca52902591d79f288bc0eda25fb4914876083c",
+          "locator": "PDF page(s) 12, 13"
+        }
+      ]
+    },
+    {
+      "source_id": "ies-study-guide",
+      "collection": "teaching",
+      "query": "Organizing Instruction and Study: space learning over time and use quizzing for active retrieval",
+      "run_id": "e2d0378c-5bf3-49ee-b605-723fd34d3411",
+      "expected_source_found": true,
+      "hits": [
+        {
+          "id": "02b50d280dc9fbcab167d57eef17f29f521e7b83086099814d1d36e21a6a38a3",
+          "source_id": "ies-study-guide",
+          "source_version": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+          "locator": "PDF page(s) 14"
+        },
+        {
+          "id": "168b4154ddc85a791a114c5dd225b8de1e74de89abc9ba09748b07315eac7e6a",
+          "source_id": "ies-study-guide",
+          "source_version": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+          "locator": "PDF page(s) 44, 45, 46"
+        },
+        {
+          "id": "305b95d24307dbe7205a2f997cdae3567ac7ff8d492c4cccd970eca0a98493c7",
+          "source_id": "ies-study-guide",
+          "source_version": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+          "locator": "PDF page(s) 12, 13, 14"
+        },
+        {
+          "id": "e4e437a29e23acff6d531908e73e11dae23c50f626353d82634de9e972411024",
+          "source_id": "ies-study-guide",
+          "source_version": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+          "locator": "PDF page(s) 46, 47"
+        },
+        {
+          "id": "dbe67a7ca90f36468786d092c47159a76fa112aa007cf6aad9ce02dd884d8ec8",
+          "source_id": "ies-study-guide",
+          "source_version": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+          "locator": "PDF page(s) 33, 34"
+        }
+      ]
+    },
+    {
+      "source_id": "scanning-study",
+      "collection": "teaching",
+      "query": "Structure of variability in finger scanning movement predicts braille reading performance in eight children",
+      "run_id": "80b06e63-6821-40c6-a1b7-ee71770e0f97",
+      "expected_source_found": true,
+      "hits": [
+        {
+          "id": "277c8bdc447df6039c7ce10458a0f1645c46bfaccdd86a8944049eafe8b2f9a0",
+          "source_id": "scanning-study",
+          "source_version": "50b73297052ac85df4ab660843bc5926536f50d4ae677cdbe08843bc4bac3945",
+          "locator": "PDF page(s) 1, 2"
+        },
+        {
+          "id": "4c39961652b3af6ded38d45a11fcf64a9a3929e61ba5bdaba7b4dda998a22050",
+          "source_id": "scanning-study",
+          "source_version": "50b73297052ac85df4ab660843bc5926536f50d4ae677cdbe08843bc4bac3945",
+          "locator": "PDF page(s) 7, 8"
+        },
+        {
+          "id": "c8d4a115f6ad9afc49b14ba3854bfea6f8802a241d0be5fe2920fc682811787a",
+          "source_id": "scanning-study",
+          "source_version": "50b73297052ac85df4ab660843bc5926536f50d4ae677cdbe08843bc4bac3945",
+          "locator": "PDF page(s) 3, 4"
+        },
+        {
+          "id": "105796727a351d53c4929a935caa940d0fbd2d8e4f7d567caaf92f5410fbd11c",
+          "source_id": "scanning-study",
+          "source_version": "50b73297052ac85df4ab660843bc5926536f50d4ae677cdbe08843bc4bac3945",
+          "locator": "PDF page(s) 5, 6, 7"
+        },
+        {
+          "id": "edfea062531289d847c8549ccdbb862b813ef47e42fbd838a75aa4a992953809",
+          "source_id": "scanning-study",
+          "source_version": "50b73297052ac85df4ab660843bc5926536f50d4ae677cdbe08843bc4bac3945",
+          "locator": "PDF page(s) 8, 9"
+        }
+      ]
+    },
+    {
+      "source_id": "ueb-2024",
+      "collection": "teaching",
+      "query": "Rules of Unified English Braille Third Edition standing alone contractions and grade 1 indicators",
+      "run_id": "d50c8600-93bb-4a78-b854-52f77e263886",
+      "expected_source_found": true,
+      "hits": [
+        {
+          "id": "efd2e32b323e461064fd35fa6c59d48f504b68bc30c1d4637e4cc7528fdb7c86",
+          "source_id": "ueb-2024",
+          "source_version": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+          "locator": "PDF page(s) 42, 43, 44, 45"
+        },
+        {
+          "id": "38424574837f55b9473cca36d53ebc33aeb61771d8ad13858d919f62c5fc86eb",
+          "source_id": "ueb-2024",
+          "source_version": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+          "locator": "PDF page(s) 405, 406, 407"
+        },
+        {
+          "id": "617ce033d370af3697a54da2401d8893225a8c04459615b4556cde186712420f",
+          "source_id": "ueb-2024",
+          "source_version": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+          "locator": "PDF page(s) 385, 386, 387"
+        },
+        {
+          "id": "ece96675b96f82ce93fb219c3a6918c74e6bd8637c3b40ebbb75116571cc816d",
+          "source_id": "ueb-2024",
+          "source_version": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+          "locator": "PDF page(s) 401, 402, 403"
+        },
+        {
+          "id": "6bbcc74d4541d219f3874eba0c046c6da30e7f201771e757f3f477558e3a6519",
+          "source_id": "ueb-2024",
+          "source_version": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+          "locator": "PDF page(s) 1, 2, 3, 4"
+        }
+      ]
+    },
+    {
+      "source_id": "polly-guide",
+      "collection": "industry",
+      "query": "Polly Quick Start Guide repeat button Helios creating learner accounts",
+      "run_id": "61268709-579a-47cb-bd71-f89017610269",
+      "expected_source_found": true,
+      "hits": [
+        {
+          "id": "1b51fca4d4bec4c59f973a7bcb2ff2f2fc3d13cd3b748f52d29bbf9d7c1ae544",
+          "source_id": "polly-guide",
+          "source_version": "c751277a63206419e0f1b69a5b82c074fd0530720974f46f2752b11402335c22",
+          "locator": "PDF page(s) 12, 13, 14, 15"
+        },
+        {
+          "id": "ee65505165ef406e44f93ba8a1caa3de947781800d56600960e4877c0121cd3f",
+          "source_id": "polly-guide",
+          "source_version": "c751277a63206419e0f1b69a5b82c074fd0530720974f46f2752b11402335c22",
+          "locator": "PDF page(s) 1, 2, 3"
+        },
+        {
+          "id": "5fb9d4ce3e7d0f051611066fab18cb143e49771813a763f899db6920fcd1b482",
+          "source_id": "polly-guide",
+          "source_version": "c751277a63206419e0f1b69a5b82c074fd0530720974f46f2752b11402335c22",
+          "locator": "PDF page(s) 9, 10, 11"
+        },
+        {
+          "id": "92a2d9c26659089ad3af88237507d660c967e56f53ac49d472b9713c49de9d4b",
+          "source_id": "polly-guide",
+          "source_version": "c751277a63206419e0f1b69a5b82c074fd0530720974f46f2752b11402335c22",
+          "locator": "PDF page(s) 15, 16, 17, 18"
+        },
+        {
+          "id": "1e9fa0b89b19fe45a835d264ca6edbbdc4c06a00006b3e9d64b76109205b110b",
+          "source_id": "polly-guide",
+          "source_version": "c751277a63206419e0f1b69a5b82c074fd0530720974f46f2752b11402335c22",
+          "locator": "PDF page(s) 4, 5, 6, 7, 8, 9"
+        }
+      ]
+    },
+    {
+      "source_id": "polly-menu",
+      "collection": "industry",
+      "query": "Polly Menu Map Whack-A-Braille Whack-A-Key vocabulary activity menu",
+      "run_id": "a5d28ca0-15ae-4ddf-a526-3942f6e226e7",
+      "expected_source_found": true,
+      "hits": [
+        {
+          "id": "339588775730fe4666a396a0f3448065a668a30cf7ff85f905e06071002d2bc6",
+          "source_id": "polly-menu",
+          "source_version": "c063dd9436e0778837faac99d1777cbd56efcf6d3ffca4cbab96ca36833551e3",
+          "locator": "PDF page(s) 1, 2"
+        },
+        {
+          "id": "44213f751be15478e90975a5bfbd2ef2aa1e75d2b2cb4d254b7afefe05045e35",
+          "source_id": "polly-menu",
+          "source_version": "c063dd9436e0778837faac99d1777cbd56efcf6d3ffca4cbab96ca36833551e3",
+          "locator": "PDF page(s) 67"
+        },
+        {
+          "id": "5fb9d4ce3e7d0f051611066fab18cb143e49771813a763f899db6920fcd1b482",
+          "source_id": "polly-guide",
+          "source_version": "c751277a63206419e0f1b69a5b82c074fd0530720974f46f2752b11402335c22",
+          "locator": "PDF page(s) 9, 10, 11"
+        },
+        {
+          "id": "1e9fa0b89b19fe45a835d264ca6edbbdc4c06a00006b3e9d64b76109205b110b",
+          "source_id": "polly-guide",
+          "source_version": "c751277a63206419e0f1b69a5b82c074fd0530720974f46f2752b11402335c22",
+          "locator": "PDF page(s) 4, 5, 6, 7, 8, 9"
+        },
+        {
+          "id": "21964460b44eb446376832185b900a79489e550cc462cc8dab7cdebe810e2912",
+          "source_id": "polly-menu",
+          "source_version": "c063dd9436e0778837faac99d1777cbd56efcf6d3ffca4cbab96ca36833551e3",
+          "locator": "PDF page(s) 48, 49"
+        }
+      ]
+    },
+    {
+      "source_id": "rnib-braille-200",
+      "collection": "industry",
+      "query": "RNIB Braille 200 survey UK barriers to learning braille adult tuition and resources",
+      "run_id": "922cb806-de6a-4c87-8000-3423bb1744e7",
+      "expected_source_found": true,
+      "hits": [
+        {
+          "id": "a9d7ada13ccd346151bedf01a4205253780532941b6efe6c28192dabb2cb555a",
+          "source_id": "rnib-braille-200",
+          "source_version": "f0efdbfda07b7b57ac9320c6e9aeb85e034e152ae5b098be042ddce82b9ef3c4",
+          "locator": "PDF page(s) 1, 2, 3, 4, 5, 6"
+        },
+        {
+          "id": "51b3ef8734f07ca21118304634341688a60f1aebf3efc7e2edccef8296686732",
+          "source_id": "rnib-braille-200",
+          "source_version": "f0efdbfda07b7b57ac9320c6e9aeb85e034e152ae5b098be042ddce82b9ef3c4",
+          "locator": "PDF page(s) 9, 10, 11"
+        },
+        {
+          "id": "612a7bfeabe2c0f3b974721ab1f4d70d233411c67078f3c350dd47a1dd0b6189",
+          "source_id": "rnib-braille-200",
+          "source_version": "f0efdbfda07b7b57ac9320c6e9aeb85e034e152ae5b098be042ddce82b9ef3c4",
+          "locator": "PDF page(s) 6"
+        },
+        {
+          "id": "391b42ee37a98294ea7a312a3b2595ef29e559b48f2a01f3cae406044b695612",
+          "source_id": "rnib-braille-200",
+          "source_version": "f0efdbfda07b7b57ac9320c6e9aeb85e034e152ae5b098be042ddce82b9ef3c4",
+          "locator": "PDF page(s) 23, 24, 25"
+        },
+        {
+          "id": "aaf49db4d5137b65c24dde58af52a01ca798177e6944fe6f0cb83a1ef25a7d5b",
+          "source_id": "rnib-braille-200",
+          "source_version": "f0efdbfda07b7b57ac9320c6e9aeb85e034e152ae5b098be042ddce82b9ef3c4",
+          "locator": "PDF page(s) 17, 18, 19"
+        }
+      ]
+    },
+    {
+      "source_id": "aph-fy2025",
+      "collection": "industry",
+      "query": "American Printing House Annual Report FY2025 Monarch and new products",
+      "run_id": "a145a46c-f856-43c5-af7a-fc6c31f9d367",
+      "expected_source_found": true,
+      "hits": [
+        {
+          "id": "66555cedf33f54d057183c9db106b00e87adc989fd44cea747eb6d2d2c6ec6de",
+          "source_id": "aph-fy2025",
+          "source_version": "637b411f72904d038d4ef3db2cac119bb1009f4a7bd16f82e57ce9cf924fd4d3",
+          "locator": "PDF page(s) 1, 2, 3, 4, 5"
+        },
+        {
+          "id": "e85816b3593f1ab0206f4c20d2b53e3b7629dacc49d8e50b93815d49c537f490",
+          "source_id": "aph-fy2025",
+          "source_version": "637b411f72904d038d4ef3db2cac119bb1009f4a7bd16f82e57ce9cf924fd4d3",
+          "locator": "PDF page(s) 6, 7"
+        },
+        {
+          "id": "ab107bb0888d3874a9235391905002308d03ade6d19488f20df3c8aaf373ed5b",
+          "source_id": "aph-fy2025",
+          "source_version": "637b411f72904d038d4ef3db2cac119bb1009f4a7bd16f82e57ce9cf924fd4d3",
+          "locator": "PDF page(s) 5, 6"
+        },
+        {
+          "id": "9e98e7dc2c1026bbe856fa2629148d1db050d10bd1aea3718cf620fb36e79d97",
+          "source_id": "aph-fy2025",
+          "source_version": "637b411f72904d038d4ef3db2cac119bb1009f4a7bd16f82e57ce9cf924fd4d3",
+          "locator": "PDF page(s) 5"
+        },
+        {
+          "id": "45405629d98dbcb5f423b66bc30418c79ab8f3cd9d45bf48ca545c47fda91a19",
+          "source_id": "polly-guide",
+          "source_version": "c751277a63206419e0f1b69a5b82c074fd0530720974f46f2752b11402335c22",
+          "locator": "PDF page(s) 28, 29, 32"
+        }
+      ]
+    }
+  ],
+  "review_status": [
+    {
+      "reviews": "0",
+      "accepted_findings": "0",
+      "approved_recommendations": "0"
+    }
+  ],
+  "rnib_conversion": {
+    "original_and_rendered_checksums_verified": true,
+    "source_version": "f0efdbfda07b7b57ac9320c6e9aeb85e034e152ae5b098be042ddce82b9ef3c4"
+  },
+  "limits": [
+    "Source-targeted retrieval checks are coverage checks, not a retrieval quality benchmark.",
+    "No new finding extraction, human acceptance, teaching recommendation approval, learner data ingestion or director integration in this batch.",
+    "UEB recovery used native page ranges and external SQL result downloads; the default CLI process operation remains whole-document."
+  ]
+}

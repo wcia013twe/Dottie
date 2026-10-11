@@ -1,12 +1,16 @@
 [project]
 name = "magneto-research"
-version = "0.1.0"
-description = "Schema-independent research pipeline scaffolding"
+version = "0.2.0"
+description = "Databricks-managed document evidence and research search"
 requires-python = ">=3.11"
-dependencies = ["databricks-sdk==0.151.0"]
+dependencies = ["databricks-sdk==0.151.0", "mlflow-skinny==3.17.0"]
+
+[project.optional-dependencies]
+judge = ["mlflow[databricks]==3.17.0"]
 
 [project.scripts]
 magneto-research-smoke = "magneto_research.smoke:run"
+magneto-research = "magneto_research.cli:run"
 
 [build-system]
 requires = ["setuptools>=68"]

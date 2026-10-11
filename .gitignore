@@ -9,3 +9,15 @@ __pycache__/
 .agentbricks/
 .databricks/
 .venv-story/
+.venv-harness/
+cane-vision/models/*.engine
+cane-vision/models/*.onnx
+cane-vision/review/
+orin-harness/tools/cell-firmware/build/
+
+.local/learner-intelligence/
+
+.venv-camera/
+.local/camera/
+
+.local/device-connections.json

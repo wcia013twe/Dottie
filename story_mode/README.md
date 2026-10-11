@@ -111,3 +111,12 @@ Verified locally: 8 controller tests and 4 real-stdio MCP tests pass. A live bro
 Peter Rabbit vegetables spread returned an orchestrator-selected `propose_activity` for `l`;
 teacher approval produced the deterministic dots 1, 2, 3 preview while physical readiness remained false.
 No child response or physical tactile-material confirmation was fabricated in that browser run.
+
+## Test with Alex Morgan
+
+Run `python3 scripts/serve_story_test.py` and open `http://127.0.0.1:8100/learn/?profile=synthetic-test#stories`.
+Open Peter Rabbit, seek to the four-rabbits introduction (page 3), open **Teacher coach**, and select **Ask orchestrator**.
+The coach shows **Fictional test · Alex Morgan** and the expandable starting profile. The live model receives this seed through MCP; no learner outcomes are prefilled.
+Approve the proposal, offer fictional test material and speak the prompt. Type a reply in **Reply as Alex**, then use **Ask for a follow-up** to test how the model adapts. Every follow-up remains a proposal for teacher review. Try one pattern at a time, such as confusing a letter with a word or saying “I’m confused.”
+
+The seed is saved in `story_mode/personas/alex-morgan.json`. It is not a diagnosis or confirmed evidence. Per-session test snapshots and transcripts are saved under `reports/storybook-session-test/sessions/`; test coach sessions are not restored after reload. Identification outcomes are marked synthetic and saved separately; the existing explicit cloud-test command can upload those outcomes to the fictional table. Persona storage itself is local, not a new Databricks table. Ordinary `python3 scripts/serve.py` sessions are unchanged.

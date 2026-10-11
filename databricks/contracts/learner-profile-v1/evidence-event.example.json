@@ -1,0 +1,14 @@
+{
+  "id": "sample-1-braille-0",
+  "learner_id": "demo-wes",
+  "session_id": "sample-1",
+  "occurred_at": "2026-10-10T12:00:00+00:00",
+  "category": "braille",
+  "target": "B/D",
+  "task": "identify",
+  "condition": "same tactile presentation and task difficulty",
+  "outcome": "independent",
+  "confirmed": true,
+  "synthetic": true,
+  "trace_id": "fixture-trace-sample-1"
+}

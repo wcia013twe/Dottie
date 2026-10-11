@@ -22,7 +22,9 @@ def main(argv=None):
 
 def run():
     """Propagate failures even when a job invokes the entry point as a function."""
-    raise SystemExit(main())
+    status = main()
+    if status:
+        raise SystemExit(status)
 
 
 if __name__ == '__main__':

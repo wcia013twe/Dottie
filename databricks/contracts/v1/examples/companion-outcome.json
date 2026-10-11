@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "outcome_id": "9f8e7d6c-5b4a-4938-8271-6f5e4d3c2b1a",
+  "session_id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+  "revision": 3,
+  "target": "c",
+  "activity": "identify",
+  "expected": "c",
+  "transcript": "c",
+  "match": "exact",
+  "outcome": "correct",
+  "source": "stt",
+  "execution": { "spoken": true, "shown": true, "cell_ack": true, "cell_connected": true },
+  "received_at_ms": 1830
+}

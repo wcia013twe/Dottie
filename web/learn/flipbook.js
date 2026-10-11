@@ -1,4 +1,5 @@
-import { mountStoryCoach } from './story-coach.js?v=story-mcp-3';
+import { mountStoryCoach } from './story-coach.js?v=eleven-autoplay-1';
+import { completionRecap, mountStoryCompletion } from './story-completion.js';
 // Pair each illustration with the following passage in the EPUB reading order.
 function illustrationSpreads(html) {
   const root = new DOMParser().parseFromString(html, 'text/html').body;
@@ -30,7 +31,8 @@ export function mountFlipbook({main, book, content, save, announce}) {
   let turning=false, disposed=false, animation=null, overlay=null, resizeFrame=0, generation=0;
   if (book.finished === undefined) book.finished = book.current === book.total;
   let legacyScroll = book.pageFraction === undefined ? (book.scroll || 0) : 0;
-  const coach=mountStoryCoach({player,enabled:book.bundled,pause:stopPlaying});
+  const coach=mountStoryCoach({player,enabled:book.bundled,pause:()=>{stopPlaying();window.speechSynthesis?.pause();}});
+  const completion=mountStoryCompletion({parent:player,title:book.title});
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   function persist() {
     book.position=chapter;book.page=page;book.pageFraction=count>1?page/(count-1):0;
@@ -69,7 +71,10 @@ export function mountFlipbook({main, book, content, save, announce}) {
     if(turning||disposed||coach.isPaused())return;
     if(direction<0 && page===0 && chapter===0)return;
     if(direction>0 && page===count-1 && chapter===content.chapters.length-1) {
-      book.finished=true;stopPlaying();persist();paint();announce('Book finished. Well done!');return;
+      const justFinished=!book.finished;
+      book.finished=true;stopPlaying();persist();paint();announce('Book finished. Well done!');
+      if(justFinished)completion.show(completionRecap(coach.observations()));
+      return;
     }
     book.finished=false;turning=true;paint();
     // A visual copy turns above the real text; it is excluded from accessibility.
@@ -100,7 +105,7 @@ export function mountFlipbook({main, book, content, save, announce}) {
   seek.oninput=()=>{stopPlaying();cancelTurn();page=Number(seek.value)-1;book.finished=false;paint();persist();};
   const fullscreen=main.querySelector('#reader-fullscreen');
   fullscreen.hidden=!document.fullscreenEnabled;
-  fullscreen.onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await player.requestFullscreen();}catch{announce('Fullscreen is unavailable in this browser.');}};
+  fullscreen.onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await player.closest('.workspace').requestFullscreen();}catch{announce('Fullscreen is unavailable in this browser.');}};
   const fullscreenChanged=()=>fullscreen.setAttribute('aria-label',document.fullscreenElement?'Exit fullscreen':'Enter fullscreen');
   document.addEventListener('fullscreenchange',fullscreenChanged);
   previous.onclick=()=>{stopPlaying();turn(-1);};next.onclick=()=>{stopPlaying();turn(1);};
@@ -122,5 +127,5 @@ export function mountFlipbook({main, book, content, save, announce}) {
   // Decode before measuring columns so illustrations cannot move the bookmark.
   const initialFraction=book.pageFraction||0;
   loadChapter(chapter,initialFraction).then(()=>{if(!disposed)observer.observe(windowEl);});
-  return ()=>{coach.dispose();stopPlaying();document.removeEventListener('fullscreenchange',fullscreenChanged);disposed=true;generation++;observer.disconnect();cancelAnimationFrame(resizeFrame);cancelTurn();};
+  return ()=>{completion.dispose();coach.dispose();stopPlaying();document.removeEventListener('fullscreenchange',fullscreenChanged);disposed=true;generation++;observer.disconnect();cancelAnimationFrame(resizeFrame);cancelTurn();};
 }

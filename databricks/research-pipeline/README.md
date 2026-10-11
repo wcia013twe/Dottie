@@ -1,43 +1,109 @@
-# Magneto research pipeline scaffold
+# Magneto research intelligence
 
-This package prepares a home for research processing and dataset analysis. It currently implements configuration, read-only metadata checks and a manual job definition. It does not ingest sources, call models, create tables/indexes, or implement teaching logic.
+Paper-first evidence storage and AI search on Databricks, with equal teaching and industry workflows. This package owns research preparation; live teaching and learner profiles remain outside it. See [the implementation design](docs/mvp-design.md), [architecture](docs/architecture.md), and [shared v1 contracts](../contracts/README.md).
 
-Read [the base contracts](../contracts/README.md) for the agreed guidance and retrieval interfaces, `docs/architecture.md` for stage responsibilities, and `docs/decisions.md` for remaining decisions. Shared assets remain owned by `../platform`; live Agent Bricks code remains in `../magneto-director`.
+## What is implemented
+
+- Explicit PDF intake with immutable source versions, SHA-256, attribution, rights basis, acquisition date, and optional expiry.
+- Databricks `ai_parse_document` 2.0 and `ai_prep_search` (Beta), retaining parser/preparation artifacts and page-linked original passages separately from enriched embedding text.
+- Source-bounded `ai_extract` 2.0 candidates; exact supporting quotes are checked before storage. Human acceptance and recommendation approval are distinct.
+- Delta review history, source withdrawal, dependent-record eligibility, and current-status revalidation after AI Search retrieval.
+- A shared research search table/index with collection and evidence-tier filters. Approved teaching guidance can be exported through the unchanged v1 contract; this is not the live director's retrieval service.
+- Advisory MLflow evidence judging; no assessment can approve records or establish individual learning gains.
+- Databricks-native operations: Catalog Explorer for evidence, a read-only operations notebook for review queues, Jobs for processing, and MLflow for traces. See [the console guide](docs/console-guide.md). Intake, review, publication, and auditing remain explicit CLI operations.
 
 ## Local checks
 
-From the repository root, using the existing SDK environment:
+From the repository root:
 
 ```bash
 PYTHONPATH=databricks/research-pipeline/src .venv-agent/bin/python -m unittest discover -s databricks/research-pipeline/tests -v
-PYTHONPATH=databricks/research-pipeline/src .venv-agent/bin/python -m magneto_research.smoke --config databricks/research-pipeline/config/development.example.toml --profile magneto
+npm run check:contracts
+npm run check
 ```
 
-Alternatively install this package into a Python 3.11+ virtual environment. `magneto-research-smoke` is the installed entry point. Optional local overrides belong in ignored `config/local.toml`; never put credentials in either file. The example uses existing resource names, not new data schemas.
+Tests and `magneto_research.smoke` never ingest sources, invoke models, schedule work, or upload learner data. Operational commands below do use cloud services. Install the package (and its `judge` extra for LLM judging) into Python 3.11+ or use the existing `.venv-agent`.
 
-Results are `reachable`, `not_configured`, or `failed`. A missing optional configuration is expected; an explicitly configured resource that cannot be read is a failure. The process exits nonzero for failures. Metadata visibility does not prove volume file-read access, index query readiness, model access, trace-write permission, or a functioning processing pipeline. No MLflow global configuration is changed.
+## Run operations
 
-## Deployment definition
-
-From this directory:
+Use this prefix from the repository root, followed by one command:
 
 ```bash
+PYTHONPATH=databricks/research-pipeline/src .venv-agent/bin/python -m magneto_research.cli --config databricks/research-pipeline/config/operations.toml --profile magneto --help
+```
+
+| Command | Effect |
+| --- | --- |
+| `init` | Create only research tables/views in the existing schema |
+| `ingest --file paper.pdf --metadata source.json` | Register and upload an explicitly selected PDF; examples contain real source metadata, not bundled PDFs |
+| `process SOURCE_VERSION` | Parse and prepare one registered document; calls managed AI Functions |
+| `list chunks` / `list findings` | Inspect up to 100 records; use SQL for larger review queues |
+| `extract CHUNK_ID` | Propose findings from one passage; leaves them unreviewed |
+| `audit passage CHUNK_ID` / `audit finding FINDING_ID` | Resolve original source and processing history |
+| `judge FINDING_ID --kind finding` | Advisory evidence check with MLflow; no approval |
+| `review finding FINDING_ID accepted --rationale "..."` | Record the operator's explicit acceptance after checking source and context |
+| `draft --file implication.json` | Save an implication supported by accepted findings from one collection |
+| `judge RECOMMENDATION_ID` | Assess that implication before human approval |
+| `review recommendation ID approved --rationale "..."` | Record explicit operator approval |
+| `review source SOURCE_VERSION withdrawn --rationale "..."` | Immediately exclude dependent records from adapter results |
+| `create-index` | Create a managed embedding index on an existing STANDARD search endpoint |
+| `publish` | Refresh the shared search table and request triggered index synchronization |
+| `search "question" --collection teaching --tier library` | Search original passages; `reviewed` finds accepted findings, `approved` finds approved implications |
+| `export-guidance ID` | Export eligible, single-source teaching guidance matching v1 |
+
+Recommendation JSON contains `text`, `finding_ids`, `rationale`, `limitations`, `target_letters`, and `difficulty_tags`. Industry implications use empty teaching arrays. Multi-source implications remain searchable internally but cannot be squeezed into v1's single citation. Corrections create new findings/recommendations; reject obsolete records rather than overwriting them. Ingesting a new edition does not automatically withdraw the previous edition: explicitly withdraw it when appropriate.
+
+The CLI records the authenticated operator, not a user-supplied actor string. Do not run review commands on behalf of a human without their review decision. Ordinary access controls still apply: administrators can modify tables, and this is not a tamper-proof compliance ledger.
+
+## Deployment and operation
+
+`config/operations.toml` records the verified workspace, existing SQL warehouse and volume, plus research-owned endpoint/index/experiment names. No credentials are stored. `init` never creates catalogs, schemas, volumes, grants, or shared infrastructure.
+
+```bash
+cd databricks/research-pipeline
 databricks bundle validate -t dev --profile magneto
+databricks bundle deploy -t dev --profile magneto
+databricks bundle run -t dev --profile magneto research_process --params source_version=REGISTERED_VERSION
 ```
 
-The following are mutating operational commands, not prerequisites for local tests:
+The manual job parses/prepares one document. It does not extract findings, approve anything, or automatically publish. No schedule and no automatic retries. Direct CLI calls and job runs are separate verification paths. Run one mutation at a time; concurrent external writers are not supported in this MVP. An interrupted run stays incomplete and its derived passages/findings are ineligible; retry explicitly with a new run.
+
+Use [the console guide](docs/console-guide.md) and `notebooks/research_operations.sql` to navigate and inspect the knowledge base inside Databricks. No local research UI or HTTP search bridge is maintained.
+
+## Availability and limits
+
+`ai_prep_search` is Beta. A supported region and SQL compute are required. The parser supports at most 500 pages / 100 MB; this intake deliberately supports PDFs first. HTML, CSV, XLSX, automatic discovery, schedules, and learner-data ingestion are not implemented. Generated extraction/preparation content requires review. Exact-substring checks establish quote presence, not scientific validity.
+
+The domain library can contain unreviewed source passages. Those are clearly labeled and isolated from reviewed findings and approved implications. Search similarity is not evidence strength. No generic graph, custom embedding server, or separate learner database is added. Search overfetches candidates and revalidates current status, so it may return fewer than the requested limit while an index is stale.
+
+See [verification.md](docs/verification.md) for actual cloud results and outstanding checks; configuration and local tests alone do not prove deployed behavior.
+
+## Connect the updater experiment
+
+The updater uses `/Shared/magneto-research`, separate from the live orchestrator's
+`/Shared/agentbricks_traces/magneto-director-uc`. It reuses the existing
+`workspace.magneto` schema and warehouse `a5e11b7fe2c6dbbc`. Setup may create the
+updater experiment and its own UC trace tables; it never provisions shared
+namespaces or grants, and never rebinds an experiment pointing to another schema.
+Existing legacy traces are not migrated by binding the new destination.
+
+From the repository root, authenticate and explicitly connect:
 
 ```bash
-databricks bundle deploy -t dev --profile magneto
-databricks bundle run -t dev --profile magneto research_smoke
+databricks auth login --profile magneto
+PYTHONPATH=databricks/research-pipeline/src .venv-agent/bin/python -m magneto_research.cli --config databricks/research-pipeline/config/operations.toml --profile magneto connect-experiment --create --verify-write
 ```
 
-Deployment builds the package wheel and uploads bundle files. Running starts serverless compute for one metadata-only task, using the job identity's credentials, without a local profile. Serverless availability and job-identity permissions must be verified in that environment. There is no schedule, automatic retry or processing task. The bundle does not own shared namespaces, permissions, the director, or its experiment.
+The connection probe writes one synthetic run and trace, then reads it back;
+it does not invoke a model, upload learner data, ingest sources, or create research
+tables. Bound its readback to 60 seconds when running through an agent. A pending
+trace ID is printed before readback so a timeout need not repeat the write.
+A `verified` result confirms this probe only, not successful research processing.
 
-Only a development target is defined. For another environment, explicitly align workspace configuration and resource references before adding a target. Research MLflow and AI Search references are optional and unset; setting a reference does not provision a resource.
-
-## Verification boundary
-
-Tests check configuration validation, workspace isolation, read-only adapter behavior and failure reporting. Bundle validation checks configuration; it does not prove remote execution. This scaffold has not been deployed or run as a cloud job as part of the repository cleanup.
-
-Cleanup verification: 10 research tests, 15 existing platform tests and repository `npm run check` passed. Bundle validation was attempted but blocked by missing cached credentials for profile `magneto`. Wheel build verification was blocked by unavailable build dependencies and package-index DNS access. Re-run both in an authenticated environment with build dependencies available before deployment. No browser views were changed.
+Subsequent operational CLI commands require the configured experiment and its UC
+binding to exist; they never create it implicitly. Ingestion, parsing/preparation,
+extraction, judging, publication, and search are traced through their existing
+operation contexts. The evidence judge reuses its parent updater run. Draft and
+human review records remain explicit audit writes; model assessment never grants
+approval. Install the package's `judge` extra to run model-based evidence judges.
+Smoke remains read-only and checks the configured experiment without tracing.

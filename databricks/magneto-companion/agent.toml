@@ -1,0 +1,9 @@
+schema_version = 1
+
+[agent]
+framework = "langgraph"
+server = "custom"
+deployment_name = "magneto-companion"
+
+[tracing]
+experiment_name = "/Shared/agentbricks_traces/magneto-companion-uc"

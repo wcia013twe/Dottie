@@ -1,0 +1,16 @@
+{
+  "provider": "elevenlabs",
+  "voice_id": "EdRF4OLfMKecDfuWuBXY",
+  "model_id": "eleven_flash_v2_5",
+  "phrases": {
+    "home": "Home. Choose Explore, Practice, Story mode, or About me.",
+    "explore": "Explore. Start your camera to discover objects.",
+    "practice": "Practice. Choose a letter, or try Feel and Guess.",
+    "stories": "Story mode. Choose a book to begin.",
+    "intelligence": "About me. Your learning discoveries are here.",
+    "guess": "Feel and Guess. What is the mystery word?",
+    "match": "Find its match. Choose the matching object.",
+    "letters": "Letters. Choose a letter to hear its Braille dots.",
+    "connect": "Connections. A grown-up can help set up your devices."
+  }
+}

@@ -46,6 +46,8 @@ AGENTS.md                Brief guidance for coding agents
 
 ## Use the viewer
 
+Open **System** in the viewer header, or the system-map link in the learning companion's **Grown-up corner**, to see the animated Databricks scaffolding at `/system.html`. Select services for their implementation paths. **Check Databricks access** performs bounded, read-only resource metadata checks using the existing `.venv-agent` and `magneto` login; it does not run models, SQL queries, deployment, or trace writes. Implemented wiring, optional adapters and missing integrations are labeled separately. A successful access check is not an end-to-end integration test.
+
 Open **Designs → Servo + reset → Open** to inspect the solid servo concept. Select dots, click **Write selected**, then **Pull reset tab**. The view selector and checkboxes isolate groups; Explode separates them. Drag to orbit, scroll to zoom and right-drag to pan.
 
 The Designs library includes **Motor arm — four-part drive**, Servo + reset, and the Readable reconstruction. Their source geometry ships with this repository, including `web/models/drive-design.json`, so a fresh browser can install the motor-arm entry. The yellow **8-cell track** button appears only in Servo + reset. **Assemble** restores assembled positions; **Center view** frames the current view. Import STL files to start a design, then name and save it. Saved designs live in localStorage: changing the browser or localhost port creates a separate library, and clearing browser data removes saves. They are not written into this Git repository.

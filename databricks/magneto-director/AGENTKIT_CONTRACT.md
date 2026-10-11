@@ -16,3 +16,11 @@ only for local development. Secrets must not be committed or returned to the bro
 
 Keep app.yaml and the pinned lockfile installable. Do not add tools, conversational memory, or a
 chat UI without extending the approved application contract and tests.
+
+Approved research context is now an optional server-side dependency of the single decision node.
+When MAGNETO_RESEARCH_ENABLED=1, agent/research.py implements the existing v1 retrieval boundary,
+rechecks current Delta eligibility and supplies a separate approved-evidence message to the model.
+Canonical snapshot and decision transport schemas are unchanged; model-selected tools are not added.
+The active decision span records evidence supplied and its citations. Lookup failures are explicit;
+empty successful results carry matches: []. This code is locally tested, not activated in app.yaml
+or verified in a deployed invocation. A model assessment cannot approve source findings/guidance.

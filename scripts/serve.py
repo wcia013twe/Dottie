@@ -5,10 +5,17 @@ from pathlib import Path
 import argparse
 import json
 import threading
+from voice_env import load_voice_env
 from urllib.parse import urlparse
 
 from decision_bridge import BridgeError, ContractError, request_decision
 from story_bridge import handle as handle_story
+from learner_bridge import handle as handle_learner
+from system_status import handle as handle_system_status
+from explore_bridge import handle as handle_explore
+from nano_bridge import handle as handle_nano
+from voice_bridge import handle as handle_voice
+from story_narration import handle as handle_narration
 
 WEB = Path(__file__).resolve().parents[1] / 'web'
 _pending = threading.Lock()
@@ -27,7 +34,16 @@ class Handler(SimpleHTTPRequestHandler):
         except (BrokenPipeError, ConnectionResetError):
             pass  # Navigation/cancellation must not turn a late result into another activity.
 
+    def do_GET(self):
+        if handle_nano(self): return
+        if handle_learner(self): return
+        super().do_GET()
+
     def do_POST(self):
+        if handle_narration(self): return
+        if handle_voice(self): return
+        if handle_explore(self): return
+        if handle_system_status(self): return
         if handle_story(self): return
         if self.path != '/api/decision':
             return self._json(404,{'error':'Unknown API route.'})
@@ -62,6 +78,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 
 def main():
+    load_voice_env()
     parser=argparse.ArgumentParser()
     parser.add_argument('--port',type=int,default=8080)
     args=parser.parse_args()

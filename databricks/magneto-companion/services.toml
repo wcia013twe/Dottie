@@ -1,0 +1,11 @@
+# Service addresses only. No credentials, learner schema, or story content.
+profile = "magneto"
+workspace_host = "https://dbc-129a8d44-1940.cloud.databricks.com"
+catalog = "workspace"
+schema = "magneto"
+reference_volume = "references"
+model_endpoint = "databricks-qwen3-next-80b-a3b-instruct"
+experiment_name = "/Shared/agentbricks_traces/magneto-director-uc"
+agent_app = "agent-bricks-magneto-director"
+trace_table_prefix = "948045133158359"
+trace_warehouse_id = "a5e11b7fe2c6dbbc"

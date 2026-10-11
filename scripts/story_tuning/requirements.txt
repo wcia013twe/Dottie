@@ -1,0 +1,5 @@
+# Offline optimizer tooling only; do not install GEPA into the serving app.
+mlflow==3.17.0
+databricks-agents==1.12.0
+gepa==0.0.27
+litellm==1.104.2

@@ -1,0 +1,12 @@
+# Explicit operational configuration; smoke never invokes these capabilities.
+workspace_host = "https://dbc-129a8d44-1940.cloud.databricks.com"
+catalog = "workspace"
+schema = "magneto"
+source_volume = "references"
+table_prefix = "research"
+warehouse_id = "a5e11b7fe2c6dbbc"
+search_endpoint = "magneto-research"
+search_index = "workspace.magneto.research_index"
+embedding_endpoint = "databricks-qwen3-embedding-0-6b"
+experiment_name = "/Shared/magneto-research"
+judge_model = "databricks:/databricks-qwen3-next-80b-a3b-instruct"

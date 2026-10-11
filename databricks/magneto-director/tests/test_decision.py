@@ -106,3 +106,39 @@ def test_model_uses_shared_platform_and_endpoint_override(monkeypatch):
     assert model_completion('test-override',[{'role':'user','content':'test'}])=='{}'
     assert len(calls)==1
     assert calls[0][1]['response_format']['json_schema']['strict'] is True
+
+
+def test_registry_prompt_and_immutable_boundary(monkeypatch):
+    import agent.decision as module
+    s = fixture(); calls = []
+    monkeypatch.setattr(module, 'resolve_prompt', lambda uri: 'Candidate teaching policy')
+    def completion(model, messages):
+        calls.append(messages)
+        return json.dumps(output(s))
+    decide(s, completion=completion, prompt_uri='prompts:/workspace.magneto.story_orchestrator/1')
+    assert calls[0][0]['content'].startswith('Candidate teaching policy')
+    assert module.PROTOCOL_PROMPT in calls[0][0]['content']
+
+
+def test_registry_failure_does_not_call_model(monkeypatch):
+    import agent.decision as module
+    def broken(uri): raise RuntimeError('Registry unavailable')
+    monkeypatch.setattr(module, 'resolve_prompt', broken)
+    def completion(*args): pytest.fail('Must not infer with a silently substituted policy')
+    with pytest.raises(RuntimeError, match='Registry unavailable'):
+        decide(fixture(), completion=completion, prompt_uri='configured')
+
+
+@pytest.mark.asyncio
+async def test_startup_checks_registry_access(monkeypatch):
+    from runtime import main
+    import mlflow
+    monkeypatch.setattr(mlflow, 'trace', lambda **kwargs: lambda fn: fn)
+    monkeypatch.setattr(mlflow, 'flush_trace_async_logging', lambda: None)
+    monkeypatch.setenv('MAGNETO_PROMPT_URI', 'prompts:/workspace.magneto.story_orchestrator@champion')
+    monkeypatch.setattr(main, 'configure', lambda: None)
+    def unavailable(): raise RuntimeError('Registry denied')
+    monkeypatch.setattr(main, 'resolve_prompt', unavailable)
+    with pytest.raises(RuntimeError, match='Registry denied'):
+        async with main.lifespan(main.app):
+            pytest.fail('App must not become ready with a broken registry')

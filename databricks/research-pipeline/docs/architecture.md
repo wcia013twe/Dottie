@@ -1,39 +1,36 @@
-# Responsibilities and integration boundaries
-
-## Intended processing paths (not implemented)
+# Research-owned evidence architecture
 
 ```text
-Source documents -> parsing -> evidence extraction --+
-                                                    +-> knowledge publication -> AI Search
-Source datasets  -> validation -> analysis ----------+                               |
-                                                                                    v
-                                                                         Agent Bricks director
+Explicit PDF intake → existing reference volume + source registry
+                    → ai_parse_document → saved parsed artifact
+                    → ai_prep_search → original passages + enriched embedding text
+                    → Delta search table → managed embeddings + hybrid AI Search
+
+Original passage → ai_extract candidate → human acceptance → implication draft
+                 → advisory MLflow judge → human approval → eligible teaching export
 ```
 
-Lakehouse storage contains source and derived assets. Unity Catalog governs their names and access. MLflow will record processing/evaluation where explicitly configured. The research pipeline produces knowledge; the director consumes it. Live learner state and device execution belong outside this package.
+Teaching and industry share all processing, review, and retrieval code. `collection` separates them. Search tiers are `library`, `reviewed`, and `approved`; none is implicitly promoted to another.
 
-| Stage | Responsibility | Required decision before implementation |
-| --- | --- | --- |
-| Intake | Explicit source acquisition and provenance | Allowed sources, formats, ownership and update policy |
-| Document processing | Parse and extract source-grounded information | Extraction fields, handling uncertainty, review requirements |
-| Dataset analysis | Validate and analyze structured data | Dataset semantics, analytical questions and valid methods |
-| Publication | Produce versioned knowledge suitable for consumption | Output schemas, acceptance criteria and versioning |
-| Retrieval | Find relevant published knowledge | Chunking, embedding/index configuration, filtering and response contract |
-| Evaluation | Assess extraction, analysis and retrieval quality | Fixtures, metrics and acceptance thresholds |
+## Storage
 
-No universal document/dataset schema or educational strategy is implied by this diagram. Do not create empty successful tasks for these stages.
+Seven research-owned Delta tables use the configured prefix: `sources`, `chunks`, `findings`, `recommendations`, `reviews`, `runs`, and `search_documents`. SQL eligibility views provide the current read model. Sources, passages, findings, implications and review events are append-only through this API; runs record started/completed/failed status. Search documents are a rebuildable derived table with Change Data Feed enabled.
 
-## Tool use
+The reference volume retains original bytes and per-run parser, preparation, extraction, retrieval, and assessment JSON. Research run records link to those artifact directories and, when configured, MLflow run/trace IDs. Parser output includes page geometry; search records keep physical PDF page numbers, which can differ from printed page labels.
 
-Current smoke code performs SDK metadata reads for configured resources. It never invokes the director, queries an index, processes a source or runs model inference. Research AI Functions and optional agent tools can be added after stage contracts are agreed. Beta capabilities are acceptable when their benefit, tested behavior and recovery path are documented.
+Views exclude failed/incomplete runs, expired sources, withdrawn sources, rejected findings and unapproved implications. An implication is eligible only when every supporting finding is currently accepted. Reactivating a withdrawn source requires fresh acceptance of its findings, and changed finding review requires fresh implication approval.
 
-## Ownership
+Publication is one Delta MERGE into the derived search table followed by an explicit index-sync request. Serving revalidates every candidate against the current eligibility view, so stale index content cannot override a withdrawal. This is current-status checking, not a multi-table transactional guarantee against concurrent administrators; serialize operational mutations.
 
-- Platform retains shared resource provisioning and existing director wiring.
-- Research owns its package, manual smoke job and deployment artifacts only.
-- Director owns its runtime, decision contract and generated platform deployment copy.
-- AI Search retrieval interface ownership is unresolved until the consumer contract is defined; do not duplicate retrieval logic between packages.
+## Ownership and boundaries
 
-## Configuration
+- Reuse existing `workspace.magneto` catalog/schema and `references` volume. No grant or namespace provisioning.
+- Research owns its tables, index, endpoint, manual jobs and separate MLflow experiment.
+- Broad library search is an internal research interface, not the shared teaching retrieval contract.
+- `export-guidance` projects reviewed internal evidence onto v1. It does not append internal fields or connect the live director.
+- Databricks Catalog Explorer and the read-only operations notebook expose evidence and review queues. User review actions remain explicit authenticated CLI commands.
+- Personal interaction analysis, learner-profile updates and physical execution are separate components.
 
-Research references existing assets independently of the director. Standard Databricks SDK authentication is reused; the platform's director-specific configuration is not copied. MLflow and search configuration is optional. Authentication failures are failures, not evidence that resources should be created.
+## Managed capabilities and remaining logic
+
+Databricks performs parsing, contextual search preparation, structured extraction, embeddings, indexing, SQL joins, run storage and MLflow judging. Local code validates provenance, computes immutable IDs, enforces publication eligibility, records decisions, and returns cited search results. It does not implement a graph database, vector engine or custom PDF parser.

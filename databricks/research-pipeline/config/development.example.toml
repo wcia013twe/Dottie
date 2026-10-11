@@ -3,6 +3,8 @@ workspace_host = "https://dbc-129a8d44-1940.cloud.databricks.com"
 catalog = "workspace"
 schema = "magneto"
 source_volume = "references"
-# Optional existing resources; leave unset until selected.
-# experiment_name = "/Shared/magneto-research"
+# Updater tracking uses the existing project schema and warehouse.
+experiment_name = "/Shared/magneto-research"
+warehouse_id = "a5e11b7fe2c6dbbc"
+# Optional search resource; leave unset until selected.
 # search_index = "workspace.magneto.approved_index"
