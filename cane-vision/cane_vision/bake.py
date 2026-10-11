@@ -16,7 +16,7 @@ from pathlib import Path
 
 import yaml
 
-from .detector import load_vocabulary
+from .detector import drop_text_encoder, fp16_args, load_vocabulary
 from .pipeline import DEFAULT_CONFIG
 
 
@@ -40,15 +40,15 @@ def main() -> None:
 
     model = YOLO(args.base or det_cfg.get("model", "yolov8s-worldv2.pt"))
     model.set_classes(vocabulary)
+    drop_text_encoder(model)
     out = base_dir / args.out
     out.parent.mkdir(parents=True, exist_ok=True)
     model.save(out)
     print(f"Baked {len(vocabulary)} names into {out}")
 
     if args.export:
-        exported = YOLO(out).export(
-            format=args.export, imgsz=det_cfg.get("image_size", 640), half=args.half
-        )
+        precision = fp16_args() if args.half else {}
+        exported = YOLO(out).export(format=args.export, imgsz=det_cfg.get("image_size", 640), **precision)
         print(f"Exported {exported}")
 
 
