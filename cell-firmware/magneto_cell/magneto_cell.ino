@@ -21,13 +21,18 @@ const uint16_t ATTACH_STAGGER_MS = 150;  // power the servos up one at a time
 // Leave empty to start with all dots down.
 const char BOOT_TEXT[] = "";
 
-const uint32_t EEPROM_MAGIC = 0x314E474DUL;  // "MGN1"
+const uint32_t EEPROM_MAGIC = 0x324E474DUL;  // "MGN2"
 
+// Saved settings are tied to the defaults they were made from: change the
+// angle constants in cell_core.h, re-flash, and the new defaults take over.
 struct Stored {
   uint32_t magic;
+  uint16_t defaults_id;
   magneto::Settings settings;
   uint16_t checksum;
 };
+
+uint16_t defaultsId() { return magneto::checksum(magneto::defaultSettings()); }
 
 class ArduinoHardware : public magneto::Hardware {
  public:
@@ -40,7 +45,7 @@ class ArduinoHardware : public magneto::Hardware {
   void println(const char* line) override { Serial.println(line); }
 
   bool save(const magneto::Settings& s) override {
-    Stored stored = {EEPROM_MAGIC, s, magneto::checksum(s)};
+    Stored stored = {EEPROM_MAGIC, defaultsId(), s, magneto::checksum(s)};
     EEPROM.put(0, stored);  // only rewrites bytes that changed
     return true;
   }
@@ -49,7 +54,8 @@ class ArduinoHardware : public magneto::Hardware {
 magneto::Settings loadSettings() {
   Stored stored;
   EEPROM.get(0, stored);
-  if (stored.magic == EEPROM_MAGIC && stored.checksum == magneto::checksum(stored.settings) &&
+  if (stored.magic == EEPROM_MAGIC && stored.defaults_id == defaultsId() &&
+      stored.checksum == magneto::checksum(stored.settings) &&
       magneto::validSettings(stored.settings))
     return stored.settings;
   return magneto::defaultSettings();

@@ -13,7 +13,7 @@ Jetson ── USB serial ──▶ Arduino Uno ── D2..D7 ──▶ six SG90s
 
 **Status.** The sketch compiles for the Uno (about 29% of flash and 45% of
 RAM). The logic passes host tests and runs in a simulator. It has not yet
-been run on a real board with servos; the endpoint defaults are placeholders
+been run on a real board with servos; the endpoint defaults are starting points
 until each dot is calibrated.
 
 ## Files
@@ -80,8 +80,8 @@ What to look for:
 - **"servo test starting" reappears by itself, usually during "all together".**
   The board reset because the servos pulled the supply down.
 
-The swing is a fixed 40°. Run it with the horns free or the linkages detached.
-Otherwise shrink `LOW_US`/`HIGH_US` first, so no pin is pushed against its stop.
+The swing is a fixed 40° around 1500 µs. It only checks wiring and power; the
+real UP/DOWN positions are in `magneto_cell` (see below).
 
 ## Flash
 
@@ -97,26 +97,47 @@ arduino-cli compile --fqbn arduino:avr:uno cell-firmware/magneto_cell
 arduino-cli upload  --fqbn arduino:avr:uno -p /dev/ttyACM0 cell-firmware/magneto_cell
 ```
 
-## Calibrate each dot
+## Default positions
 
-Every linkage needs its own UP and DOWN pulse. Mirrored horns move in opposite
-directions, so no single angle fits all six. Open the Serial Monitor at
-**115200 baud** with line ending **Newline**, then do this for each dot:
+The horns stay where they were fitted. The firmware turns each one to its
+extended (dot up) and rest (dot down) angle. Set them in degrees at the top of
+`magneto_cell/cell_core.h`:
 
-1. `JOG 1 1500` moves dot 1's servo to 1500 µs. Step in 20–50 µs increments.
-   Find the pulse where the pin is fully raised and the one where it sits just
-   below the reading surface. A servo that buzzes is pushing against a hard
-   stop, so back off a little.
-2. `CAL 1 1720 1460` stores UP then DOWN. UP can be the smaller number.
-3. Check with `DOTS 1` (raised) and `DOTS` (all down).
+```cpp
+const int16_t EXTENDED_ANGLE_DEG = -15;  // dot UP (pressed, red line)
+const int16_t REST_ANGLE_DEG = 32;       // dot DOWN (rest, blue line)
+const int8_t LEFT_BANK_DIR = 1;          // dots 1-3
+const int8_t RIGHT_BANK_DIR = -1;        // dots 4-6
+const uint16_t US_PER_10_DEG = 105;      // SG90: about 10.5 us per degree
+```
 
-Repeat for dots 2–6. Then:
+- Angles are measured from where the horn sits at 1500 µs. Positive turns one
+  way, negative the other.
+- Dots 4–6 are a mirror image, so `RIGHT_BANK_DIR = -1` turns them the
+  opposite way. If a whole bank moves backwards, flip its `*_BANK_DIR`.
+- Re-flash after editing. The new angles replace any endpoints saved with
+  `SAVE`, so there's no need to send `DEFAULTS`.
 
-- `DOTS 123456` raises every dot. Check that none stick or collide.
-- `SPELL hello` runs the demo word.
-- `SAVE` writes the endpoints and timing to EEPROM.
-- `CONFIG` prints the settings as commands you can paste back later. Keep a
-  copy with the build notes.
+With the values above, the pulses are:
+
+| Dots | UP (extended) | DOWN (rest) |
+|------|---------------|-------------|
+| 1–3 | 1343 | 1836 |
+| 4–6 | 1657 | 1164 |
+
+## Check and fine-tune each dot
+
+Flash `magneto_cell` and open the Serial Monitor at **115200 baud** with line
+ending **Newline**.
+
+1. `DOTS 123456` should raise every dot; `DOTS` lowers them.
+2. **A bank moves backwards** (pressed and rest are swapped): flip that bank's
+   `LEFT_BANK_DIR` or `RIGHT_BANK_DIR` in `cell_core.h` and re-flash.
+3. **All arms are a little off:** change the two angles and re-flash.
+   **Only one is off:** nudge it with `JOG` in 20–30 µs steps (e.g. `JOG 2 1320`,
+   `JOG 2 1360`), then store it with `CAL 2 <up> <down>` and `SAVE`.
+4. `DOTS 123456` and `SPELL hello` to check, then `SAVE`. `CONFIG` prints the
+   settings as commands you can paste back later.
 
 ## Commands
 
@@ -150,15 +171,17 @@ servo stagger. Changes last until reset unless saved.
 
 - **Clear between letters.** There is always an all-down gap after each letter,
   so the two L's in "hello" read as two letters.
-- **Dots are driven both ways and held.** Servos stay powered while a letter is
-  shown, with no catch, as the mechanism notes require.
+- **Dots are pushed up and held; gravity lowers them.** Servos stay powered
+  while a letter is shown. The piston simply rests on the horn tip, so DOWN
+  only has to lean the arm out of the way.
 - **Gentle power-up.** Each servo's first pulse is its DOWN position, so
   nothing jumps to 90°. The servos also start 150 ms apart.
 - **Staggered moves.** Within a letter, servos start 20 ms apart instead of all
   at once, which lowers the peak current draw. Use `TIMING ... 0` to move them
   together.
-- **Safe settings.** EEPROM settings carry a checksum. Blank or corrupt
-  settings fall back to the defaults.
+- **Safe settings.** EEPROM settings carry a checksum and are tied to the angle
+  constants they were made from. Blank, corrupt or outdated settings fall back
+  to the defaults.
 - **No computer needed for a demo.** Set `BOOT_TEXT` in the sketch to
   `"hello"` and the board spells it at power-up.
 - **Unexpected restarts.** If the board prints `READY` while running (the

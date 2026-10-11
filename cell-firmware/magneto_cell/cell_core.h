@@ -29,6 +29,19 @@ const uint16_t PULSE_MIN_US = 500;
 const uint16_t PULSE_MAX_US = 2500;
 const uint16_t MAX_STEP_MS = 60000;
 const uint16_t MAX_STAGGER_MS = 200;
+// ---- Dot angles: edit these, re-flash, and they take effect --------------
+// Angles are in degrees, measured from where the horn sits at 1500 us (as it
+// was fitted). Positive turns one way, negative the other. Dots 1-3 use them
+// as written; dots 4-6 are multiplied by RIGHT_BANK_DIR (-1 = mirror image).
+// If a whole bank moves backwards, flip its *_BANK_DIR between 1 and -1.
+const int16_t EXTENDED_ANGLE_DEG = 10;  // dot UP (pressed, red line)
+const int16_t REST_ANGLE_DEG = -32;       // dot DOWN (rest, blue line)
+const int8_t LEFT_BANK_DIR = 1;          // dots 1-3
+const int8_t RIGHT_BANK_DIR = -1;        // dots 4-6
+const uint16_t US_PER_10_DEG = 105;      // SG90: about 10.5 us per degree
+
+// Pulse for `deg` degrees from the 1500 us position, clamped to the legal range.
+uint16_t angleToPulse(int16_t deg, int8_t dir);
 
 struct Settings {
   uint16_t up_us[DOT_COUNT];    // pulse that raises each dot
