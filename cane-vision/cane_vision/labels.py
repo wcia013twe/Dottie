@@ -21,6 +21,22 @@ DEFAULT_RENAMES: dict[str, str] = {
 }
 
 
+# Names that are already plural take no article ("you're looking at stairs").
+PLURALS = {"stairs", "steps", "scissors", "glasses", "shoes", "clothes"}
+
+
+def with_article(word: str) -> str:
+    """'chair' -> 'a chair', 'elevator' -> 'an elevator', 'stairs' -> 'stairs'."""
+    if word.lower() in PLURALS:
+        return word
+    return f"{'an' if word[:1].lower() in 'aeiou' else 'a'} {word}"
+
+
+def format_phrase(phrase: str, word: str) -> str:
+    """Fill `{object}` (the bare word) and `{a_object}` (with a/an) in a phrase."""
+    return phrase.format(object=word, a_object=with_article(word))
+
+
 @dataclass(frozen=True)
 class Announcement:
     spoken: str
