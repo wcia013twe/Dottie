@@ -25,6 +25,9 @@ BAUD = 115200
 MAX_TEXT = 64          # longest text the firmware keeps from one SPELL
 MAX_STEP_MS = 60000
 # USB vendor IDs of Uno boards and the USB-serial chips on common clones.
+PERMISSION_HINT = (
+    "\n[cell] Fix on Linux: sudo usermod -aG dialout $USER, then log out and back in"
+)
 USB_VENDORS = {0x2341: "Arduino", 0x2A03: "Arduino", 0x1A86: "CH340", 0x10C4: "CP210x", 0x0403: "FTDI"}
 
 
@@ -212,7 +215,8 @@ def make_cell(cell_cfg: dict, timing: Timing) -> SerialCell | CellPlayer:
     try:
         return SerialCell(found, timing, baud)
     except (serial.SerialException, RuntimeError) as e:
-        print(f"[cell] {e}, using the console preview", flush=True)
+        hint = PERMISSION_HINT if "Permission denied" in str(e) else ""
+        print(f"[cell] {e}, using the console preview{hint}", flush=True)
         return console
 
 

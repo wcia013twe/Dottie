@@ -20,6 +20,22 @@ def pick_device(device: str | None = "auto") -> str:
     return "cpu"
 
 
+def fp16_args() -> dict:
+    """FP16 in whichever form the installed Ultralytics takes: `quantize=16`
+    in newer releases (where `half` is deprecated), `half=True` before."""
+    from ultralytics.cfg import DEFAULT_CFG_DICT
+
+    return {"quantize": 16} if "quantize" in DEFAULT_CFG_DICT else {"half": True}
+
+
+def drop_text_encoder(model) -> None:
+    """YOLO-World keeps its CLIP text encoder (~150M parameters, 12x the
+    detector) attached after `set_classes`, so it would follow the detector
+    onto the GPU and into saved files. The encoded names are all it needs."""
+    if getattr(model.model, "clip_model", None) is not None:
+        model.model.clip_model = None
+
+
 @dataclass(frozen=True)
 class Detection:
     label: str
@@ -59,10 +75,12 @@ class Detector:
             # YOLO-World: detect exactly these names. This encodes the words
             # with CLIP at startup; a baked model (cane_vision.bake) skips it.
             self.model.set_classes(vocabulary)
+            drop_text_encoder(self.model)
         self.confidence = confidence
         self.image_size = image_size
         self.device = pick_device(device)
-        self.half = self.device.startswith("cuda")  # FP16 is free speed on NVIDIA GPUs
+        # FP16 is free speed on NVIDIA GPUs
+        self.precision = fp16_args() if self.device.startswith("cuda") else {}
 
     @property
     def class_names(self) -> list[str]:
@@ -75,7 +93,7 @@ class Detector:
             conf=self.confidence,
             imgsz=self.image_size,
             device=self.device,
-            half=self.half,
+            **self.precision,
             verbose=False,
         )[0]
         names = result.names
