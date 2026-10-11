@@ -52,4 +52,14 @@ def submit_response(session_id: str, revision: int, text: str) -> dict:
     """Capture an UNCONFIRMED response transcript; never grade it or establish mastery."""
     return bridge('submit_response',session_id,revision,text=text)
 
+@mcp.tool()
+def propose_word_emphasis(session_id: str, revision: int, activity: Literal['emphasize'], target: str, prompt: str, hint: str, reason: str) -> dict:
+    """Propose exploring an approved story keyword letter by letter on one cell. Exposure, not a recognition assessment. No hardware execution."""
+    return bridge('propose_word_emphasis',session_id,revision,activity=activity,target=target,prompt=prompt,hint=hint,reason=reason)
+
+@mcp.tool()
+def prepare_word_sequence(session_id: str, revision: int) -> dict:
+    """After educator approval, prepare ordered Braille cells and bounded timing for the keyword. Preview only; no serial writes or physical-ready claim."""
+    return bridge('prepare_word_sequence',session_id,revision)
+
 if __name__=='__main__':mcp.run(transport='stdio')

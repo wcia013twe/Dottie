@@ -34,7 +34,8 @@ class SyntheticCloudTests(unittest.TestCase):
             self.assertTrue(saved['events'][0]['synthetic'])
 
     def setUp(self):
-        self.batch = json.loads((ROOT/'reports/synthetic-learner-profiles/river.evidence.json').read_text())
+        from generate_synthetic_profiles import batches
+        self.batch = batches()['river']
         self.baseline = derive(self.batch['learner_id'], 'Fictional River', self.batch['events'], True)
 
     def test_production_genie_still_rejects_synthetic(self):

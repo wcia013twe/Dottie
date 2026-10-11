@@ -71,7 +71,7 @@ export async function importEbook(file) {
     if (tag === 'img' || tag === 'image') {
       const href = node.getAttribute('src') || node.getAttribute('href') || node.getAttribute('xlink:href');
       const src = href ? await image(resolve(path,href)) : '';
-      return src ? `<img src="${src}" alt="${esc(node.getAttribute('alt')||'Book illustration')}">` : '';
+      return src ? `<img src="${src}" alt="${esc(node.getAttribute('alt')||'Book illustration')}" data-source-image-id="${esc(node.getAttribute('id')||'')}">` : '';
     }
     const content = (await Promise.all([...node.childNodes].map(child=>clean(child,path)))).join('');
     if (!allowed.has(tag)) return content;

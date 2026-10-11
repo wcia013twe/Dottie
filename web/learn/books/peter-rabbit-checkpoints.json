@@ -1,0 +1,171 @@
+{
+  "schema_version": "1.0",
+  "book_id": "builtin-peter-rabbit",
+  "edition": "bundled-gutenberg-14838",
+  "pages": [
+    {
+      "id": "title-opening",
+      "source_image_id": "img_images_peter04.jpg"
+    },
+    {
+      "id": "page-03",
+      "source_image_id": "img_images_peter02.gif"
+    },
+    {
+      "id": "page-04",
+      "source_image_id": "img_images_peter08.jpg"
+    },
+    {
+      "id": "page-05",
+      "source_image_id": "img_images_peter11.jpg"
+    },
+    {
+      "id": "page-06",
+      "source_image_id": "img_images_peter12.jpg"
+    },
+    {
+      "id": "page-07",
+      "source_image_id": "img_images_peter15.jpg"
+    },
+    {
+      "id": "page-08",
+      "source_image_id": "img_images_peter16.jpg"
+    },
+    {
+      "id": "page-09",
+      "source_image_id": "img_images_peter19.jpg"
+    },
+    {
+      "id": "page-10",
+      "source_image_id": "img_images_peter20.jpg"
+    },
+    {
+      "id": "page-11",
+      "source_image_id": "img_images_peter23.jpg"
+    },
+    {
+      "id": "page-12",
+      "source_image_id": "img_images_peter24.jpg"
+    },
+    {
+      "id": "page-13",
+      "source_image_id": "img_images_peter27.jpg"
+    },
+    {
+      "id": "page-14",
+      "source_image_id": "img_images_peter28.jpg"
+    },
+    {
+      "id": "page-15",
+      "source_image_id": "img_images_peter31.jpg"
+    },
+    {
+      "id": "page-16",
+      "source_image_id": "img_images_peter32.jpg"
+    },
+    {
+      "id": "page-17",
+      "source_image_id": "img_images_peter35.jpg"
+    },
+    {
+      "id": "page-18",
+      "source_image_id": "img_images_peter36.jpg"
+    },
+    {
+      "id": "page-19",
+      "source_image_id": "img_images_peter39.jpg"
+    },
+    {
+      "id": "page-20",
+      "source_image_id": "img_images_peter40.jpg"
+    },
+    {
+      "id": "page-21",
+      "source_image_id": "img_images_peter43.jpg"
+    },
+    {
+      "id": "page-22",
+      "source_image_id": "img_images_peter44.jpg"
+    },
+    {
+      "id": "page-23",
+      "source_image_id": "img_images_peter47.jpg"
+    },
+    {
+      "id": "page-24",
+      "source_image_id": "img_images_peter48.jpg"
+    },
+    {
+      "id": "page-25",
+      "source_image_id": "img_images_peter51.jpg"
+    },
+    {
+      "id": "page-26",
+      "source_image_id": "img_images_peter52.jpg"
+    },
+    {
+      "id": "page-27",
+      "source_image_id": "img_images_peter55.jpg"
+    },
+    {
+      "id": "page-28",
+      "source_image_id": "img_images_peter57.jpg"
+    },
+    {
+      "id": "page-29",
+      "source_image_id": "img_images_peter58.jpg"
+    }
+  ],
+  "checkpoints": [
+    {
+      "id": "rabbit",
+      "page_id": "page-03",
+      "summary": "Meet Peter and the other little rabbits.",
+      "prop": "rabbit model",
+      "targets": [
+        "r",
+        "rabbit"
+      ],
+      "pause_at": "after_narration",
+      "optional": true,
+      "required_materials": [
+        "rabbit model",
+        "tactile Braille for the selected target"
+      ]
+    },
+    {
+      "id": "gate",
+      "page_id": "page-09",
+      "summary": "Peter squeezes under the garden gate.",
+      "prop": "tactile gate model",
+      "targets": [
+        "g",
+        "gate"
+      ],
+      "pause_at": "after_narration",
+      "optional": true,
+      "required_materials": [
+        "tactile gate model",
+        "tactile Braille for the selected target"
+      ]
+    },
+    {
+      "id": "lettuce",
+      "page_id": "page-10",
+      "summary": "Peter eats lettuces, French beans and radishes.",
+      "prop": "lettuce leaf or radish model",
+      "targets": [
+        "l",
+        "lettuce",
+        "r",
+        "radish"
+      ],
+      "pause_at": "after_narration",
+      "optional": true,
+      "required_materials": [
+        "lettuce leaf or radish model",
+        "tactile Braille for the selected target"
+      ]
+    }
+  ]
+}

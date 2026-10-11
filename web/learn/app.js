@@ -1,9 +1,9 @@
-import { loadNavigationVoice, navigationPrompt, speakNavigation, stopNavigationVoice } from './navigation-voice.js?v=eleven-autoplay-1';
+import { loadNavigationVoice, navigationPrompt, speakNavigation, stopNavigationVoice } from './navigation-voice.js?v=merge-main-1';
 import { mountDeviceStatus } from './device-status.js';
-import { mountVoice } from './voice.js?v=eleven-autoplay-1';
-import { voiceContext, performVoiceAction } from './voice-actions.js?v=eleven-autoplay-1';
-import { stories, bindStories, cleanupStoryReader, isStoryOpen } from './stories.js?v=eleven-autoplay-1';
-import { intelligence, bindIntelligence } from './intelligence.js?v=alex-persona-1';
+import { mountVoice } from './voice.js?v=merge-main-1';
+import { voiceContext, performVoiceAction } from './voice-actions.js?v=merge-main-1';
+import { stories, bindStories, cleanupStoryReader, isStoryOpen } from './stories.js?v=merge-main-1';
+import { intelligence, bindIntelligence } from './intelligence.js?v=merge-main-1';
 import { connectors } from './connectors.js';
 import { exploreView, bindExplore, cleanupExplore } from './explore.js';
 const paths={home:'M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z',explore:'M10 3H3v7m11-7h7v7M3 14v7h7m11-7v7h-7M8 12h8m-4-4v8',practice:'M4 4h6a3 3 0 0 1 3 3v14a4 4 0 0 0-4-2H4Zm16 0h-4a3 3 0 0 0-3 3v14a4 4 0 0 1 4-2h3Z',progress:'m4 17 5-6 4 3 7-10M15 4h5v5M3 21h18',guess:'M8 9a4 4 0 1 1 7 3c-2 1-3 2-3 4m0 4h.01M4 4l1-1m14 0 1 1',match:'M3 5h7v7H3Zm11 7h7v7h-7ZM14 5h5v3M10 19H5v-3',audio:'M11 4 5 9H2v6h3l6 5ZM15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14',camera:'M3 7h5l2-3h4l2 3h5v13H3Z M16 13a4 4 0 1 1-8 0 4 4 0 0 1 8 0',device:'M3 6h18v12H3Zm4 4h.01M12 10h.01M17 10h.01M7 14h.01M12 14h.01M17 14h.01',cup:'M4 5h12v11a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4Zm12 2h3a3 3 0 0 1 0 6h-3',ball:'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM6 5c9 1 4 14 12 14M4 17c4-7 12-1 14-12',book:'M3 4h7l2 2 2-2h7v16h-7l-2 1-2-1H3Zm9 2v15',arrow:'M4 12h16m-6-6 6 6-6 6',back:'M20 12H4m6-6-6 6 6 6',leaf:'M19 3C8 2 2 8 5 15c5 7 16 2 14-12ZM5 21 16 8'};

@@ -227,3 +227,16 @@ body:has(.book-player) .player-header .voice-input-panel{position:relative;left:
 body:has(.book-player) .book-player{bottom:0;height:100dvh}.story-fullscreen main:has(.book-player){height:100dvh}
 @media(max-width:600px){.player-header .voice-toggle span{display:none}.player-header .voice-toggle{font-size:12px;gap:4px}.player-header .voice-input-panel{padding:0 8px}}
 .book-player .voice-controls-content{color-scheme:light}.book-player .voice-controls-content button{color:var(--ink);background:var(--green);border:1px solid var(--line);padding:10px 14px;border-radius:12px}.book-player .voice-controls-content button:hover{background:#dce7bc}.book-player .voice-controls-content button.primary{background:var(--teal);color:#fff}.book-player .voice-controls-content button:disabled{opacity:.5}.book-player .voice-controls-content .text-button{background:transparent}.book-player .voice-controls-content .voice-command-help summary{color:var(--ink)}
+.local-narration:not([hidden]){display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:.5rem 0}
+.local-narration audio{max-width:100%}
+
+.reader-timeline{position:relative;margin:14px 8px 0}
+#question-markers{position:absolute;inset:0;pointer-events:none}
+.question-marker{position:absolute;top:-8px;transform:translateX(-50%);width:20px;height:20px;border-radius:50%;background:#f4cf7e;color:#14251f;border:2px solid #14251f;font:bold 12px/16px sans-serif;text-align:center}
+.question-stop-label{margin:4px 0 8px;color:#f4cf7e;font-size:12px}
+
+.question-marker{pointer-events:auto}
+.question-marker--solved{background:#94dab0}
+.question-marker--assisted{background:#b5d7f5}
+.question-marker--skipped{background:#c6cbc8}
+.question-marker--revisit{box-shadow:0 0 0 2px #f4cf7e}

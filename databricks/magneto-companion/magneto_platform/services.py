@@ -28,6 +28,7 @@ class ServiceConfig:
     agent_app: str
     trace_table_prefix: str | None = None
     trace_warehouse_id: str | None = None
+    learning_warehouse_id: str | None = None
 
     @classmethod
     def load(cls, path):
@@ -198,6 +199,39 @@ class Services:
         return self._post(app.url.rstrip('/') + '/api/invocations',
                           {'id': request_id, 'session_id': session_id, 'input': payload},
                           timeout_s=timeout_s, headers={'X-Routing-Key': session_id})
+
+    def ingest_learning_events(self, payload, *, profile_id, timeout_s=12):
+        """Send validated browser events to the learning endpoint without exposing credentials."""
+        if str(UUID(profile_id)) != profile_id:
+            raise ValueError('Profile ID must be a canonical UUID')
+        app = self.client.apps.get(self.config.agent_app)
+        address = urlparse(app.url or '')
+        if address.scheme != 'https' or not address.hostname or address.username or address.password:
+            raise ValueError('App does not have a valid HTTPS URL yet')
+        return self._post(app.url.rstrip('/') + '/api/learning/events', payload,
+                          timeout_s=timeout_s, headers={'X-Profile-Key': profile_id})
+
+    def ingest_learning_attempts(self, payload, *, timeout_s=30):
+        profile_id = payload['profile_id']
+        if str(UUID(profile_id)) != profile_id:
+            raise ValueError('Profile ID must be a canonical UUID')
+        app = self.client.apps.get(self.config.agent_app)
+        address = urlparse(app.url or '')
+        if address.scheme != 'https' or not address.hostname or address.username or address.password:
+            raise ValueError('App does not have a valid HTTPS URL yet')
+        return self._post(app.url.rstrip('/') + '/api/learning/attempts', payload,
+                          timeout_s=timeout_s, headers={'X-Profile-Key': profile_id})
+
+    def create_learning_profile(self, profile, *, timeout_s=12):
+        profile_id = profile.get('profile_id') if isinstance(profile, dict) else None
+        if not isinstance(profile_id, str) or str(UUID(profile_id)) != profile_id:
+            raise ValueError('Profile ID must be a canonical UUID')
+        app = self.client.apps.get(self.config.agent_app)
+        address = urlparse(app.url or '')
+        if address.scheme != 'https' or not address.hostname or address.username or address.password:
+            raise ValueError('App does not have a valid HTTPS URL yet')
+        return self._post(app.url.rstrip('/') + '/api/learning/profile', profile,
+                          timeout_s=timeout_s, headers={'X-Profile-Key': profile_id})
 
     def reference_path(self, relative_path):
         path = PurePosixPath(relative_path)

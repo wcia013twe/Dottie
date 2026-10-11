@@ -20,7 +20,7 @@ LOCK=RLock()
 CURRENT_SESSION=None
 PERSONA=load_persona('alex-morgan')
 # This override lives only in this separate test-server process. The ordinary server stays anonymous.
-story_bridge.create_session=lambda: story_bridge.controller.create(synthetic_persona_id=PERSONA['id'])
+story_bridge.create_session=lambda history=None: story_bridge.controller.create(synthetic_persona_id=PERSONA['id'])
 
 def publish(state):
     with LOCK:

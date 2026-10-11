@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "book_id": "peter-rabbit-interactions",
+  "script_version": "interaction-pack-1",
+  "model_id": "eleven_multilingual_v2",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "style": 0,
+    "use_speaker_boost": true
+  },
+  "passages": [
+    {
+      "id": "success-independent",
+      "match_text": "interaction:success-independent",
+      "text": "You found it! Let’s see where Peter goes next."
+    },
+    {
+      "id": "retry",
+      "match_text": "interaction:retry",
+      "text": "Not quite that one. Let’s feel the dots once more."
+    },
+    {
+      "id": "offer-help",
+      "match_text": "interaction:offer-help",
+      "text": "Let’s try it together. Take your time."
+    },
+    {
+      "id": "success-assisted",
+      "match_text": "interaction:success-assisted",
+      "text": "We found it together. On we go!"
+    },
+    {
+      "id": "skip",
+      "match_text": "interaction:skip",
+      "text": "We can come back to that. Peter’s adventure is waiting."
+    },
+    {
+      "id": "return-to-story",
+      "match_text": "interaction:return-to-story",
+      "text": "Now, where has that little rabbit gone?"
+    },
+    {
+      "id": "invite",
+      "match_text": "interaction:invite",
+      "text": "Before Peter goes any farther, will you help him with a little discovery?"
+    },
+    {
+      "id": "patient-wait",
+      "match_text": "interaction:patient-wait",
+      "text": "Take your time. There’s no need to hurry."
+    }
+  ]
+}

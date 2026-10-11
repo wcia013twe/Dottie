@@ -2,12 +2,15 @@
 from copy import deepcopy
 from threading import RLock
 from uuid import uuid4
+from datetime import datetime, timezone
+from story_mode.review import validate_history, summarize
 
-CATALOG = {
-    'rabbit': {'summary': 'Meet Peter and the other little rabbits.', 'prop': 'rabbit model', 'targets': ['r', 'rabbit']},
-    'lettuce': {'summary': 'Peter eats lettuces, French beans and radishes.', 'prop': 'lettuce leaf or radish model', 'targets': ['l', 'lettuce', 'r', 'radish']},
-    'gate': {'summary': 'Peter squeezes under the garden gate.', 'prop': 'tactile gate model', 'targets': ['g', 'gate']},
-}
+import json
+from pathlib import Path
+
+CHECKPOINT_MAP = json.loads((Path(__file__).resolve().parents[1]/'web/learn/books/peter-rabbit-checkpoints.json').read_text())
+CATALOG = {c['id']: {k:v for k,v in c.items() if k != 'id'} for c in CHECKPOINT_MAP['checkpoints']}
+
 DOTS = dict(zip('abcdefghijklmnopqrstuvwxyz', [[1],[1,2],[1,4],[1,4,5],[1,5],[1,2,4],[1,2,4,5],[1,2,5],[2,4],[2,4,5],[1,3],[1,2,3],[1,3,4],[1,3,4,5],[1,3,5],[1,2,3,4],[1,2,3,4,5],[1,2,3,5],[2,3,4],[2,3,4,5],[1,3,6],[1,2,3,6],[2,4,5,6],[1,3,4,6],[1,3,4,5,6],[1,3,5,6]]))
 
 class StoryError(ValueError):
@@ -18,13 +21,14 @@ class Controller:
         self.sessions = {}
         self.lock = RLock()
 
-    def create(self, *, synthetic_persona_id=None):
+    def create(self, history=None, *, synthetic_persona_id=None):
         # Only the isolated server selects a repository-owned persona; HTTP clients cannot supply prose.
         persona=None
         if synthetic_persona_id is not None:
             from story_mode.personas import load_persona
             persona=load_persona(synthetic_persona_id)
         with self.lock:
+            history=deepcopy(validate_history([] if history is None else history,{t for c in CATALOG.values() for t in c['targets']}))
             # Ephemeral anonymous session; never load a child's identity or browser shelf.
             if len(self.sessions) >= 100:
                 raise StoryError('Too many sessions. Restart the local server to clear expired sessions.')
@@ -32,8 +36,8 @@ class Controller:
             self.sessions[sid] = {'session_id':sid, 'revision':0, 'passage_id':None,
                 'phase':'reading', 'proposal':None, 'response':None, 'observations':[], 'trace':[],
                 'device':{'connected':False, 'ready':False, 'mode':'teacher-supplied tactile Braille'},
-                'policy':{'teacher_approval':True, 'max_activities':6, 'braille_code':'UEB', 'translation':'uncontracted lowercase letters'},
-                'activities_started':0}
+                'policy':{'word_emphasis_enabled':True, 'teacher_approval':True, 'max_activities':6, 'braille_code':'UEB', 'translation':'uncontracted lowercase letters'},
+                'activities_started':0, 'interaction_revision':0, 'learner_history':history}
             if persona is not None:
                 self.sessions[sid]['synthetic_persona']=persona
             return self.get(sid)
@@ -42,6 +46,7 @@ class Controller:
         with self.lock:
             if sid not in self.sessions: raise StoryError('Session expired. Reopen the teacher panel.')
             state = deepcopy(self.sessions[sid])
+            state['review_candidates']=summarize(state.get('learner_history',[])+state['observations'])
             state['opportunity'] = deepcopy(CATALOG.get(state['passage_id']))
             return state
 
@@ -64,13 +69,20 @@ class Controller:
                 passage=args.get('passage_id')
                 if passage is not None and passage not in CATALOG: raise StoryError('Unknown story passage.')
                 s.update(passage_id=passage, phase='reading', proposal=None, response=None)
-            elif name == 'propose_activity':
+            elif name == 'set_word_emphasis':
+                teacher();phase('reading','proposed','continue_proposed')
+                if type(args.get('enabled')) is not bool:raise StoryError('Word emphasis setting must be boolean.')
+                s['policy']['word_emphasis_enabled']=args['enabled']
+                s.update(phase='reading',proposal=None,response=None)
+            elif name in ('propose_activity','propose_word_emphasis'):
                 phase('reading','proposed','continue_proposed',*(['awaiting_confirmation'] if s.get('synthetic_persona') else []))
                 opportunity=CATALOG.get(s['passage_id'])
                 target=args.get('target')
                 if not opportunity or target not in opportunity['targets']: raise StoryError('Target is outside the approved passage.')
                 if s['activities_started'] >= s['policy']['max_activities']: raise StoryError('Session activity limit reached.')
-                if args.get('activity') not in ('introduce','identify','match'): raise StoryError('Unknown activity.')
+                beta=name=='propose_word_emphasis'
+                if beta and (not s['policy']['word_emphasis_enabled'] or not isinstance(target,str) or len(target)<2):raise StoryError('Word emphasis is unavailable for this target.')
+                if args.get('activity') not in (('emphasize',) if beta else ('introduce','identify','match')): raise StoryError('Unknown activity.')
                 s['proposal']={'activity':args['activity'], 'target':target, 'kind':'letter' if len(target)==1 else 'word',
                     'reason':text('reason',400), 'prompt':text('prompt',240), 'hint':text('hint',240)}
                 s['phase']='proposed'
@@ -80,10 +92,13 @@ class Controller:
                 s['proposal']={'reason':text('reason',400)};s['phase']='continue_proposed'
             elif name == 'approve_activity':
                 teacher();phase('proposed');s['phase']='awaiting_tactile';s['activities_started']+=1
-            elif name == 'prepare_braille':
+            elif name in ('prepare_braille','prepare_word_sequence'):
                 phase('awaiting_tactile')
+                if name=='prepare_word_sequence' and (not s['policy']['word_emphasis_enabled'] or s['proposal']['activity']!='emphasize'):raise StoryError('No approved word activity.')
                 s['braille']={'code':'UEB','mode':'uncontracted lowercase', 'cells':[{'letter':c,'dots':DOTS[c]} for c in s['proposal']['target']],
                               'physical_ready':False, 'source':'deterministic preview; teacher supplies tactile material'}
+                if name=='prepare_word_sequence':
+                    s['braille']['sequence']={'word':s['proposal']['target'],'hold_ms':1500,'gap_ms':300,'command':'SPELL '+s['proposal']['target'],'execution':'preview_only'}
             elif name == 'confirm_tactile':
                 teacher();phase('awaiting_tactile')
                 if 'braille' not in s: raise StoryError('Prepare the Braille preview first.')
@@ -103,13 +118,14 @@ class Controller:
                 if outcome not in ('independent','with_help','try_later'): raise StoryError('Invalid observation.')
                 if outcome == 'independent' and s.get('hint_used'): raise StoryError('A hint was used. Record with help or try later.')
                 s['observations'].append({'id':str(uuid4()), 'passage_id':s['passage_id'], 'target':s['proposal']['target'],
-                    'activity':s['proposal']['activity'], 'outcome':outcome, 'source':'teacher', 'hint_used':s.get('hint_used',False)})
+                    'observed_at':datetime.now(timezone.utc).isoformat(), 'activity':s['proposal']['activity'], 'outcome':outcome, 'source':'teacher', 'hint_used':s.get('hint_used',False)})
                 s['phase']='complete'
             elif name == 'resume_story':
                 teacher();s.update(phase='reading',proposal=None,response=None)
             else: raise StoryError('Unknown Story Mode tool.')
-            if name in ('set_context','resume_story','propose_activity'):
+            if name in ('set_context','resume_story','propose_activity','propose_word_emphasis','set_word_emphasis'):
                 for field in ('braille','speech','hint_used','tactile_source'):s.pop(field,None)
+            if name != 'set_context': s['interaction_revision'] = s.get('interaction_revision', 0) + 1
             s['revision']+=1
             s['trace']=(s['trace']+[{'tool':name,'actor':actor,'revision':s['revision']}])[-40:]
             self.sessions[sid]=s

@@ -94,3 +94,18 @@ The model receives the canonical snapshot plus a separate approved-guidance evid
 Reproduce local proof: `PYTHONPATH=databricks/magneto-director databricks/magneto-director/.venv/bin/python -m pytest databricks/magneto-director/tests/test_research.py -q`. Tests use explicitly synthetic research and a controlled model substitute; they prove adapter-to-model wiring and rejection gates, not hosted inference or teaching improvement. Existing research has no approved teaching recommendations in the latest inherited verification, so live retrieval may correctly return no matches until actual review/approval occurs. No synthetic fixture is published.
 
 Local verification: 46 director tests passed, shared contract checks and repository `npm run check` passed. The System map connection is amber, with activation pending; labels and animation were browser-verified. Inspect `reports/research-director-local-proof.json` at the repository root for the captured synthetic guidance/citation, model messages, audit record and validated decision. `uv` was unavailable on PATH; tests ran in the director's existing virtual environment.
+## Optional learning-history uploads
+
+PR #7 extends this app with v2 legacy events/profiles and v3 lean attempts. See
+[the contract and migration notes](../contracts/v3/README.md). This is durable observation storage;
+the decision graph continues to use its supplied v1 snapshot and does not read the tables.
+The browser keeps one profile across session restarts, asks for upload opt-in, and records
+support separately from the teacher's response. Existing books and local progress stay separate.
+
+With learning_warehouse_id empty, learning routes return 503 and queues remain local.
+When configured for an explicit deployment, startup creates missing learning tables. SQL values
+are parameterized; only successful statements and matching event/attempt readback produce
+acknowledgements. The SDK wait is bounded to 5 seconds with cancellation on timeout.
+See the [Statement Execution API](https://docs.databricks.com/api/statement-execution/v1/statement-execution).
+No raw transcripts, media, device commands or model reasoning are accepted in v3.
+The check:learning script covers contract rejection, storage failures, idempotent retries and the browser outbox.

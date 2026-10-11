@@ -9,3 +9,5 @@ experiment_name = "/Shared/agentbricks_traces/magneto-director-uc"
 agent_app = "agent-bricks-magneto-director"
 trace_table_prefix = "948045133158359"
 trace_warehouse_id = "a5e11b7fe2c6dbbc"
+# Separate from MLflow trace storage; set only when the learning Delta tables exist.
+learning_warehouse_id = ""

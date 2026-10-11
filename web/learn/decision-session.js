@@ -1,4 +1,5 @@
 /** Complete snapshots and transport state only; teaching choices come from Databricks. */
+import {LearningOutbox} from './learning-outbox.js';
 export const CONNECTED_KEY = 'magneto-connected-demo-v1';
 export const PASSAGE_IDS = ['monday_apple', 'tuesday_pear', 'wednesday_plum'];
 const letters = ['A', 'P', 'P'];
@@ -21,13 +22,16 @@ export function validateResult(result, request) {
 }
 
 export class DecisionSession {
-  constructor({storage = globalThis.localStorage, fetcher = (...args) => globalThis.fetch(...args), uuid = () => crypto.randomUUID(), timeoutMs = 15000} = {}) {
-    this.storage = storage; this.fetcher = fetcher; this.uuid = uuid; this.timeoutMs = timeoutMs;
+  constructor({storage = globalThis.localStorage, fetcher = (...args) => globalThis.fetch(...args), uuid = () => crypto.randomUUID(), timeoutMs = 15000, outbox = null} = {}) {
+    this.storage = storage; this.fetcher = fetcher; this.uuid = uuid; this.timeoutMs = timeoutMs; this.outbox = outbox || new LearningOutbox({storage, fetcher, uuid});
     this.pending = null; this.error = ''; this.storageOK = true; this.generation = 0;
+    let savedProfile = null;
+    try { savedProfile = JSON.parse(storage.getItem(CONNECTED_KEY) || 'null')?.profile_id; } catch {}
+    this.profileId = this.outbox.profileId(savedProfile);
     this.state = this.fresh();
     try {
       const s = JSON.parse(storage.getItem(CONNECTED_KEY) || 'null');
-      if (s && isId(s.session_id) && Number.isInteger(s.step) && s.step >= 0 && s.step <= 3 &&
+       if (s && isId(s.session_id) && Number.isInteger(s.step) && s.step >= 0 && s.step <= 3 &&
           Array.isArray(s.events) && s.events.length <= 2 && s.events.every(e => isId(e.event_id) &&
             ['tuesday_pear', 'wednesday_plum'].includes(e.passage_id) && e.target_letter === 'P' && ['correct', 'incorrect', 'help'].includes(e.response)) &&
           s.decisions && typeof s.decisions === 'object' && !Array.isArray(s.decisions) && Array.isArray(s.skipped)) {
@@ -38,11 +42,11 @@ export class DecisionSession {
             events: s.events.filter(e => PASSAGE_IDS.indexOf(e.passage_id) < PASSAGE_IDS.indexOf(passage_id))});
         }
         if (s.skipped.some(p => !PASSAGE_IDS.includes(p))) throw Error('Invalid saved skip');
-        this.state = s;
+        this.state = {...s, profile_id: this.profileId};
       }
     } catch { this.storageOK = false; }
   }
-  fresh() { return {session_id: this.uuid(), step: 0, events: [], decisions: {}, skipped: []}; }
+  fresh() { return {session_id: this.uuid(), profile_id: this.profileId, step: 0, events: [], decisions: {}, skipped: []}; }
   get passage() { return PASSAGE_IDS[this.state.step]; }
   get result() { return this.state.decisions[this.passage]; }
   get skipped() { return this.state.skipped.includes(this.passage); }
@@ -59,11 +63,21 @@ export class DecisionSession {
     if (this.pending || (!this.result && !this.skipped)) return;
     this.generation++; this.state.step = Math.min(3, this.state.step + 1); this.error = ''; this.save();
   }
-  record(response) {
+  record(response, support = 'unknown') {
     if (this.pending || this.result?.decision.action !== 'teach' || ![1, 2].includes(this.state.step) ||
         !['correct', 'incorrect', 'help'].includes(response)) return;
     if (this.state.events.some(e => e.passage_id === this.passage)) return;
-    this.state.events.push({event_id: this.uuid(), passage_id: this.passage, target_letter: 'P', response});
+    if (!['none','hint','modeled_answer','unknown'].includes(support)) return;
+    const event_id = this.uuid();
+    this.state.events.push({event_id, passage_id: this.passage, target_letter: 'P', response});
+    if (this.outbox.uploadsEnabled) {
+      try {
+        this.outbox.enqueueAttempt({attempt_id:event_id, profile_id:this.profileId, session_id:this.state.session_id,
+          activity_ref:this.passage === 'tuesday_pear' ? 'caterpillar/tuesday-pear/identify-p@1' : 'caterpillar/wednesday-plum/identify-p@1',
+          result:response === 'help' ? 'help_requested' : response, support, assessment:'teacher_confirmed'});
+        void this.outbox.flush().catch(() => {});
+      } catch (error) { this.outbox.error = error.message; }
+    }
     this.save(); // The actual response is saved before any later request is created.
     this.advance();
   }

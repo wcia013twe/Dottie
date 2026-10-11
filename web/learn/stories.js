@@ -1,8 +1,9 @@
 import { demoCompletionRecap, mountStoryCompletion } from './story-completion.js';
-import { DecisionSession } from './decision-session.js?v=story-completion-1';
+import { preparePeterReading, PETER_READING_VERSION } from './peter-reading.js?v=merge-main-1';
+import { DecisionSession } from './decision-session.js';
 import { peterActivities, bindPeterActivities } from './peter-activities.js';
-import { mountFlipbook } from './flipbook.js?v=eleven-autoplay-1';
-import { importEbook, ebookStore } from './ebook.js';
+import { mountFlipbook } from './flipbook.js?v=merge-main-1';
+import { importEbook, ebookStore } from './ebook.js?v=merge-main-1';
 // Reading records are separate from learning progress and saved CAD designs.
 const key = 'magneto-stories-v1';
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -30,6 +31,14 @@ try {
     if (Number.isSafeInteger(saved[field]) && saved[field] >= 0 && (field !== 'total' || saved[field] > 0)) peter[field] = saved[field];
   }
   if (typeof saved.finished === 'boolean') peter.finished = saved.finished;
+  if (typeof saved.readingVersion === 'string') peter.readingVersion = saved.readingVersion;
+  if (saved.previousReadingPosition && typeof saved.previousReadingPosition === 'object') {
+    peter.previousReadingPosition = {};
+    for (const field of ['position','page','pageFraction']) {
+      const value = saved.previousReadingPosition[field];
+      if (Number.isFinite(value) && value >= 0) peter.previousReadingPosition[field] = value;
+    }
+  }
   if (Number.isFinite(saved.pageFraction) && saved.pageFraction >= 0 && saved.pageFraction <= 1) peter.pageFraction = saved.pageFraction;
 } catch { storageOK = false; }
 const selectedBook = () => opened === 'peter' ? peter : Number.isInteger(opened) ? books[opened] : null;
@@ -37,7 +46,13 @@ async function loadBook(book) {
   if (!book.bundled) return ebookStore('get',book.id);
   const response = await fetch('./books/the-tale-of-peter-rabbit.epub');
   if (!response.ok) throw Error('Peter Rabbit could not be opened. Please reload and try again.');
-  const content = await importEbook(new File([await response.blob()], 'the-tale-of-peter-rabbit.epub'));
+  const mapResponse=await fetch('./books/peter-rabbit-checkpoints.json');
+  if(!mapResponse.ok)throw Error('Checkpoint map is unavailable.');
+  const content = preparePeterReading(await importEbook(new File([await response.blob()], 'the-tale-of-peter-rabbit.epub')),await mapResponse.json());
+  if(book.readingVersion !== PETER_READING_VERSION){
+    book.previousReadingPosition={position:book.position,page:book.page,pageFraction:book.pageFraction};
+    Object.assign(book,{position:content.readingStart,page:0,pageFraction:0,current:content.readingStart,finished:false,readingVersion:PETER_READING_VERSION});
+  }
   book.total = content.chapters.length;
   book.position = Math.min(book.position, book.total-1);
   book.current = Math.min(book.current, book.total);
@@ -66,6 +81,8 @@ function demoView() {
     'The teacher reads the plum passage from their own book and offers the plum prop.',
     'You’ve finished this simulated activity. Your teacher can continue reading the original book.'
   ][step];
+  const uploads = director.outbox;
+  const sharing = '<details class="panel"><summary>Learning history</summary><p>One student profile in this browser. Uploads save confirmed responses and support used for later review.</p><label><input type="checkbox" id="learning-uploads"' + (uploads.uploadsEnabled ? ' checked' : '') + '> Enable learning history uploads</label><p role="status" id="learning-status">' + (uploads.uploadsEnabled ? 'Uploads enabled. ' : 'Uploads paused. Existing cloud records are retained. ') + uploads.queuedCount + ' records waiting.</p>' + '<p role="status" id="learning-error">' + escape(uploads.error) + '</p>' + '<button type="button" class="secondary" id="learning-retry">Retry pending uploads</button></details>';
   const raised = decision?.target_letter === 'A' ? [1] : [1,2,3,4];
   const activity = decision?.action === 'teach' ? `<div class="demo-letter"><span class="braille" role="img" aria-label="Braille ${escape(decision.target_letter)}: dots ${raised.join(', ')}">${[1,2,3,4,5,6].map(n=>`<span class="dot ${raised.includes(n)?'raised':''}"></span>`).join('')}</span><div><strong>Magneto previews ${escape(decision.target_letter)}</strong><p>On-screen simulation. The teacher supplies tactile Braille.</p></div></div><p class="intro">${escape(decision.prompt)}</p>` : '';
   let controls = '';
@@ -73,10 +90,10 @@ function demoView() {
   else if (director.pending) controls = '<p role="status" aria-live="polite">Databricks is deciding the next interaction…</p>';
   else if (director.error) controls = `<p role="alert">${escape(director.error)}</p><div class="choices"><button class="primary" id="decision-retry">Retry</button><button class="secondary" id="decision-skip">Continue without activity</button></div>`;
   else if (director.skipped) controls = '<p role="status">Teacher chose to continue without an activity. This is not an agent decision.</p><button class="primary" id="demo-next">Continue reading →</button>';
-  else if (decision?.action === 'teach' && step > 0) controls = '<h2>What happened?</h2><p>Teacher: record the learner’s spoken, signed, or assisted response.</p><div class="choices"><button class="secondary" data-response="incorrect">Incorrect</button><button class="primary" data-response="correct">Correct</button><button class="secondary" data-response="help">Help</button></div>';
+  else if (decision?.action === 'teach' && step > 0) controls = '<h2>What happened?</h2><p>Teacher: record the learner’s spoken, signed, or assisted response.</p><label for="response-support">Support used</label><select id="response-support"><option value="unknown">Not recorded</option><option value="none">No support</option><option value="hint">Hint</option><option value="modeled_answer">Answer demonstrated</option></select><div class="choices"><button class="secondary" data-response="incorrect">Incorrect</button><button class="primary" data-response="correct">Correct</button><button class="secondary" data-response="help">Help</button></div>';
   else if (decision) controls = `<aside class="demo-decision"><strong>${decision.action === 'continue' ? 'Continue the story' : 'A short practice moment'}</strong></aside><button class="primary" id="demo-next">Continue reading →</button>`;
   const details = result ? `<details class="demo-decision"><summary>Developer details · Databricks decision</summary><p>${escape(decision.reason)}</p><dl><dt>Model</dt><dd>${escape(result.model)}</dd><dt>Model call + validation</dt><dd>${result.elapsed_ms} ms</dd><dt>Browser round trip</dt><dd>${result.round_trip_ms} ms</dd><dt>Based on learner event</dt><dd>${escape(decision.based_on_event_id || 'No live response yet; synthetic starting history')}</dd><dt>Request</dt><dd>${escape(result.request_id)}</dd></dl></details>` : '';
-  return `<button class="back text-button" id="story-close">← Back to my books</button><p class="tag">The Very Hungry Caterpillar · Live Databricks decisions</p><h1>${heading}</h1><section class="panel demo-scene"><div class="demo-fruit" aria-hidden="true">${fruit}</div><p class="intro">${copy}</p>${activity}${controls}${details}</section><p class="hint">Simulated Braille · Teacher-provided test props · Synthetic starting history: A familiar, P needs practice. Camera and physical Braille are not connected to this story demo. Read the original story from your own book.</p>${!director.storageOK ? '<p role="status">Browser storage is unavailable. This session may not survive a reload.</p>' : ''}`;
+  return `<button class="back text-button" id="story-close">← Back to my books</button><p class="tag">The Very Hungry Caterpillar · Live Databricks decisions</p><h1>${heading}</h1><section class="panel demo-scene"><div class="demo-fruit" aria-hidden="true">${fruit}</div><p class="intro">${copy}</p>${activity}${controls}${details}</section>${sharing}<p class="hint">Simulated Braille · Teacher-provided test props · Synthetic starting history: A familiar, P needs practice. Camera and physical Braille are not connected to this story demo. Read the original story from your own book.</p>${!director.storageOK ? '<p role="status">Browser storage is unavailable. This session may not survive a reload.</p>' : ''}`;
 }
 export function stories() {
   if (opened === 'peter-activities') return peterActivities();
@@ -85,7 +102,7 @@ export function stories() {
   if (selected?.imported) {
     const content = loadedEbooks.get(selected.id), position = Math.min(selected.position || 0, selected.total-1);
     readerSize = [20,24,30].includes(selected.textSize) ? selected.textSize : 20;
-    return `<section class="book-player" aria-label="Story player"><header class="player-header"><button class="player-button" id="story-close" aria-label="Back to my books" title="Back to my books">←</button><div class="player-title"><h1>${escape(selected.title)}</h1><p>${escape(selected.author)}</p></div>${selected.bundled ? '<button class="player-activity" id="open-story-coach">⠗ <span>Teacher coach</span></button>' : ''}</header><div id="ebook-status" role="status">${content ? '' : 'Opening your book…'}</div>${content ? `<div class="player-stage"><article class="flipbook" id="ebook-content" tabindex="0" aria-label="Book text" style="font-size:${readerSize}px"><div class="book-sheet" id="book-sheet"><div class="page-window" id="page-window"><div class="page-text" id="page-text"></div></div></div></article></div><footer class="player-controls"><label class="sr-only" for="reader-seek">Page in this chapter</label><input id="reader-seek" type="range" min="1" max="1" value="1" step="1"><div class="player-control-row"><button class="player-button" id="reader-play" aria-label="Play automatic page turns" title="Auto-turn pages every 12 seconds">▶</button><button class="player-button" id="reader-prev" aria-label="Previous page" title="Previous page">❮</button><button class="player-button" id="reader-next" aria-label="Next page" title="Next page">❯</button><span id="reader-feedback" role="status"></span><span class="player-spacer"></span><details class="player-settings"><summary aria-label="Reader settings" title="Reader settings">⚙</summary><div class="player-settings-panel"><label for="reader-chapter">Chapter</label><select id="reader-chapter">${content.chapters.map((chapter,i)=>`<option value="${i}" ${i===position?'selected':''}>${escape(chapter.title)}</option>`).join('')}</select><label for="reader-size">Text size</label><select id="reader-size"><option value="20" ${readerSize===20?'selected':''}>Standard</option><option value="24" ${readerSize===24?'selected':''}>Large</option><option value="30" ${readerSize===30?'selected':''}>Extra large</option></select><p>Play turns a page every 12 seconds. Arrow keys or swipe to turn manually.</p></div></details><button class="player-button" id="reader-fullscreen" aria-label="Enter fullscreen" title="Fullscreen">⛶</button></div><div class="player-meta"><span id="player-mode">Read at your own pace</span><span>Your place is saved automatically</span></div></footer>` : ''}</section>`;
+    return `<section class="book-player" aria-label="Story player"><header class="player-header"><button class="player-button" id="story-close" aria-label="Back to my books" title="Back to my books">←</button><div class="player-title"><h1>${escape(selected.title)}</h1><p>${escape(selected.author)}</p></div>${selected.bundled ? '<button class="player-activity" id="open-story-coach">⠗ <span>Teacher coach</span></button>' : ''}</header><div id="ebook-status" role="status">${content ? '' : 'Opening your book…'}</div>${content ? `<div class="player-stage"><article class="flipbook" id="ebook-content" tabindex="0" aria-label="Book text" style="font-size:${readerSize}px"><div class="book-sheet" id="book-sheet"><div class="page-window" id="page-window"><div class="page-text" id="page-text"></div></div></div></article></div><footer class="player-controls"><label class="sr-only" for="reader-seek">Page in this chapter</label><div class="reader-timeline"><input id="reader-seek" type="range" min="1" max="1" value="1" step="1"><div id="question-markers" aria-label="Question stops and results"></div></div><p id="question-stop-label" class="question-stop-label" hidden></p><div class="player-control-row"><button class="player-button" id="reader-play" aria-label="Play automatic page turns" title="Auto-turn pages every 12 seconds">▶</button><button class="player-button" id="reader-prev" aria-label="Previous page" title="Previous page">❮</button><button class="player-button" id="reader-next" aria-label="Next page" title="Next page">❯</button><span id="reader-feedback" role="status"></span><span class="player-spacer"></span><details class="player-settings"><summary aria-label="Reader settings" title="Reader settings">⚙</summary><div class="player-settings-panel"><label for="reader-chapter">Chapter</label><select id="reader-chapter">${content.chapters.map((chapter,i)=>`<option value="${i}" ${i===position?'selected':''}>${escape(chapter.title)}</option>`).join('')}</select><label for="reader-size">Text size</label><select id="reader-size"><option value="20" ${readerSize===20?'selected':''}>Standard</option><option value="24" ${readerSize===24?'selected':''}>Large</option><option value="30" ${readerSize===30?'selected':''}>Extra large</option></select><p>Play turns a page every 12 seconds. Arrow keys or swipe to turn manually.</p></div></details><button class="player-button" id="reader-fullscreen" aria-label="Enter fullscreen" title="Fullscreen">⛶</button></div><div class="player-meta"><span id="player-mode">Read at your own pace</span><span>Your place is saved automatically</span></div></footer>` : ''}</section>`;
   }
   if (selected) {
     const link = safeLink(selected.url);
@@ -144,11 +161,26 @@ export function bindStories(main, render, announce) {
     } catch(error){status.textContent=error instanceof RangeError ? 'This EPUB is damaged or unsupported.' : error.message;event.target.disabled=false;event.target.value='';}
   });
   const redrawDemo = () => { if (opened === 'demo' && location.hash === '#stories') show(); };
-  main.querySelector('#open-demo')?.addEventListener('click', () => { opened = 'demo'; show(); });
+  const refreshLearningStatus = () => {
+    const outbox = director.outbox;
+    const status = main.querySelector('#learning-status');
+    const error = main.querySelector('#learning-error');
+    if (status) status.textContent = (outbox.uploadsEnabled ? 'Uploads enabled. ' : 'Uploads paused. Existing cloud records are retained. ') + outbox.queuedCount + ' records waiting.';
+    if (error) error.textContent = outbox.error;
+  };
+  main.querySelector('#learning-uploads')?.addEventListener('change', async event => {
+    const checkbox = event.target; checkbox.disabled = true;
+    try { await director.outbox.setUploadsEnabled(checkbox.checked); } catch {} finally { checkbox.disabled = false; refreshLearningStatus(); }
+  });
+  main.querySelector('#learning-retry')?.addEventListener('click', async event => {
+    event.target.disabled = true;
+    try { await director.outbox.flush(); } catch {} finally { event.target.disabled = false; refreshLearningStatus(); }
+  });
+  main.querySelector('#open-demo')?.addEventListener('click', () => { opened = 'demo'; show(); void director.outbox.flush().catch(() => {}).finally(refreshLearningStatus); });
   main.querySelectorAll('[data-open-book]').forEach(button => button.addEventListener('click', () => { director.cancel(); opened = Number(button.dataset.openBook); show(); }));
   main.querySelectorAll('#story-close, #story-close-done').forEach(button => button.addEventListener('click', () => { director.cancel(); opened = null; show(); }));
   main.querySelector('#demo-next')?.addEventListener('click', () => { director.advance(); show(); });
-  main.querySelectorAll('[data-response]').forEach(button => button.addEventListener('click', () => { director.record(button.dataset.response); show(); }));
+  main.querySelectorAll('[data-response]').forEach(button => button.addEventListener('click', () => { director.record(button.dataset.response, main.querySelector('#response-support')?.value || 'unknown'); show(); void director.outbox.flush().catch(() => {}).finally(refreshLearningStatus); }));
   main.querySelector('#demo-restart')?.addEventListener('click', () => { director.restart(); show(); });
   main.querySelector('#decision-retry')?.addEventListener('click', () => director.request(redrawDemo));
   main.querySelector('#decision-skip')?.addEventListener('click', () => { director.skip(); show(); });

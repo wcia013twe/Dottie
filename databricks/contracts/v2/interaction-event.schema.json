@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magneto:contracts:v2:interaction-event",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "event_id": {"type": "string", "format": "uuid", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+    "profile_id": {"type": "string", "format": "uuid", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+    "session_id": {"type": "string", "format": "uuid", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "event_type": {"enum": ["activity_started", "activity_completed", "response_recorded", "activity_skipped", "device_unavailable"]},
+    "activity_id": {"type": "string", "minLength": 1, "maxLength": 120},
+    "target": {"type": ["string", "null"], "maxLength": 120},
+    "outcome": {"enum": ["correct", "incorrect", "help", "skipped", "unavailable", null]},
+    "client_sequence": {"type": "integer", "minimum": 0},
+    "metadata": {"type": "object", "additionalProperties": false, "properties": {"source": {"type": "string", "enum": ["browser"]}}, "required": ["source"]}
+  },
+  "required": ["schema_version", "event_id", "profile_id", "session_id", "occurred_at", "event_type", "activity_id", "target", "outcome", "client_sequence", "metadata"]
+}

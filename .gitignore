@@ -21,3 +21,7 @@ orin-harness/tools/cell-firmware/build/
 .local/camera/
 
 .local/device-connections.json
+.venv-story
+
+# Local generated narration; scripts remain versioned.
+web/learn/narration/

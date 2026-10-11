@@ -7,6 +7,7 @@ from jsonschema import Draft202012Validator, FormatChecker, ValidationError
 
 ROOT=Path(__file__).resolve().parents[1]
 BASE=ROOT/'databricks/contracts/v1'
+V2=ROOT/'databricks/contracts/v2'
 sys.path.insert(0,str(ROOT/'databricks/magneto-director'))
 from agent.decision import make_snapshot, validate_snapshot, validate_decision, DECISION_SCHEMA
 
@@ -70,3 +71,38 @@ try:persona_validator.validate(bad)
 except ValidationError:pass
 else:raise AssertionError('Real records cannot use the synthetic persona contract')
 print('Validated isolated synthetic Story persona contract and source example.')
+v2_validators={}
+for path in V2.glob('*.schema.json'):
+    schema=read(path)
+    Draft202012Validator.check_schema(schema)
+    v2_validators[path.name.removesuffix('.schema.json')]=Draft202012Validator(schema,format_checker=FormatChecker())
+v2_validators['interaction-event'].validate(read(V2/'examples/interaction-event.json'))
+v2_validators['profile'].validate(read(V2/'examples/profile.json'))
+
+from learning.contract import validate_attempts, validate_batch, validate_profile
+v3 = ROOT / 'databricks/contracts/v3'
+schema = read(v3 / 'attempt-batch.schema.json')
+Draft202012Validator.check_schema(schema)
+v3_validator = Draft202012Validator(schema, format_checker=FormatChecker())
+rabbit = read(v3 / 'examples/rabbit-session.json')
+v3_validator.validate(rabbit)
+validate_attempts(rabbit)
+validate_batch({'schema_version': '2.0', 'events': [read(V2 / 'examples/interaction-event.json')]})
+validate_profile(read(V2 / 'examples/profile.json'))
+assert read(v3 / 'activity-catalog.json') == read(ROOT / 'databricks/magneto-director/learning/activity-catalog.json')
+assert set(schema['properties']['attempts']['items']['properties']['activity_ref']['enum']) == set(read(v3 / 'activity-catalog.json'))
+generated = (ROOT / 'web/learn/activity-catalog.js').read_text().split('export const ACTIVITY_CATALOG = ',1)[1].strip().removesuffix(';')
+assert json.loads(generated) == read(v3 / 'activity-catalog.json')
+for mutate in (
+    lambda p: p['attempts'][0].update(transcript='not accepted'),
+    lambda p: p['attempts'][0].update(assessment='unconfirmed'),
+    lambda p: p['attempts'][0].update(activity_ref='unknown'),
+):
+    bad=copy.deepcopy(rabbit);mutate(bad)
+    try: v3_validator.validate(bad)
+    except ValidationError: pass
+    else: raise AssertionError('v3 schema accepted invalid input')
+    try: validate_attempts(bad)
+    except (ValueError, TypeError): pass
+    else: raise AssertionError('v3 runtime accepted invalid input')
+print(f'Validated {len(validators)+len(v2_validators)+1} schemas, {len(examples)+3} examples, generated catalogs, live demo fixtures and negative cases. No cloud calls.')

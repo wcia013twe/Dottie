@@ -13,6 +13,11 @@
     "v1/session-snapshot.schema.json",
     "v1/companion-snapshot.schema.json",
     "v1/companion-tool-plan.schema.json",
-    "v1/companion-outcome.schema.json"
-  ]
+    "v1/companion-outcome.schema.json",
+    "v2/interaction-event.schema.json",
+    "v2/profile.schema.json",
+    "v3/attempt-batch.schema.json"
+  ],
+  "learning_intelligence_status": "v2 event and profile ingestion boundary implemented; durable table materialization pending deployment",
+  "learning_attempts_status": "v3 producer and consumer; deployment and memory readback not verified"
 }

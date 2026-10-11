@@ -1,18 +1,20 @@
-import { mountStoryCoach } from './story-coach.js?v=eleven-autoplay-1';
 import { completionRecap, mountStoryCompletion } from './story-completion.js';
+import { createPageTurnSound } from './page-turn-sound.js';
+import { mountNarration } from './narration.js?v=merge-main-1';
+import { mountStoryCoach } from './story-coach.js?v=merge-main-1';
 // Pair each illustration with the following passage in the EPUB reading order.
 function illustrationSpreads(html) {
   const root = new DOMParser().parseFromString(html, 'text/html').body;
-  const spreads = []; let passage = '', image = ''; 
+  const spreads = []; let passage = '', image = '', pageId = null;
   function visit(node) {
     if (node.nodeType === 3) { if (node.textContent.trim()) { const p=document.createElement('p');p.textContent=node.textContent;passage+=p.outerHTML; } return; }
     if (node.nodeType !== 1) return;
-    if (node.tagName === 'IMG') { if(image || passage.trim())spreads.push({image,html:passage});image=node.outerHTML;passage='';return; }
+    if (node.tagName === 'IMG') { if(image || passage.trim())spreads.push({image,html:passage,pageId});image=node.outerHTML;pageId=node.dataset.storyPageId||null;passage='';return; }
     if (node.querySelector('img') || ['DIV','SECTION','ARTICLE','FIGURE'].includes(node.tagName)) { [...node.childNodes].forEach(visit);return; }
     passage += node.outerHTML;
   }
   [...root.childNodes].forEach(visit);
-  if (image || passage.trim()) spreads.push({image,html:passage});
+  if (image || passage.trim()) spreads.push({image,html:passage,pageId});
   return spreads.length ? spreads : [{image:'',html:html}];
 }
 // Browser-native pagination; the imported chapter remains accessible text.
@@ -25,13 +27,37 @@ export function mountFlipbook({main, book, content, save, announce}) {
   let spreads=[], paintedPage=-1;
   reader.classList.add('spread-reader');
   const illustration=document.createElement('div');illustration.className='spread-illustration';sheet.prepend(illustration);
-  let playTimer=null;
-  function stopPlaying(){clearInterval(playTimer);playTimer=null;play.textContent='▶';play.setAttribute('aria-label','Play automatic page turns');main.querySelector('#player-mode').textContent='Read at your own pace';}
+  const pageTurnSound=createPageTurnSound();
+  let playTimer=null, narration=null;
+  function stopPlaying(pauseAudio=true){if(pauseAudio)narration?.pause();clearInterval(playTimer);playTimer=null;play.textContent='▶';play.setAttribute('aria-label','Play automatic page turns');main.querySelector('#player-mode').textContent='Read at your own pace';}
   let chapter=Math.min(book.position||0,content.chapters.length-1), page=0, count=1, stride=0;
   let turning=false, disposed=false, animation=null, overlay=null, resizeFrame=0, generation=0;
   if (book.finished === undefined) book.finished = book.current === book.total;
   let legacyScroll = book.pageFraction === undefined ? (book.scroll || 0) : 0;
-  const coach=mountStoryCoach({player,enabled:book.bundled,pause:()=>{stopPlaying();window.speechSynthesis?.pause();}});
+  narration=mountNarration({player,bookId:book.id,onPlay:()=>{stopPlaying(false);coach.stopSpeech?.();},onEnded:()=>coach.offerQuestion?.()});
+  let questionStops=[];
+  const markerArea=main.querySelector('#question-markers'), markerLabel=main.querySelector('#question-stop-label');
+  function paintQuestionMarker(){
+    markerArea.replaceChildren();markerLabel.hidden=true;
+    const labels=[];
+    const appearances={planned:['?','Planned question'],solved:['✓','Solved'],assisted:['✓','Solved with help'],skipped:['–','Skipped']};
+    for(const stop of questionStops){
+      const checkpoint=content.checkpoints?.find(c=>c.id===stop.id);
+      const target=checkpoint?spreads.findIndex(s=>s.pageId===checkpoint.page_id):-1;
+      if(target<0)continue;
+      const [glyph,status]=appearances[stop.status];
+      const marker=document.createElement('span');
+      marker.className='question-marker question-marker--'+stop.status;
+      marker.textContent=glyph;
+      const label=`${status} · page ${target+1}${stop.planned&&stop.status!=='planned'?' · new question planned':''}`;
+      marker.title=label;marker.setAttribute('role','img');marker.setAttribute('aria-label',label);
+      if(stop.planned&&stop.status!=='planned')marker.classList.add('question-marker--revisit');
+      marker.style.left=`${count>1?target/(count-1)*100:0}%`;
+      markerArea.append(marker);labels.push(label);
+    }
+    markerLabel.textContent=labels.join(' / ');markerLabel.hidden=!labels.length;
+  }
+  const coach=mountStoryCoach({player,enabled:book.bundled,checkpoints:content.checkpoints||[],pause:stopPlaying,onResume:()=>turn(1),onQuestionStops:stops=>{questionStops=stops;paintQuestionMarker();}});
   const completion=mountStoryCompletion({parent:player,title:book.title});
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   function persist() {
@@ -44,8 +70,14 @@ export function mountFlipbook({main, book, content, save, announce}) {
       illustration.innerHTML=spread?.image || '<span class="spread-no-art" aria-hidden="true">⠿</span>';
       text.innerHTML=spread?.html || '<p class="spread-caption"></p>';
       if(!spread?.html)text.querySelector('.spread-caption').textContent=content.chapters[chapter].title;
-      windowEl.scrollTop=0;paintedPage=page;coach.context(text.textContent);
+      windowEl.scrollTop=0;paintedPage=page;const upcoming=[];
+      for(let c=chapter;c<content.chapters.length && upcoming.length<3;c++){
+        const pages=c===chapter?spreads:illustrationSpreads(content.chapters[c].html);
+        for(let p=c===chapter?page:0;p<pages.length && upcoming.length<3;p++)upcoming.push(pages[p].pageId);
+      }
+      coach.context(spread?.pageId||null,upcoming);narration.context(text.textContent);
     }
+    paintQuestionMarker();
     previous.disabled=coach.isPaused() || (chapter===0 && page===0);
     next.disabled=coach.isPaused();
     previous.setAttribute('aria-disabled',String(turning || previous.disabled));
@@ -76,6 +108,7 @@ export function mountFlipbook({main, book, content, save, announce}) {
       if(justFinished)completion.show(completionRecap(coach.observations()));
       return;
     }
+    pageTurnSound.play();
     book.finished=false;turning=true;paint();
     // A visual copy turns above the real text; it is excluded from accessibility.
     overlay=sheet.cloneNode(true);overlay.removeAttribute('id');
@@ -101,15 +134,15 @@ export function mountFlipbook({main, book, content, save, announce}) {
     }
     cancelTurn();if(!disposed)paint();
   }
-  play.onclick=()=>{if(playTimer){stopPlaying();return;}play.textContent='Ⅱ';play.setAttribute('aria-label','Pause automatic page turns');main.querySelector('#player-mode').textContent='Auto-turn · 12 seconds per page';playTimer=setInterval(()=>turn(1),12000);};
-  seek.oninput=()=>{stopPlaying();cancelTurn();page=Number(seek.value)-1;book.finished=false;paint();persist();};
+  play.onclick=()=>{narration.pause();if(playTimer){stopPlaying();return;}play.textContent='Ⅱ';play.setAttribute('aria-label','Pause automatic page turns');main.querySelector('#player-mode').textContent='Auto-turn · 12 seconds per page';playTimer=setInterval(()=>turn(1),12000);};
+  seek.oninput=()=>{if(Number(seek.value)-1!==page)pageTurnSound.play();stopPlaying();cancelTurn();page=Number(seek.value)-1;book.finished=false;paint();persist();};
   const fullscreen=main.querySelector('#reader-fullscreen');
   fullscreen.hidden=!document.fullscreenEnabled;
   fullscreen.onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await player.closest('.workspace').requestFullscreen();}catch{announce('Fullscreen is unavailable in this browser.');}};
   const fullscreenChanged=()=>fullscreen.setAttribute('aria-label',document.fullscreenElement?'Exit fullscreen':'Enter fullscreen');
   document.addEventListener('fullscreenchange',fullscreenChanged);
   previous.onclick=()=>{stopPlaying();turn(-1);};next.onclick=()=>{stopPlaying();turn(1);};
-  chapterSelect.onchange=()=>{stopPlaying();cancelTurn();book.finished=false;loadChapter(Number(chapterSelect.value),0);};
+  chapterSelect.onchange=()=>{pageTurnSound.play();stopPlaying();cancelTurn();book.finished=false;loadChapter(Number(chapterSelect.value),0);};
   main.querySelector('#reader-size').onchange=event=>{
     cancelTurn();book.textSize=Number(event.target.value);reader.style.fontSize=book.textSize+'px';layout(book.pageFraction||0);
   };
@@ -127,5 +160,5 @@ export function mountFlipbook({main, book, content, save, announce}) {
   // Decode before measuring columns so illustrations cannot move the bookmark.
   const initialFraction=book.pageFraction||0;
   loadChapter(chapter,initialFraction).then(()=>{if(!disposed)observer.observe(windowEl);});
-  return ()=>{completion.dispose();coach.dispose();stopPlaying();document.removeEventListener('fullscreenchange',fullscreenChanged);disposed=true;generation++;observer.disconnect();cancelAnimationFrame(resizeFrame);cancelTurn();};
+  return ()=>{completion.dispose();pageTurnSound.dispose();coach.dispose();stopPlaying();narration.dispose();document.removeEventListener('fullscreenchange',fullscreenChanged);disposed=true;generation++;observer.disconnect();cancelAnimationFrame(resizeFrame);cancelTurn();};
 }

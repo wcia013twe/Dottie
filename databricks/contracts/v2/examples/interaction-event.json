@@ -1,0 +1,13 @@
+{
+  "schema_version": "2.0",
+  "event_id": "f1bc4f2c-27b6-4c0e-a9de-cb08e92d0e1e",
+  "profile_id": "c4d6e3b1-7e6f-4c5c-9f77-0f04c4f4d2b4",
+  "session_id": "39664dce-f233-4fd5-a2bc-5963e70661b9",
+  "occurred_at": "2026-10-11T12:00:00Z",
+  "event_type": "response_recorded",
+  "activity_id": "tuesday_pear",
+  "target": "P",
+  "outcome": "incorrect",
+  "client_sequence": 1,
+  "metadata": {"source": "browser"}
+}

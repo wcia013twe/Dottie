@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magneto:contracts:v3:attempt-batch",
+  "title": "Learning attempts batch",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "profile_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "session_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "attempts": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "attempt_id": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "Z$"
+          },
+          "activity_ref": {
+            "enum": [
+              "caterpillar/tuesday-pear/identify-p@1",
+              "caterpillar/wednesday-plum/identify-p@1",
+              "peter-rabbit/rabbit/identify-r@1",
+              "peter-rabbit/lettuce/identify-l@1",
+              "peter-rabbit/radish/identify-r@1",
+              "peter-rabbit/rabbit/introduce-r@1",
+              "peter-rabbit/rabbit/match-r@1",
+              "peter-rabbit/rabbit/introduce-rabbit@1",
+              "peter-rabbit/rabbit/identify-rabbit@1",
+              "peter-rabbit/rabbit/match-rabbit@1",
+              "peter-rabbit/gate/introduce-g@1",
+              "peter-rabbit/gate/identify-g@1",
+              "peter-rabbit/gate/match-g@1",
+              "peter-rabbit/gate/introduce-gate@1",
+              "peter-rabbit/gate/identify-gate@1",
+              "peter-rabbit/gate/match-gate@1",
+              "peter-rabbit/lettuce/introduce-l@1",
+              "peter-rabbit/lettuce/match-l@1",
+              "peter-rabbit/lettuce/introduce-lettuce@1",
+              "peter-rabbit/lettuce/identify-lettuce@1",
+              "peter-rabbit/lettuce/match-lettuce@1",
+              "peter-rabbit/lettuce/introduce-r@1",
+              "peter-rabbit/lettuce/identify-r@1",
+              "peter-rabbit/lettuce/match-r@1",
+              "peter-rabbit/lettuce/introduce-radish@1",
+              "peter-rabbit/lettuce/identify-radish@1",
+              "peter-rabbit/lettuce/match-radish@1",
+              "peter-rabbit/rabbit/emphasize-rabbit@1",
+              "peter-rabbit/gate/emphasize-gate@1",
+              "peter-rabbit/lettuce/emphasize-lettuce@1",
+              "peter-rabbit/lettuce/emphasize-radish@1"
+            ]
+          },
+          "result": {
+            "enum": [
+              "correct",
+              "incorrect",
+              "help_requested",
+              "unconfirmed"
+            ]
+          },
+          "support": {
+            "enum": [
+              "none",
+              "hint",
+              "modeled_answer",
+              "unknown"
+            ]
+          },
+          "assessment": {
+            "enum": [
+              "teacher_confirmed",
+              "unconfirmed"
+            ]
+          }
+        },
+        "required": [
+          "attempt_id",
+          "observed_at",
+          "activity_ref",
+          "result",
+          "support",
+          "assessment"
+        ],
+        "oneOf": [
+          {
+            "properties": {
+              "assessment": {
+                "const": "teacher_confirmed"
+              },
+              "result": {
+                "enum": [
+                  "correct",
+                  "incorrect",
+                  "help_requested"
+                ]
+              }
+            }
+          },
+          {
+            "properties": {
+              "assessment": {
+                "const": "unconfirmed"
+              },
+              "result": {
+                "const": "unconfirmed"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "profile_id",
+    "session_id",
+    "attempts"
+  ]
+}
