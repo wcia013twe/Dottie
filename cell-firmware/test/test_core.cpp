@@ -10,6 +10,15 @@
 
 using magneto::Cell;
 using magneto::Settings;
+using magneto::defaultSettings;
+using magneto::validSettings;
+using magneto::angleToPulse;
+using magneto::EXTENDED_ANGLE_DEG;
+using magneto::REST_ANGLE_DEG;
+using magneto::LEFT_BANK_DIR;
+using magneto::RIGHT_BANK_DIR;
+static const uint16_t PULSE_MAX_US_ = magneto::PULSE_MAX_US;
+static const uint16_t PULSE_MIN_US_ = magneto::PULSE_MIN_US;
 
 static int failures = 0;
 #define CHECK(cond)                                                    \
@@ -169,8 +178,9 @@ static void test_dots_and_calibration() {
   send(cell, "DOTS 125", 200);
   CHECK(last(hw) == "CELL 13 -");
   cell.update(201);
-  CHECK(hw.pulse[0] == 1800 && hw.pulse[1] == 1700 && hw.pulse[4] == 1100);
-  CHECK(hw.pulse[2] == 1500 && hw.pulse[3] == 1500 && hw.pulse[5] == 1500);
+  const Settings d = defaultSettings();
+  CHECK(hw.pulse[0] == 1800 && hw.pulse[1] == d.up_us[1] && hw.pulse[4] == 1100);
+  CHECK(hw.pulse[2] == d.down_us[2] && hw.pulse[3] == d.down_us[3] && hw.pulse[5] == d.down_us[5]);
   send(cell, "DOTS 1, 2 5 6", 201);
   CHECK(cell.mask() == 0x33);
   send(cell, "DOTS", 202);
@@ -180,6 +190,21 @@ static void test_dots_and_calibration() {
   send(cell, "CAL 1 1800 1250", 203);
   cell.update(203);
   CHECK(hw.pulse[0] == 1250);
+}
+
+// The angle constants become the default pulses; dots 4-6 are mirrored.
+static void test_default_endpoints_come_from_angles() {
+  const Settings d = defaultSettings();
+  for (int i = 0; i < 3; i++)
+    CHECK(d.up_us[i] == angleToPulse(EXTENDED_ANGLE_DEG, LEFT_BANK_DIR) &&
+          d.down_us[i] == angleToPulse(REST_ANGLE_DEG, LEFT_BANK_DIR));
+  for (int i = 3; i < 6; i++)
+    CHECK(d.up_us[i] == angleToPulse(EXTENDED_ANGLE_DEG, RIGHT_BANK_DIR) &&
+          d.down_us[i] == angleToPulse(REST_ANGLE_DEG, RIGHT_BANK_DIR));
+  CHECK(angleToPulse(-15, 1) == 1343 && angleToPulse(32, 1) == 1836);
+  CHECK(angleToPulse(-15, -1) == 1657 && angleToPulse(32, -1) == 1164);
+  CHECK(angleToPulse(150, 1) == PULSE_MAX_US_ && angleToPulse(150, -1) == PULSE_MIN_US_);
+  CHECK(validSettings(d));
 }
 
 static void test_moves_are_staggered() {
@@ -211,7 +236,7 @@ static void test_jog_holds_until_next_change() {
   CHECK(hw.pulse[1] == 1000);
   send(cell, "DOTS", 100);
   cell.update(100);
-  CHECK(hw.pulse[1] == 1500);
+  CHECK(hw.pulse[1] == defaultSettings().down_us[1]);
 }
 
 static void test_errors() {
@@ -292,6 +317,7 @@ int main() {
   test_empty_spell_still_ends();
   test_clear_stops_spelling();
   test_dots_and_calibration();
+  test_default_endpoints_come_from_angles();
   test_moves_are_staggered();
   test_jog_holds_until_next_change();
   test_errors();

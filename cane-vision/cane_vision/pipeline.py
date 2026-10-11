@@ -23,7 +23,7 @@ import yaml
 from .braille import Timing
 from .cane import Cane, select_touched
 from .detector import Detection, Detector, load_vocabulary
-from .labels import LabelMap
+from .labels import LabelMap, format_phrase
 from .elevenlabs import ElevenLabsSpeaker, make_speaker
 from .serial_cell import make_cell
 
@@ -156,7 +156,7 @@ class CaneVision:
         self.speaker = make_speaker(speech_cfg)
         if isinstance(self.speaker, ElevenLabsSpeaker) and (speech_cfg.get("elevenlabs") or {}).get("prewarm"):
             names = [n for n in self.detector.class_names if self.labels.allowed(n)]
-            phrases = [self.phrase.format(object=self.labels(n).spoken) for n in names]
+            phrases = [format_phrase(self.phrase, self.labels(n).spoken) for n in names]
             self.speaker.tts.prewarm([self.unknown_phrase, *phrases])
         self.cell = make_cell(config.get("cell", {}), self.timing)
 
@@ -173,7 +173,7 @@ class CaneVision:
             self.cell.stop()
             return
         a = self.labels(label)
-        self.speaker.say(self.phrase.format(object=a.spoken))
+        self.speaker.say(format_phrase(self.phrase, a.spoken))
         self.cell.spell(a.braille)
         self.tracker.announced(label, time.monotonic())
 

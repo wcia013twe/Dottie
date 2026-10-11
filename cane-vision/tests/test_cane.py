@@ -89,6 +89,16 @@ def test_per_class_min_confidence():
     assert not labels.allowed("cat", 0.99)
 
 
+def test_phrase_articles():
+    from cane_vision.labels import format_phrase
+
+    phrase = "You're looking at {a_object}. Here's how to spell it."
+    assert format_phrase(phrase, "chair") == "You're looking at a chair. Here's how to spell it."
+    assert format_phrase(phrase, "elevator") == "You're looking at an elevator. Here's how to spell it."
+    assert format_phrase(phrase, "stairs") == "You're looking at stairs. Here's how to spell it."
+    assert format_phrase("{object}", "door") == "door"
+
+
 class FakeCamera:
     """Produces numbered frames as fast as it's read, then runs out."""
 

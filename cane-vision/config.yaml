@@ -41,10 +41,15 @@ cell:
 speech:
   # auto = ElevenLabs if ELEVENLABS_API_KEY is set, else the local engine.
   engine: auto         # auto | elevenlabs | say | piper | espeak-ng | print
-  phrase: "{object}"   # e.g. "touched {object}"; short is faster to hear
+  # {a_object} = the word with "a"/"an" ("a chair", "an elevator", "stairs");
+  # {object} = the bare word. Shorter phrases start speaking sooner.
+  phrase: "You're looking at {a_object}. Here's how to spell it."
   # piper_model: /path/to/en_US-lessac-medium.onnx   # local / fallback voice
   elevenlabs:
-    voice_id: JBFqnCBsd6RMkjVDRZzb   # any voice ID from your ElevenLabs library
+    # "Gerald": Bill, ElevenLabs default voice (older American man, warm, trustworthy).
+    # Alternatives: Brian nPczCjzI2devNBz1zQrb (deep, middle-aged American),
+    # George JBFqnCBsd6RMkjVDRZzb (warm, middle-aged British; the previous default).
+    voice_id: pqHfZKP75CvOlQylNhV4
     model_id: eleven_flash_v2_5      # fastest; eleven_v4_turbo is more expressive
     # voice_settings: {stability: 0.5, similarity_boost: 0.75, speed: 1.0}
     timeout_s: 4.0                   # then fall back to the local voice

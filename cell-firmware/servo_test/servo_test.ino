@@ -20,8 +20,8 @@ const uint8_t SERVO_PINS[DOT_COUNT] = {2, 3, 4, 5, 6, 7};  // dots 1-6
 
 // Pulse widths in microseconds. 1500 is the middle of an SG90's range and
 // roughly 10 us is one degree, so 1300-1700 is about 40 degrees of swing.
-// With the dot linkages attached, shrink this until you have calibrated the
-// real endpoints, or a servo can push a pin against its stop.
+// This only checks wiring and power. The real UP/DOWN positions live in
+// magneto_cell.
 const uint16_t CENTER_US = 1500;
 const uint16_t LOW_US = 1300;
 const uint16_t HIGH_US = 1700;

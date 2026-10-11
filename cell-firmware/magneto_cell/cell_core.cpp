@@ -42,12 +42,20 @@ bool is(const char* token, const char* name) { return strcasecmp(token, name) ==
 
 }  // namespace
 
+uint16_t angleToPulse(int16_t deg, int8_t dir) {
+  int32_t us = 1500 + (int32_t)dir * deg * US_PER_10_DEG / 10;
+  if (us < PULSE_MIN_US) us = PULSE_MIN_US;
+  if (us > PULSE_MAX_US) us = PULSE_MAX_US;
+  return (uint16_t)us;
+}
+
 Settings defaultSettings() {
   Settings s;
+  // UP and DOWN come from the angle constants in cell_core.h.
   for (uint8_t i = 0; i < DOT_COUNT; i++) {
-    // Placeholders: every linkage needs its own measured endpoints (see README).
-    s.up_us[i] = 1700;
-    s.down_us[i] = 1500;
+    int8_t dir = i < 3 ? LEFT_BANK_DIR : RIGHT_BANK_DIR;
+    s.up_us[i] = angleToPulse(EXTENDED_ANGLE_DEG, dir);
+    s.down_us[i] = angleToPulse(REST_ANGLE_DEG, dir);
   }
   s.hold_ms = 3000;
   s.gap_ms = 300;
