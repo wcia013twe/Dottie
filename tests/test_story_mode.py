@@ -51,4 +51,28 @@ class StoryTests(unittest.TestCase):
         with self.assertRaises(StoryError):self.propose()
         self.call('recommend_continue',{'reason':'The activity limit has been reached.'})
 
+    def test_persona_is_opt_in_and_never_seeded_as_outcomes(self):
+        self.assertNotIn('synthetic_persona',self.s)
+        self.s=self.c.create(synthetic_persona_id='alex-morgan')
+        self.assertTrue(self.s['synthetic_persona']['synthetic'])
+        self.assertEqual(self.s['observations'],[])
+        self.call('set_context',{'passage_id':'rabbit'},'teacher')
+        self.assertEqual(self.s['synthetic_persona']['display_name'],'Alex Morgan')
+        with self.assertRaises(ValueError):self.c.create(synthetic_persona_id='../../live')
+
+    def test_synthetic_follow_up_cannot_grade_or_skip_approval(self):
+        self.s=self.c.create(synthetic_persona_id='alex-morgan')
+        self.call('set_context',{'passage_id':'rabbit'},'teacher')
+        self.start();self.call('submit_response',{'text':'I am confused.'})
+        self.propose()
+        self.assertEqual(self.s['phase'],'proposed')
+        self.assertEqual(self.s['observations'],[])
+        self.assertIsNone(self.s['response'])
+        self.assertNotIn('braille',self.s)
+        with self.assertRaises(StoryError):self.call('speak_prompt')
+
+    def test_real_session_rejects_unconfirmed_follow_up(self):
+        self.start();self.call('submit_response',{'text':'I am confused.'})
+        with self.assertRaises(StoryError):self.propose()
+
 if __name__=='__main__':unittest.main()

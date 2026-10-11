@@ -18,7 +18,7 @@ flowchart LR
 | --- | --- | --- |
 | Research → publication | `guidance.schema.json` | Agreed baseline; research owner implements processing |
 | Director → AI Search | `retrieval-request.schema.json` | Agreed baseline; research owner and director teammate implement adapter |
-| AI Search → director | `retrieval-result.schema.json` | Agreed baseline; not yet connected to live decisions |
+| AI Search → director | `retrieval-result.schema.json` | Opt-in server-side adapter implemented and tested locally; deployed activation/live verification pending |
 | Browser → localhost bridge | `browser-request.schema.json` | Existing demo interface; runtime teammate |
 | Bridge → director | `session-snapshot.schema.json` | Existing canonical demo snapshot; director teammate |
 | Director → runtime | `decision.schema.json` | Existing six-field decision; director and runtime teammates |
@@ -52,7 +52,7 @@ Use the existing references volume for explicitly uploaded sources, one future D
 3. Run `npm run check:contracts` before proposing an interface change. The command uses the existing director Python environment and `jsonschema`.
 4. For incompatible changes, create a new version, provide producer/consumer migration notes, and update examples and checks together. Do not silently loosen a validator or create another conflicting contract document.
 
-`guidance_ids` on decisions and retrieved guidance in the model snapshot are **deferred extensions**, not accepted v1 fields. Integrating them requires a coordinated contract change; the current live validator would reject them. Internal research extraction formats, chunking, index settings, and hardware protocols can evolve independently while these boundaries remain stable.
+`guidance_ids` on decisions and retrieved guidance inside the canonical snapshot are **deferred extensions**, not accepted v1 fields. The director can now retrieve approved v1 guidance server-side and supply it as a separate evidence message to the model, recording full citations on the active director trace. Browser snapshots and six-field decisions remain unchanged. This records evidence supplied, not a claim that a particular citation caused the decision. The adapter is opt-in and has not been activated or verified in the deployed App. Adding citation fields to wire payloads still requires a coordinated version change. Internal research extraction formats, chunking, index settings, and hardware protocols can evolve independently while these boundaries remain stable.
 
 ## Companion boundaries (v1, additive)
 
@@ -62,3 +62,11 @@ The three `companion-*.schema.json` files describe the Orin Nano harness boundar
 - The harness validates the plan against the current `revision`, executes it locally over MCP, and records a `companion-outcome`. A stale or mismatched plan is rejected before any physical effect, and a retry never repeats a physical action.
 - Physical device commands and acknowledgements stay in this separate execution interface; they are not added to `events` and do not alter the `decision` schema.
 - `reason` is a one-sentence evidence summary. Model output is evidence, never instructions; transcripts are unconfirmed and are not a grade or a mastery claim. The deterministic letter/word match is reported as `match`/`outcome` evidence only.
+
+## Learner profile boundary (additive, local)
+
+[`learner-profile-v1/README.md`](learner-profile-v1/README.md) defines a separate read-only page profile and normalized evidence events. A local research-backed, MLflow-judged reflection producer and About me renderer implement it, with optional source provenance. Existing v1 demo, director and harness messages are unchanged. Confirmed evidence syncs to Unity Catalog; AI Search supplies cited research for constrained category proposals; a native MLflow judge gates them. Genie MCP supplies only an optional summary, and code keeps numeric evidence authoritative. A separately scheduled cloud reflection job is not deployed.
+
+## Synthetic Story persona boundary (additive, test-only)
+
+[`synthetic-story-persona-v1/README.md`](synthetic-story-persona-v1/README.md) specifies the optional fictional starting profile used only by the isolated Story test server. It is distinct from confirmed observations and generated learner intelligence; legacy deployed payloads are unchanged.

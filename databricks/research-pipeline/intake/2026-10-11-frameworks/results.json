@@ -1,0 +1,205 @@
+{
+  "ingest": {
+    "source_version": "ebe482de3be944bd39d450b22d324af3e8a76ae307fd0ecf64f620af9675492f",
+    "status": "registered"
+  },
+  "process": {
+    "run_id": "d4e8ff5d-2a71-415e-ae20-e99bb18cbdc5",
+    "passages": 1,
+    "status": "completed"
+  },
+  "publication": {
+    "run_id": "87ee23b1-3523-46f3-8747-a003157e44fc",
+    "status": "table_refreshed",
+    "index_status": "sync_requested"
+  },
+  "counts": [
+    {
+      "sources": "11",
+      "passages": "410",
+      "reviews": "0"
+    }
+  ],
+  "index_status": {
+    "index_url": "7c50cfbe-7689-40be-a501-43b7777e606b.vector-search.cloud.databricks.com/api/2.0/7474648183111292/vector-search/indexes/workspace.magneto.research_index",
+    "indexed_row_count": 410,
+    "message": "Index creation succeeded. Check latest status: https://dbc-129a8d44-1940.cloud.databricks.com/explore/data/workspace/magneto/research_index",
+    "ready": true
+  },
+  "retrieval_verification": "passed",
+  "sync_observation": "Initial managed retries reported free serverless capacity exhaustion; index subsequently reached 410 rows and source-targeted retrieval passed.",
+  "limits": [
+    "One-page CAST graphic organizer only; full explanations not ingested.",
+    "No extracted findings, approvals or learner updates.",
+    "I-M-ABLE guide not acquired; public handout returned HTTP 403."
+  ],
+  "search": {
+    "run_id": "17a848b5-ed9a-469a-95cf-17521b3b136d",
+    "collection": "teaching",
+    "tier": "library",
+    "matches": [
+      {
+        "score": 1.0,
+        "record": {
+          "id": "0d5e8692f95dbcb11b7972816789731ac044d56a518576f61ccd29d7188fdb8d",
+          "source_version": "ebe482de3be944bd39d450b22d324af3e8a76ae307fd0ecf64f620af9675492f",
+          "run_id": "d4e8ff5d-2a71-415e-ae20-e99bb18cbdc5",
+          "text": "\nThe goal of UDL is learner agency that is purposeful & reflectve, resourceful & authentc, strategic & acton-oriented.\n\nDescription of a 'figure': \n\n\u2022 Optimize choice and autonomy (7.1)\n\u2022 Optimize relevance, value, and authenticity (7.2)\n\u2022 Nurture joy and play (7.3)\n\u2022 Address biases, threats, and distractions (7.4)\n\n\u2022 Clarify the meaning and purpose of goals (8.1)\n\u2022 Optimize challenge and support (8.2)\n\u2022 Foster collaboration, interdependence, and collective\nlearning (8.3)\n\u2022 Foster belonging and community (8.4)\n\u2022 Offer action-oriented feedback (8.5)\n\n\u2022 Recognize expectations, beliefs, and motivations (9.1)\n\u2022 Develop awareness of self and others (9.2)\n\u2022 Promote individual and collective reflection (9.3)\n\u2022 Cultivate empathy and restorative practices (9.4)\n\nDescription of a 'figure': \n\n\u2022 Support opportunities to customize the display of\ninformation (1.1)\n\u2022 Support multiple ways to perceive information (1.2)\n\u2022 Represent a diversity of perspectives and identities in\nauthentic ways (1.3)\n\n\u2022 Clarify vocabulary, symbols, and language structures (2.1)\n\u2022 Support decoding of text, mathematical notation, and\nsymbols (2.2)\n\u2022 Cultivate understanding and respect across languages\nand dialects (2.3)\n\u2022 Address biases in the use of language and symbols (2.4)\n\u2022 Illustrate through multiple media (2.5)\n\n\u2022 Connect prior knowledge to new learning (3.1)\n\u2022 Highlight and explore patterns, critical features, big ideas,\nand relationships (3.2)\n\u2022 Cultivate multiple ways of knowing and making meaning (3.3)\n\u2022 Maximize transfer and generalization (3.4)\n\nDescription of a 'figure': \n\n\u2022 Vary and honor the methods for response, navigation,\nand movement (4.1)\n\u2022 Optimize access to accessible materials and assistive and\naccessible technologies and tools (4.2)\n\n\u2022 Use multiple media for communication (5.1)\n\u2022 Use multiple tools for construction, composition, and\ncreativity (5.2)\n\u2022 Build fluencies with graduated support for practice and\nperformance (5.3)\n\u2022 Address biases related to modes of expression and\ncommunication (5.4)\n\n\u2022 Set meaningful goals (6.1)\n\u2022 Anticipate and plan for challenges (6.2)\n\u2022 Organize information and resources (6.3)\n\u2022 Enhance capacity for monitoring progress (6.4)\n\u2022 Challenge exclusionary practices (6.5)\n\nDescription of a 'figure': \n",
+          "locator": "PDF page(s) 1",
+          "pages": "[0]",
+          "source": {
+            "id": "ebe482de3be944bd39d450b22d324af3e8a76ae307fd0ecf64f620af9675492f",
+            "source_id": "cast-udl-3-organizer",
+            "collection": "teaching",
+            "title": "CAST Universal Design for Learning Guidelines version 3.0 \u2014 numbered graphic organizer",
+            "uri": "https://udlguidelines.cast.org/static/udlg3-graphicorganizer-digital-numbers-a11y.pdf",
+            "sha256": "b1373877826c6f301309a0256c866941c2f590a255aeaf8fccb0d1d9cbf98b4a",
+            "volume_path": "/Volumes/workspace/magneto/references/research/sources/ebe482de3be944bd39d450b22d324af3e8a76ae307fd0ecf64f620af9675492f/source.pdf",
+            "metadata": "{\"acquired_date\": \"2026-10-11\", \"collection\": \"teaching\", \"publication_date\": null, \"publisher\": \"CAST, Inc.\", \"rights_basis\": \"Official publicly downloadable CAST 2024 graphic organizer; user-authorized internal reference processing with attribution and unchanged original retained. Copyright CAST. Accessibility/design framework summary, not a braille intervention study or the full guideline explanations; guideline numbers identify considerations, not measured results. No blanket redistribution license asserted.\", \"source_id\": \"cast-udl-3-organizer\", \"synthetic\": false, \"title\": \"CAST Universal Design for Learning Guidelines version 3.0 \u2014 numbered graphic organizer\", \"uri\": \"https://udlguidelines.cast.org/static/udlg3-graphicorganizer-digital-numbers-a11y.pdf\", \"valid_until\": null}",
+            "created_at": "2026-10-11T09:29:58.106Z",
+            "actor": "wcia013twe@gmail.com"
+          },
+          "produced_by": {
+            "id": "d4e8ff5d-2a71-415e-ae20-e99bb18cbdc5",
+            "subject_id": "ebe482de3be944bd39d450b22d324af3e8a76ae307fd0ecf64f620af9675492f",
+            "operation": "parse_and_prepare",
+            "status": "completed",
+            "details": "{\"artifact_directory\": \"/Volumes/workspace/magneto/references/research/runs/d4e8ff5d-2a71-415e-ae20-e99bb18cbdc5\", \"experiment_id\": \"1306573313615572\", \"mlflow_run_id\": \"5907ea845dcc4e88977fd956bf8b2fc9\", \"parser_schema\": \"2.0\", \"prep\": \"ai_prep_search\", \"sha256\": \"b1373877826c6f301309a0256c866941c2f590a255aeaf8fccb0d1d9cbf98b4a\", \"trace_id\": \"trace:/workspace.magneto.1306573313615572/2d8d0534acac96376f2c51a7af58ceaa\"}",
+            "created_at": "2026-10-11T09:30:06.170Z",
+            "actor": "wcia013twe@gmail.com"
+          }
+        }
+      },
+      {
+        "score": 0.9019352033050663,
+        "record": {
+          "id": "247a88791faa5d89529f7f97ce75548b7199fa120d85705eab350b18273e825a",
+          "source_version": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+          "run_id": "4bc982c4-3fd6-439c-ae6b-096b807d04dd",
+          "text": " range of abilities and prior knowledge to\nmaster abstract representation of the concept.\n\nA second line of research indicates that explicit\nmarking of the relationships between different types of\nrepresentations supports learning.46 As in the research\ndescribed above, a critical aspect of using both concrete\nand abstract representations of a concept seems to\nbe the role of the instructor in drawing students\u2019\nattention to the relevant and shared components\nof the concrete and abstract representation. When\nstudents are not provided guidance, it is difficult\nfor learners to identify which components of the\nproblem can be transferred to new problems.47 On\nthe other hand, when teachers explicitly identify the\n\ncritical components of a representation and draw\nstudents\u2019 attention to those critical components, their\nperformance improves.48 Finally, there is evidence\nthat lower-achieving students demonstrate improved\nlearning when they are asked to solve hands-on or\nauthentic problems that require the use of these\nunderlying key concepts or principles.49 Again, the role\nof the teacher or peers in guiding the student to note\nthe critical components of the concept or problem\nacross the different representational forms is important.\n\nTaken together, these research findings support our\nrecommendation that teachers use both abstract\nand concrete representations of key concepts and\nhighlight the critical aspects of the concept to be\nlearned (e.g., pointing out to the student which\nvariables in the mathematical function being taught\nare related to which aspects of the word problem).\nThis process of interleaving and connecting both\nconcrete and abstract representations has been\nshown to support better mastery of the taught\nprinciple, as well as transfer to other tasks that require\nstudents to use the same principle or concept.\n\nWhen teaching students about an abstract principle\nor skill, such as a mathematical function, teachers\nshould connect those abstract ideas to relevant\nconcrete representations and situations, making sure\nto highlight the relevant features across all forms of the\nrepresentation of the function. An abstract idea, like\na mathematical function, can be expressed in many\ndifferent ways: Concisely in mathematical symbols like\n\u201cy = 2x\u201d; visually in a line graph that starts at 0 and\ngoes by 2 units for every 1 unit over; discretely in a\ntable showing that 0 goes to 0, 1 goes to 2, 2 goes to\n4, and so on; practically in a real world scenario like\nmaking $2 for every mile you walk in a walkathon; and\nphysically by walking at 2 miles per hour. By showing\nstudents the same idea in different forms, teachers can\ndemonstrate that although the \u201csurface\u201d form may vary,\nit is the \u201cdeep\u201d structure\u2014what does not change\u2014that\nis the essence of the idea. Teachers can also get at the\n\n44 Goldstone and Son (2005).\n\n45 Goldstone and Sakamoto (2003).\n\n46 E.g., Ainsworth, Bibby, and Wood (2002); Bottge, Rueda, LaRoque, et al. (2007); Richland, Zur, and Holyoak (2007).\n\n47 Ainsworth, Bibby, and Wood (2002).\n\n48 Richland, Zur, and Holyoak (2007).\n\n49 Bottge, Rueda, LaRoque, et al. (2007).\n\ndeep structure by showing how variations in an idea,\nlike receiving $3 per mile in a walkathon, lead to\nparticular variations in each representation: The graph\nis now steeper; the table has y values that go up by 3\nrather than 2; and the equation is now y = 3x.\n\nWhen students first encounter a new idea, they may\npick up on the wrong features of the examples we give\nthem. They might think that averages are about sports\nif we give them mostly sports examples or, more subtly,\nthat an average is a ratio between two numbers (e.g.,\nhits to at-bats) rather than a ratio of a sum of measures\nto the number of those measures (e.g., (2 + 6 + 4)/3).\nOr, they might think the seasons are caused by how\nthe tilt of the earth brings parts of the earth closer to\nthe sun rather than by how the tilt causes sunlight to\nbe spread out in some places and more concentrated\nin others. A variety of representations and explicit\ndiscussion of the connections between them can help\nstudents avoid such misconceptions.\n\nInstruction may often move too quickly to the use\nof new terms or symbols before students have had a\nchance to understand the meanings of those new terms\nor symbols through drawing connections to multiple\nfamiliar objects or situations that the terms represent.\nStudents may be able to memorize new terms and their\ndefinitions, or learn how to manipulate new symbolic\nforms (like mathematical equations), without ever\ndrawing such",
+          "locator": "PDF page(s) 27, 28",
+          "pages": "[26, 27]",
+          "source": {
+            "id": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+            "source_id": "ies-study-guide",
+            "collection": "teaching",
+            "title": "Organizing Instruction and Study to Improve Student Learning: IES Practice Guide NCER 2007-2004",
+            "uri": "https://ies.ed.gov/ncee/wwc/Docs/PracticeGuide/20072004.pdf",
+            "sha256": "5e6a7602f80c3856875e5461aab1b1d20404dcf8dd761d34b9cd8698b9196154",
+            "volume_path": "/Volumes/workspace/magneto/references/research/sources/5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900/source.pdf",
+            "metadata": "{\"acquired_date\": \"2026-10-11\", \"collection\": \"teaching\", \"publication_date\": null, \"publisher\": \"Institute of Education Sciences, US Department of Education\", \"rights_basis\": \"Public US Department of Education practice guide, September 2007; user-requested evidence processing with attribution. General learning/memory guidance, not a braille intervention study; retain recommendation-specific evidence ratings.\", \"source_id\": \"ies-study-guide\", \"synthetic\": false, \"title\": \"Organizing Instruction and Study to Improve Student Learning: IES Practice Guide NCER 2007-2004\", \"uri\": \"https://ies.ed.gov/ncee/wwc/Docs/PracticeGuide/20072004.pdf\", \"valid_until\": null}",
+            "created_at": "2026-10-11T06:51:50.012Z",
+            "actor": "wcia013twe@gmail.com"
+          },
+          "produced_by": {
+            "id": "4bc982c4-3fd6-439c-ae6b-096b807d04dd",
+            "subject_id": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+            "operation": "parse_and_prepare",
+            "status": "completed",
+            "details": "{\"artifact_directory\": \"/Volumes/workspace/magneto/references/research/runs/4bc982c4-3fd6-439c-ae6b-096b807d04dd\", \"experiment_id\": \"1306573313615572\", \"mlflow_run_id\": \"664836ca4dd84e7a816cc37fbd88bc47\", \"parser_schema\": \"2.0\", \"prep\": \"ai_prep_search\", \"sha256\": \"5e6a7602f80c3856875e5461aab1b1d20404dcf8dd761d34b9cd8698b9196154\", \"trace_id\": \"trace:/workspace.magneto.1306573313615572/9d98cb386bc59d82f398b1826f5cd533\"}",
+            "created_at": "2026-10-11T06:51:59.084Z",
+            "actor": "wcia013twe@gmail.com"
+          }
+        }
+      },
+      {
+        "score": 0.8317670904735581,
+        "record": {
+          "id": "d87d65a29c4b3b73487ae8625f3e199f01360d929f32832bc3fdab40c2e916f8",
+          "source_version": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+          "run_id": "7ea2fe60-7807-4091-aa3f-f06d0d9351b3",
+          "text": "3 Welsh: Do not use the contraction \"ed\" in the letter combination\n\"edd\" (dd represents a distinct letter). Similarly use \"ff\" contraction\nin the letter combination \"off\" rather than the contraction for \"of\".\n\n13.4.1 There are two ways to represent accented letters in braille within a\nUEB context:\n\u2022 by means of UEB signs for modifiers (see section 13.5), or\n\u2022 by means of the foreign code signs used in braille production in the\ncountry where the language is spoken (see section 13.6).\nHybridisation of these two methods is to be avoided since UEB\nsymbols and foreign code signs are different and may conflict.\n\nDescription of a 'figure': \n\ninverted exclamation mark\ninverted question mark\n\nDescription of a 'figure': \n\n13.5.1 Use UEB signs to represent accented letters, punctuation or Greek\nletters where it is judged likely that most readers will be unfamiliar\nwith the foreign code signs, and where the nature of the material\ndoes not create a reasonable expectation that they should learn\nthem. UEB signs should therefore be used:\n\u2022 for occasional foreign words and phrases occurring in English\ncontext;\n\u2022 for longer foreign passages such as conversation occurring in\nEnglish novels or in other English works regarded as primarily for\nleisure reading.\nRefer to: Section 4, Letters and their modifiers, for the complete list\nof UEB signs for accents and Greek letters.\n\nHe walked past the great masses of the grandes \u00e9coles .\n\nDescription of a 'figure': \n\nSietske took out the parcel and handed it to the soldier. \"Ein\nGeschenk f\u00fcr uns [A gift for us],\" he laughed. Then he opened the\ntin box.\n\"Ah, gute Butter [butter, delicious]. Danke, Fr\u00e4ulein [Thank you,\nyoung lady].\"\n\nDescription of a 'figure': \n\n\u2014\u00a1Qu\u00e9 idea m\u00e1s buena! \u2014exclaimed Pedro's mother.\n\nDescription of a 'figure': \n\nFor \u03c3 read \"standard deviation.\"\n\nDescription of a 'figure': \n\nUse \u0394v to denote difference or change in velocity.\n\nDescription of a 'figure': \n\n13.5.2 When UEB signs are used, do not use foreign code contractions or\nother signs from the foreign language code such as punctuation or\nindicators.\n13.5.3 When UEB signs are used, do not use code switch indicators.\n\n13.6.1 Use foreign code signs in the representation of foreign language\nmaterial where there is substantial occurrence of the foreign\nlanguage, as in:\n\u2022 grammars and other instructional materials;\n\u2022 English commentaries on foreign works for study;\n\u2022 bilingual texts (whether set out in parallel or consecutively) such as\nofficial forms, opera libretti and other translations;\n\u2022 any situation where significant knowledge of the foreign language\nis presupposed or being taught.\n13.6.2 In a foreign language braille code, it is possible to have six categories\nof sign:\n\n1. Signs representing the basic elements of the script (whether\nalphabet, syllabary, or other);\n2. Signs representing accents (including indicators of breathing, tone,\nstress or quantity);\n3. Punctuation signs and indicators;\n4. Ancillary signs (including any signs liable to occur in literary\ncontexts, which may or may not be more prevalent in technical\nmaterial, such as the ampersand, asterisk, bullet, at sign, dagger,\nand the signs representing basic mathematical operations);\n5. Technical signs, which are unlikely ever to appear in literary\ncontexts;\n6. Contractions.\nRefer to: The most recent edition of World Braille Usage which lists\nby country signs used in categories (1) to (3).\n13.6.3 When foreign code signs are used, do not use UEB contractions.\n13.6.4 When using foreign code signs for basic elements of the script and/or\nfor accents, that is, categories (1) and (2) above, it is permissible\nthough not required to use the foreign code signs for any of the other\ncategories. Do not use a UEB sign that conflicts with an element in\nthe foreign code. Also do not mix foreign code signs and the\nequivalent UEB signs for the same language in the same book.\n\n[from a textbook teaching Spanish:]\nTo indicate profession or vocation:\nCarlos Fuentes es escritor. Carlos Fuentes is a writer.\nYo soy m\u00fasico. I am a musician.\nT\u00fa eres doctora. You are a doctor.\n\nDescription of a 'figure': \n\n[examples in a textbook teaching French:]\nIl y a deux cr\u00e8ches en ville.\nThere are two day-care centers in the city.\nIls se sont mari\u00e9s il y a deux ans.\nThey got married two years ago.\n\nDescription of a 'figure",
+          "locator": "PDF page(s) 231, 232, 233, 234",
+          "pages": "[230, 231, 232, 233]",
+          "source": {
+            "id": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+            "source_id": "ueb-2024",
+            "collection": "teaching",
+            "title": "The Rules of Unified English Braille, Third Edition 2024",
+            "uri": "https://iceb.org/wp-content/uploads/2025/10/Rules-of-Unified-English-Braille-2024.pdf",
+            "sha256": "bf742499ee2eb3cbdf4914d97bbf0b2857bd3e91621f04a4990091b64e5a105e",
+            "volume_path": "/Volumes/workspace/magneto/references/research/sources/e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169/source.pdf",
+            "metadata": "{\"acquired_date\": \"2026-10-11\", \"collection\": \"teaching\", \"publication_date\": null, \"publisher\": \"International Council on English Braille\", \"rights_basis\": \"Publisher PDF licensed CC BY-NC-ND 2.5 Australia; preserve unmodified original, attribution and license. User-requested private reference indexing only; no redistribution or model training authorized. Normative code reference, not teaching-effectiveness evidence. Machine-extracted braille glyphs require visual verification against the original; not a validated translator.\", \"source_id\": \"ueb-2024\", \"synthetic\": false, \"title\": \"The Rules of Unified English Braille, Third Edition 2024\", \"uri\": \"https://iceb.org/wp-content/uploads/2025/10/Rules-of-Unified-English-Braille-2024.pdf\", \"valid_until\": null}",
+            "created_at": "2026-10-11T07:02:42.606Z",
+            "actor": "wcia013twe@gmail.com"
+          },
+          "produced_by": {
+            "id": "7ea2fe60-7807-4091-aa3f-f06d0d9351b3",
+            "subject_id": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+            "operation": "parse_and_prepare",
+            "status": "completed",
+            "details": "{\"artifact_directory\": \"/Volumes/workspace/magneto/references/research/runs/7ea2fe60-7807-4091-aa3f-f06d0d9351b3\", \"experiment_id\": \"1306573313615572\", \"mlflow_run_id\": \"ddae339b19db4f08a47de3cc509ceb3f\", \"mode\": \"managed_page_ranges_external_results\", \"page_count_verified_from_original_pdf\": 408, \"parser_schema\": \"2.0\", \"prep\": \"ai_prep_search\", \"recovered_statement\": \"01f1c543-bbf0-1eef-af43-64dfada3705d\", \"reused_artifact_run\": \"9ca9911d-57ba-406f-a354-dc90160b3fd5\", \"sha256\": \"bf742499ee2eb3cbdf4914d97bbf0b2857bd3e91621f04a4990091b64e5a105e\", \"trace_id\": \"trace:/workspace.magneto.1306573313615572/a12d6ceba9f1bbd2ac54e1390e300eaf\"}",
+            "created_at": "2026-10-11T08:46:01.982Z",
+            "actor": "wcia013twe@gmail.com"
+          }
+        }
+      },
+      {
+        "score": 0.828104934874335,
+        "record": {
+          "id": "694febc73a3ea8ff4afb725fbc0cbc6e46f88a65cbb51077fab0cbae3ee65ba7",
+          "source_version": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+          "run_id": "4bc982c4-3fd6-439c-ae6b-096b807d04dd",
+          "text": " Developmental trends in children\u2019s feeling-of-knowing judgements.\nInternational Journal of Behavioral Development, 26, 327-333.\n\nMace, C.A. (1932). The psychology of study . London: Methuen.\n\nMasur, E.F., McIntyre, C.W., and Flavell, J.H. (1973). Developmental changes in apportionment of study time\namong items in a multitrial free recall task. Journal of Experimental Child Psychology, 15, 237-246.\n\nMayer, R.E. (2001). Multimedia learning. New York: Cambridge University Press.\n\nMayer, R.E., and Anderson, R. (1991). Animations need narrations: An experimental test of a dual-coding\nhypothesis. Journal of Educational Psychology, 83, 484\u2013490.\n\nMayer, R.E., and Anderson, R. (1992). The instructive animation: Helping students build connections between\nwords and pictures in multimedia learning. Journal of Educational Psychology, 84, 444\u2013452.\n\nMayer, R.E., Hegarty, M., Mayer, S., and Campbell, J. (2005). When static media promote active learning:\nAnnotated illustrations versus narrated animations in multimedia instruct. Journal of Experimental Psychology:\nApplied, 11, 256-265.\n\nMayer, R.E., and Moreno, R. (1998). A split-attention effect in multimedia learning: Evidence for dual-processing\nsystems in working memory. Journal of Educational Psychology, 90, 312\u2013320.\n\nMcDaniel, M.A., Anderson, J.L., Derbish, M.H., and Morrisette, N. (2007). Testing the testing effect in the\nclassroom. European Journal of Cognitive Psychology, 19, 494-513.\n\nMcDaniel, M.A., and Fisher, R.P. (1991). Tests and test feedback as learning sources. Contemporary Educational\nPsychology, 16, 192-201.\n\nMcDaniel, M.A., Roediger, H.L., and McDermott, K.B. (2007). Generalizing test enhanced learning from the\nlaboratory to the classroom. Psychonomic Bulletin & Review, 14, 200-206 .\n\nMcLaren, B.M., Lim, S., Gagnon, F., Yaron, D., and Koedinger, K.R. (2006). Studying the effects of personalized\nlanguage and worked examples in the context of a web-based intelligent tutor. In M. Ikeda, K. Ashley, and T.\nChan (Eds.), The Proceedings of the 8th International Conference on Intelligent Tutoring Systems (pp. 318-328).\nNew York: Springer.\n\nMcNamara, D.S. (2004). SERT: Self-explanation reading training. Discourse Processes, 38, 1-30.\n\nMcNamara, D.S., O\u2019Reilly, T., Best, R., and Ozuru, Y. (2006). Improving adolescent students\u2019 reading\ncomprehension with iSTART. Journal of Educational Computing Research, 34, 147-171.\n\nMeeter, M., and Nelson, T.O. (2003). Multiple study trials and judgments of learning. Acta Psychologica,\n113, 123-132 .\n\nMetcalfe, J., and Dunlosky, J. (in press). Metamemory. In J.H. Byrne (Ed.), Learning and memory:\nA comprehensive reference. Oxford: Elsevier.\n\nMetcalfe, J., and Finn, B. (in press). Evidence that judgments of learning are causally related to study choice.\nPsychonomic Bulletin & Review .\n\nMetcalfe, J., and Kornell, N. (2005). A region of proximal learning model of study time allocation.\nJournal of Memory and Language, 52, 463-477.\n\nMoreno, R., and Mayer, R.C. (1999a). Cognitive principles of multimedia learning: The role of modality and\ncontiguity. Journal of Educational Psychology, 91, 358-368.\n\nMoreno, R., and Mayer, R.C. (1999b). Multimedia-supported metaphors for meaning making in mathematics.\nCognition and Instruction, 17, 215-248.\n\nMoss, J. (2005). Pipes, tubs, and beakers: New approaches to teaching the rational-number system. In M.S.\nDonovan and J.D. Bransford (Eds.), How students learn: History, math, and science in the classroom\n(pp. 309-349). Washington, DC: National Academies Press.\n\nMoulton, C., Dubrowski, A., MacRae, H., Graham, B., Grober, E., and Reznick, R. (2006). Teaching surgical\nskills: What kind of practice makes perfect? Annals of Surgery,",
+          "locator": "PDF page(s) 59, 60",
+          "pages": "[58, 59]",
+          "source": {
+            "id": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+            "source_id": "ies-study-guide",
+            "collection": "teaching",
+            "title": "Organizing Instruction and Study to Improve Student Learning: IES Practice Guide NCER 2007-2004",
+            "uri": "https://ies.ed.gov/ncee/wwc/Docs/PracticeGuide/20072004.pdf",
+            "sha256": "5e6a7602f80c3856875e5461aab1b1d20404dcf8dd761d34b9cd8698b9196154",
+            "volume_path": "/Volumes/workspace/magneto/references/research/sources/5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900/source.pdf",
+            "metadata": "{\"acquired_date\": \"2026-10-11\", \"collection\": \"teaching\", \"publication_date\": null, \"publisher\": \"Institute of Education Sciences, US Department of Education\", \"rights_basis\": \"Public US Department of Education practice guide, September 2007; user-requested evidence processing with attribution. General learning/memory guidance, not a braille intervention study; retain recommendation-specific evidence ratings.\", \"source_id\": \"ies-study-guide\", \"synthetic\": false, \"title\": \"Organizing Instruction and Study to Improve Student Learning: IES Practice Guide NCER 2007-2004\", \"uri\": \"https://ies.ed.gov/ncee/wwc/Docs/PracticeGuide/20072004.pdf\", \"valid_until\": null}",
+            "created_at": "2026-10-11T06:51:50.012Z",
+            "actor": "wcia013twe@gmail.com"
+          },
+          "produced_by": {
+            "id": "4bc982c4-3fd6-439c-ae6b-096b807d04dd",
+            "subject_id": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+            "operation": "parse_and_prepare",
+            "status": "completed",
+            "details": "{\"artifact_directory\": \"/Volumes/workspace/magneto/references/research/runs/4bc982c4-3fd6-439c-ae6b-096b807d04dd\", \"experiment_id\": \"1306573313615572\", \"mlflow_run_id\": \"664836ca4dd84e7a816cc37fbd88bc47\", \"parser_schema\": \"2.0\", \"prep\": \"ai_prep_search\", \"sha256\": \"5e6a7602f80c3856875e5461aab1b1d20404dcf8dd761d34b9cd8698b9196154\", \"trace_id\": \"trace:/workspace.magneto.1306573313615572/9d98cb386bc59d82f398b1826f5cd533\"}",
+            "created_at": "2026-10-11T06:51:59.084Z",
+            "actor": "wcia013twe@gmail.com"
+          }
+        }
+      },
+      {
+        "score": 0.8252164502164502,
+        "record": {
+          "id": "a2a2ccacb4ccebf7a6817d94e93ea17934d54c9a46af7d94deb2e1509139de1d",
+          "source_version": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+          "run_id": "4bc982c4-3fd6-439c-ae6b-096b807d04dd",
+          "text": " relevant to solving\nthe concrete problem, and then integrating those\nabstract principles into the solution of the concrete\nproblem that is the focus of our recommendation.\n\nCurrent research extends this type of anchoring\nby affording students additional opportunities to\npractice their skills and deepen their understanding.\nStudents using Enhanced Anchored Instruction (EAI)\nare expected to solve new but analogous problems\nin applied contexts (e.g., designing, building, and\nriding hovercrafts). These projects help students create\nmore vivid mental models of the problem situations\npresented in the video-based anchors. Adding the\ninterleaved enhancements provides students several\ncontexts in which to apply their concepts and skills,\nacknowledging that highly contextualized learning may\n\n109 Kaminski, Sloutsky, and Heckler (2006a).\n\n110 Goldstone and Sakamoto (2003); Kaminiski, Sloutsky, and Heckler (2006b).\n\n111 Cawley, Parmar, Foley, et al. (2001).\n\nactually hamper learning transfer. Quasi-experimental\ntests comparing student outcomes after being taught\nthe same course concepts through the use of EAI\nversus traditional instruction finds that EAI engages\nhard-to-teach adolescents in middle schools, high\nschools, and alternative settings and improves their\nproblem solving skills.112\n\nUse quizzing to promote learning.\n\nUse pre-questions to introduce new topics.\n\nThe panel rated the level of evidence supporting this\nrecommendation as low. We were able to locate two\nhigh-quality studies completed in the laboratory\nexamining the use of pre-questions prior to reading\ntext.113 In addition, research completed on the use of\nadvanced organizers during reading lends additional\nsupport to this recommendation.114\n\nFor possible application to classroom practice, two\nespecially important findings have been reported in a\nwell-controlled experiment conducted in the laboratory\n(random assignment of participants to conditions and\ndemonstrating equivalence of groups at pre-test were\nboth used).115 First, only learners who were required\nto answer pre-questions prior to reading a text showed\ngains in acquisition of content; learners who read\nbut did not answer the pre-questions did not show\nsignificant gains relative to learners not given pre-questions.\nSecond, the attempt to answer pre-questions\nwas beneficial regardless of whether the learners\nprovided a correct answer. That is, answering pre-questions\nincorrectly did not eliminate the pre-question\n\nadvantage\u2014the advantage simply required an attempt\nto answer the pre-questions.\n\nUse quizzing to promote learning.\n\nThe panel judged the level of evidence supporting\nthis recommendation to be strong based on nine\nexperimental studies examining the effects of this\npractice for improving K-12 students\u2019 performance\non academic content or classroom performance, over\n30 experimental studies that examined the effect of\nthis strategy for improving college students\u2019 academic\nperformance, and the large number of carefully\ncontrolled laboratory experiments that have examined\nthe testing effect.116\n\nIn one study,117 a laboratory experiment using college\nlevel art history lectures found that multiple-choice\nand short-answer quizzes administered immediately\nafter viewing the lectures substantially improved\nperformance on a test 30 days later relative to when no\nquizzes were given. In addition, short-answer but not\nmultiple-choice quizzes improved performance on the\ntest 30 days later relative to a condition in which the\ntarget facts were given for additional study immediately\nafter viewing the lecture.\n\nIn a well-controlled experiment conducted in a\ncollege class on brain and behavior118 content that was\nquizzed with multiple-choice quizzes and short-answer\nquizzes\u2014both with corrective feedback for students\u2019\nanswers\u2014was remembered significantly better on exams\nthan non-quizzed content. Also, short-answer quizzing\nproduced significantly better performance on exams\nthan did providing the target facts for extra study.\n\n112 E.g., Bottge (1999); Bottge, Heinrichs, Chan, et al. (2001); Bottge, Heinrichs, Mehta, et al. (2002); Bottge, Rueda, and Skivington\n(2006); Bottge, Rueda, LaRoque, et al. (2007); Bottge, Rueda, Serlin, et al. (2007).\n\n113 Pressley, Tannebaum, McDaniel, et al. (1990); Rickards (1976).\n\n114 E.g., Rickards (1975-1976).\n\n115 Pressley, Tannebaum, McDaniel, et al. (1990).\n\n116 See Roediger and Karpicke (2006a) for a recent review and synthesis of both laboratory and classroom research that empirically\nexamines the testing effect (see also Dempster and Perkins, 1993). See McDaniel, Roediger, and McDermott (2007) for a discussion",
+          "locator": "PDF page(s) 49, 50",
+          "pages": "[48, 49]",
+          "source": {
+            "id": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+            "source_id": "ies-study-guide",
+            "collection": "teaching",
+            "title": "Organizing Instruction and Study to Improve Student Learning: IES Practice Guide NCER 2007-2004",
+            "uri": "https://ies.ed.gov/ncee/wwc/Docs/PracticeGuide/20072004.pdf",
+            "sha256": "5e6a7602f80c3856875e5461aab1b1d20404dcf8dd761d34b9cd8698b9196154",
+            "volume_path": "/Volumes/workspace/magneto/references/research/sources/5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900/source.pdf",
+            "metadata": "{\"acquired_date\": \"2026-10-11\", \"collection\": \"teaching\", \"publication_date\": null, \"publisher\": \"Institute of Education Sciences, US Department of Education\", \"rights_basis\": \"Public US Department of Education practice guide, September 2007; user-requested evidence processing with attribution. General learning/memory guidance, not a braille intervention study; retain recommendation-specific evidence ratings.\", \"source_id\": \"ies-study-guide\", \"synthetic\": false, \"title\": \"Organizing Instruction and Study to Improve Student Learning: IES Practice Guide NCER 2007-2004\", \"uri\": \"https://ies.ed.gov/ncee/wwc/Docs/PracticeGuide/20072004.pdf\", \"valid_until\": null}",
+            "created_at": "2026-10-11T06:51:50.012Z",
+            "actor": "wcia013twe@gmail.com"
+          },
+          "produced_by": {
+            "id": "4bc982c4-3fd6-439c-ae6b-096b807d04dd",
+            "subject_id": "5c3ed4abce9e1845fc11c10da3afe26bc5380daa8d5191525c7c9e7599c6b900",
+            "operation": "parse_and_prepare",
+            "status": "completed",
+            "details": "{\"artifact_directory\": \"/Volumes/workspace/magneto/references/research/runs/4bc982c4-3fd6-439c-ae6b-096b807d04dd\", \"experiment_id\": \"1306573313615572\", \"mlflow_run_id\": \"664836ca4dd84e7a816cc37fbd88bc47\", \"parser_schema\": \"2.0\", \"prep\": \"ai_prep_search\", \"sha256\": \"5e6a7602f80c3856875e5461aab1b1d20404dcf8dd761d34b9cd8698b9196154\", \"trace_id\": \"trace:/workspace.magneto.1306573313615572/9d98cb386bc59d82f398b1826f5cd533\"}",
+            "created_at": "2026-10-11T06:51:59.084Z",
+            "actor": "wcia013twe@gmail.com"
+          }
+        }
+      }
+    ]
+  },
+  "expected_source_found": true,
+  "indexed_passages": 410
+}

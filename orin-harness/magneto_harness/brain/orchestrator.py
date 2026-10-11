@@ -102,10 +102,12 @@ async def run_turn(client: ClientSession, brain: Any, session_id: str) -> dict[s
     if state["phase"] in ("complete", "stopped"):
         return {"state": state, "tool_called": None, "done": True}
     if state["phase"] == "awaiting_response":
-        accepted = await wait_for_response(client, session_id)
-        if not accepted:
-            state = await get_state(client, session_id)
+        await wait_for_response(client, session_id)
         state = await get_state(client, session_id)
+        # Response submission can finish or stop the session. Do not ask the brain
+        # for another action against a terminal state obtained during this turn.
+        if state["phase"] in ("complete", "stopped"):
+            return {"state": state, "tool_called": None, "done": True}
     snapshot = build_snapshot(state)
     schemas = await brain_tool_schemas(client)
     plan = await asyncio.to_thread(brain.decide, snapshot, schemas)

@@ -18,7 +18,12 @@ class Controller:
         self.sessions = {}
         self.lock = RLock()
 
-    def create(self):
+    def create(self, *, synthetic_persona_id=None):
+        # Only the isolated server selects a repository-owned persona; HTTP clients cannot supply prose.
+        persona=None
+        if synthetic_persona_id is not None:
+            from story_mode.personas import load_persona
+            persona=load_persona(synthetic_persona_id)
         with self.lock:
             # Ephemeral anonymous session; never load a child's identity or browser shelf.
             if len(self.sessions) >= 100:
@@ -29,6 +34,8 @@ class Controller:
                 'device':{'connected':False, 'ready':False, 'mode':'teacher-supplied tactile Braille'},
                 'policy':{'teacher_approval':True, 'max_activities':6, 'braille_code':'UEB', 'translation':'uncontracted lowercase letters'},
                 'activities_started':0}
+            if persona is not None:
+                self.sessions[sid]['synthetic_persona']=persona
             return self.get(sid)
 
     def get(self, sid):
@@ -58,7 +65,7 @@ class Controller:
                 if passage is not None and passage not in CATALOG: raise StoryError('Unknown story passage.')
                 s.update(passage_id=passage, phase='reading', proposal=None, response=None)
             elif name == 'propose_activity':
-                phase('reading','proposed','continue_proposed')
+                phase('reading','proposed','continue_proposed',*(['awaiting_confirmation'] if s.get('synthetic_persona') else []))
                 opportunity=CATALOG.get(s['passage_id'])
                 target=args.get('target')
                 if not opportunity or target not in opportunity['targets']: raise StoryError('Target is outside the approved passage.')
@@ -67,8 +74,9 @@ class Controller:
                 s['proposal']={'activity':args['activity'], 'target':target, 'kind':'letter' if len(target)==1 else 'word',
                     'reason':text('reason',400), 'prompt':text('prompt',240), 'hint':text('hint',240)}
                 s['phase']='proposed'
+                s['response']=None
             elif name == 'recommend_continue':
-                phase('reading','proposed','continue_proposed')
+                phase('reading','proposed','continue_proposed',*(['awaiting_confirmation'] if s.get('synthetic_persona') else []))
                 s['proposal']={'reason':text('reason',400)};s['phase']='continue_proposed'
             elif name == 'approve_activity':
                 teacher();phase('proposed');s['phase']='awaiting_tactile';s['activities_started']+=1

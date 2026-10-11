@@ -46,3 +46,27 @@ bad=read(BASE/'examples/companion-tool-plan.json');bad['arguments']={'session_id
 bad=read(BASE/'examples/companion-outcome.json');bad['match']='maybe';rejects('companion-outcome',bad)
 bad=read(BASE/'examples/companion-snapshot.json');del bad['device'];rejects('companion-snapshot',bad)
 print(f'Validated {len(validators)} schemas, {len(examples)} examples, live demo fixtures and negative cases. No cloud calls.')
+
+for name in ("profile", "evidence-event", "feed-status"):
+    folder=ROOT/"databricks/contracts/learner-profile-v1"
+    schema=read(folder/f"{name}.schema.json")
+    Draft202012Validator.check_schema(schema)
+    Draft202012Validator(schema,format_checker=FormatChecker()).validate(read(folder/f"{name}.example.json"))
+print("Validated additive learner profile/evidence contracts. Legacy v1 unchanged.")
+Draft202012Validator(read(folder/'profile.schema.json'),format_checker=FormatChecker()).validate(read(folder/'genie-profile.example.json'))
+print("Validated Genie profile provenance example.")
+
+Draft202012Validator(read(folder/'profile.schema.json'),format_checker=FormatChecker()).validate(read(folder/'research-profile.example.json'))
+print('Validated research reflection provenance example.')
+
+# Optional fictional Story seed: kept separate from learner outcome/profile contracts.
+persona_schema=read(ROOT/'databricks/contracts/synthetic-story-persona-v1/persona.schema.json')
+Draft202012Validator.check_schema(persona_schema)
+persona_validator=Draft202012Validator(persona_schema)
+persona=read(ROOT/'story_mode/personas/alex-morgan.json')
+persona_validator.validate(persona)
+bad=copy.deepcopy(persona);bad['synthetic']=False
+try:persona_validator.validate(bad)
+except ValidationError:pass
+else:raise AssertionError('Real records cannot use the synthetic persona contract')
+print('Validated isolated synthetic Story persona contract and source example.')

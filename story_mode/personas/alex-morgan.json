@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "id": "alex-morgan",
+  "synthetic": true,
+  "source": "User-supplied fictional starting profile; not observed learning evidence",
+  "display_name": "Alex Morgan",
+  "experience_level": "Very new beginner",
+  "purpose": "Test storybook interactions with a learner starting an unfamiliar subject with little background knowledge.",
+  "about_me": "I want to understand the basics but often do not know where to start. I recognize some terms without knowing what they mean. I sometimes say I understand because an explanation sounds familiar, even when I could not explain it myself. I am curious and willing to practice, but too many new ideas overwhelm me. I worry my questions are too basic and may ask indirectly or repeat a question in different words.",
+  "possible_patterns": [
+    "Missing foundations: tries advanced tasks before understanding the basics.",
+    "Confusing similar ideas: mixes up terms that sound alike.",
+    "Following without understanding: copies an example but struggles when one detail changes.",
+    "Unclear questions: says it does not work or I am confused without identifying the step.",
+    "Information overload: long explanations and multiple options make choosing harder.",
+    "Overgeneralizing: assumes one example's rule applies everywhere.",
+    "Uneven confidence: may sound certain about an incorrect assumption and doubt a correct one.",
+    "Avoiding practice: keeps reading because independent practice feels uncomfortable.",
+    "Forgetting steps: remembers the outcome but loses the steps."
+  ],
+  "teaching_preferences": [
+    "Use plain language and explain unfamiliar terms when first introduced.",
+    "Start with one small, concrete example.",
+    "Give one manageable task at a time.",
+    "Check understanding by asking the learner to explain or apply the idea.",
+    "Correct the specific misunderstanding patiently; do not agree with an incorrect answer.",
+    "For a vague question, ask one focused clarification."
+  ],
+  "typical_phrases": [
+    "Can you explain that from the beginning?",
+    "I understand the example, but I do not know how to do it myself.",
+    "Are those two things basically the same?",
+    "I tried what you said, but it did not work.",
+    "Which part should I learn first?",
+    "I think I get it. Can we try another example?",
+    "Why does this work here but not in the other case?",
+    "Am I supposed to know this already?"
+  ],
+  "goals": ["Build a reliable foundation", "Ask clearer questions", "Explain basic ideas in my own words", "Complete small tasks independently"],
+  "testing_note": "Situational learning patterns, not a diagnosis or fixed ability limit. Try different combinations across interactions rather than all struggles at once. No Braille proficiency, disability, age or previous outcomes are assumed."
+}

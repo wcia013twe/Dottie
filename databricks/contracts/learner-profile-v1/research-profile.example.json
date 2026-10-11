@@ -1,0 +1,606 @@
+{
+  "schema_version": "1.0",
+  "learner_id": "demo-wes",
+  "display_name": "Wes",
+  "synthetic": true,
+  "epoch": 2,
+  "updated_at": "2026-10-11T06:59:37.735656+00:00",
+  "derivation_version": "research-reflection-2",
+  "stats": [
+    {
+      "label": "Recognition targets practiced",
+      "value": "2"
+    },
+    {
+      "label": "Sessions with evidence",
+      "value": "2"
+    },
+    {
+      "label": "Independent recognition \u00b7 latest comparable session",
+      "value": "80%"
+    }
+  ],
+  "categories": [
+    {
+      "id": "braille",
+      "title": "Braille recognition",
+      "status": "Observed pattern",
+      "finding": "Wes identified B/D independently 80% of the time. Previously 40% under comparable conditions.",
+      "action": "Check an unfamiliar example without a naming hint.",
+      "reasoning": "4 of 5 teacher-confirmed opportunities in the latest session, for B/D, identify, under same tactile presentation and task difficulty. This describes this task, not mastery or a diagnosis.",
+      "evidence_ids": [
+        "sample-1-braille-0",
+        "sample-1-braille-1",
+        "sample-1-braille-2",
+        "sample-1-braille-3",
+        "sample-1-braille-4",
+        "sample-2-braille-0",
+        "sample-2-braille-1",
+        "sample-2-braille-2",
+        "sample-2-braille-3",
+        "sample-2-braille-4"
+      ],
+      "metric": {
+        "numerator": 4,
+        "denominator": 5,
+        "unit": "percent"
+      },
+      "chart": {
+        "type": "session_progress",
+        "points": [
+          {
+            "session_id": "sample-1",
+            "numerator": 2,
+            "denominator": 5
+          },
+          {
+            "session_id": "sample-2",
+            "numerator": 4,
+            "denominator": 5
+          }
+        ]
+      },
+      "last_changed_at": "2026-10-11T06:59:37.735656+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T06:59:37.735138+00:00",
+          "previous_finding": null,
+          "finding": "Wes identified B/D independently 40% of the time.",
+          "reasoning": "2 of 5 teacher-confirmed opportunities in the latest session, for B/D, identify, under same tactile presentation and task difficulty. This describes this task, not mastery or a diagnosis.",
+          "action": "Check an unfamiliar example without a naming hint.",
+          "evidence_ids": [
+            "sample-1-braille-0",
+            "sample-1-braille-1",
+            "sample-1-braille-2",
+            "sample-1-braille-3",
+            "sample-1-braille-4"
+          ]
+        },
+        {
+          "epoch": 2,
+          "at": "2026-10-11T06:59:37.735656+00:00",
+          "previous_finding": "Wes identified B/D independently 40% of the time.",
+          "finding": "Wes identified B/D independently 80% of the time. Previously 40% under comparable conditions.",
+          "reasoning": "4 of 5 teacher-confirmed opportunities in the latest session, for B/D, identify, under same tactile presentation and task difficulty. This describes this task, not mastery or a diagnosis.",
+          "action": "Check an unfamiliar example without a naming hint.",
+          "evidence_ids": [
+            "sample-1-braille-0",
+            "sample-1-braille-1",
+            "sample-1-braille-2",
+            "sample-1-braille-3",
+            "sample-1-braille-4",
+            "sample-2-braille-0",
+            "sample-2-braille-1",
+            "sample-2-braille-2",
+            "sample-2-braille-3",
+            "sample-2-braille-4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tactile",
+      "title": "Tactile exploration",
+      "status": "Not enough observations",
+      "finding": "We don\u2019t yet have enough evidence about tactile exploration.",
+      "action": "Ask the learner to show a comfortable starting point.",
+      "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+      "evidence_ids": [],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T06:59:37.735138+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T06:59:37.735138+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about tactile exploration.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Ask the learner to show a comfortable starting point.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "id": "instructions",
+      "title": "Understanding instructions",
+      "status": "Observed pattern",
+      "finding": "Wes responded without a repeat on 80% of single-step prompts.",
+      "action": "Give one instruction at a time and check clarity.",
+      "reasoning": "4 of 5 teacher-confirmed opportunities in the latest session, for spoken instruction, follow_prompt, under single-step. This describes this task, not mastery or a diagnosis.",
+      "evidence_ids": [
+        "sample-2-instructions-0",
+        "sample-2-instructions-1",
+        "sample-2-instructions-2",
+        "sample-2-instructions-3",
+        "sample-2-instructions-4"
+      ],
+      "metric": {
+        "numerator": 4,
+        "denominator": 5,
+        "unit": "percent"
+      },
+      "chart": null,
+      "last_changed_at": "2026-10-11T06:59:37.735656+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T06:59:37.735138+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about understanding instructions.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Give one instruction at a time and check clarity.",
+          "evidence_ids": []
+        },
+        {
+          "epoch": 2,
+          "at": "2026-10-11T06:59:37.735656+00:00",
+          "previous_finding": "We don\u2019t yet have enough evidence about understanding instructions.",
+          "finding": "Wes responded without a repeat on 80% of single-step prompts.",
+          "reasoning": "4 of 5 teacher-confirmed opportunities in the latest session, for spoken instruction, follow_prompt, under single-step. This describes this task, not mastery or a diagnosis.",
+          "action": "Give one instruction at a time and check clarity.",
+          "evidence_ids": [
+            "sample-2-instructions-0",
+            "sample-2-instructions-1",
+            "sample-2-instructions-2",
+            "sample-2-instructions-3",
+            "sample-2-instructions-4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "answering",
+      "title": "Answering & asking for help",
+      "status": "Emerging preference",
+      "finding": "Wes chose spoken answers 80% of the time when both options were available.",
+      "action": "Offer speech first, keep alternatives, and confirm the preference.",
+      "reasoning": "4 of 5 teacher-confirmed opportunities in the latest session, for response choice, choose_response, under speech and tactile alternatives available. This describes this task, not mastery or a diagnosis.",
+      "evidence_ids": [
+        "sample-2-answering-0",
+        "sample-2-answering-1",
+        "sample-2-answering-2",
+        "sample-2-answering-3",
+        "sample-2-answering-4"
+      ],
+      "metric": {
+        "numerator": 4,
+        "denominator": 5,
+        "unit": "percent"
+      },
+      "chart": null,
+      "last_changed_at": "2026-10-11T06:59:37.735656+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T06:59:37.735138+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about answering & asking for help.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Offer a response choice and ask which feels comfortable.",
+          "evidence_ids": []
+        },
+        {
+          "epoch": 2,
+          "at": "2026-10-11T06:59:37.735656+00:00",
+          "previous_finding": "We don\u2019t yet have enough evidence about answering & asking for help.",
+          "finding": "Wes chose spoken answers 80% of the time when both options were available.",
+          "reasoning": "4 of 5 teacher-confirmed opportunities in the latest session, for response choice, choose_response, under speech and tactile alternatives available. This describes this task, not mastery or a diagnosis.",
+          "action": "Offer speech first, keep alternatives, and confirm the preference.",
+          "evidence_ids": [
+            "sample-2-answering-0",
+            "sample-2-answering-1",
+            "sample-2-answering-2",
+            "sample-2-answering-3",
+            "sample-2-answering-4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "title": "Retention & transfer",
+      "status": "Early observation",
+      "finding": "Wes recognized R independently once in a new context.",
+      "action": "Revisit the same target in a new context next session.",
+      "reasoning": "These are isolated new-context observations. Delayed retention has not been established.",
+      "evidence_ids": [
+        "sample-2-transfer-0"
+      ],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T06:59:37.735656+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T06:59:37.735138+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about retention & transfer.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Revisit the same target in a new context next session.",
+          "evidence_ids": []
+        },
+        {
+          "epoch": 2,
+          "at": "2026-10-11T06:59:37.735656+00:00",
+          "previous_finding": "We don\u2019t yet have enough evidence about retention & transfer.",
+          "finding": "Wes recognized R independently once in a new context.",
+          "reasoning": "These are isolated new-context observations. Delayed retention has not been established.",
+          "action": "Revisit the same target in a new context next session.",
+          "evidence_ids": [
+            "sample-2-transfer-0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "interests",
+      "title": "Interests & participation",
+      "status": "Not enough observations",
+      "finding": "We don\u2019t yet have enough evidence about interests & participation.",
+      "action": "Offer two story topics and ask the learner to choose.",
+      "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+      "evidence_ids": [],
+      "metric": null,
+      "chart": null,
+      "last_changed_at": "2026-10-11T06:59:37.735138+00:00",
+      "history": [
+        {
+          "epoch": 1,
+          "at": "2026-10-11T06:59:37.735138+00:00",
+          "previous_finding": null,
+          "finding": "We don\u2019t yet have enough evidence about interests & participation.",
+          "reasoning": "No supported pattern established. Unconfirmed responses and device failures are excluded; deferred responses are not counted as incorrect.",
+          "action": "Offer two story topics and ask the learner to choose.",
+          "evidence_ids": []
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "sample-1-braille-0",
+      "learner_id": "demo-wes",
+      "session_id": "sample-1",
+      "occurred_at": "2026-10-10T12:00:00+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation and task difficulty",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-1"
+    },
+    {
+      "id": "sample-1-braille-1",
+      "learner_id": "demo-wes",
+      "session_id": "sample-1",
+      "occurred_at": "2026-10-10T12:00:01+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation and task difficulty",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-1"
+    },
+    {
+      "id": "sample-1-braille-2",
+      "learner_id": "demo-wes",
+      "session_id": "sample-1",
+      "occurred_at": "2026-10-10T12:00:02+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation and task difficulty",
+      "outcome": "with_help",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-1"
+    },
+    {
+      "id": "sample-1-braille-3",
+      "learner_id": "demo-wes",
+      "session_id": "sample-1",
+      "occurred_at": "2026-10-10T12:00:03+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation and task difficulty",
+      "outcome": "with_help",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-1"
+    },
+    {
+      "id": "sample-1-braille-4",
+      "learner_id": "demo-wes",
+      "session_id": "sample-1",
+      "occurred_at": "2026-10-10T12:00:04+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation and task difficulty",
+      "outcome": "with_help",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-1"
+    },
+    {
+      "id": "sample-2-answering-0",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:00+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "spoken",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-braille-0",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:00+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation and task difficulty",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-instructions-0",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:00+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-transfer-0",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:00+00:00",
+      "category": "transfer",
+      "target": "R",
+      "task": "identify_new_context",
+      "condition": "new story, same tactile presentation",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-answering-1",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:01+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "spoken",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-braille-1",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:01+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation and task difficulty",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-instructions-1",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:01+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-answering-2",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:02+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "spoken",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-braille-2",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:02+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation and task difficulty",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-instructions-2",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:02+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-answering-3",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:03+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "spoken",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-braille-3",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:03+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation and task difficulty",
+      "outcome": "independent",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-instructions-3",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:03+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "clear",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-answering-4",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:04+00:00",
+      "category": "answering",
+      "target": "response choice",
+      "task": "choose_response",
+      "condition": "speech and tactile alternatives available",
+      "outcome": "alternative",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-braille-4",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:04+00:00",
+      "category": "braille",
+      "target": "B/D",
+      "task": "identify",
+      "condition": "same tactile presentation and task difficulty",
+      "outcome": "with_help",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    },
+    {
+      "id": "sample-2-instructions-4",
+      "learner_id": "demo-wes",
+      "session_id": "sample-2",
+      "occurred_at": "2026-10-11T12:00:04+00:00",
+      "category": "instructions",
+      "target": "spoken instruction",
+      "task": "follow_prompt",
+      "condition": "single-step",
+      "outcome": "repeated",
+      "confirmed": true,
+      "synthetic": true,
+      "trace_id": "fixture-trace-sample-2"
+    }
+  ],
+  "updates": [
+    {
+      "epoch": 1,
+      "at": "2026-10-11T06:59:37.735138+00:00",
+      "changed_categories": [
+        "braille",
+        "tactile",
+        "instructions",
+        "answering",
+        "transfer",
+        "interests"
+      ]
+    },
+    {
+      "epoch": 2,
+      "at": "2026-10-11T06:59:37.735656+00:00",
+      "changed_categories": [
+        "braille",
+        "instructions",
+        "answering",
+        "transfer"
+      ]
+    }
+  ],
+  "reflection": {
+    "id": "synthetic-reflection-example",
+    "input_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "proposal_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  }
+}

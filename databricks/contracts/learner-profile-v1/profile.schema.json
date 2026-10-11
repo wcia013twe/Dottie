@@ -1,0 +1,495 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "learner_id",
+    "display_name",
+    "synthetic",
+    "epoch",
+    "updated_at",
+    "derivation_version",
+    "stats",
+    "categories",
+    "evidence",
+    "updates"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "learner_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "updated_at": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "derivation_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "stats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "value"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "status",
+          "finding",
+          "action",
+          "reasoning",
+          "evidence_ids",
+          "metric",
+          "chart",
+          "last_changed_at",
+          "history"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "braille",
+              "tactile",
+              "instructions",
+              "answering",
+              "transfer",
+              "interests"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "finding": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "action": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "reasoning": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            }
+          },
+          "metric": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "numerator",
+                  "denominator",
+                  "unit"
+                ],
+                "properties": {
+                  "numerator": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "denominator": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "unit": {
+                    "const": "percent"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "chart": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "type",
+                  "points"
+                ],
+                "properties": {
+                  "type": {
+                    "const": "session_progress"
+                  },
+                  "points": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "session_id",
+                        "numerator",
+                        "denominator"
+                      ],
+                      "properties": {
+                        "session_id": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 1000
+                        },
+                        "numerator": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "denominator": {
+                          "type": "integer",
+                          "minimum": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "last_changed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "epoch",
+                "at",
+                "previous_finding",
+                "finding",
+                "reasoning",
+                "action",
+                "evidence_ids"
+              ],
+              "properties": {
+                "epoch": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "at": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1000
+                },
+                "previous_finding": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1000
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "finding": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1000
+                },
+                "reasoning": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1000
+                },
+                "action": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1000
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1000
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "learner_id",
+          "session_id",
+          "occurred_at",
+          "category",
+          "target",
+          "task",
+          "condition",
+          "outcome",
+          "confirmed",
+          "synthetic",
+          "trace_id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "learner_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "session_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "occurred_at": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "category": {
+            "enum": [
+              "braille",
+              "tactile",
+              "instructions",
+              "answering",
+              "transfer",
+              "interests"
+            ]
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "task": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "condition": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "outcome": {
+            "enum": [
+              "independent",
+              "with_help",
+              "try_later",
+              "spoken",
+              "alternative",
+              "clear",
+              "repeated",
+              "device_failure"
+            ]
+          },
+          "confirmed": {
+            "type": "boolean"
+          },
+          "synthetic": {
+            "type": "boolean"
+          },
+          "trace_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      }
+    },
+    "updates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "epoch",
+          "at",
+          "changed_categories"
+        ],
+        "properties": {
+          "epoch": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "at": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "changed_categories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            }
+          },
+          "source_url": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conversation_id",
+        "response_id",
+        "source_url",
+        "summary",
+        "evidence_digest"
+      ],
+      "properties": {
+        "conversation_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "response_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "source_url": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "evidence_digest": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "reflection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "input_digest",
+        "proposal_digest"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "input_digest": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "proposal_digest": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

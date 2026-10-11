@@ -1,6 +1,7 @@
-import { DecisionSession } from './decision-session.js';
+import { demoCompletionRecap, mountStoryCompletion } from './story-completion.js';
+import { DecisionSession } from './decision-session.js?v=story-completion-1';
 import { peterActivities, bindPeterActivities } from './peter-activities.js';
-import { mountFlipbook } from './flipbook.js?v=story-mcp-3';
+import { mountFlipbook } from './flipbook.js?v=eleven-autoplay-1';
 import { importEbook, ebookStore } from './ebook.js';
 // Reading records are separate from learning progress and saved CAD designs.
 const key = 'magneto-stories-v1';
@@ -10,7 +11,12 @@ let books = [], storageOK = true;
 const loadedEbooks = new Map();
 let readerSize = 20;
 let disposeReader = null;
-export function cleanupStoryReader() { disposeReader?.(); disposeReader = null; if (location.hash !== '#stories') director.cancel(); }
+let disposeCompletion = null;
+let celebratedDemoSession = null;
+export function cleanupStoryReader() {
+  const voice=document.querySelector('#voice-input-panel');
+  if (voice?.closest('.book-player')) { voice.open=false; document.querySelector('.workspace').insertBefore(voice,document.querySelector('.voice-bar')); }
+ disposeCompletion?.(); disposeCompletion = null; disposeReader?.(); disposeReader = null; if (location.hash !== '#stories') director.cancel(); }
 try {
   const saved = JSON.parse(localStorage.getItem(key) || '[]');
   if (!Array.isArray(saved)) throw new Error('Invalid shelf');
@@ -42,6 +48,11 @@ function save() {
   catch { storageOK = false; }
 }
 const director = new DecisionSession();
+if (director.state.step === 3) celebratedDemoSession = director.state.session_id;
+// Read the validated in-memory session without introducing another wire format.
+export function learnerStoryEvidence() {
+  return structuredClone({session: director.state, error: director.error, pending: !!director.pending});
+}
 let opened = null;
 export function isStoryOpen() { return opened !== null; }
 const caterpillar = `<svg viewBox="0 0 260 140" aria-hidden="true"><path d="M32 116Q130 85 239 116" fill="none" stroke="#a2ac61" stroke-width="3"/>${[0,1,2,3,4].map((n)=>`<ellipse cx="${66+n*31}" cy="${91-Math.sin(n)*12}" rx="25" ry="31" fill="${['#719851','#448567','#88a654','#428062','#98aa51'][n]}" transform="rotate(${n*8-15} ${66+n*31} 85)"/>`).join('')}<ellipse cx="207" cy="65" rx="29" ry="33" fill="#c35c48"/><path d="M194 34l-7-16m31 15 8-19" stroke="#766089" stroke-width="5" stroke-linecap="round"/><ellipse cx="199" cy="61" rx="6" ry="9" fill="#e8d679"/><ellipse cx="218" cy="59" rx="6" ry="9" fill="#e8d679"/><path d="M205 78q7 6 12-2" fill="none" stroke="#563e33" stroke-width="3"/></svg>`;
@@ -96,7 +107,15 @@ export function bindStories(main, render, announce) {
   main.querySelector('#open-peter')?.addEventListener('click', () => { director.cancel(); opened = 'peter'; show(); });
   main.querySelector('#open-peter-activities')?.addEventListener('click', () => { opened = 'peter-activities'; show(); });
   if (opened === 'peter-activities') bindPeterActivities(main, show, () => { opened = 'peter'; show(); });
+  if (opened === 'demo' && director.state.step === 3 && celebratedDemoSession !== director.state.session_id) {
+    celebratedDemoSession = director.state.session_id;
+    const completion = mountStoryCompletion({parent:main,title:'The Very Hungry Caterpillar · story demo'});
+    disposeCompletion = () => completion.dispose();
+    completion.show(demoCompletionRecap(director.state.events));
+  }
   const selected = selectedBook();
+  const header=main.querySelector('.player-header');
+  if(header && document.querySelector('#voice-input-panel'))header.append(document.querySelector('#voice-input-panel'));
   if (selected?.imported) {
     if (!loadedEbooks.has(selected.id)) {
       loadBook(selected).then(content=>{

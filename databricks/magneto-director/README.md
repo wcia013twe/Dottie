@@ -78,3 +78,19 @@ databricks/magneto-director/.venv/bin/python scripts/verify_tracing.py --readbac
 Readback is bounded to 60 seconds per invocation of the verifier. The local SQL
 helper explicitly uses profile `magneto`; deployed writes use the app identity.
 The existing SQL warehouse is used for setup/readback; no learner database was added.
+
+## Prompt optimization pilot
+
+See [story prompt optimization](../docs/story-prompt-optimization.md) for the registry-backed CLI evaluation / GEPA workflow. Runtime registry loading is opt-in via `MAGNETO_PROMPT_URI`; the serving app keeps its previous prompt until the beta registry privileges are approved. Schema and tactile Braille constraints are outside the tunable policy.
+
+## Approved research context (local implementation; live activation pending)
+
+`agent/research.py` implements the v1 retrieval request/result boundary. With `MAGNETO_RESEARCH_ENABLED=1`, `decide` queries only teaching/approved AI Search candidates and rechecks them against current `research_eligible_recommendations` and `research_eligible_findings` in the SQL warehouse. It excludes stale hits, other target letters and multi-source recommendations that cannot satisfy v1's single citation. It never accepts library passages as approved advice or writes review decisions.
+
+The model receives the canonical snapshot plus a separate approved-guidance evidence message. Citations and guidance IDs are recorded on the active director MLflow span as `research.approved_guidance`; they describe evidence supplied, not causal reliance or educational effectiveness. Model output and browser payloads keep the existing wire format. Empty retrieval is a successful `matches: []`; configured lookup failure stops the decision explicitly. The existing overall invocation deadline still applies.
+
+`python3 scripts/prepare_agent.py --target magneto-director` packages authoritative retrieval schemas and research resource references as generated deployment files. Optional `MAGNETO_RESEARCH_CONFIG` selects a different config file. Do not edit generated `agent/research_contracts/` or `research.toml`. The serving identity needs index-query and warehouse access plus SELECT on the research eligibility dependencies. No grants or cloud deployment were changed by this local implementation. `app.yaml` does not enable the feature.
+
+Reproduce local proof: `PYTHONPATH=databricks/magneto-director databricks/magneto-director/.venv/bin/python -m pytest databricks/magneto-director/tests/test_research.py -q`. Tests use explicitly synthetic research and a controlled model substitute; they prove adapter-to-model wiring and rejection gates, not hosted inference or teaching improvement. Existing research has no approved teaching recommendations in the latest inherited verification, so live retrieval may correctly return no matches until actual review/approval occurs. No synthetic fixture is published.
+
+Local verification: 46 director tests passed, shared contract checks and repository `npm run check` passed. The System map connection is amber, with activation pending; labels and animation were browser-verified. Inspect `reports/research-director-local-proof.json` at the repository root for the captured synthetic guidance/citation, model messages, audit record and validated decision. `uv` was unavailable on PATH; tests ran in the director's existing virtual environment.

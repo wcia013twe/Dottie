@@ -60,3 +60,5 @@ function frame(now){requestAnimationFrame(frame);
 requestAnimationFrame(frame);
 // Read-only hooks for checking state during local QA.
 window.servoCellState=()=>({latched:[...latched],selected:[...chosen],tabTravel:carrier.position.y,cellX:cell.position.x,cellZ:cell.position.z,stationX:groups.station.position.x,hornAngles:horns.map(h=>h.rotation.y),plungerLift:pins.map(p=>p.position.z),gravityStops:[45.4],busy:!!animation,parts:Object.keys(groups)});
+
+if(new URLSearchParams(location.search).has('visualizer')){const {mountSignalVisualizer}=await import('./signal-visualizer.js');mountSignalVisualizer();}

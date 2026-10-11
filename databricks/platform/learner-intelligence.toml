@@ -1,0 +1,5 @@
+# Existing workspace and warehouse; credentials stay in the magneto SDK profile.
+profile = "magneto"
+warehouse_id = "a5e11b7fe2c6dbbc"
+evidence_table = "workspace.magneto.learner_observations_v1"
+genie_status = "connected"

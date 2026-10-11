@@ -14,7 +14,7 @@ from fastapi import FastAPI, HTTPException, Request
 import uvicorn
 
 from agent.agent import configure
-from agent.decision import ContractError, validate_snapshot
+from agent.decision import ContractError, resolve_prompt, validate_snapshot
 from runtime.adapter import invoke
 
 load_dotenv(dotenv_path=Path(__file__).parent.parent / '.env', override=False)
@@ -23,6 +23,16 @@ load_dotenv(dotenv_path=Path(__file__).parent.parent / '.env', override=False)
 @asynccontextmanager
 async def lifespan(app):
     configure()
+    # Fail startup if the serving identity cannot read the configured champion.
+    # A green app status must not hide a broken registry connection.
+    if os.getenv('MAGNETO_PROMPT_URI'):
+        import mlflow
+        def check_prompt():
+            try:
+                return mlflow.trace(name='story_prompt_registry_startup')(resolve_prompt)()
+            finally:
+                mlflow.flush_trace_async_logging()
+        await asyncio.to_thread(check_prompt)
     yield
 
 

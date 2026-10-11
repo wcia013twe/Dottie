@@ -1,0 +1,96 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "learner_id",
+    "session_id",
+    "occurred_at",
+    "category",
+    "target",
+    "task",
+    "condition",
+    "outcome",
+    "confirmed",
+    "synthetic",
+    "trace_id"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "learner_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "occurred_at": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "category": {
+      "enum": [
+        "braille",
+        "tactile",
+        "instructions",
+        "answering",
+        "transfer",
+        "interests"
+      ]
+    },
+    "target": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "task": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "condition": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "outcome": {
+      "enum": [
+        "independent",
+        "with_help",
+        "try_later",
+        "spoken",
+        "alternative",
+        "clear",
+        "repeated",
+        "device_failure"
+      ]
+    },
+    "confirmed": {
+      "type": "boolean"
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "trace_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "Story interruption panels",
+  "tools": [
+    {
+      "name": "propose_activity",
+      "description": "Propose one approved letter/word activity for teacher review. No speech or hardware action. Reason is a brief evidence summary, not private reasoning.",
+      "arguments": [
+        "session_id",
+        "revision",
+        "activity",
+        "target",
+        "prompt",
+        "hint",
+        "reason"
+      ],
+      "source": "story_mode/mcp_server.py",
+      "line": 26
+    }
+  ]
+}

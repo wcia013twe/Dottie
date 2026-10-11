@@ -71,4 +71,27 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaises(Exception):asyncio.run(run(self.s,invalid))
         self.assertEqual(controller.get(self.s['session_id'])['observations'],[])
 
+    def test_synthetic_persona_and_reply_reach_model_without_grading(self):
+        self.s=controller.create(synthetic_persona_id='alex-morgan')
+        def act(name,args=None,actor='teacher'):
+            self.s=controller.call(self.s['session_id'],self.s['revision'],name,args,actor=actor)
+        act('set_context',{'passage_id':'rabbit'})
+        act('propose_activity',{'activity':'introduce','target':'r','prompt':'This letter is r.',
+            'hint':'Feel one dot at a time.','reason':'Fictional beginner test.'},'orchestrator')
+        act('approve_activity');act('prepare_braille');act('confirm_tactile');act('speak_prompt')
+        act('submit_response',{'text':'Are a letter and a word basically the same?'})
+        def fixture(messages):
+            context=json.loads(messages[-1]['content'])['context']
+            self.assertEqual(context['synthetic_persona']['id'],'alex-morgan')
+            self.assertFalse(context['response']['confirmed'])
+            self.assertEqual(context['observations'],[])
+            return json.dumps({'tool':'propose_activity','arguments':{'session_id':self.s['session_id'],
+                'revision':self.s['revision'],'activity':'introduce','target':'r',
+                'prompt':'A letter is one symbol. A word uses letters. This is the letter r.',
+                'hint':'Explore one letter first.','reason':'Clarify the fictional learner’s question using one approved letter.'}})
+        result=asyncio.run(run(self.s,fixture))
+        self.assertEqual(result['state']['phase'],'proposed')
+        self.assertEqual(result['state']['observations'],[])
+        self.assertFalse(result['state']['device']['ready'])
+
 if __name__=='__main__':unittest.main()

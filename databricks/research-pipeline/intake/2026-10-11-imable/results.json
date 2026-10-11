@@ -1,0 +1,205 @@
+{
+  "ingest": {
+    "source_version": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+    "status": "registered"
+  },
+  "process": {
+    "run_id": "86fb2680-7d3e-4a53-b460-cc9442b5c9be",
+    "passages": 4,
+    "status": "completed",
+    "original_pdf_pages": [
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ]
+  },
+  "publication": {
+    "run_id": "05eca50c-7d2f-4567-b35a-4682054bd62c",
+    "status": "table_refreshed",
+    "index_status": "sync_requested"
+  },
+  "indexed_passages": 414,
+  "search": {
+    "run_id": "ae1abd31-575b-4255-b362-83c1ac2fd90c",
+    "collection": "teaching",
+    "tier": "library",
+    "matches": [
+      {
+        "score": 1.0,
+        "record": {
+          "id": "56db50d46ea22f99933905039a95f0107b7e80d10aabed3fdf25211109e4b348",
+          "source_version": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+          "run_id": "86fb2680-7d3e-4a53-b460-cc9442b5c9be",
+          "text": " handed him the stack of word cards. As he flipped\nthrough the cards, he would take one, read it and then place it aside. He went\nmethodically through the entire stack of 80 cards, reading each one, placing it aside and\nmoving to the next. I watched as he read every card quickly and correctly, and at the\nend, he said, \u201cWell, it isn\u2019t there is it?\u201d Sitting next to me was a consultant from the\nDepartment of Public Instruction which had provided the funding for our research. I was\nchuckling to myself as I watched her face during this lesson. As she watched Roger flip\nquickly through the stack of cards, her eyes got wider and wider, and her mouth began\nto open wide. The idea that he was able to go through the word cards as quickly and as\naccurately as he had after such a short period of instructional time simply amazed her.\nDuring the next few months he continued to make progress and created several stories\nto read about his favourite topics. One of them was a story about motorcycles which he\nparticularly liked, and he asked his teacher if she thought he could read it to his buddies\nin his class. They practiced reading the story together until he felt confident he could\nread it fluently, and then he asked his classroom teacher if he could have some time to\nread the story to his friends. She agreed and they arranged for him to read the story\nthat day after lunch. He gathered his buddies around him in a circle and proceeded to\nread the story to them. The motorcycle story was definitely a hit. He finished the story\nto accolades of \u201cAwesome, Roger!\u201d \u201cWay to go, dude!\u201d and his teacher reported to us\nthat the ear-to-ear smile that he had on his face for the entire afternoon afterwards had\nher almost in tears.\n\nFor some students the progress wasn\u2019t as great as Roger\u2019s, but it was still exciting.\nJennifer, who was in a class with students who had severe developmental disabilities\nand behaviour issues, had learned the word purse. Her mother had a purse, and\nJennifer wanted to learn the word and also wanted a purse for herself. Her teacher\nfound a purse that she brought for Jennifer. And Jennifer learned three other words ---\nlotion, keys, cell phone. She carried her purse with her everywhere and had some lotion\nin it, an old set of car keys, and a non-working cell phone which her teacher used as\nprops for their \u201cpurse\u201d stories. One day when the TVI came to work with Jennifer,\nJennifer told her that the school had been on lockdown the day before. Jennifer was\nextremely agitated by this according to her classroom teacher and the first thing\nJennifer asked for that day when she saw her teacher was the word \u201clockdown.\u201d She\ninsisted that they create and read that word immediately! And she wasn\u2019t content until\nher teacher had brailled the word cards and sat her down to look at them. As she and\nher teacher examined and talked about the word, her teacher exaggerated the \u201cl\u201d sound\nat the beginning of it. Jennifer immediately said \u201cOh, starts like lotion.\u201d While this might\nnot be an earth-shattering statement for a typical reader, for Jennifer this analogy to\nanother of her words was huge. Of course they not only had to read the word. They\nhad to create a lockdown story which soon was equal to the purse story in prominence\nin her lessons.\nJust recently in a workshop I was giving on I-M-ABLE one of the participants shared a\nstory about a student she had taught to read braille. The student didn\u2019t have any\nsensitivity in most of her body including her fingers. However, the teacher had\ndiscovered that the student did have sensitivity in one part of her body, and she told\nabout how she had taught the student to read braille by using that part of her body \u2013 her\nlower lip. The student was reading successfully at grade level and also doing her math\nproblems -- using her bottom lip. I had seen a little boy years ago who read braille with\nhis thumb, and had also heard about a girl in China teaching herself to read braille with\nher tongue, but I had never met someone who had actually taught someone to read\nbraille using any body part other than their fingers. What this said to all of us in the\nworkshop was that this teacher was someone who truly believed in the importance of\nliteracy and the capabilities of her student! It also demonstrated for us the need for high\nteacher expectations and the ability to think outside the box where braille literacy is\nconcerned.\nMany more of these stories exist, but no matter how pleased I am that we have been\nable to teach reading to these older students who have previously not been successful,\nit bothers me that these stories have to begin with statements like \u201cthis student was 12\nyears old",
+          "locator": "PDF page(s) 47, 48",
+          "pages": "[46, 47]",
+          "source": {
+            "id": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+            "source_id": "wormsley-right-to-literacy-2016",
+            "collection": "teaching",
+            "title": "The Right to Literacy: Braille literacy for learners with cognitive impairments and additional disabilities \u2014 Diane P. Wormsley (2016)",
+            "uri": "https://www.spevi.net/wp-content/uploads/2015/07/JSPEVI-Vol-9-2016-1.pdf",
+            "sha256": "354b8e1a1f57ac51ef0686770b320de678b7a2c5666657e95bcbeef1641c20f3",
+            "volume_path": "/Volumes/workspace/magneto/references/research/sources/655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710/source.pdf",
+            "metadata": "{\"acquired_date\": \"2026-10-11\", \"collection\": \"teaching\", \"publication_date\": null, \"publisher\": \"Journal of the South Pacific Educators in Vision Impairment (JSPEVI), Volume 9, 2016\", \"rights_basis\": \"Author article publicly published by SPEVI; user-authorized internal reference processing with attribution, unchanged original journal PDF retained. Process only original PDF pages 46\u201351 (printed pages 45\u201350). Author/practitioner account with illustrative cases and explicit causal uncertainty, not a controlled effectiveness study or the full I-M-ABLE practice guide. No blanket redistribution license asserted.\", \"source_id\": \"wormsley-right-to-literacy-2016\", \"synthetic\": false, \"title\": \"The Right to Literacy: Braille literacy for learners with cognitive impairments and additional disabilities \u2014 Diane P. Wormsley (2016)\", \"uri\": \"https://www.spevi.net/wp-content/uploads/2015/07/JSPEVI-Vol-9-2016-1.pdf\", \"valid_until\": null}",
+            "created_at": "2026-10-11T09:49:57.168Z",
+            "actor": "wcia013twe@gmail.com"
+          },
+          "produced_by": {
+            "id": "86fb2680-7d3e-4a53-b460-cc9442b5c9be",
+            "subject_id": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+            "operation": "parse_and_prepare",
+            "status": "completed",
+            "details": "{\"artifact_directory\": \"/Volumes/workspace/magneto/references/research/runs/86fb2680-7d3e-4a53-b460-cc9442b5c9be\", \"experiment_id\": \"1306573313615572\", \"mlflow_run_id\": \"48a5b9b138db44119a349b17ffc5df2d\", \"page_range\": \"46-51\", \"parser_schema\": \"2.0\", \"prep\": \"ai_prep_search\", \"printed_pages\": \"45-50\", \"scope\": \"Selected Wormsley article only; full original journal retained\", \"sha256\": \"354b8e1a1f57ac51ef0686770b320de678b7a2c5666657e95bcbeef1641c20f3\", \"trace_id\": \"trace:/workspace.magneto.1306573313615572/cb4224d28b1d48865ed02333e70ab3d9\"}",
+            "created_at": "2026-10-11T09:50:07.515Z",
+            "actor": "wcia013twe@gmail.com"
+          }
+        }
+      },
+      {
+        "score": 0.9838709677419355,
+        "record": {
+          "id": "8c77d5abd96168ae362d1dcd668abecb3ce8da4d50013b14c2e7052ecd46ce30",
+          "source_version": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+          "run_id": "86fb2680-7d3e-4a53-b460-cc9442b5c9be",
+          "text": "\nWhile it can be said that children who are blind or visually impaired with additional or\nmultiple disabilities are frequently overlooked when it comes to literacy instruction, this\nsituation has been changing for the better with the emergence of some new approaches\nto teach reading. What it takes is belief that a student can become literate, no matter\nhow severe the disability. In his book, Seeing All Kids as Readers, Christopher Kliewer\n(2008) exemplifies the importance of believing in the capabilities of learners with\ndisabilities to become literate, and then developing ways to teach them to fit their own\nlearning style.\nProviding students with what they need to become literate means that teachers need to\nthink about non-traditional ways to teach reading and writing. I\u2019ve spent much of my\ncareer working with older children who hadn\u2019t been successful learning to read, trying to\nfigure out what might work with them. Back in the late 90\u2019s I was asked to help a\nteacher with three girls who were between the ages of 16 and 18 who were moderately\ncognitively impaired in addition to being totally blind, and who had not yet been\nsuccessful in learning to read braille. They had each learned most of the letters of the\nalphabet but were unable to read words or connected text. Their teacher and I decided\nto try to use a more meaningful approach with them, similar to the one used by Silvia\nAshton Warner with her Maori students in New Zealand which she wrote about in her\nbook Teacher (Ashton-Warner, 1963). Rather than starting with letter recognition, or\nphonics, we started with whole words in braille that the girls wanted to learn to read.\nWe used a language experience approach to help them write stories with each other,\nand watched as their excitement and enthusiasm for reading and writing developed.\nWork in phonics and letter and contraction recognition followed their initial success in\nreading and they improved their reading gradually, working in fully contracted braille.\nBy the time each of these girls aged out of school they were reading at around a second\ngrade level and were able to use braille as a literacy tool for writing grocery lists,\nreading recipes, and writing notes to other braille readers.\nThe approach that we began using with these three girls has evolved over the years. In\n2004 AFB Press published Braille Literacy: A Functional Approach which outlined\nthe basic approach that we used and made suggestions for using a similar approach\nwith a range of individuals. And just this year AFB published the most recent version of\nthe approach, entitled the I-M-ABLE (Individualized Meaning-Centered Approach to\nBraille Literacy Education). In addition I\u2019m pleased to say that the American Printing\nHouse for the Blind will be making available a kit of materials including the I-M-ABLE\n\npublication for purchase. Teachers in the US will be able to order it under our Quota\nSystem.\nI\u2019ve been lucky enough to witness some of the success stories of students whose\nteachers used I-M-ABLE and whose students emerged into literacy after being non- or\npre-readers for much of their life up until they were anywhere between 10 and 18. I love\nto talk about Roger, a student who was 14 when we began working with him using I-M-ABLE.\nHe was in a resource room for students with developmental disabilities, and\ncould not read or write. Roger\u2019s face and body were bulging with numerous tumours\nwhich would grow, be removed and then regrow. These tumours had affected his vision\nand also his health. When he was in kindergarten and first grade, braille literacy\ninstruction was begun with him, but somewhere during his early years in school the\ninstruction stopped for reasons we weren\u2019t able to reconstruct, except that it was noted\nthat he wasn\u2019t making progress, perhaps because of numerous absences from school.\nI remember watching Roger\u2019s teacher one day after she had been working with him for\nabout three months. Roger had learned 80 words in that time, and his teacher had the\n80 words on cards in a stack and was searching for a word which she wanted to use\nwith him in a lesson, but simply wasn\u2019t able to find. Roger got impatient and said, \u201cLet\nme look for it\u201d and the teacher handed him the stack of word cards. As he flipped\nthrough the cards, he would take one, read it and then place it aside. He went\nmethodically through the entire stack of 80 cards, reading each one, placing it aside and\nmoving to the next. I watched as he read every card quickly and correctly, and at the\nend, he said, \u201cWell, it isn\u2019t there is it?\u201d Sitting next to me was a consultant from the\nDepartment of Public Instruction which had provided the funding for our research. I was\nchuckling to myself as I watched her face during this lesson. As",
+          "locator": "PDF page(s) 46, 47",
+          "pages": "[45, 46]",
+          "source": {
+            "id": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+            "source_id": "wormsley-right-to-literacy-2016",
+            "collection": "teaching",
+            "title": "The Right to Literacy: Braille literacy for learners with cognitive impairments and additional disabilities \u2014 Diane P. Wormsley (2016)",
+            "uri": "https://www.spevi.net/wp-content/uploads/2015/07/JSPEVI-Vol-9-2016-1.pdf",
+            "sha256": "354b8e1a1f57ac51ef0686770b320de678b7a2c5666657e95bcbeef1641c20f3",
+            "volume_path": "/Volumes/workspace/magneto/references/research/sources/655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710/source.pdf",
+            "metadata": "{\"acquired_date\": \"2026-10-11\", \"collection\": \"teaching\", \"publication_date\": null, \"publisher\": \"Journal of the South Pacific Educators in Vision Impairment (JSPEVI), Volume 9, 2016\", \"rights_basis\": \"Author article publicly published by SPEVI; user-authorized internal reference processing with attribution, unchanged original journal PDF retained. Process only original PDF pages 46\u201351 (printed pages 45\u201350). Author/practitioner account with illustrative cases and explicit causal uncertainty, not a controlled effectiveness study or the full I-M-ABLE practice guide. No blanket redistribution license asserted.\", \"source_id\": \"wormsley-right-to-literacy-2016\", \"synthetic\": false, \"title\": \"The Right to Literacy: Braille literacy for learners with cognitive impairments and additional disabilities \u2014 Diane P. Wormsley (2016)\", \"uri\": \"https://www.spevi.net/wp-content/uploads/2015/07/JSPEVI-Vol-9-2016-1.pdf\", \"valid_until\": null}",
+            "created_at": "2026-10-11T09:49:57.168Z",
+            "actor": "wcia013twe@gmail.com"
+          },
+          "produced_by": {
+            "id": "86fb2680-7d3e-4a53-b460-cc9442b5c9be",
+            "subject_id": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+            "operation": "parse_and_prepare",
+            "status": "completed",
+            "details": "{\"artifact_directory\": \"/Volumes/workspace/magneto/references/research/runs/86fb2680-7d3e-4a53-b460-cc9442b5c9be\", \"experiment_id\": \"1306573313615572\", \"mlflow_run_id\": \"48a5b9b138db44119a349b17ffc5df2d\", \"page_range\": \"46-51\", \"parser_schema\": \"2.0\", \"prep\": \"ai_prep_search\", \"printed_pages\": \"45-50\", \"scope\": \"Selected Wormsley article only; full original journal retained\", \"sha256\": \"354b8e1a1f57ac51ef0686770b320de678b7a2c5666657e95bcbeef1641c20f3\", \"trace_id\": \"trace:/workspace.magneto.1306573313615572/cb4224d28b1d48865ed02333e70ab3d9\"}",
+            "created_at": "2026-10-11T09:50:07.515Z",
+            "actor": "wcia013twe@gmail.com"
+          }
+        }
+      },
+      {
+        "score": 0.9606894841269842,
+        "record": {
+          "id": "79aa8d536de9402464798ced7130893597b8edd8a132eae9c1b828b75c488d48",
+          "source_version": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+          "run_id": "86fb2680-7d3e-4a53-b460-cc9442b5c9be",
+          "text": " any body part other than their fingers. What this said to all of us in the\nworkshop was that this teacher was someone who truly believed in the importance of\nliteracy and the capabilities of her student! It also demonstrated for us the need for high\nteacher expectations and the ability to think outside the box where braille literacy is\nconcerned.\nMany more of these stories exist, but no matter how pleased I am that we have been\nable to teach reading to these older students who have previously not been successful,\nit bothers me that these stories have to begin with statements like \u201cthis student was 12\nyears old and hadn\u2019t learned more than 15 letters and knew no words.\u201d Some people\nmight argue that we had just reached these students at the right time \u2013 that it wasn\u2019t the\n\nI-M-ABLE approach we used that created the success\u2013 we just hit the students when\nthey were finally ready to learn to read. Obviously we don\u2019t have real evidence that this\nisn\u2019t the case. But the dramatic turnarounds that we see in the children make me think\nthat we just hadn\u2019t found the right way to work with them earlier on. This is why it is so\nimportant that teachers record their work carefully and that we conduct more research in\nthis area. If we could get to these students earlier and find what works with them, we\nmight be able to move them into reading earlier and their progress might be more\ntypical. They might achieve more in the long run than our waiting until 12 years old to\nteach them to read.\nSo I want to try to get us to re-examine how we think about literacy with respect to all of\nour students who are visually impaired or blind and make sure that we are thinking of\nthem as potentially capable of developing literacy skills as early as possible. I know that\nit is hard to think of literacy when we see a child who has severe disabilities in addition\nto blindness. We think about motor skills, speaking skills, skills of daily living, but we\ndon\u2019t think of literacy for these children. So how do we make sure that literacy is at the\nfront of our thinking when we work with these children in early intervention?\nJust recently I read an article Cervetti and Heibert (2015) who acknowledge in their\narticle that the common core state standards have changed how we think about literacy\nin relation to the content areas of education. They say, \u201cAmong the significant changes\nbrought by the CCSS/ELA is a focus on knowledge development as part of literacy\ndevelopment and a focus on the acquisition of literacy skills specific to learning in\ndifferent disciplines.\u201d As they said in their article, \u201cLinking literacy instruction and content\narea learning is beneficial for students\u2019 literacy development.\u201d Although the article dealt\nwith the Common Core State Standards and making sure that literacy materials for\ncontent instruction were developed, when I read this I immediately began to take this\ndown several levels to those infant and preschool students. Just how are we developing\ntheir knowledge of the world around them and relating that to literacy? Are we\ndeveloping their knowledge of the world around them and if so are we relating it to\nliteracy? We know that children who are visually impaired or blind have a harder time\nwith conceptual understanding of their world. Those children who have additional\ndisabilities have additional difficulties with this.\nSo the first place to start with helping our students develop literacy in early intervention\nis to examine how we develop programs for children and how we help their parents help\ntheir children learn about their world, and develop a realistic understanding of that world\nwhich they can use to interpret their experiences. We know how important concept\ndevelopment is for children who are visually impaired or blind, but we also need to pair\nthat concept development with literacy to assure that we take that additional step.\nNeuman, et al. (2007) stated that the five essential activities that families can do with\n\ntheir children to help them develop literacy are talking, singing, playing, reading and\nwriting. Talking plays a critical role in language development and the more words a\nchild knows before entering kindergarten; the more likely he or she will be a capable\nreader. Teachers can help parents engage children in conversations, and encourage\nthem to give children language for their experiences and develop meaningful concepts.\nSinging to children strengthens their ability to hear and pay attention to sounds and\nrhythms of speech. Nursery rhymes, silly songs and chants reinforce concepts of words\nand help children hear the differences and similarities in how words sound. Playing\nallows children to expand and refine their ability to use objects to represent experiences\nin their world and helps them develop a sense of narrative as they recreate in play what\nthey have experienced in reality. Parents playing with their children can help them\nunderstand concepts, and expand a child\u2019s vocabulary by introducing new words at\nappropriate times.\nReading and telling stories are considered critical to developing knowledge about",
+          "locator": "PDF page(s) 48, 49, 50",
+          "pages": "[47, 48, 49]",
+          "source": {
+            "id": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+            "source_id": "wormsley-right-to-literacy-2016",
+            "collection": "teaching",
+            "title": "The Right to Literacy: Braille literacy for learners with cognitive impairments and additional disabilities \u2014 Diane P. Wormsley (2016)",
+            "uri": "https://www.spevi.net/wp-content/uploads/2015/07/JSPEVI-Vol-9-2016-1.pdf",
+            "sha256": "354b8e1a1f57ac51ef0686770b320de678b7a2c5666657e95bcbeef1641c20f3",
+            "volume_path": "/Volumes/workspace/magneto/references/research/sources/655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710/source.pdf",
+            "metadata": "{\"acquired_date\": \"2026-10-11\", \"collection\": \"teaching\", \"publication_date\": null, \"publisher\": \"Journal of the South Pacific Educators in Vision Impairment (JSPEVI), Volume 9, 2016\", \"rights_basis\": \"Author article publicly published by SPEVI; user-authorized internal reference processing with attribution, unchanged original journal PDF retained. Process only original PDF pages 46\u201351 (printed pages 45\u201350). Author/practitioner account with illustrative cases and explicit causal uncertainty, not a controlled effectiveness study or the full I-M-ABLE practice guide. No blanket redistribution license asserted.\", \"source_id\": \"wormsley-right-to-literacy-2016\", \"synthetic\": false, \"title\": \"The Right to Literacy: Braille literacy for learners with cognitive impairments and additional disabilities \u2014 Diane P. Wormsley (2016)\", \"uri\": \"https://www.spevi.net/wp-content/uploads/2015/07/JSPEVI-Vol-9-2016-1.pdf\", \"valid_until\": null}",
+            "created_at": "2026-10-11T09:49:57.168Z",
+            "actor": "wcia013twe@gmail.com"
+          },
+          "produced_by": {
+            "id": "86fb2680-7d3e-4a53-b460-cc9442b5c9be",
+            "subject_id": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+            "operation": "parse_and_prepare",
+            "status": "completed",
+            "details": "{\"artifact_directory\": \"/Volumes/workspace/magneto/references/research/runs/86fb2680-7d3e-4a53-b460-cc9442b5c9be\", \"experiment_id\": \"1306573313615572\", \"mlflow_run_id\": \"48a5b9b138db44119a349b17ffc5df2d\", \"page_range\": \"46-51\", \"parser_schema\": \"2.0\", \"prep\": \"ai_prep_search\", \"printed_pages\": \"45-50\", \"scope\": \"Selected Wormsley article only; full original journal retained\", \"sha256\": \"354b8e1a1f57ac51ef0686770b320de678b7a2c5666657e95bcbeef1641c20f3\", \"trace_id\": \"trace:/workspace.magneto.1306573313615572/cb4224d28b1d48865ed02333e70ab3d9\"}",
+            "created_at": "2026-10-11T09:50:07.515Z",
+            "actor": "wcia013twe@gmail.com"
+          }
+        }
+      },
+      {
+        "score": 0.9462481962481962,
+        "record": {
+          "id": "f57149456ed2fa70d62370c811e8e86b1487aba732a3db494b3b14ed8ae01d26",
+          "source_version": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+          "run_id": "86fb2680-7d3e-4a53-b460-cc9442b5c9be",
+          "text": "Singing to children strengthens their ability to hear and pay attention to sounds and\nrhythms of speech. Nursery rhymes, silly songs and chants reinforce concepts of words\nand help children hear the differences and similarities in how words sound. Playing\nallows children to expand and refine their ability to use objects to represent experiences\nin their world and helps them develop a sense of narrative as they recreate in play what\nthey have experienced in reality. Parents playing with their children can help them\nunderstand concepts, and expand a child\u2019s vocabulary by introducing new words at\nappropriate times.\nReading and telling stories are considered critical to developing knowledge about the\nwritten word. Parents can create experience stories which help students understand\nthat reading has meaning and has something to do with themselves. Stories can\nprovide opportunities for exploration, also, in order to make the concepts in the stories\nmore meaningful to the students if they haven\u2019t already experienced what the story is\nabout.\nThe first phase of literacy development involves awareness and exploration. While we\nhelp young students develop the ability to explore and be aware of their environment,\nwe need to remind ourselves how this awareness and exploration relates to literacy.\nWhen I think about working with students to help them become literate, I think about\nwhat we do with our children who develop normally and who have sight. Then I try to\ndetermine how we can adapt those activities to make certain that children with\ndisabilities have access to the same types of activities. I think of this as teaching with\nan eye to literacy. Many good resources for these types of activities already exist. We\nhave researchers who have spent considerable time in assisting with these early\nintervention activities, Deborah Hatton, Kay Ferrell, and others. We have AFB Press\nPublications on Early Intervention, and APH products that help parents learn about\nproviding the kind of awareness and exploration that are part of the early phases of\nliteracy development. We need to make sure that those who work in early intervention\nhave access to all of these resources.\nI mentioned earlier that we need to be sure we are providing children with what they\nneed in order to become literate. Knowledge of their world and a body of experiences\nto bring to reading are important. But we also need to be sure we figure out as soon as\npossible what literacy medium the students will be using when they eventually begin to\nlearn to read. This is especially important if the student is to be a braille reader.\n\nWithout making a decision that braille might be a literacy medium for a child, we won\u2019t\nbring it into the environment. And without its being in the environment, the child won\u2019t\nhave any experience (meaning no fingers on braille) with the very medium that is going\nto help him or her become literate. Even if braille is the only obvious choice, because of\nthe child\u2019s eye condition or quickly deteriorating vision, if we don\u2019t believe that the child\ncan become literate, if we don\u2019t provide him with experiences and teach him with an eye\ntowards literacy, we will not be providing him with what he needs to grow into literacy.\nWe need to believe that each of the students we teach has stories to tell. Our job is to\nhelp them develop the capacity to tell the stories and to read them to others. We have\nto believe that they, just like anyone else, have a right to literacy!\n\nAshton-Warner, S. (1963). Teacher. New York: Simon and Schuster.\nCervetti,G.N. & Heibert, E. H. (2015). The sixth pillar of reading instruction. The\nReading Teacher, 68(7), 548-551.\nKliewer, C. (2008). Seeing all kids as readers. Baltimore: Paul H. Brookes Publishing\nCompany.\nNeuman, S., Roskos, K., Wright, T, & Lenhard, L. (2007). Nurturing knowledge:\nBuilding a foundation for school success by linking early literacy to math,\nscience, art and social studies. New York: Scholastic.\nWormsley, D.P. (2004). Braille literacy: A functional approach. New York: AFB Press.\nWormsley, D. P. (2016). I-M-ABLE: The Individualized Meaning-Centered Approach to\nBraille Literacy Education. New York: AFB Press.\n\nEducation Consultant, American Printing House for the Blind\nPaper presented at the WBU-ICEVI\nGeneral Assembly, Orlando USA, August 2016\n",
+          "locator": "PDF page(s) 50, 51",
+          "pages": "[49, 50]",
+          "source": {
+            "id": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+            "source_id": "wormsley-right-to-literacy-2016",
+            "collection": "teaching",
+            "title": "The Right to Literacy: Braille literacy for learners with cognitive impairments and additional disabilities \u2014 Diane P. Wormsley (2016)",
+            "uri": "https://www.spevi.net/wp-content/uploads/2015/07/JSPEVI-Vol-9-2016-1.pdf",
+            "sha256": "354b8e1a1f57ac51ef0686770b320de678b7a2c5666657e95bcbeef1641c20f3",
+            "volume_path": "/Volumes/workspace/magneto/references/research/sources/655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710/source.pdf",
+            "metadata": "{\"acquired_date\": \"2026-10-11\", \"collection\": \"teaching\", \"publication_date\": null, \"publisher\": \"Journal of the South Pacific Educators in Vision Impairment (JSPEVI), Volume 9, 2016\", \"rights_basis\": \"Author article publicly published by SPEVI; user-authorized internal reference processing with attribution, unchanged original journal PDF retained. Process only original PDF pages 46\u201351 (printed pages 45\u201350). Author/practitioner account with illustrative cases and explicit causal uncertainty, not a controlled effectiveness study or the full I-M-ABLE practice guide. No blanket redistribution license asserted.\", \"source_id\": \"wormsley-right-to-literacy-2016\", \"synthetic\": false, \"title\": \"The Right to Literacy: Braille literacy for learners with cognitive impairments and additional disabilities \u2014 Diane P. Wormsley (2016)\", \"uri\": \"https://www.spevi.net/wp-content/uploads/2015/07/JSPEVI-Vol-9-2016-1.pdf\", \"valid_until\": null}",
+            "created_at": "2026-10-11T09:49:57.168Z",
+            "actor": "wcia013twe@gmail.com"
+          },
+          "produced_by": {
+            "id": "86fb2680-7d3e-4a53-b460-cc9442b5c9be",
+            "subject_id": "655e63e7a9aad12bf4bb33b85eff3651fd4910753ec7871ed7ace307778b9710",
+            "operation": "parse_and_prepare",
+            "status": "completed",
+            "details": "{\"artifact_directory\": \"/Volumes/workspace/magneto/references/research/runs/86fb2680-7d3e-4a53-b460-cc9442b5c9be\", \"experiment_id\": \"1306573313615572\", \"mlflow_run_id\": \"48a5b9b138db44119a349b17ffc5df2d\", \"page_range\": \"46-51\", \"parser_schema\": \"2.0\", \"prep\": \"ai_prep_search\", \"printed_pages\": \"45-50\", \"scope\": \"Selected Wormsley article only; full original journal retained\", \"sha256\": \"354b8e1a1f57ac51ef0686770b320de678b7a2c5666657e95bcbeef1641c20f3\", \"trace_id\": \"trace:/workspace.magneto.1306573313615572/cb4224d28b1d48865ed02333e70ab3d9\"}",
+            "created_at": "2026-10-11T09:50:07.515Z",
+            "actor": "wcia013twe@gmail.com"
+          }
+        }
+      },
+      {
+        "score": 0.4765625,
+        "record": {
+          "id": "01625c3edfe9a216bb8f89c8fc9332eff03a1bf11c971b67f9ae95c85b45e7e5",
+          "source_version": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+          "run_id": "7ea2fe60-7807-4091-aa3f-f06d0d9351b3",
+          "text": "></td><td>10.7.8</td></tr><tr><td>Dayton</td><td><points x1=\"400\" y1=\"978\" alt=\"Dayton\">Dayton</points></td><td>10.7.1</td></tr><tr><td>deactivate</td><td><points x1=\"400\" y1=\"1011\" alt=\"deactivate\">deactivate</points></td><td>10.6.7</td></tr></tbody></table>\n\n<table><thead><tr><th>Word</th><th>Braille Representation</th><th>Reference</th></tr></thead><tbody><tr><td>DeafBlind</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.9.4</td></tr><tr><td>deafen</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.6.8</td></tr><tr><td>deduce</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.11.5</td></tr><tr><td>deity</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.8.1</td></tr><tr><td>delineate</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.11.7</td></tr><tr><td>demonetise</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.7.6</td></tr><tr><td>denominate</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.11.5</td></tr><tr><td>denote</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.6.8, 10.11.5</td></tr><tr><td>denouement</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.11.5</td></tr><tr><td>denounce</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.11.5</td></tr><tr><td>deny</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.6.8</td></tr><tr><td>derail</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10.11.5</td></tr><tr><td>derailed</td><td><sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022<sup>\u2022</sup>\u2022</td><td>10",
+          "locator": "PDF page(s) 292, 293",
+          "pages": "[291, 292]",
+          "source": {
+            "id": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+            "source_id": "ueb-2024",
+            "collection": "teaching",
+            "title": "The Rules of Unified English Braille, Third Edition 2024",
+            "uri": "https://iceb.org/wp-content/uploads/2025/10/Rules-of-Unified-English-Braille-2024.pdf",
+            "sha256": "bf742499ee2eb3cbdf4914d97bbf0b2857bd3e91621f04a4990091b64e5a105e",
+            "volume_path": "/Volumes/workspace/magneto/references/research/sources/e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169/source.pdf",
+            "metadata": "{\"acquired_date\": \"2026-10-11\", \"collection\": \"teaching\", \"publication_date\": null, \"publisher\": \"International Council on English Braille\", \"rights_basis\": \"Publisher PDF licensed CC BY-NC-ND 2.5 Australia; preserve unmodified original, attribution and license. User-requested private reference indexing only; no redistribution or model training authorized. Normative code reference, not teaching-effectiveness evidence. Machine-extracted braille glyphs require visual verification against the original; not a validated translator.\", \"source_id\": \"ueb-2024\", \"synthetic\": false, \"title\": \"The Rules of Unified English Braille, Third Edition 2024\", \"uri\": \"https://iceb.org/wp-content/uploads/2025/10/Rules-of-Unified-English-Braille-2024.pdf\", \"valid_until\": null}",
+            "created_at": "2026-10-11T07:02:42.606Z",
+            "actor": "wcia013twe@gmail.com"
+          },
+          "produced_by": {
+            "id": "7ea2fe60-7807-4091-aa3f-f06d0d9351b3",
+            "subject_id": "e04784e197dc920ad5d3d77e2c46a98c9b00682088bed36bc29618277dcc4169",
+            "operation": "parse_and_prepare",
+            "status": "completed",
+            "details": "{\"artifact_directory\": \"/Volumes/workspace/magneto/references/research/runs/7ea2fe60-7807-4091-aa3f-f06d0d9351b3\", \"experiment_id\": \"1306573313615572\", \"mlflow_run_id\": \"ddae339b19db4f08a47de3cc509ceb3f\", \"mode\": \"managed_page_ranges_external_results\", \"page_count_verified_from_original_pdf\": 408, \"parser_schema\": \"2.0\", \"prep\": \"ai_prep_search\", \"recovered_statement\": \"01f1c543-bbf0-1eef-af43-64dfada3705d\", \"reused_artifact_run\": \"9ca9911d-57ba-406f-a354-dc90160b3fd5\", \"sha256\": \"bf742499ee2eb3cbdf4914d97bbf0b2857bd3e91621f04a4990091b64e5a105e\", \"trace_id\": \"trace:/workspace.magneto.1306573313615572/a12d6ceba9f1bbd2ac54e1390e300eaf\"}",
+            "created_at": "2026-10-11T08:46:01.982Z",
+            "actor": "wcia013twe@gmail.com"
+          }
+        }
+      }
+    ]
+  },
+  "expected_source_found": true,
+  "counts": [
+    {
+      "sources": "12",
+      "passages": "414",
+      "reviews": "0"
+    }
+  ],
+  "limits": [
+    "Source-targeted retrieval coverage, not educational validity or general retrieval benchmark.",
+    "Author article only; full I-M-ABLE guide not acquired.",
+    "No findings extracted, reviews approved or learner profiles updated."
+  ]
+}

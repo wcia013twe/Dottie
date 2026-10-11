@@ -60,3 +60,7 @@ class SmokeTests(unittest.TestCase):
             with self.assertRaises(SystemExit) as failure:
                 run()
         self.assertEqual(failure.exception.code, 1)
+
+    def test_successful_wheel_task_returns_normally(self):
+        with patch('magneto_research.smoke.main', return_value=0):
+            self.assertIsNone(run())

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magneto:contracts:v1:retrieval-request",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "target_letter": {
+      "type": "string",
+      "pattern": "^[A-Z]$"
+    },
+    "difficulty_tags": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "recognition",
+          "incorrect_response",
+          "help_requested"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "query": {
+      "type": "string",
+      "minLength": 1
+    },
+    "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    }
+  },
+  "required": [
+    "schema_version",
+    "request_id",
+    "target_letter",
+    "difficulty_tags",
+    "query",
+    "limit"
+  ]
+}

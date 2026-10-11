@@ -1,0 +1,9 @@
+{
+  "state": "connected",
+  "connected": true,
+  "source": "workspace.magneto.learner_observations_v1",
+  "event_count": 0,
+  "checked_at": null,
+  "error": null,
+  "genie": "connected"
+}

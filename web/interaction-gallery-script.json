@@ -1,0 +1,47 @@
+{
+  "scope": "Fictional gallery script; not a live interaction pack",
+  "activities": [
+    {
+      "id": "introduce",
+      "title": "Explore a letter",
+      "description": "A tactile discovery, woven into the story.",
+      "narrator_line": "Peter has curious paws. Feel r with him—the first letter of rabbit.",
+      "reason": "First encounter with r in this passage.",
+      "choices": [
+        "I’ve explored it"
+      ],
+      "answer": "I’ve explored it",
+      "feedback": "A little discovery with Peter. On we go!"
+    },
+    {
+      "id": "identify",
+      "title": "Name the letter",
+      "description": "One answer, then back to Peter’s adventure.",
+      "narrator_line": "Peter needs your help. Which letter can you feel?",
+      "reason": "Recall practice for the checkpoint target r.",
+      "choices": [
+        "r",
+        "b",
+        "p",
+        "t"
+      ],
+      "answer": "r",
+      "feedback": "You found r! Peter is ready to hop on."
+    },
+    {
+      "id": "match",
+      "title": "Find its match",
+      "description": "Connect the tactile letter to a story word.",
+      "narrator_line": "Feel this letter. Which word starts with it?",
+      "reason": "Connect the tactile target r to a familiar story word.",
+      "choices": [
+        "rabbit",
+        "gate",
+        "lettuce",
+        "Peter"
+      ],
+      "answer": "rabbit",
+      "feedback": "Rabbit starts with r. Let’s follow Peter!"
+    }
+  ]
+}
