@@ -1,4 +1,4 @@
-# Magneto
+# Dottie
 
 A simple local 3D parts viewer for a Braille prototype. View components, assemblies and ideal motion, or save designs in your browser. No Autodesk, web framework or cloud service is required.
 
